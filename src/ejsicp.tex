@@ -218,7 +218,67 @@
 \pagenumbering{roman}
 \VerbatimFootnotes
 
-\small
+\frontmatter
+
+\includepdf[scale=0.92]{coverpage.pdf}
+
+\pagebreak
+
+\vspace*{\fill}
+\thispagestyle{empty}
+
+\begin{small}
+
+\noindent
+{\copyright}1996 by The Massachusetts Institute of Technology
+
+\vspace{1.26em}
+\noindent
+Structure and Interpretation of Computer Programs,\\
+second edition
+
+\vspace{1.26em}
+\noindent
+Harold Abelson and Gerald Jay Sussman\\
+with Julie Sussman, foreword by Alan J. Perlis
+
+\vspace{1.6em}
+\noindent
+\includegraphics[width=3mm]{fig/icons/cc.pdf}
+\includegraphics[width=3mm]{fig/icons/by.pdf}
+\includegraphics[width=3mm]{fig/icons/sa.pdf}
+
+\vspace{0.4em}
+\noindent
+This work is licensed under a Creative Commons\\ 
+Attribution-ShareAlike 3.0 Unported License\\
+(\href{http://creativecommons.org/licenses/by-sa/3.0/}{\acronym{CC BY-SA} 3.0}).
+Based on a work at \href{http://mitpress.mit.edu/sicp/}{mitpress.mit.edu}.
+
+\vspace{1.26em}
+\noindent
+The \acronym{MIT} Press\\
+Cambridge, Massachusetts\\ 
+London, England
+
+\vspace{1.26em}
+\noindent
+McGraw-Hill Book Company\\
+New York, St. Louis, San Francisco,\\ 
+Montreal, Toronto
+
+\vspace{1.26em}
+\noindent
+Unofficial Texinfo Format \href{http://sicpebook.wordpress.com}{2.andresraba5.2} (February 10, 2014),\\ 
+based on \href{http://www.neilvandyke.org/sicp-texi/}{2.neilvandyke4} (January 10, 2007).
+
+\end{small}
+
+\pagebreak
+
+\tableofcontents
+
+\small  % Added by minghai. (Japanese fonts looks too big.)
 
 \label{UTF}
 \chapter*{Unofficial Texinfo Format}
