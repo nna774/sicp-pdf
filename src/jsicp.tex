@@ -5279,18 +5279,6 @@ Lispは他の言語と異なり、手続に完全な第一級の地位を与え�
 \vspace{1.0em}
 
 \noindent
-We concentrated in \link{Chapter 1} on computational processes and on the role
-of procedures in program design.  We saw how to use primitive data (numbers)
-and primitive operations (arithmetic operations), how to combine procedures to
-form compound procedures through composition, conditionals, and the use of
-parameters, and how to abstract procedures by using \code{define}.  We saw that
-a procedure can be regarded as a pattern for the local evolution of a process,
-and we classified, reasoned about, and performed simple algorithmic analyses of
-some common patterns for processes as embodied in procedures.  We also saw that
-higher-order procedures enhance the power of our language by enabling us to
-manipulate, and thereby to reason in terms of, general methods of computation.
-This is much of the essence of programming.
-
 \link{Chapter 1}では演算処理とプログラム設計における手続の役割について集中しました。
 私達はプリミティブなデータ(数値)とプリミティブな命令(算術演算)の使い方、
 組み合わせ、条件式、パラメタの使用を通して複合手続を形成するための手続の結合方法、
@@ -5302,36 +5290,17 @@ This is much of the essence of programming.
 私達の言語の強化することも学びました。
 これはプログラミングの本質の大部分です。
 
-In this chapter we are going to look at more complex data.  All the procedures
-in chapter 1 operate on simple numerical data, and simple data are not
-sufficient for many of the problems we wish to address using computation.
-Programs are typically designed to model complex phenomena, and more often than
-not one must construct computational objects that have several parts in order
-to model real-world phenomena that have several aspects.  Thus, whereas our
-focus in chapter 1 was on building abstractions by combining procedures
-to form compound procedures, we turn in this chapter to another key aspect of
-any programming language: the means it provides for building abstractions by
-combining data objects to form \newterm{compound data}.
-
 この章では私達はより複雑なデータについて目を向けることにします。
 第一章での全ての手続は単純な数値データを操作しましたが、単純なデータは私達が
 演算を用いて解決したいと願う多くの問題には不十分です。
-プログラムは一般的に複雑な事象をモデル化するために設計され、多くの場合、一人が
-複数の側面を持つ実世界の事象をモデル化するためのいくつかのパーツを持つ演算対象の
+プログラムは一般的に複雑な事象をモデル化するために設計され、大抵の場合、
+複数の側面を持つ実世界の事象をモデル化するため、いくつかのパーツを持つ演算対象の
 オブジェクトを構築せねばなりません。
 従って第一章での焦点は手続を組み合わせることで複合手続を形成し抽象化を構築すること
 でしたが、この章では任意のプログラミング言語においてもう1つの鍵となる側面に向かい
 ます。プログラミング言語がデータオブジェクトを組み合わせ\newterm{compound data}(複合データ)
 を形成することにより抽象化構築が与える意味です。
 
-Why do we want compound data in a programming language?  For the same reasons
-that we want compound procedures: to elevate the conceptual level at which we
-can design our programs, to increase the modularity of our designs, and to
-enhance the expressive power of our language.  Just as the ability to define
-procedures enables us to deal with processes at a higher conceptual level than
-that of the primitive operations of the language, the ability to construct
-compound data objects enables us to deal with data at a higher conceptual level
-than that of the primitive data objects of the language.
 
 私達はなぜプログラミング言語にてデータを組合せたいのでしょうか?
 手続を組み合わせたいのと同じ理由のためです。プログラムを設計可能な概念上のレベル
@@ -5342,22 +5311,7 @@ than that of the primitive data objects of the language.
 より高い概念レベルのデータを扱うことを可能にします。
 
 
-Consider the task of designing a system to perform arithmetic with rational
-numbers.  We could imagine an operation \code{add\-/rat} that takes two rational
-numbers and produces their sum.  In terms of simple data, a rational number can
-be thought of as two integers: a numerator and a denominator.  Thus, we could
-design a program in which each rational number would be represented by two
-integers (a numerator and a denominator) and where \code{add\-/rat} would be
-implemented by two procedures (one producing the numerator of the sum and one
-producing the denominator).  But this would be awkward, because we would then
-need to explicitly keep track of which numerators corresponded to which
-denominators.  In a system intended to perform many operations on many rational
-numbers, such bookkeeping details would clutter the programs substantially, to
-say nothing of what they would do to our minds.  It would be much better if we
-could ``glue together'' a numerator and denominator to form a pair---a
-\newterm{compound data object}---that our programs could manipulate in a way
-that would be consistent with regarding a rational number as a single
-conceptual unit.
+
 
 分数を用いて数値演算を実行するシステム設計の課題を考えます。
 2つの分数を取りそれらの和を実行する命令\code{add\-/rat}を想像します。
@@ -5372,15 +5326,7 @@ conceptual unit.
 ペア---\newterm{compound data object}(複合データオブジェクト)---
 に``貼り合せ''られればずっと良くなることでしょう。
 
-The use of compound data also enables us to increase the modularity of our
-programs.  If we can manipulate rational numbers directly as objects in their
-own right, then we can separate the part of our program that deals with
-rational numbers per se from the details of how rational numbers may be
-represented as pairs of integers.  The general technique of isolating the parts
-of a program that deal with how data objects are represented from the parts of
-a program that deal with how data objects are used is a powerful design
-methodology called \newterm{data abstraction}.  We will see how data
-abstraction makes programs much easier to design, maintain, and modify.
+
 
 複合データの使用はまたプログラムのモジュラリティ(部品化)を推進します。
 もし分数を直接オブジェクトそれ自身として扱うことができれば、分数を
@@ -5392,13 +5338,7 @@ abstraction makes programs much easier to design, maintain, and modify.
 どのようにデータ抽象化がプログラムの設計、保守、変更をより簡単にするかを
 これから学びます。
 
-The use of compound data leads to a real increase in the expressive
-power of our programming language.  Consider the idea of forming a
-``linear combination'' \( ax + by \).  We might like to write
-a procedure that would accept \( a \), \( b \), \( x \), and \( y \) as
-arguments and return the value of \( ax + by \).  This
-presents no difficulty if the arguments are to be numbers, because we
-can readily define the procedure
+
 
 複合データの使用はプログラミング言語の表現力を実際に増加させます。
 ``一次結合''\( ax + by \)の形式化について考えてみて下さい。
@@ -5412,12 +5352,6 @@ can readily define the procedure
 \end{scheme}
 
 \noindent
-But suppose we are not concerned only with numbers.  Suppose we would like to
-express, in procedural terms, the idea that one can form linear combinations
-whenever addition and multiplication are defined---for rational numbers,
-complex numbers, polynomials, or whatever.  We could express this as a
-procedure of the form
-
 しかし数値のみが対象ではないと考えてみましょう。手続の項目として加算と乗算が定義され
 ているならば分数、複素数、多項式、その他何でも一次結合を形式化できるというアイデアを
 表現したいとします。これを以下の形式の手続として表現できるでしょう。
@@ -5428,33 +5362,6 @@ procedure of the form
 \end{scheme}
 
 \noindent
-where \code{add} and \code{mul} are not the primitive procedures \code{+} and
-\code{*} but rather more complex things that will perform the appropriate
-operations for whatever kinds of data we pass in as the arguments \code{a},
-\code{b}, \code{x}, and \code{y}. The key point is that the only thing
-\code{linear\-/combination} should need to know about \code{a}, \code{b},
-\code{x}, and \code{y} is that the procedures \code{add} and \code{mul} will
-perform the appropriate manipulations.  From the perspective of the procedure
-\code{linear\-/combination}, it is irrelevant what \code{a}, \code{b}, \code{x},
-and \code{y} are and even more irrelevant how they might happen to be
-represented in terms of more primitive data.  This same example shows why it is
-important that our programming language provide the ability to manipulate
-compound objects directly: Without this, there is no way for a procedure such
-as \code{linear\-/combination} to pass its arguments along to \code{add} and
-\code{mul} without having to know their detailed structure.\footnote{The
-ability to directly manipulate procedures provides an analogous increase in the
-expressive power of a programming language.  For example, in 
-\link{Section 1.3.1} we introduced the \code{sum} procedure, which takes a procedure
-\code{term} as an argument and computes the sum of the values of \code{term}
-over some specified interval.  In order to define \code{sum}, it is crucial
-that we be able to speak of a procedure such as \code{term} as an entity in its
-own right, without regard for how \code{term} might be expressed with more
-primitive operations.  Indeed, if we did not have the notion of ``a
-procedure,'' it is doubtful that we would ever even think of the possibility of
-defining an operation such as \code{sum}.  Moreover, insofar as performing the
-summation is concerned, the details of how \code{term} may be constructed from
-more primitive operations are irrelevant.}
-
 \code{add}と\code{mul}はプリミティブな手続\code{+}と\code{*}ではなく、より複雑なものです。
 適切な操作を引数\code{a}, \code{b}, \code{x}, \code{y}として与えたどのような種類のデータに対しても行います。
 キーポイントは\code{linear\-/combination}が\code{a}, \code{b}, \code{x}, \code{y}について知らねばならないことは

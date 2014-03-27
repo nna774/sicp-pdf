@@ -1342,11 +1342,11 @@ all its ideas of relations.  3.  The third is separating them from all other
 ideas that accompany them in their real existence: this is called abstraction,
 and thus all its general ideas are made.
 
-心がその力を単純な考えの上に発揮する心の働きは、主としてこれら3つです。1. いくつかの
+心がその中で、その力を単純な考えの上に発揮する``心の働き''は、主としてこれら3つです。1. いくつかの
 簡単な考えを1つの複合物に組み合わせます。全ての複雑な考えはこのようにして作られます。
-2. 2つ目は2つの考えをそれが簡単であるか複雑であるかに係らず一緒にもたらし、お互いに
+2. 2つの考えをそれが簡単であるか複雑であるかに係らず一緒にもたらし、お互いに
 合わせることでそれらを統合することは無しに、全ての関係性の考えを得ることで、一度に
-それらを見渡します。3. 3つ目は考えをそれらの実在に付随する全ての他の考えから分離します。
+それらを見渡します。3. 考えをそれらの実在に付随する全ての他の考えから分離します。
 これは抽象化と呼ばれ、このようにして全てのその一般的な考えは作られます。
 
 ---John Locke, \emph{An Essay Concerning Human Understanding} (1690)
@@ -1637,10 +1637,10 @@ rules for manipulating the data.  Thus, any powerful programming language
 should be able to describe primitive data and primitive procedures and should
 have methods for combining and abstracting procedures and data.
 
-プログラミングにおいては２つの種類の要素を扱います。プロシジャとデータです。
+プログラミングにおいては２つの種類の要素を扱います。手続(procedure)とデータです。
 （後でそれらはあまりはっきりとは区別できないことを明かします。）
-簡単に説明するとデータは操作対象の``物''でプロシジャはデータの操作のためのルールの
-記述です。従って強力なプログラミング言語はどれもプリミティブなデータと
+簡単に説明するとデータは操作対象の``物''で手続はデータの操作のためのルールの
+記述です。従って強力なプログラミング言語はどれもプリミティブ(原始的な、最低レベルの、組込の)なデータと
 プリミティブな手続を記述可能でなければならず、また手続とデータを
 合成化、抽象化する手法を持たなければなりません。
 
@@ -1700,7 +1700,7 @@ One kind of primitive expression you might type is a number.  (More precisely,
 the expression that you type consists of the numerals that represent the number
 in base 10.)  If you present Lisp with a number
 
-あなたが入力するプリミティブな(原始的な、最低レベルの、組込の)式の一種として数値があります。(より正確には
+あなたが入力するプリミティブな式の一種として数値があります。(より正確には
 あなたが入力する式は10進数の数値を表す数字から成り立ちます。)
 もし数値をLispに与えた場合、
 
@@ -1964,8 +1964,8 @@ environments).\footnote{\link{Chapter 3} will show that this notion of
 environment is crucial, both for understanding how the interpreter works and
 for implementing interpreters.}
 
-値に記号を関連付け後にそれらを取り出すことがあるのは、インタプリタが名前と
-オブジェクトのペアを追跡するためのある種のメモリを持たなければいえけないことを
+値に記号を関連付け、後にそれらを取り出すことがあるのは、インタプリタが名前と
+オブジェクトのペアを追跡するためのある種のメモリを持たなければいけないことを
 意味することは明白でしょう。このメモリは\newterm{environment}(環境)(より正確
 には\newterm{global environment}(大域環境)、演算には複数の異なる環境が利用され
 ることを後に学ぶため)と呼ばれます。.\footnote{\link{Chapter 3}にてこの環境という
@@ -1980,18 +1980,18 @@ procedurally.  As a case in point, let us consider that, in evaluating
 combinations, the interpreter is itself following a procedure.
 
 この章の目標の1つは手続的な思考上の問題を分離することです。
-代表例として、複合式の評価においてインタプリタはそれ自身が手続に従うことを
+代表例として、組み合わせの評価においてインタプリタはそれ自身が手続に従うことを
 考えてみましょう。
 
 \begin{quote}
 To evaluate a combination, do the following:
-複合式を評価するため、以下を行います
+組み合わせを評価するため、以下を行います
 
 \begin{enumerate}
 
 \item
 Evaluate the subexpressions of the combination.
-複合式の部分式を評価する
+組み合わせの部分式を評価する
 
 \item
 Apply the procedure that is the value of the leftmost subexpression (the
@@ -2018,13 +2018,13 @@ useful to be able to work with combinations whose operators are themselves
 compound expressions.}
 
 この単純なルールでさえ、一般的な過程におけるいくつかの重要な点を示します。
-最初に第一のステップが複合式の評価過程を達成すためには先に複合式の各要素の
+最初に第一のステップが組み合わせの評価過程を達成すためには先に組み合わせの各要素の
 評価過程の実行を行う必要があります。従って評価ルールは事実上
 \newterm{recursive}(再帰的)です。つまり評価ルールの1ステップとしてそれ自身を
 実行する必要性があります。\footnote{評価ルールが第一のステップの部分として
-合成式の最も左の要素を評価しなければいけないというのは奇妙に写るかもしれませ
+組み合わせの最も左の要素を評価しなければいけないというのは奇妙に写るかもしれませ
 ん。この時点ではそれは\code{+}や\code{*}が表す足し算やかけ算のような組込の
-プリミティブな手続でしかないためです。後に合成式のオペレータそのものが合成式
+プリミティブな手続でしかないためです。後に組み合わせのオペレータそのものが組み合わせ
 である場合を扱えることが便利であることを学びます。}
 
 Notice how succinctly the idea of recursion can be used to express what, in the
@@ -2054,9 +2054,9 @@ technique for dealing with hierarchical, treelike objects.  In fact, the
 ``percolate values upward'' form of the evaluation rule is an example of a
 general kind of process known as \newterm{tree accumulation}.
 
-この式は評価ルールが4つの異なる合成式に適用される必要があります。この過程を
+この式は評価ルールが4つの異なる組み合わせに適用される必要があります。この過程を
 式の組立を木形式にて表現することで図解することが可能です。\link{Figure 1.1}を
-ご覧下さい。各合成式は枝の付いたノードで表され、枝にはオペレータと別の合成式
+ご覧下さい。各組み合わせは枝の付いたノードで表され、枝にはオペレータと別の組み合わせ
 への茎となるオペランドが付いています。終端ノード(他のノードへのと続く枝の無い物)
 はオペレータか数値を表しています。評価を木の用語で表すと、オペランドの値は
 上へと流れていくことが想像できます。終端ノードから始まり上のレベル、さらに上のレベルにて
@@ -2096,7 +2096,7 @@ point where we need to evaluate, not combinations, but primitive expressions
 such as numerals, built-in operators, or other names.  We take care of the
 primitive cases by stipulating that
 
-次に第一ステップの適用の繰り返しが、合成式でなく、プリミティブ
+次に第一ステップの適用の繰り返しが、組み合わせでなく、プリミティブ
 な式、例えば数値や組込オペレータ、その他の名前を評価することが必要となる点へと
 導くことに注目して下さい。
 以下を規定することにより、プリミティブな場合を取り扱います。
@@ -2212,7 +2212,7 @@ Numbers and arithmetic operations are primitive data and procedures.
 \item
 Nesting of combinations provides a means of combining operations.
 
-合成式のネストは演算の結合手法を提供します。
+組み合わせのネストは演算の結合手法を提供します。
 
 \item
 Definitions that associate names with values provide a limited means of
@@ -2247,7 +2247,7 @@ We can understand this in the following way:
 \begin{example}
 (define (square    x)         (*      x         x))
   |        |       |           |      |         |
- 定義    二乗する    xを        かける  xを       xで.
+ 定義    二乗する    xを     かける  xを       xで.
 \end{example}
 
 \noindent
@@ -2298,7 +2298,7 @@ would be in an actual call to the procedure being defined.
 
 \( \langle\hbox{\sl name}\kern0.08em\rangle \)はその環境における手続定義に関連付けられる記号です。
 \footnote{この本では一般的な式の構文をかぎ括弧にて閉じたイタリックの記号
----e.g., \( \langle \)\var{name}\( \kern0.08em\rangle \)---を用いて実際に
+---例えば、 \( \langle \)\var{name}\( \kern0.08em\rangle \)---を用いて実際に
 式が利用される時に埋められるべき式中の``枠''を示します。}
 \( \langle\hbox{\sl formal parameters}\kern0.08em\rangle \)は手続の中で
 利用される名前で手続の関連する引数を参照します。
@@ -2440,7 +2440,7 @@ the formal parameters \code{x} and \code{y} in the body of
 \code{sum\-/of\-/squares}, reducing the expression to
 
 従って問題は2つのオペランドとオペレータ\code{sum\-/of\-/squares}に換算されます。
-このコンビネーションの評価は3つのサブプロブレムに分かれます。まずオペレータを
+この組み合わせの評価は3つの部分問題に分かれます。まずオペレータを
 評価して適用する手続を得て、オペランドを評価して引数を得る必要があります。
 さて\code{(+ 5 1)}は6になり、\code{(* 5 2)}は10になりますので\code{sum\-/of\-/squares}手続
 を6と10に適用しなければなりません。これらの値は\code{sum\-/of\-/squares}のボディの
@@ -2485,7 +2485,7 @@ are concerned.  However, there are two points that should be stressed:
 
 ここまで説明したプロセスは手続適用の\newterm{substitution model}(置換モデル、代入モデル)
 と呼ばれます。この章にて扱われた手続の過程においては、
-手続適用の``meaning''を決定するモデルとして捉えることができます。
+手続適用の``意味''を決定するモデルとして捉えることができます。
 しかし、強調すべき2つの事があります。
 
 \begin{itemize}
@@ -2533,9 +2533,9 @@ See \link{Stoy 1977} for a careful discussion of substitution.}
 の最初---評価手続について正式な考え得るための始まりに過ぎません。
 一般的に科学とエンジニアリングについての事象をモデリングする場合、単純化した
 不完全なモデルから始めます。より詳細な調査を行うにつれ、これらの単純なモデルは
-不適切になり、より正確なモデルにて置き換えられます。代入モデルもまた例外ではあり
+不適切になり、より正確なモデルにて置き換えられます。置換モデルもまた例外ではあり
 ません。実際に \link{Chapter 3}で示しますが手続を``mutable(変わりやすい)データ''
-と共に扱う場合に代入モデルは破綻し、より複雑な手続適用のモデルにより置き換えなけ
+と共に扱う場合に置換モデルは破綻し、より複雑な手続適用のモデルにより置き換えなけ
 ればならなくなります。
 \footnote{代入のアイデアの簡明性にもかかわらず、代入手続の厳密な数学上の定義を
 与えることは驚くほど複雑になることが知られています。問題は手続の形式パラメタの名前と
@@ -2603,7 +2603,7 @@ values, normal-order and applicative-order evaluation produce the same value.
 (See \link{Exercise 1.5} for an instance of an ``illegitimate'' value where
 normal-order and applicative-order evaluation do not give the same result.)
 
-この代替である``完全に展開してから簡約''評価方法は\newterm{正規順序評価}
+この代替である``完全に展開してから簡約する''評価方法は\newterm{正規順序評価}
 として知られています。一方、``引数を評価してから適用''する方法はインタプリタ
 が実際に利用するもので\newterm{適用順序評価}と呼ばれます。、
 (この本の最初の2つの章の手続全てを含めて)代入を使用してモデリング可能、かつ正当な値を生む手続適用において
@@ -2712,10 +2712,10 @@ value, it interprets \code{\#f} as false.  Any other value is treated as true.
 this book we will use names \code{true} and \code{false}, which are associated
 with the values \code{\#t} and \code{\#f} respectively.}
 
-\newterm{clauses}(クローズ、節)と呼ばれます。各ペアの最初の式は\newterm{predicate}(述部)
+\newterm{clauses}(クローズ、節)と呼ばれます。各ペアの最初の式は\newterm{predicate}(述語)
 ---値が真か偽になる式です。
-\footnote{``真か偽のどちかに翻訳される''とは次を意味します。Schemeでは2つの区別される
-値が存在し、それらは \code{\#t} と \code{\#f}の定数で示されます。インタプリタが述部の値をチェック
+\footnote{``真か偽のどちかに解釈される''とは次を意味します。Schemeでは2つの区別される
+値が存在し、それらは \code{\#t} と \code{\#f}の定数で示されます。インタプリタが述語の値をチェック
 する時、\code{\#f}を偽と訳します。それ以外の任意の値は全て真だと扱われます。(従って
 \code{\#t}を与えることは論理的には必要ありません。しかしそのほうが便利です。)
 この本では\code{true} と \code{false}という名前を用います。それらは\code{\#t} と \code{\#f}という値に
@@ -2730,10 +2730,10 @@ expression} \( \langle{e}\kern0.08em\rangle \) of the clause as the value of the
 If none of the \( \langle{p}\kern0.08em\rangle \)'s is found to be true, the value of the \code{cond} is
 undefined.
 
-条件式は次のように評価されます。述部\( \langle{p_1}\kern0.08em\rangle \)が最初に評価されます
+条件式は次のように評価されます。まず述語\( \langle{p_1}\kern0.08em\rangle \)が最初に評価されます。
 もしその値が偽であれば次に\( \langle{p_2}\kern0.08em\rangle \)が評価されます。もし\( \langle{p_2}\kern0.08em\rangle \)
 の値もまた偽であるならば、その次は\( \langle{p_3}\kern0.08em\rangle \)が評価されます。
-この過程は値が真となる述部が見つかるまで続きます。その場合インタプリタは対応するクローズの
+この過程は値が真となる述語が見つかるまで続きます。その場合インタプリタは対応するクローズの
 \newterm{consequent expression}(結果式) \( \langle{e}\kern0.08em\rangle \)の値が条件式の値として返されます。
 もし真となる\( \langle{p}\kern0.08em\rangle \)が見つからない場合には\code{cond}の値は未定義です。
 
@@ -2746,8 +2746,8 @@ negation.} These take two numbers as arguments and test whether the first
 number is, respectively, greater than, less than, or equal to the second
 number, returning true or false accordingly.
 
-\newterm{述部}という単語は真か偽を返す手続に利用されます。真か偽と評価される式にも用いられます。
-絶対値の手続\code{abs}はプリミティブな述部\code{>}, \code{<}, \code{=}を利用します。
+\newterm{述語}という単語は真か偽を返す手続に利用されます。真か偽と評価される式にも用いられます。
+絶対値の手続\code{abs}はプリミティブな述語\code{>}, \code{<}, \code{=}を利用します。
 \footnote{\code{abs}はまた``マイナス''演算子\code{-}を使用します。
 \code{(- x)}のように単一のオペランドに利用された時、符号の反転を示します。}
 
@@ -2869,8 +2869,7 @@ of the \code{or} expression is false.
 The value of a \code{not} expression is true when the expression \( \langle{e}\kern0.08em\rangle \)
 evaluates to false, and false otherwise.
 
-\code{not}式の値は式\( \langle{e}\kern0.08em\rangle \)が偽と評価される時は真であり、そうでなければ偽である。
-
+\code{not}式の値は式\( \langle{e}\kern0.08em\rangle \)が偽と評価される時は真であり、そうでなければ偽となります。
 \end{itemize}
 
 \noindent
@@ -2878,15 +2877,15 @@ Notice that \code{and} and \code{or} are special forms, not procedures, because
 the subexpressions are not necessarily all evaluated.  \code{Not} is an
 ordinary procedure.
 
-\code{and}と\code{or}が特別な形式であり手続ではないことに注意すること。
-部分式が全て評価される必要が無いためである。
-\code{Not}は通常の手続である。
+\code{and}と\code{or}が特別な形式であり手続ではないことに注意して下さい。
+部分式が全て評価される必要が無いためです。
+\code{not}は通常の手続です。
 
 As an example of how these are used, the condition that a number \( x \) be in
 the range \( 5 < x < 10 \) may be expressed as
 
 これらがどのように利用されるかの例として、数値\( x \)が\( 5 < x < 10 \)の値域に存在するかという条件は
-次のように表現される
+次のように表現されます。
 
 \begin{scheme}
 (and (> x 5) (< x 10))
@@ -2896,7 +2895,7 @@ the range \( 5 < x < 10 \) may be expressed as
 As another example, we can define a predicate to test whether one number is
 greater than or equal to another as
 
-別の例として、ある数値が別の数値に対し等しいかより大きいかを示す述語は以下の通り。
+別の例として、ある数値が別の数値に対し等しいかより大きいかを示す述語は以下の通りです。
 
 \begin{scheme}
 (define (>= x y) (or (> x y) (= x y)))
@@ -2917,7 +2916,7 @@ What is the result printed by the interpreter in response to each expression?
 Assume that the sequence is to be evaluated in the order in which it is
 presented.
 
-以下は式の列である。各式に対するインタプリタの応答としての表示結果は何か?
+以下の一連の式について、各式に対するインタプリタの応答としての表示結果は何か?
 式の列は下記に表示された順で評価されるものと考えよ。
 
 \begin{scheme}
@@ -3029,7 +3028,7 @@ expression.)
 Benは適用順評価を用いるインタプリタではどのような挙動を観察するだろうか?
 Benは正規順評価を用いるインタプリタではどのような挙動を観察するだろうか?
 あなたの回答を説明せよ。(特別形式の\code{if}はインタプリタが適用順評価でも正規順評価でも
-同じ挙動を行うと仮定せよ: 述部式が最初に評価され、結果がconsequentとalternativeのどちらを評価するか決定する)
+同じ挙動を行うと仮定せよ: 述語式が最初に評価され、結果がconsequentとalternativeのどちらを評価するか決定する)
 
 
 \end{quote}
@@ -3085,7 +3084,7 @@ rephrase this definition in pseudo-Lisp:
 \noindent
 This only begs the question.
 
-これはただ問題を提起します。
+これはただ問題を提起するだけです。
 
 The contrast between function and procedure is a reflection of the general
 distinction between describing properties of things and describing how to do
@@ -3115,7 +3114,7 @@ important areas where progress has been made.  We shall revisit this idea in
 (how to)記述を用います。\footnote{宣言的、手続的記述は数学とコンピュータサイエンスの
 ように実際に深く関わっています。例えばプログラムの生成した答が``正しい''という
 ことはプログラムについて宣言的な文を作成することです。プログラムが正しいことを
-証明するための立証技術を目的とした非常に大くの研究が存在します。この問題の技術的
+証明するための立証技術を目的とした非常に多くの研究が存在します。この問題の技術的
 難度の多くは(プログラムが構築される)手続的文と(事象を推論するのに用いられる)
 宣言的文との間の移行に関連します。関連領域において、プログラミング言語の設計に
 おける現在の重要な領域は超高水準言語と呼ばれる物の調査です。それは実際に
@@ -3823,7 +3822,7 @@ test patterns in photography: as oversimplified prototypical patterns, rather
 than practical examples in their own right.
 
 この節では簡単な手続により生成されたプロセスのためのいくつかの共通な``形''について
-検討してみます。またこれらのプロセスが時間と空間の重要な計算資源をどの程度消費する
+検討してみます。またこれらのプロセスが時間と記憶域の重要な計算資源をどの程度消費する
 かについても調査してみます。ここで考慮する手続はとても簡単なものです。それらの役割は
 写真撮影におけるテストパターンにより演じられる様なものです。非常に単純化した原型的な
 パターンであり、それら自身の目的に沿った現実的な例ではありません。
@@ -4138,11 +4137,11 @@ way to compile procedure calls (\link{Steele 1977}).  The \acronym{IEEE} standar
 Scheme requires that Scheme implementations be tail-recursive.}
 
 プロセスとプロシジャ(手続)の区別が混乱を招き易いのは多く(AdaやPascal、C言語を含む)一般的言語
-の実装が例えプロセスが本質的に反復で記述されていても任意の再帰手続の翻訳が手続呼出の回数に伴い
+の実装が例えプロセスが本質的に反復で記述されていても任意の再帰手続の逐次翻訳が手続呼出の回数に伴い
 多くのメモリ容量を消費するためです。結果としてこれらの言語は反復プロセスのみを特別な目的の
 ``ループ構成概念''である\code{do}, \code{repeat}, \code{until}, \code{for}, \code{while}のような物を用いて
 記述可能です。私達が\link{Chapter 5}にて考えるSchemeの実装はこの短所を共有しません。
-例え反復プロセスが再帰手続により記述されていても定量的な空間にて実行します。
+例え反復プロセスが再帰手続により記述されていても定量的な記憶域にて実行します。
 この属性を持つ実装は\newterm{tail-recursive}(末尾再帰)と呼ばれます。末尾再帰の実装を用いれば
 反復は一般的な手続呼出メカニズムを用いて表現可能であり、特別な反復構成概念は構文糖としてのみ
 実益のあるものとなります。\footnote{末尾再帰は長い間コンパイラの最適化のための裏技として知られ
@@ -4382,10 +4381,10 @@ tree-recursive process will be proportional to the number of nodes in the tree,
 while the space required will be proportional to the maximum depth of the tree.
 
 従ってプロセスは入力に伴ない指数関数的に増加するステップ数を要します。一方で
-要求される空間は入力に対し線形にしか増加しません。なぜなら計算過程の任意のポイントに
+要求される記憶域は入力に対し線形にしか増加しません。なぜなら計算過程の任意のポイントに
 おいて、木の中のどのノードが上にあるのかのみ追跡する必要があるためです。一般的に、
 木再帰プロセスにおいて必要とされるステップ数は木の中のノードの数に比例します。
-必要とされる空間は木の最大の深さに対して比例します。
+必要とされる記憶域は木の最大の深さに対して比例します。
 
 We can also formulate an iterative process for computing the Fibonacci numbers.
 The idea is to use a pair of integers \( a \) and \( b \), initialized to
@@ -4623,7 +4622,7 @@ linearly with the input.  See \link{Exercise 3.27}.}
 既にテーブルに存在するかを確認します。その場合、冗長な演算を防ぐことが可能です。
 この戦略は\newterm{tabulation}(表形式化)や\newterm{memoization}(メモ化)として知られ
 直感的な方法で実装が可能です。表形式化は時折、(\code{count\-/change}のような)指数関数的な
-ステップ数を要するプロセスを、入力に対し時間と空間の要求が線形に増加するプロセスへと
+ステップ数を要するプロセスを、入力に対し時間と記憶域の要求が線形に増加するプロセスへと
 変換するのに利用されます。(\link{Exercise 3.27}参照)}
 
 \begin{quote}
@@ -4763,14 +4762,14 @@ described in \link{Section 1.2.2}.
 
 例として、\link{Section 1.2.1}で説明した階乗を求める線形再帰プロセスではステップ数は入力
 \( n \)に比例します。従ってこのプロセスに必要なステップ数は\( \Theta(n) \)に
-従い増加します。必要とされる空間もまた\( \Theta(n) \)に従い増加します。反復式階乗では
-ステップ数はまだ\( \Theta(n) \)ですが、空間は\( \Theta(1) \)---定数です。
+従い増加します。必要とされる記憶域もまた\( \Theta(n) \)に従い増加します。反復式階乗では
+ステップ数はまだ\( \Theta(n) \)ですが、記憶域は\( \Theta(1) \)---定数です。
 \footnote{これらの文は多量の単純化を隠しています。例えばもしプロセスのステップ数を
 ``機械語命令''として数えたならば、例えば乗算に対し必要な機械語命令の数は乗算される
 2つの数に対し独立していると想定するでしょう。それはもし数値が十分に大きな場合は
-間違いです。同様の見解が空間に対する見積に対しても取られます。プロセスのデザインと記述
+間違いです。同様の見解が記憶域に対する見積に対しても取られます。プロセスのデザインと記述
 のように、プロセスの分析は抽象化の色々なレベルに対して行えます}
-木再帰フィボナッチ演算は\( \Theta(\varphi^n) \)ステップと空間\( \Theta(n) \)を
+木再帰フィボナッチ演算は\( \Theta(\varphi^n) \)ステップと記憶域\( \Theta(n) \)を
 必要とします。
 この時\( \varphi \)は\link{Section 1.2.2}で示したとおりの黄金比です。
 
@@ -4805,7 +4804,7 @@ in making change for 11 cents.  What are the orders of growth of the space and
 number of steps used by this process as the amount to be changed increases?
 
 \link{Section 1.2.2}の\code{count\-/change}手続により11セントの両替を求めた場合に生成される
-プロセスの木を図示せよ。量が増えるに従いこのプロセスにより使用される空間とステップ数
+プロセスの木を図示せよ。量が増えるに従いこのプロセスにより使用される記憶域とステップ数
 の増加の次数はいくつか?
 \end{quote}
 
@@ -4862,7 +4861,7 @@ What is the order of growth in space and number of steps (as a function of
 \code{(sine a)} is evaluated?
 
 \code{(sine a)}が評価された時、\code{sine}手続により生成されたプロセスにより使用
-された(\( a \)の関数としての)空間とステップ数の増加の次数を求めよ。
+された(\( a \)の関数としての)記憶域とステップ数の増加の次数を求めよ。
 
 \end{enumerate}
 \end{quote}
@@ -4912,7 +4911,7 @@ This is a linear recursive process, which requires \( \Theta(n) \) steps and
 \( \Theta(n) \) space.  Just as with factorial, we can readily formulate an
 equivalent linear iteration:
 
-これは線形再帰プロセスであり、\( \Theta(n) \)ステップと空間\( \Theta(n) \)を
+これは線形再帰プロセスであり、\( \Theta(n) \)ステップと記憶域\( \Theta(n) \)を
 必要とします。階乗と同様にすぐに等価な線形反復へと定式化可能です。
 
 \begin{scheme}
@@ -4929,7 +4928,7 @@ equivalent linear iteration:
 \noindent
 This version requires \( \Theta(n) \) steps and \( \Theta(1) \) space.
 
-このバージョンは\( \Theta(n) \)ステップと空間\( \Theta(1) \)を必要とします。
+このバージョンは\( \Theta(n) \)ステップと記憶域\( \Theta(1) \)を必要とします。
 
 We can compute exponentials in fewer steps by using successive squaring.  For
 instance, rather than computing \( b^8 \) as
@@ -4981,13 +4980,11 @@ b^n = b * b^(n - 1)  if n is odd
 
 \end{comment}
 \begin{displaymath}
-% \eqalign{	b^2 &= b\cdot b, \cr
-%		b^4 &= b^2\cdot b^2, \cr
-%		b^8 &= b^4\cdot b^4. \cr} 
-\begin{array}{l@{{}={}}l}
-  b^2 & b\cdot b, \\
-  b^4 & b^2\cdot b^2, \\
-  b^8 & b^4\cdot b^4.
+% \eqalign{b^n &= (b^{n / 2})^2 \qquad \;\, {\rm if\;} n {\rm\; is\; even}, \cr
+% b^n &= b\cdot b^{n-1} \qquad {\rm if\;} n {\rm\; is\; odd}. \cr} 
+\begin{array}{l@{{}={}}lr@{\ n\ }l}
+  b^n & (b^{n / 2})^2  \;\; & \mbox{if\,} & \mbox{\,is\, even}, \\
+  b^n & b\cdot b^{n-1} \;\; & \mbox{if\,} & \mbox{\,is\, odd}.
 \end{array}
 \end{displaymath}
 We can express this method as a procedure:
@@ -5005,7 +5002,7 @@ We can express this method as a procedure:
 where the predicate to test whether an integer is even is defined in terms of
 the primitive procedure \code{remainder} by
 
-整数が偶数であるかテストする述部はプリミティブな手続、\code{remainder}を用い
+整数が偶数であるかテストする述語はプリミティブな手続、\code{remainder}を用い
 以下のように定義される。
 
 \begin{scheme}
@@ -5029,7 +5026,7 @@ less than twice the log base 2 of \( n \).  The arbitrary constants \( k_1 \) an
 process, the base to which logarithms are taken does not matter, so all such
 processes are described as \( \Theta(\log n) \).}
 
-\code{fast\-/expt}により展開されるプロセスは\( n \)の対数に従い空間とステップ数の両者が
+\code{fast\-/expt}により展開されるプロセスは\( n \)の対数に従い記憶域とステップ数の両者が
 増加します。これを理解するために\( b^{2n} \)を\code{fast\-/expt}を用いて演算するのに
 \( b^n \)の演算よりただ1度のみ多くの乗算が必要であることに注目して下さい。
 従って計算可能な指数のサイズは、可能な新規の乗算の度に(大体)倍になります。
@@ -5380,7 +5377,7 @@ evaluation of \code{(gcd 206 40)}?  In the applicative-order evaluation?
 
 ある手続が生成するプロセスはもちろんインタプリタにより使用されるルールに依存する。
 例として上で説明した反復\code{gcd}手続について考える。この手続を\link{Section 1.1.5}で議論した
-正規順評価で翻訳実行したと想定する。(\code{if}に対する正規順評価ルールは\link{Exercise 1.5}
+正規順評価で解釈、実行したと想定する。(\code{if}に対する正規順評価ルールは\link{Exercise 1.5}
 を参照)。置換法を(正規順に)用いて\code{(gcd 206 40)}の評価により生成されるプロセスを
 説明せよ。次に実際に実行された\code{remainder}命令を示せ。\code{(gcd 206 40)}の正規順評価に
 おいて実際に実行された\code{remainder}命令は何回だろうか? 適用順評価では?
@@ -6425,7 +6422,7 @@ Show how to express the following using \code{filtered\-/accumulate}:
 より汎用的なバージョンの\code{accumulate} (\link{Exercise 1.32})を結合される項の
 \newterm{filter}(フィルタ)の概念を紹介することで得ることが可能だ。指定された条件を
 満たす範囲の値から導かれる項のみを連結する。結果としての\code{filtered\-/accumulate}抽象は
-\code{accumulate}と同じ引数を追加の1引数の述部と共に取り、述部はフィルタを指定する。
+\code{accumulate}と同じ引数を追加の1引数の述語と共に取り、述語はフィルタを指定する。
 手続としての\code{filtered\-/accumulate}を書け。以下を\code{filtered\-/accumulate}を用いて
 どのように表現するかを示せ。
 
@@ -6435,7 +6432,7 @@ Show how to express the following using \code{filtered\-/accumulate}:
 the sum of the squares of the prime numbers in the interval \( a \) to \( b \)
 (assuming that you have a \code{prime?} predicate already written)
 
-\( a \)と\( b \)の区間の素数の二乗の和(あなたは既に\code{prime?}述部を書いていると前提する)
+\( a \)と\( b \)の区間の素数の二乗の和(あなたは既に\code{prime?}述語を書いていると前提する)
 
 \item
 the product of all the positive integers less than \( n \) that are relatively
@@ -7913,8 +7910,8 @@ having to look at the things they stand for.
 私達は今、数学上の抽象化の重要なステップに到達しました。
 記号がどんな意味を持つのか忘れるのです。
 \( \dots \)[数学者]に遊んでいる暇はありません。
-これらの記号を用いて実行する演算はいくらでもあります。
-これらが何を意味するのか全く知らない状態でも。
+これらの記号を用いて実行する演算はいくらでもあります、
+これらが何を意味するのか全く考える必要無しに。
 
 ---Hermann Weyl, \textit{The Mathematical Way of Thinking}
 \end{quote}
@@ -7959,8 +7956,8 @@ combining data objects to form \newterm{compound data}.
 この章では私達はより複雑なデータについて目を向けることにします。
 第一章での全ての手続は単純な数値データを操作しましたが、単純なデータは私達が
 演算を用いて解決したいと願う多くの問題には不十分です。
-プログラムは一般的に複雑な事象をモデル化するために設計され、多くの場合、一人が
-複数の側面を持つ実世界の事象をモデル化するためのいくつかのパーツを持つ演算対象の
+プログラムは一般的に複雑な事象をモデル化するために設計され、大抵の場合、
+複数の側面を持つ実世界の事象をモデル化するため、いくつかのパーツを持つ演算対象の
 オブジェクトを構築せねばなりません。
 従って第一章での焦点は手続を組み合わせることで複合手続を形成し抽象化を構築すること
 でしたが、この章では任意のプログラミング言語においてもう1つの鍵となる側面に向かい
@@ -8174,7 +8171,7 @@ representation of sets, and the encoding of information.
 オブジェクトの集合を表現するための様々な代替方法について探検します。
 与えられた数値関数が多くの異なる演算処理により計算され得ると同時に、
 与えられたデータ構造が多くの方法にてより単純なオブジェクトを用いて表現され得ること、
-表現の選択はデータを扱う処理が日宇町な時間と空間に対し重大な影響を与えることについて発見するでしょう。
+表現の選択はデータを扱う処理が日宇町な時間と記憶域に対し重大な影響を与えることについて発見するでしょう。
 記号上の微分、集合の表現、情報符号化のコンテキストにてこれらの考えについて調査します。
 
 Next we will take up the problem of working with data that may be represented
@@ -10676,7 +10673,7 @@ mobile is balanced.
 その棒にかかる重さを掛けた値が、相対する右側の積の値と同じ場合である)、かつ
 各部分モバイルも全て同様である場合に限り、
 \newterm{balanced}(バランスが取れた状態)であると言う。
-あるバイナリモバイルがバランスが取れているかテストする述部を設計せよ。
+あるバイナリモバイルがバランスが取れているかテストする述語を設計せよ。
 
 \item
 Suppose we change the representation of mobiles so that the constructors are
@@ -11015,7 +11012,7 @@ the \code{map} procedure from \link{Section 2.2.1}:
 Filtering a sequence to select only those elements that satisfy a given
 predicate is accomplished by
 
-列をフィルタリングして与えられた述部を満足する要素のみを選択することは以下の様に達成できます。
+列をフィルタリングして与えられた述語を満足する要素のみを選択することは以下の様に達成できます。
 
 \begin{scheme}
 (define (filter predicate sequence)
@@ -11189,7 +11186,7 @@ write
 慣習的なデータ処理アプリケーションを列操作を用いて説明することもできます。
 個人の記録の列があるとし、最も高給なプログラマの給料を見つけたいとします。
 記録の給料を返すセレクタ\code{salary}と記録がプログラマの物であるかを判定する
-述部\code{programmer?}があるとします。すると以下のように書けます。
+述語\code{programmer?}があるとします。すると以下のように書けます。
 
 \begin{scheme}
 (define (salary-of-highest-paid-programmer records)
@@ -11656,9 +11653,9 @@ predicate is called for each element of the sequence; its argument is a pair
 and it must extract the integers from the pair.  Thus, the predicate to apply
 to each element in the sequence is
 
-これでこのペアの列をフィルタにかけ和が素数であるものを探します。フィルタの述部が
+これでこのペアの列をフィルタにかけ和が素数であるものを探します。フィルタの述語が
 各要素に対して呼ばれます。その引数はペアであり、ペアから整数を抽出せねばなりません。
-従って列の各要素に適用される述部は以下のようになります。
+従って列の各要素に適用される述語は以下のようになります。
 
 \begin{scheme}
 (define (prime-sum? pair)
@@ -13561,7 +13558,7 @@ predicates:
 に耽ります。もし代数式を表現するための手段があるのなら式が和か積か定数であるかを
 判別することができるはずです。式のパーツを抽出することができるはずです。例えば
 足し算に対して加数(第一項)と被加数(第二項)を抽出できるはずです。またパーツから式を
-構築することもできるはずです。既に以下のセレクタ、コンストラクタ、述部を実装するための
+構築することもできるはずです。既に以下のセレクタ、コンストラクタ、述語を実装するための
 手続を持っていると仮定しましょう。
 
 \begin{scheme}
@@ -13581,7 +13578,7 @@ predicates:
 Using these, and the primitive predicate \code{number?}, which identifies
 numbers, we can express the differentiation rules as the following procedure:
 
-これらと数値であるかを判断するプリミティブな述部\code{number?}を用いて、以下の手続の
+これらと数値であるかを判断するプリミティブな述語\code{number?}を用いて、以下の手続の
 様に微分のルールを表現できます。
 
 \begin{scheme}
@@ -13633,7 +13630,7 @@ representation for the differentiation problem is as follows:
 The variables are symbols.  They are identified by the primitive predicate
 \code{symbol?}:
 
-変数はシンボルである。プリミティブな述部\code{symbol?}で判別される。
+変数はシンボルである。プリミティブな述語\code{symbol?}で判別される。
 
 \begin{scheme}
 (define (variable? x) (symbol? x))
@@ -13905,7 +13902,7 @@ algebraic expressions on which the differentiator is to operate.
 
 微分プログラムを変更し通常の数学の記法を扱えるようにしたいとする。\code{+}と\code{*}は
 接中辞となり接頭辞演算子ではなくなる。微分プログラムは抽象データを用いて定義されて
-いるので、もっぱら微分プログラムが操作する代数式を表現する述部、セレクタ、コンストラクタを
+いるので、もっぱら微分プログラムが操作する代数式を表現する述語、セレクタ、コンストラクタを
 変更することで式の異なる表現を対応するように変更することができる。
 
 \begin{enumerate}[a]
@@ -13929,7 +13926,7 @@ such that our derivative program still works?
 
 \code{(x + 3 * (x + y + 2))}のような標準的な代数記法を認めることで問題は大幅に難しくなる。
 これは必要の無い括弧を省略し、乗算は加算の前に行われると仮定している。
-私達の微分プログラムがそれでも働くこの記法に対する適切な述部、セレクタ、コンストラクタを設計できるだろうか?
+私達の微分プログラムがそれでも働くこの記法に対する適切な述語、セレクタ、コンストラクタを設計できるだろうか?
 
 \end{enumerate}
 \end{quote}
@@ -13973,7 +13970,7 @@ interpretations given above.
 私達はデータ抽象の手法を用いることができます。それは``集合''を集合上で用いられる
 操作を特定することで定義することです。これらは\code{union\-/set}, \code{intersection\-/set}, 
 \code{element\-/of\-/set?}, \code{adjoin\-/set}です。\code{element\-/of\-/set?}は与えられた要素が
-集合のメンバーであるかを判定する述部です。\code{adjoin\-/set}はオブジェクトと集合を
+集合のメンバーであるかを判定する述語です。\code{adjoin\-/set}はオブジェクトと集合を
 引数として取り、元の集合の要素と挿入された要素をも含む集合を返します。
 \code{union\-/set}はどちらかの引数に現れる全ての
 要素含む集合である、2つの集合の和集合を計算します。
@@ -14778,7 +14775,7 @@ With this code, the same message as above is encoded as the string
 This string contains 42 bits, so it saves more than 20\% in space in comparison
 with the fixed-length code shown above.
 
-この列は42ビットですから上で示した固定長符号に比べ空間において20\%以上節約できています。
+この列は42ビットですから上で示した固定長符号に比べ記憶域において20\%以上節約できています。
 
 One of the difficulties of using a variable-length code is knowing when you
 have reached the end of a symbol in reading a sequence of zeros and ones.
@@ -15884,7 +15881,7 @@ way to implement this is to use ordinary list structure:
 Using these procedures, we can define predicates \code{rectangular?}  and
 \code{polar?}, which recognize rectangular and polar numbers, respectively:
 
-これら手続を用いて述部\code{rectangular?}と\code{polar?}を定義し、直行形式と
+これら手続を用いて述語\code{rectangular?}と\code{polar?}を定義し、直行形式と
 極形式のそれぞれを認識することができます。
 
 \begin{scheme}
@@ -17168,7 +17165,7 @@ predicate \code{equ?} that tests the equality of two numbers, and install it in
 the generic arithmetic package.  This operation should work for ordinary
 numbers, rational numbers, and complex numbers.
 
-2つの数値の等値関係をテストするジェネリックな等値の述部\code{equ?}を定義し、
+2つの数値の等値関係をテストするジェネリックな等値の述語\code{equ?}を定義し、
 ジェネリック数値演算パッケージにインストールせよ。この命令は通常の数値、分数、
 複素数に対しても働くこと。
 \end{quote}
@@ -21140,7 +21137,7 @@ control structure of the interpreter in \link{Section 5.4}.}
 \end{quote}
 
 各版の\code{factorial}手続を用いて\code{(factorial 6)}を評価した場合に作成される環境構造を示せ。\footnote{
-環境モデルはインタプリタは\code{fact\-/iter}のような手続を末尾再帰を用いることで一定量の空間にて実行できる
+環境モデルはインタプリタは\code{fact\-/iter}のような手続を末尾再帰を用いることで一定量の記憶域にて実行できる
 という\link{Section 1.2.1}での私達の主張を明確にはしません。末尾再帰については\link{Section 5.4}にてインタプリタの
 コントロール構造を取り扱う時に議論します。}
 
@@ -26873,7 +26870,7 @@ required by our computations.  When we represent manipulations on sequences as
 transformations of lists, our programs must construct and copy data structures
 (which may be huge) at every step of a process.
 
-残念なことに、列をリストとして表現するとこの洗練さは演算により必要とされる時間と空間に関する
+残念なことに、列をリストとして表現するとこの洗練さは演算により必要とされる時間と記憶域に関する
 深刻な非効率性を犠牲にして得ることになります。列上の操作をリストの変形として表現した時、
 私達のプログラムは(大きくなりえる)データ構造を処理の各ステップにおいて構築とコピーをせねば
 なりません。
@@ -32682,8 +32679,8 @@ that would otherwise arise in implementing a compiler.}
 お互いを定義が評価されている間に使用はしません。Schemeの\acronym{IEEE}標準は
 実装者にこれらの定義の評価に用いられる仕組みについて幾つかの選択を残します。
 別のルールではなくある評価ルールを選択することはここでは``悪い形式''のプログラムの
-翻訳のみに影響する小さな問題に見えるかもしれません。しかし\link{Section 5.5.6}では同時に
-内部定義を行うモデルへの移行がそうしなければコンパイラの実装にて起こる意地の悪い
+解釈のみに影響する小さな問題に見えるかもしれません。しかし\link{Section 5.5.6}では同時に
+内部定義を行うモデルへの移行が、そうしなければコンパイラの実装にて起こり得る意地の悪い
 問題を防ぐことを学びます。}
 
 There is, however, a simple way to treat definitions so that internally defined
@@ -35568,8 +35565,8 @@ Scheme will be entirely in the execution procedures.
 対する変更として実装することを選択しました。対照的に、\link{Section 4.1.7}の分析評価機を
 \code{amb}評価機の基にします。その評価機内の実行手続がバックトラックを実装するのに
 便利なフレームワークを提供するためです。}分析評価機のように、式の評価は式の分析により
-生成される実行手続を呼ぶことにより達成されます。通常のSchemeの翻訳と非決定性Schemeの
-翻訳との違いは完全に実行手続の中に存在します。
+生成される実行手続を呼ぶことにより達成されます。通常のSchemeの解釈と非決定性Schemeの
+解釈との違いは完全に実行手続の中に存在します。
 
 \subsubsection*{Execution procedures and continuations}
 
