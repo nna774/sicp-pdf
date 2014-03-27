@@ -5379,12 +5379,7 @@ Lispは他の言語と異なり、手続に完全な第一級の地位を与え�
 その上、加算の実行を考慮する範囲では\code{term}がどのようによりプリミティブな命令から構築され得るのかの
 詳細は無関係なのです。}
 
-We begin this chapter by implementing the rational-number arithmetic system
-mentioned above.  This will form the background for our discussion of compound
-data and data abstraction.  As with compound procedures, the main issue to be
-addressed is that of abstraction as a technique for coping with complexity, and
-we will see how data abstraction enables us to erect suitable
-\newterm{abstraction barriers} between different parts of a program.
+
 
 私達はこの章を先に触れられた分数の数値演算システムを実装することで始めます。
 これが複合データとデータ抽象化の議論の背景を形作ります。
@@ -5392,20 +5387,7 @@ we will see how data abstraction enables us to erect suitable
 どのようにデータ抽象化が適切な\newterm{abstraction barriers}(抽象化バリア)を
 異なるプログラムの部分の間に構築することを可能にするかについて学びます。
 
-We will see that the key to forming compound data is that a programming
-language should provide some kind of ``glue'' so that data objects can be
-combined to form more complex data objects.  There are many possible kinds of
-glue.  Indeed, we will discover how to form compound data using no special
-``data'' operations at all, only procedures.  This will further blur the
-distinction between ``procedure'' and ``data,'' which was already becoming
-tenuous toward the end of chapter 1.  We will also explore some
-conventional techniques for representing sequences and trees.  One key idea in
-dealing with compound data is the notion of \newterm{closure}---that the glue
-we use for combining data objects should allow us to combine not only primitive
-data objects, but compound data objects as well.  Another key idea is that
-compound data objects can serve as \newterm{conventional interfaces} for
-combining program modules in mix-and-match ways.  We illustrate some of these
-ideas by presenting a simple graphics language that exploits closure.
+
 
 複合データを形成するための鍵はプログラミング言語はある種の``糊''を提供しなければ
 ならないことであり、そうすることでデータオブジェクトはより複雑なデータオブジェクト
@@ -5422,16 +5404,6 @@ ideas by presenting a simple graphics language that exploits closure.
 これらのアイデアのいくつかについてはクロージャを用いる簡単なグラフィック言語を与えることで
 説明します。
 
-We will then augment the representational power of our language by introducing
-\newterm{symbolic expressions}---data whose elementary parts can be arbitrary
-symbols rather than only numbers.  We explore various alternatives for
-representing sets of objects.  We will find that, just as a given numerical
-function can be computed by many different computational processes, there are
-many ways in which a given data structure can be represented in terms of
-simpler objects, and the choice of representation can have significant impact
-on the time and space requirements of processes that manipulate the data.  We
-will investigate these ideas in the context of symbolic differentiation, the
-representation of sets, and the encoding of information.
 
 次に\newterm{symbolic expressions}(記号表現)---その基本的な部分は任意の記号であり
 数字のみではないデータ---を紹介することで言語の具象的な力を増補します。
@@ -5441,19 +5413,6 @@ representation of sets, and the encoding of information.
 表現の選択はデータを扱う処理が日宇町な時間と記憶域に対し重大な影響を与えることについて発見するでしょう。
 記号上の微分、集合の表現、情報符号化のコンテキストにてこれらの考えについて調査します。
 
-Next we will take up the problem of working with data that may be represented
-differently by different parts of a program.  This leads to the need to
-implement \newterm{generic operations}, which must handle many different types
-of data.  Maintaining modularity in the presence of generic operations requires
-more powerful abstraction barriers than can be erected with simple data
-abstraction alone.  In particular, we introduce \newterm{data-directed
-programming} as a technique that allows individual data representations to be
-designed in isolation and then combined \newterm{additively} (i.e., without
-modification).  To illustrate the power of this approach to system design, we
-close the chapter by applying what we have learned to the implementation of a
-package for performing symbolic arithmetic on polynomials, in which the
-coefficients of the polynomials can be integers, rational numbers, complex
-numbers, and even other polynomials.
 
 次にプログラムの異なる部分において異なって表現され得るデータを用いて処理する問題に問とりかかります。 
 これが\newterm{generic operations}(総称命令)の実装の必要性へと導きます。総称命令は
@@ -5470,18 +5429,7 @@ numbers, and even other polynomials.
 \label{Section 2.1}
 \section{Introduction to Data Abstraction}
 
-In \link{Section 1.1.8}, we noted that a procedure used as an element in
-creating a more complex procedure could be regarded not only as a collection of
-particular operations but also as a procedural abstraction.  That is, the
-details of how the procedure was implemented could be suppressed, and the
-particular procedure itself could be replaced by any other procedure with the
-same overall behavior.  In other words, we could make an abstraction that would
-separate the way the procedure would be used from the details of how the
-procedure would be implemented in terms of more primitive procedures.  The
-analogous notion for compound data is called \newterm{data abstraction}.  Data
-abstraction is a methodology that enables us to isolate how a compound data
-object is used from the details of how it is constructed from more primitive
-data objects.
+
 
 \link{Section 1.1.8}においてより複雑な手続を作成する要素として使われる手続は特定の命令の
 集合としてのみでなく、手続の抽象化としても見做されることを伝えました。
@@ -5494,16 +5442,7 @@ data objects.
 プリミティブなデータオブジェクトから構築されたのかの詳細から分離することを可能にする
 方法論(methodology, メソドロジ)です。
 
-The basic idea of data abstraction is to structure the programs that are to use
-compound data objects so that they operate on ``abstract data.'' That is, our
-programs should use data in such a way as to make no assumptions about the data
-that are not strictly necessary for performing the task at hand.  At the same
-time, a ``concrete'' data representation is defined independent of the programs
-that use the data.  The interface between these two parts of our system will be
-a set of procedures, called \newterm{selectors} and \newterm{constructors},
-that implement the abstract data in terms of the concrete representation.  To
-illustrate this technique, we will consider how to design a set of procedures
-for manipulating rational numbers.
+
 
 データ抽象化の基本的なアイデアは複合データオブジェクトを使用するためのプログラムを構造化
 することで``抽象データ''上で操作を行うことです。それはつまり、私達のプログラムが
@@ -5519,18 +5458,12 @@ for manipulating rational numbers.
 \label{Section 2.1.1}
 \subsection{Example: Arithmetic Operations for Rational Numbers}
 
-Suppose we want to do arithmetic with rational numbers.  We want to be able to
-add, subtract, multiply, and divide them and to test whether two rational
-numbers are equal.
+
 
 分数を用いて数値演算を行いたいとします。足し算、引き算、かけ算、割り算をそれらに
 対して行い2つの分数が等しいかテストします。
 
-Let us begin by assuming that we already have a way of constructing a rational
-number from a numerator and a denominator.  We also assume that, given a
-rational number, we have a way of extracting (or selecting) its numerator and
-its denominator.  Let us further assume that the constructor and selectors are
-available as procedures:
+
 
 分子と分母から分数を構築する方法を既に持っていると仮定することから始めましょう。
 分数を与えられた時にそれの分子と分母を抽出する(または選択(セレクト)する)方法を持っているとも
@@ -5539,16 +5472,13 @@ available as procedures:
 \begin{itemize}
 
 \item
-\( \hbox{\tt(make-rat}\;\langle{n}\kern0.08em\rangle\;\langle{d}\kern0.06em\rangle\hbox{\tt)} \) returns the rational number whose numerator is the integer \( \langle{n}\kern0.08em\rangle \) and whose denominator is the integer
-\( \langle{d}\kern0.06em\rangle \).
+\( \hbox{\tt(make-rat}\;\langle{n}\kern0.08em\rangle\;\langle{d}\kern0.06em\rangle\hbox{\tt)} \)は分子が整数\( \langle{n}\kern0.08em\rangle \)であり、かつ分母が整数\( \langle{d}\kern0.06em\rangle \)である分数を返す。
 
 \item
-\( \hbox{\tt(numer}\;\;\langle{x}\kern0.08em\rangle\hbox{\tt)} \) returns the numerator of the rational number
-\( \langle{x}\kern0.08em\rangle \).
+\( \hbox{\tt(numer}\;\;\langle{x}\kern0.08em\rangle\hbox{\tt)} \)は分数\( \langle{x}\kern0.08em\rangle \)の分子を返す。
 
 \item
-\( \hbox{\tt(denom}\;\;\langle{x}\kern0.08em\rangle\hbox{\tt)} \) returns the denominator of the rational number
-\( \langle{x}\kern0.08em\rangle \).
+\( \hbox{\tt(denom}\;\;\langle{x}\kern0.08em\rangle\hbox{\tt)} \)は分数\( \langle{x}\kern0.08em\rangle \)の分母を返す。
 
 \end{itemize}
 
