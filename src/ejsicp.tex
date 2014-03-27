@@ -9058,19 +9058,19 @@ manipulate inexact quantities (such as measured parameters of physical devices)
 with known precision, so that when computations are done with such approximate
 quantities the results will be numbers of known precision.
 
-Alyssa P. Hackerは人々が工学上の問題を解くのを手助けするシステムを設計している。
+Alyssa P. Hackerは人々が工学上の問題を解くのを手助けするシステムを設計しています。
 システムにおいて彼女が提供したい1つの機能は(物理機器の測定されたパラメータのような)不正確な量を
-既知の精度にて扱う能力である。そうすることで演算がそのような近似量にて行われた時、結果が既知の
-精度の値になるようにするためである。
+既知の精度にて扱う能力です。演算がそのような近似量にて行われた時、結果が既知の
+精度の値になるようにするためです。
 
 Electrical engineers will be using Alyssa's system to compute electrical
 quantities.  It is sometimes necessary for them to compute the value of a
 parallel equivalent resistance \( R_p \) of two resistors \( R_1 \), \( R_2 \)
 using the formula
 
-電気技術者達がAlyssaのシステムを電気の量を計算するために使用する。彼らは時折2つの
+電気技術者達がAlyssaのシステムを電気の量を計算するために使用します。彼らは時折2つの
 抵抗\( R_1 \), \( R_2 \)の並列に等価な抵抗値\( R_p \)を次の式を用いて計算する
-必要がある。
+必要があります。
 \begin{comment}
 
 \begin{example}
@@ -9092,12 +9092,12 @@ resistance of the combination can range from about 2.58 ohms (if the two
 resistors are at the lower bounds) to about 2.97 ohms (if the two resistors are
 at the upper bounds).
 
-抵抗値は通常抵抗の生産者により保証されるいくらかの許容誤差未満であることが知られている。
+抵抗値は通常抵抗の生産者により保証されるいくらかの許容誤差未満であることが知られています。
 例えばもしあなたが``10\%の許容誤差で6.8Ω''とラベリングされた抵抗を買ったとしたら、
 確かなのはその抵抗は\( 6.8 - 0.68 = 6.12 \)と\( 6.8 + 0.68 = 7.48 \)Ωの間の抵抗を
-持つことのみである。従って、もし6.8Ω 10\%の抵抗と並列に4.7Ω 5\%の抵抗を接続した場合に、
+持つことのみです。従って、もし6.8Ω 10\%の抵抗と並列に4.7Ω 5\%の抵抗を接続した場合に、
 組み合わせの抵抗は約2.58Ω(2つの抵抗が低限である場合)から約2.97Ω(2つの抵抗が上限である場合)
-の区間になる。
+の区間になります。
 
 Alyssa's idea is to implement ``interval arithmetic'' as a set of arithmetic
 operations for combining ``intervals'' (objects that represent the range of
@@ -9106,8 +9106,8 @@ multiplying, or dividing two intervals is itself an interval, representing the
 range of the result.
 
 Alyssaのアイデアは``interval arithmetic''(区間演算)を``区間''(不正確な量の取り得る
-値の区間を表現するオブジェクト)を連結する演算命令の集合として実装することである。
-2つの区間の加算、減算、乗算、除算の結果はそれ自身が区間であり、結果の範囲を表す。
+値の区間を表現するオブジェクト)を連結する演算命令の集合として実装することです。
+2つの区間の加算、減算、乗算、除算の結果はそれ自身が区間であり、結果の範囲を表します。
 
 Alyssa postulates the existence of an abstract object called an ``interval''
 that has two endpoints: a lower bound and an upper bound.  She also presumes
@@ -9117,10 +9117,10 @@ adding two intervals.  She reasons that the minimum value the sum could be is
 the sum of the two lower bounds and the maximum value it could be is the sum of
 the two upper bounds:
 
-Alyssaは2つの終端、下限と上限を持つ``区間''と呼ばれる抽象オブジェクトの存在を仮定した。
+Alyssaは2つの終端、下限と上限を持つ``区間''と呼ばれる抽象オブジェクトの存在を仮定しました。
 彼女はまた区間の終端を与えられた時、データコンストラクタ\code{make\-/interval}を用いて区間の
-構築ができると仮定した。Alyssaは最初に2つの区間を足す手続を書いた。彼女は和の最小値は
-2つの下限の和であり、最大値は2つの上限の和になろうだろうと推測した。
+構築ができると仮定しました。Alyssaは最初に2つの区間を足す手続を書きました。彼女は和の最小値は
+2つの下限の和であり、最大値は2つの上限の和になるだろうと推測しました。
 
 \begin{scheme}
 (define (add-interval x y)
@@ -9135,8 +9135,8 @@ resulting interval.  (\code{Min} and \code{max} are primitives that find the
 minimum or maximum of any number of arguments.)
 
 Alyssaはまた2つの区間の積を限界値の積の最小値と最大値を見つけることで算出し、
-そしてそれらを結果区間の限界値として用いた。(\code{min}と\code{max}は任意の数の引数の
-最小値と最大値を見つけるプリミティブである)。
+そしてそれらを結果区間の限界値として用いました。(\code{min}と\code{max}は任意の数の引数の
+最小値と最大値を見つけるプリミティブです)。
 
 \begin{scheme}
 (define (mul-interval x y)
@@ -9153,8 +9153,8 @@ To divide two intervals, Alyssa multiplies the first by the reciprocal of the
 second.  Note that the bounds of the reciprocal interval are the reciprocal of
 the upper bound and the reciprocal of the lower bound, in that order.
 
-2つの区間を割るために、Alyssaは一つ目に2つ目の逆数を掛けた。区間の逆数の限界値は
-上限の逆数と下限の逆数をその順で用いることに注意せよ。
+2つの区間を割るために、Alyssaは一つ目に2つ目の逆数を掛けました。区間の逆数の限界値は
+上限の逆数と下限の逆数をその順で用いることに注意して下さい。
 
 \begin{scheme}
 (define (div-interval x y)
@@ -9260,10 +9260,10 @@ as the ratio of the width of the interval to the midpoint of the interval.
 Engineers usually specify percentage tolerances on the parameters of devices,
 as in the resistor specifications given earlier.
 
-不運なことに、Alyssaのユーザの多くはエンジニアだ。真に工学の場では通常、小さな不確かさ
-を伴なう計測を伴い、区間の中央値に対する区間の幅の割合として測られる。
+不運なことに、Alyssaのユーザの多くはエンジニアです。実際の工学の場では通常、小さな不確かさ
+を伴なう計測を伴い、区間の中央値に対する区間の幅の割合として測定されます。
 エンジニアは通常パーセンテージにて許容誤差を端末のパラメータ上に、以前に与えた抵抗の
-仕様のように指定する。
+仕様のように指定します。
 
 \begin{quote}
 \heading{\phantomsection\label{Exercise 2.12}Exercise 2.12:} Define a constructor
@@ -9297,9 +9297,9 @@ call from an irate user, Lem E. Tweakit.  It seems that Lem has noticed that
 the formula for parallel resistors can be written in two algebraically
 equivalent ways:
 
-大変な仕事を終え、Alyssa P. Hackerは完了したシステムを受け渡した。何年か後、彼女が全てを忘れた頃に、
-彼女は興奮した電話を怒ったユーザ、Lem E. Tweakitから受けた。どうやらLemは並列接続の抵抗の式が2つの
-代数的に等価な方法で書くことができることに気付いたようだ。
+大変な仕事を終え、Alyssa P. Hackerは完了したシステムを受け渡しました。何年か後、彼女が全てを忘れた頃に、
+彼女は興奮した電話を、怒ったユーザ、Lem E. Tweakitから受けました。どうやらLemは並列接続の抵抗の式が2つの
+代数的に等価な方法で書くことができることに気付いたようです。
 \begin{comment}
 
 \begin{example}
@@ -9329,7 +9329,7 @@ and
 He has written the following two programs, each of which computes the
 parallel-resistors formula differently:
 
-彼は以下の2つのプログラムを書いた。それぞれが並列接続の抵抗値を異なる式で計算する。
+彼は以下の2つのプログラムを書きました。それぞれが並列接続の抵抗値を異なる式で計算します。
 
 \begin{scheme}
 (define (par1 r1 r2)
@@ -9337,8 +9337,6 @@ parallel-resistors formula differently:
                 (add-interval r1 r2)))
 \end{scheme}
 
-\begin{figure}[tb]
-
 \begin{scheme}
 (define (par2 r1 r2)
   (let ((one (make-interval 1 1)))
@@ -9347,32 +9345,13 @@ parallel-resistors formula differently:
                        (div-interval one r2)))))
 \end{scheme}
 
-\centering
-
-(define (par2 r1 r2)
-  (let ((one (make-interval 1 1)))
-    (div-interval 
-     one (add-interval (div-interval one r1)
-                       (div-interval one r2)))))
-
-
-\begin{quote}
-
-(define (par2 r1 r2)
-  (let ((one (make-interval 1 1)))
-    (div-interval 
-     one (add-interval (div-interval one r1)
-                       (div-interval one r2)))))
-
-\end{quote}
-\end{figure}
 \vspace{0.3em}
 
 Lem complains that Alyssa's program gives different answers for the two ways of
 computing. This is a serious complaint.
 
-LemはAlyssaのプログラムは2つの方法の演算にて異なる値を返すと抗議した。
-これは真剣な苦情だ。
+LemはAlyssaのプログラムは2つの方法の演算にて異なる値を返すと抗議しました。
+これは深刻な苦情です。
 
 \begin{quote}
 \heading{\phantomsection\label{Exercise 2.14}Exercise 2.14:} Demonstrate that Lem is right.

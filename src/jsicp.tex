@@ -5719,21 +5719,7 @@ constructor is
 
 
 
-We can envision the structure of the rational-number system as shown in 
-\link{Figure 2.1}.  The horizontal lines represent \newterm{abstraction
-barriers} that isolate different ``levels'' of the system.  At each level, the
-barrier separates the programs (above) that use the data abstraction from the
-programs (below) that implement the data abstraction.  Programs that use
-rational numbers manipulate them solely in terms of the procedures supplied
-``for public use'' by the rational-number package: \code{add\-/rat},
-\code{sub\-/rat}, \code{mul\-/rat}, \code{div\-/rat}, and \code{equal\-/rat?}. These,
-in turn, are implemented solely in terms of the constructor and selectors
-\code{make\-/rat}, \code{numer}, and \code{denom}, which themselves are
-implemented in terms of pairs.  The details of how pairs are implemented are
-irrelevant to the rest of the rational-number package so long as pairs can be
-manipulated by the use of \code{cons}, \code{car}, and \code{cdr}.  In effect,
-procedures at each level are the interfaces that define the abstraction
-barriers and connect the different levels.
+
 
 私達は\link{Figure 2.1}にて示された分数システムの構造を想像することができます。
 水平線は\newterm{abstraction barriers}(抽象化バリア)を表現し、システムの異なる``レベル''
@@ -5748,15 +5734,7 @@ barriers and connect the different levels.
 他の物に取っては重要ではありません。実質的に、各レベルにおける手続は抽象化バリアを定義する
 インターフェイスであり、異なるレベルを接続します。
 
-This simple idea has many advantages.  One advantage is that it makes programs
-much easier to maintain and to modify.  Any complex data structure can be
-represented in a variety of ways with the primitive data structures provided by
-a programming language.  Of course, the choice of representation influences the
-programs that operate on it; thus, if the representation were to be changed at
-some later time, all such programs might have to be modified accordingly.  This
-task could be time-consuming and expensive in the case of large programs unless
-the dependence on the representation were to be confined by design to a very
-few program modules.
+
 
 この単純な考えは多くの利点を持ちます。1つの利点はプログラムの保守と変更をより簡単に
 することです。任意の複雑なデータ構造が、プログラミング言語により提供されるプリミティブな
@@ -5801,11 +5779,6 @@ few program modules.
 \end{figure}
 
 \noindent
-For example, an alternate way to address the problem of reducing rational
-numbers to lowest terms is to perform the reduction whenever we access the
-parts of a rational number, rather than when we construct it.  This leads to
-different constructor and selector procedures:
-
 例として、分数を最小の項へと約分する問題の解法の代替法には、分数を組み立てた時でなく、
 分数のパーツにアクセスする度に約分を実行する方法があります。
 これは異なるコンストラクタとセレクタ手続に導きます。
@@ -5821,15 +5794,6 @@ different constructor and selector procedures:
 \end{scheme}
 
 \noindent
-The difference between this implementation and the previous one lies in when we
-compute the \code{gcd}.  If in our typical use of rational numbers we access
-the numerators and denominators of the same rational numbers many times, it
-would be preferable to compute the \code{gcd} when the rational numbers are
-constructed.  If not, we may be better off waiting until access time to compute
-the \code{gcd}.  In any case, when we change from one representation to the
-other, the procedures \code{add\-/rat}, \code{sub\-/rat}, and so on do not have to
-be modified at all.
-
 この実装と依然の実装との間の違いはいつ\code{gcd}を求めるかにあります。
 私達の典型的な分数の使用においては、同じ分数の分子と分母に何度もアクセスする場合、
 分数が組み立てられる時に\code{gcd}を求めるほうが好ましいです。そうでなければ
@@ -5837,14 +5801,7 @@ be modified at all.
 どちらの場合でも、一方の表現からもう一方の表現へと変更する場合、手続、\code{add\-/rat}, 
 \code{sub\-/rat}, その他は全く変更する必要がありません。
 
-Constraining the dependence on the representation to a few interface procedures
-helps us design programs as well as modify them, because it allows us to
-maintain the flexibility to consider alternate implementations.  To continue
-with our simple example, suppose we are designing a rational-number package and
-we can't decide initially whether to perform the \code{gcd} at construction
-time or at selection time.  The data-abstraction methodology gives us a way to
-defer that decision without losing the ability to make progress on the rest of
-the system.
+
 
 表現上の依存対象を少ないインターフェイス手続に制約することはプログラムの設計と共に
 それらの変更をも手助けします。なぜなら代替的な実装を考えるための柔軟性を保つ
@@ -5854,20 +5811,8 @@ the system.
 可能性を失わせずに決定を遅らせる方法を与えます。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.2}Exercise 2.2:} Consider the problem of
-representing line segments in a plane.  Each segment is represented as a pair
-of points: a starting point and an ending point.  Define a constructor
-\code{make\-/segment} and selectors \code{start\-/segment} and \code{end\-/segment}
-that define the representation of segments in terms of points.  Furthermore, a
-point can be represented as a pair of numbers: the \( x \) coordinate and the
-\( y \) coordinate.  Accordingly, specify a constructor \code{make\-/point} and
-selectors \code{x\-/point} and \code{y\-/point} that define this representation.
-Finally, using your selectors and constructors, define a procedure
-\code{midpoint\-/segment} that takes a line segment as argument and returns its
-midpoint (the point whose coordinates are the average of the coordinates of the
-endpoints).  To try your procedures, you'll need a way to print points:
-
-平面上の線分を表現する問題について考える。各線分は点のペアにて表現する。始点と
+\heading{\phantomsection\label{Exercise 2.2}Exercise 2.2:} 平面上の線分を
+表現する問題について考える。各線分は点のペアにて表現する。始点と
 終点である。コンストラクタ\code{make\-/segment}とセレクタ\code{start\-/segment}と\code{end\-/segment}
 を定義せよ。それらは点を用いて線分の表現を定義する。さらに点は数値のペアにて表現できる。
 \( x \)座標と\( y \)座標である。それに沿ってこの表現を定義するコンストラクタ\code{make\-/point}と
@@ -5888,15 +5833,8 @@ endpoints).  To try your procedures, you'll need a way to print points:
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.3}Exercise 2.3:} Implement a representation for
-rectangles in a plane.  (Hint: You may want to make use of \link{Exercise 2.2}.)
-In terms of your constructors and selectors, create procedures that compute the
-perimeter and the area of a given rectangle.  Now implement a different
-representation for rectangles.  Can you design your system with suitable
-abstraction barriers, so that the same perimeter and area procedures will work
-using either representation?
-
-平面上の三角のための表現を実装せよ。(ヒント：\link{Exercise 2.2}を利用したいだろう。)
+\heading{\phantomsection\label{Exercise 2.3}Exercise 2.3:} 平面上の
+三角のための表現を実装せよ。(ヒント：\link{Exercise 2.2}を利用したいだろう。)
 コンストラクタとセレクタを利用して、与えられた三角の周辺の長さと面積を求める手続を
 作れ。適切な抽象化バリアを用いてどんな表現を用いても同じ周辺長と面積の手続が働くよう、
 あなたのシステムを設計できるだろうか?
@@ -5906,12 +5844,7 @@ using either representation?
 \label{Section 2.1.3}
 \subsection{What Is Meant by Data?}
 
-We began the rational-number implementation in \link{Section 2.1.1} by
-implementing the rational-number operations \code{add\-/rat}, \code{sub\-/rat}, and
-so on in terms of three unspecified procedures: \code{make\-/rat}, \code{numer},
-and \code{denom}.  At that point, we could think of the operations as being
-defined in terms of data objects---numerators, denominators, and rational
-numbers---whose behavior was specified by the latter three procedures.
+
 
 
 \link{Section 2.1.1}にて分数実装を分数演算\code{add\-/rat}, \code{sub\-/rat}, その他を
@@ -5920,16 +5853,7 @@ numbers---whose behavior was specified by the latter three procedures.
 分数を用いて定義されると考えることができました。データオブジェクトの振舞は
 後者の3つの手続により指定されました。
 
-But exactly what is meant by \newterm{data}?  It is not enough to say
-``whatever is implemented by the given selectors and constructors.''  Clearly,
-not every arbitrary set of three procedures can serve as an appropriate basis
-for the rational-number implementation.  We need to guarantee that, if we
-construct a rational number \code{x} from a pair of integers \code{n} and
-\code{d}, then extracting the \code{numer} and the \code{denom} of \code{x} and
-dividing them should yield the same result as dividing \code{n} by \code{d}.
-In other words, \code{make\-/rat}, \code{numer}, and \code{denom} must satisfy
-the condition that, for any integer \code{n} and any non-zero integer \code{d},
-if \code{x} is \code{(make\-/rat n d)}, then
+
 
 しかし\newterm{data}(データ)とは正確には何を意味するのでしょうか。
 ``与えられたセレクタとコンストラクタにより実装された物全て''と言うのみでは十分ではありません。
@@ -5950,29 +5874,7 @@ if \code{x} is \code{(make\-/rat n d)}, then
 \begin{displaymath}
  {\hbox{\tt(numer x)} \over \hbox{\tt(denom x)}} = {{\tt n} \over {\tt d}}\,.  
 \end{displaymath}
-In fact, this is the only condition \code{make\-/rat}, \code{numer}, and
-\code{denom} must fulfill in order to form a suitable basis for a
-rational-number representation.  In general, we can think of data as defined by
-some collection of selectors and constructors, together with specified
-conditions that these procedures must fulfill in order to be a valid
-representation.\footnote{Surprisingly, this idea is very difficult to formulate
-rigorously. There are two approaches to giving such a formulation.  One,
-pioneered by C. A. R. \link{Hoare (1972)}, is known as the method of \newterm{abstract
-models}.  It formalizes the ``procedures plus conditions'' specification as
-outlined in the rational-number example above.  Note that the condition on the
-rational-number representation was stated in terms of facts about integers
-(equality and division).  In general, abstract models define new kinds of data
-objects in terms of previously defined types of data objects.  Assertions about
-data objects can therefore be checked by reducing them to assertions about
-previously defined data objects.  Another approach, introduced by Zilles at
-\acronym{MIT}, by Goguen, Thatcher, Wagner, and Wright at IBM 
-(see \link{Thatcher et al. 1978}), 
-and by Guttag at Toronto (see \link{Guttag 1977}), is called
-\newterm{algebraic specification}.  It regards the ``procedures'' as elements
-of an abstract algebraic system whose behavior is specified by axioms that
-correspond to our ``conditions,'' and uses the techniques of abstract algebra
-to check assertions about data objects.  Both methods are surveyed in the paper
-by \link{Liskov and Zilles (1975)}.}
+
 
 実際にこれが\code{make\-/rat}, \code{numer}, \code{denom}が分数表現のための適切な基準を形成する
 ために満たさなければならないただ1つの条件です。
@@ -5991,22 +5893,7 @@ by \link{Liskov and Zilles (1975)}.}
 指定されました。そして抽象代数のテクニックを用いてデータオブジェクトに関する成立条件をチェックしました。
 両者の手法が\link{Liskov and Zilles (1975)}により論文として調査されています。}
 
-This point of view can serve to define not only ``high-level'' data objects,
-such as rational numbers, but lower-level objects as well.  Consider the notion
-of a pair, which we used in order to define our rational numbers.  We never
-actually said what a pair was, only that the language supplied procedures
-\code{cons}, \code{car}, and \code{cdr} for operating on pairs.  But the only
-thing we need to know about these three operations is that if we glue two
-objects together using \code{cons} we can retrieve the objects using \code{car}
-and \code{cdr}.  That is, the operations satisfy the condition that, for any
-objects \code{x} and \code{y}, if \code{z} is \code{(cons x y)} then \code{(car
-z)} is \code{x} and \code{(cdr z)} is \code{y}.  Indeed, we mentioned that
-these three procedures are included as primitives in our language.  However,
-any triple of procedures that satisfies the above condition can be used as the
-basis for implementing pairs.  This point is illustrated strikingly by the fact
-that we could implement \code{cons}, \code{car}, and \code{cdr} without using
-any data structures at all but only using procedures.  Here are the
-definitions:
+
 
 この視点は分数のような``高階データオブジェクト''のみを定義するのではなく、
 より低いレベルのオブジェクトの定義も提供することができます。
@@ -6035,27 +5922,11 @@ definitions:
 \end{scheme}
 
 \noindent
-This use of procedures corresponds to nothing like our intuitive notion of what
-data should be.  Nevertheless, all we need to do to show that this is a valid
-way to represent pairs is to verify that these procedures satisfy the condition
-given above.
-
 この手続の使用はデータが何であるべきかという私達の直感的概念のような物には全く
 関係しません。それでもなお、これがペアを表現するのに有効な方法であると示すのに
 必要なこと全てはこれらの手続が上で与えられた制約を満たすことです。
 
-The subtle point to notice is that the value returned by \code{(cons x y)} is a
-procedure---namely the internally defined procedure \code{dispatch}, which
-takes one argument and returns either \code{x} or \code{y} depending on whether
-the argument is 0 or 1.  Correspondingly, \code{(car z)} is defined to apply
-\code{z} to 0.  Hence, if \code{z} is the procedure formed by \code{(cons x
-y)}, then \code{z} applied to 0 will yield \code{x}. Thus, we have shown that
-\code{(car (cons x y))} yields \code{x}, as desired.  Similarly, \code{(cdr
-(cons x y))} applies the procedure returned by \code{(cons x y)} to 1, which
-returns \code{y}.  Therefore, this procedural implementation of pairs is a
-valid implementation, and if we access pairs using only \code{cons},
-\code{car}, and \code{cdr} we cannot distinguish this implementation from one
-that uses ``real'' data structures.
+
 
 注意すべき微細な点は\code{(cons x y)}により返される値は手続---すなわち内部で定義された
 手続\code{dispatch}であることです。それが1つの引数を取り\code{x}か\code{y}のどちらかを
@@ -6067,18 +5938,7 @@ that uses ``real'' data structures.
 \code{cons}, \code{car}, \code{cdr}のみを用いてペアにアクセスする場合、この実装を``本物の''データ構造を
 用いる実装と区別することはできません。
 
-The point of exhibiting the procedural representation of pairs is not that our
-language works this way (Scheme, and Lisp systems in general, implement pairs
-directly, for efficiency reasons) but that it could work this way.  The
-procedural representation, although obscure, is a perfectly adequate way to
-represent pairs, since it fulfills the only conditions that pairs need to
-fulfill.  This example also demonstrates that the ability to manipulate
-procedures as objects automatically provides the ability to represent compound
-data.  This may seem a curiosity now, but procedural representations of data
-will play a central role in our programming repertoire.  This style of
-programming is often called \newterm{message passing}, and we will be using it
-as a basic tool in \link{Chapter 3} when we address the issues of modeling and
-simulation.
+
 
 ペアの手続による表現を提示することのポイントは私達の言語がこのように働いているという
 ことではなく(Schemeや一般的なLispシステムは効率上の理由からペアを直接的に実装します)、
@@ -6092,11 +5952,8 @@ simulation.
 用います。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.4}Exercise 2.4:} Here is an alternative procedural
-representation of pairs.  For this representation, verify that \code{(car (cons
-x y))} yields \code{x} for any objects \code{x} and \code{y}.
-
-ここにペアの代替的な手続上の表現がある。この表現に対して\code{(car (cons
+\heading{\phantomsection\label{Exercise 2.4}Exercise 2.4:} ここにペアの
+代替的な手続上の表現がある。この表現に対して\code{(car (cons
 x y))}が任意のオブジェクト\code{x}と\code{y}に対して\code{x}を返すか確認せよ。
 
 \begin{scheme}
@@ -6106,33 +5963,22 @@ x y))}が任意のオブジェクト\code{x}と\code{y}に対して\code{x}を�
   (z (lambda (p q) p)))
 \end{scheme}
 
-What is the corresponding definition of \code{cdr}? (Hint: To verify that this
-works, make use of the substitution model of \link{Section 1.1.5}.)
+
 
 対応する\code{cdr}の定義はどうなるか? (ヒント：これが正しく働くか確認するには
 \link{Section 1.1.5}の置換モデルを使用せよ)
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.5}Exercise 2.5:} Show that we can represent pairs of
-nonnegative integers using only numbers and arithmetic operations if we
-represent the pair \( a \) and \( b \) as the integer that is the product \( 2^a 3^b \).  
-Give the corresponding definitions of the procedures \code{cons},
-\code{car}, and \code{cdr}.
-
-負ではない整数のペアを数値と数値演算命令のみを用いて表現できることを、もし\( a \)と\( b \)の
+\heading{\phantomsection\label{Exercise 2.5}Exercise 2.5:} 負ではない
+整数のペアを数値と数値演算命令のみを用いて表現できることを、もし\( a \)と\( b \)の
 ペアを積\( 2^a 3^b \)の整数で表現すれば可能であることにより示せ。
 対応する手続\code{cons}, \code{car}, \code{cdr}.の定義を与えよ。
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.6}Exercise 2.6:} In case representing pairs as
-procedures wasn't mind-boggling enough, consider that, in a language that can
-manipulate procedures, we can get by without numbers (at least insofar as
-nonnegative integers are concerned) by implementing 0 and the operation of
-adding 1 as
-
-ペアを手続として表現することが十分に驚かせるに値するものでない場合、
+\heading{\phantomsection\label{Exercise 2.6}Exercise 2.6:} ペアを
+手続として表現することが十分に驚かせるに値するものでない場合、
 手続を操作可能なある言語においては0と1を足すことを以下のように実装することで
 数値が無くてもやっていける(少なくとも負ではない整数のみを考える場合においては)ことを
 考えてみよ。
@@ -6143,16 +5989,12 @@ adding 1 as
   (lambda (f) (lambda (x) (f ((n f) x)))))
 \end{scheme}
 
-This representation is known as \newterm{Church numerals}, after its inventor,
-Alonzo Church, the logician who invented the \( \lambda \)-calculus.
+
 
 この表現はその開発者に因んで\newterm{Church numerals}(チャーチ数)として知られる。
 Alonzo Churchは\( \lambda \)-演算を発明した論理学者である。
 
-Define \code{one} and \code{two} directly (not in terms of \code{zero} and
-\code{add\-/1}).  (Hint: Use substitution to evaluate \code{(add\-/1 zero)}).  Give
-a direct definition of the addition procedure \code{+} (not in terms of
-repeated application of \code{add\-/1}).
+
 
 \code{one}と\code{two}を直接(\code{zero}と\code{add\-/1}を用いずに)定義せよ。(ヒント：
 加算手続の直接的な定義\code{+}を与えよ。(\code{add\-/1}の繰り返し適用は用いない)
@@ -6162,25 +6004,18 @@ repeated application of \code{add\-/1}).
 \label{Section 2.1.4}
 \subsection{Extended Exercise: Interval Arithmetic}
 
-Alyssa P. Hacker is designing a system to help people solve engineering
-problems.  One feature she wants to provide in her system is the ability to
-manipulate inexact quantities (such as measured parameters of physical devices)
-with known precision, so that when computations are done with such approximate
-quantities the results will be numbers of known precision.
 
-Alyssa P. Hackerは人々が工学上の問題を解くのを手助けするシステムを設計している。
+
+Alyssa P. Hackerは人々が工学上の問題を解くのを手助けするシステムを設計しています。
 システムにおいて彼女が提供したい1つの機能は(物理機器の測定されたパラメータのような)不正確な量を
-既知の精度にて扱う能力である。そうすることで演算がそのような近似量にて行われた時、結果が既知の
-精度の値になるようにするためである。
+既知の精度にて扱う能力です。演算がそのような近似量にて行われた時、結果が既知の
+精度の値になるようにするためです。
 
-Electrical engineers will be using Alyssa's system to compute electrical
-quantities.  It is sometimes necessary for them to compute the value of a
-parallel equivalent resistance \( R_p \) of two resistors \( R_1 \), \( R_2 \)
-using the formula
 
-電気技術者達がAlyssaのシステムを電気の量を計算するために使用する。彼らは時折2つの
+
+電気技術者達がAlyssaのシステムを電気の量を計算するために使用します。彼らは時折2つの
 抵抗\( R_1 \), \( R_2 \)の並列に等価な抵抗値\( R_p \)を次の式を用いて計算する
-必要がある。
+必要があります。
 \begin{comment}
 
 \begin{example}
@@ -6193,44 +6028,27 @@ R_p = -------------
 \begin{displaymath}
  R_p = {1 \over 1 \big/ R_1 + 1 \big/ R_2}\,.  
 \end{displaymath}
-Resistance values are usually known only up to some tolerance guaranteed by the
-manufacturer of the resistor.  For example, if you buy a resistor labeled ``6.8
-ohms with 10\% tolerance'' you can only be sure that the resistor has a
-resistance between \( 6.8 - 0.68 = 6.12 \) and \( 6.8 + 0.68 = 7.48 \) ohms.  Thus, if you
-have a 6.8-ohm 10\% resistor in parallel with a 4.7-ohm 5\% resistor, the
-resistance of the combination can range from about 2.58 ohms (if the two
-resistors are at the lower bounds) to about 2.97 ohms (if the two resistors are
-at the upper bounds).
 
-抵抗値は通常抵抗の生産者により保証されるいくらかの許容誤差未満であることが知られている。
+
+抵抗値は通常抵抗の生産者により保証されるいくらかの許容誤差未満であることが知られています。
 例えばもしあなたが``10\%の許容誤差で6.8Ω''とラベリングされた抵抗を買ったとしたら、
 確かなのはその抵抗は\( 6.8 - 0.68 = 6.12 \)と\( 6.8 + 0.68 = 7.48 \)Ωの間の抵抗を
-持つことのみである。従って、もし6.8Ω 10\%の抵抗と並列に4.7Ω 5\%の抵抗を接続した場合に、
+持つことのみです。従って、もし6.8Ω 10\%の抵抗と並列に4.7Ω 5\%の抵抗を接続した場合に、
 組み合わせの抵抗は約2.58Ω(2つの抵抗が低限である場合)から約2.97Ω(2つの抵抗が上限である場合)
-の区間になる。
+の区間になります。
 
-Alyssa's idea is to implement ``interval arithmetic'' as a set of arithmetic
-operations for combining ``intervals'' (objects that represent the range of
-possible values of an inexact quantity).  The result of adding, subtracting,
-multiplying, or dividing two intervals is itself an interval, representing the
-range of the result.
+
 
 Alyssaのアイデアは``interval arithmetic''(区間演算)を``区間''(不正確な量の取り得る
-値の区間を表現するオブジェクト)を連結する演算命令の集合として実装することである。
-2つの区間の加算、減算、乗算、除算の結果はそれ自身が区間であり、結果の範囲を表す。
+値の区間を表現するオブジェクト)を連結する演算命令の集合として実装することです。
+2つの区間の加算、減算、乗算、除算の結果はそれ自身が区間であり、結果の範囲を表します。
 
-Alyssa postulates the existence of an abstract object called an ``interval''
-that has two endpoints: a lower bound and an upper bound.  She also presumes
-that, given the endpoints of an interval, she can construct the interval using
-the data constructor \code{make\-/interval}.  Alyssa first writes a procedure for
-adding two intervals.  She reasons that the minimum value the sum could be is
-the sum of the two lower bounds and the maximum value it could be is the sum of
-the two upper bounds:
 
-Alyssaは2つの終端、下限と上限を持つ``区間''と呼ばれる抽象オブジェクトの存在を仮定した。
+
+Alyssaは2つの終端、下限と上限を持つ``区間''と呼ばれる抽象オブジェクトの存在を仮定しました。
 彼女はまた区間の終端を与えられた時、データコンストラクタ\code{make\-/interval}を用いて区間の
-構築ができると仮定した。Alyssaは最初に2つの区間を足す手続を書いた。彼女は和の最小値は
-2つの下限の和であり、最大値は2つの上限の和になろうだろうと推測した。
+構築ができると仮定しました。Alyssaは最初に2つの区間を足す手続を書きました。彼女は和の最小値は
+2つの下限の和であり、最大値は2つの上限の和になるだろうと推測しました。
 
 \begin{scheme}
 (define (add-interval x y)
@@ -6239,14 +6057,9 @@ Alyssaは2つの終端、下限と上限を持つ``区間''と呼ばれる抽象
 \end{scheme}
 
 \noindent
-Alyssa also works out the product of two intervals by finding the minimum and
-the maximum of the products of the bounds and using them as the bounds of the
-resulting interval.  (\code{Min} and \code{max} are primitives that find the
-minimum or maximum of any number of arguments.)
-
 Alyssaはまた2つの区間の積を限界値の積の最小値と最大値を見つけることで算出し、
-そしてそれらを結果区間の限界値として用いた。(\code{min}と\code{max}は任意の数の引数の
-最小値と最大値を見つけるプリミティブである)。
+そしてそれらを結果区間の限界値として用いました。(\code{min}と\code{max}は任意の数の引数の
+最小値と最大値を見つけるプリミティブです)。
 
 \begin{scheme}
 (define (mul-interval x y)
@@ -6259,12 +6072,8 @@ Alyssaはまた2つの区間の積を限界値の積の最小値と最大値を�
 \end{scheme}
 
 \noindent
-To divide two intervals, Alyssa multiplies the first by the reciprocal of the
-second.  Note that the bounds of the reciprocal interval are the reciprocal of
-the upper bound and the reciprocal of the lower bound, in that order.
-
-2つの区間を割るために、Alyssaは一つ目に2つ目の逆数を掛けた。区間の逆数の限界値は
-上限の逆数と下限の逆数をその順で用いることに注意せよ。
+2つの区間を割るために、Alyssaは一つ目に2つ目の逆数を掛けました。区間の逆数の限界値は
+上限の逆数と下限の逆数をその順で用いることに注意して下さい。
 
 \begin{scheme}
 (define (div-interval x y)
@@ -6275,44 +6084,27 @@ the upper bound and the reciprocal of the lower bound, in that order.
 \end{scheme}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.7}Exercise 2.7:} Alyssa's program is incomplete
-because she has not specified the implementation of the interval abstraction.
-Here is a definition of the interval constructor:
-
-Alyssaのプログラムは未完成である。なぜなら彼女は区間の抽象の実装を特定していない。
-ここに区間のコンストラクタの定義を置く。
+\heading{\phantomsection\label{Exercise 2.7}Exercise 2.7:} Alyssaの
+プログラムは未完成である。なぜなら彼女は区間の抽象の実装を特定していない。
+以下に区間のコンストラクタの定義を置く。
 
 \begin{scheme}
 (define (make-interval a b) (cons a b))
 \end{scheme}
 
-Define selectors \code{upper\-/bound} and \code{lower\-/bound} to complete the
-implementation.
 
 セレクタ\code{upper\-/bound}と\code{lower\-/bound}を定義し実装を完成させよ。
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.8}Exercise 2.8:} Using reasoning analogous to
-Alyssa's, describe how the difference of two intervals may be computed.  Define
-a corresponding subtraction procedure, called \code{sub\-/interval}.
-
-Alyssaの考えと同様の推論を用いて、2つの区間の差がどのように計算されるかを説明せよ。
+\heading{\phantomsection\label{Exercise 2.8}Exercise 2.8:} Alyssaの
+考えと同様の推論を用いて、2つの区間の差がどのように計算されるかを説明せよ。
 対応する減算手続\code{sub\-/interval}を定義せよ。
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.9}Exercise 2.9:} The \newterm{width} of an interval
-is half of the difference between its upper and lower bounds.  The width is a
-measure of the uncertainty of the number specified by the interval.  For some
-arithmetic operations the width of the result of combining two intervals is a
-function only of the widths of the argument intervals, whereas for others the
-width of the combination is not a function of the widths of the argument
-intervals.  Show that the width of the sum (or difference) of two intervals is
-a function only of the widths of the intervals being added (or subtracted).
-Give examples to show that this is not true for multiplication or division.
-
-区間の\newterm{width}(幅)は上限と下限の差の半値である。幅は区間で指定された数値
+\heading{\phantomsection\label{Exercise 2.9}Exercise 2.9:} 区間の
+\newterm{width}(幅)は上限と下限の差の半値である。幅は区間で指定された数値
 の不確かさの基準である。いくつかの数値演算に対しては、2つの区間を結合した結果の幅は
 引数区間の幅のみによる関数である。一方で他の演算においては結合の幅は引数の幅の
 関数ではない。2つの区間の和、または差の幅は足される、または引かれる区間の幅の
@@ -6320,35 +6112,19 @@ Give examples to show that this is not true for multiplication or division.
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.10}Exercise 2.10:} Ben Bitdiddle, an expert systems
-programmer, looks over Alyssa's shoulder and comments that it is not clear what
-it means to divide by an interval that spans zero.  Modify Alyssa's code to
-check for this condition and to signal an error if it occurs.
-
-エキスパートシステムプログラマのBen BitdiddleはAlyssaの肩越しに覗いて、
+\heading{\phantomsection\label{Exercise 2.10}Exercise 2.10:} エキスパートシステム
+プログラマのBen BitdiddleはAlyssaの肩越しに覗いて、
 区間の長さが0の時に割ったらどうなるのか不明だよとコメントした。
 Alyssaのコードを変更し、この条件をチェックしてもしそれが起こればエラーを返すようにせよ。
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.11}Exercise 2.11:} In passing, Ben also cryptically
-comments: ``By testing the signs of the endpoints of the intervals, it is
-possible to break \code{mul\-/interval} into nine cases, only one of which
-requires more than two multiplications.''  Rewrite this procedure using Ben's
-suggestion.
-
-通り過ぎながらBenはまた曖昧なコメントを残した。``区間の終端の符号をテストすることで
+\heading{\phantomsection\label{Exercise 2.11}Exercise 2.11:} 通り過ぎながら
+Benはまた曖昧なコメントを残した。``区間の終端の符号をテストすることで
 \code{mul\-/interval}を7つに場合分けできる。その1つのみが2つ以上の乗算を必要とする。''
 この手続をBenの提案に従い書き直せ。
 \end{quote}
 \noindent
-After debugging her program, Alyssa shows it to a potential user, who complains
-that her program solves the wrong problem.  He wants a program that can deal
-with numbers represented as a center value and an additive tolerance; for
-example, he wants to work with intervals such as \( 3.5 \pm 0.15 \) rather than
-[3.35, 3.65].  Alyssa returns to her desk and fixes this problem by supplying
-an alternate constructor and alternate selectors:
-
 プログラムをデバッグした後で、Alyssaはユーザ候補の一人に見せた。彼は彼女の
 プログラムは間違った問題を解いていると文句を言った。彼が欲しい のは中央値として
 表現された数値と追加の許容誤差を扱えるプログラムだ。例えば彼は\( 3.5 \pm 0.15 \)の
@@ -6364,52 +6140,30 @@ an alternate constructor and alternate selectors:
   (/ (- (upper-bound i) (lower-bound i)) 2))
 \end{scheme}
 \noindent
-Unfortunately, most of Alyssa's users are engineers.  Real engineering
-situations usually involve measurements with only a small uncertainty, measured
-as the ratio of the width of the interval to the midpoint of the interval.
-Engineers usually specify percentage tolerances on the parameters of devices,
-as in the resistor specifications given earlier.
-
-不運なことに、Alyssaのユーザの多くはエンジニアだ。真に工学の場では通常、小さな不確かさ
-を伴なう計測を伴い、区間の中央値に対する区間の幅の割合として測られる。
+不運なことに、Alyssaのユーザの多くはエンジニアです。実際の工学の場では通常、小さな不確かさ
+を伴なう計測を伴い、区間の中央値に対する区間の幅の割合として測定されます。
 エンジニアは通常パーセンテージにて許容誤差を端末のパラメータ上に、以前に与えた抵抗の
-仕様のように指定する。
+仕様のように指定します。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.12}Exercise 2.12:} Define a constructor
-\code{make\-/center\-/percent} that takes a center and a percentage tolerance and
-produces the desired interval.  You must also define a selector \code{percent}
-that produces the percentage tolerance for a given interval.  The \code{center}
-selector is the same as the one shown above.
-
-コンストラクタ\code{make\-/center\-/percent}を中央値とパーセンテージ許容誤差を取り
+\heading{\phantomsection\label{Exercise 2.12}Exercise 2.12:} コンストラクタ
+\code{make\-/center\-/percent}を中央値とパーセンテージ許容誤差を取り
 望まれた区間を返すように定義せよ。セレクタ\code{percent}を与えられた区間に対する
 パーセンテージ許容誤差を返すように定義することも行うこと。\code{center}セレクタは
 上で見たものと同じである。
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.13}Exercise 2.13:} Show that under the assumption of
-small percentage tolerances there is a simple formula for the approximate
-percentage tolerance of the product of two intervals in terms of the tolerances
-of the factors.  You may simplify the problem by assuming that all numbers are
-positive.
-
-小さなパーセンテージ許容誤差の前提の下では、2つの区間の積のパーセンテージ許容誤差を
+\heading{\phantomsection\label{Exercise 2.13}Exercise 2.13:} 小さな
+パーセンテージ許容誤差の前提の下では、2つの区間の積のパーセンテージ許容誤差を
 因数の許容誤差を用いて近似するための簡単な式が存在することを示せ。
 全ての数値は正であると前提して問題を簡単にしても良い。
 \end{quote}
 
 \noindent
-After considerable work, Alyssa P. Hacker delivers her finished system.
-Several years later, after she has forgotten all about it, she gets a frenzied
-call from an irate user, Lem E. Tweakit.  It seems that Lem has noticed that
-the formula for parallel resistors can be written in two algebraically
-equivalent ways:
-
-大変な仕事を終え、Alyssa P. Hackerは完了したシステムを受け渡した。何年か後、彼女が全てを忘れた頃に、
-彼女は興奮した電話を怒ったユーザ、Lem E. Tweakitから受けた。どうやらLemは並列接続の抵抗の式が2つの
-代数的に等価な方法で書くことができることに気付いたようだ。
+大変な仕事を終え、Alyssa P. Hackerは完了したシステムを受け渡しました。何年か後、彼女が全てを忘れた頃に、
+彼女は興奮した電話を、怒ったユーザ、Lem E. Tweakitから受けました。どうやらLemは並列接続の抵抗の式が2つの
+代数的に等価な方法で書くことができることに気付いたようです。
 \begin{comment}
 
 \begin{example}
@@ -6423,7 +6177,7 @@ R_1 + R_2
  R_1 R_2 \over R_1 + R_2 
 \end{displaymath}
 \noindent
-and
+と、
 \begin{comment}
 
 \begin{example}
@@ -6436,10 +6190,8 @@ and
 \begin{displaymath}
  {1 \over 1 \big/ R_1 + 1 \big/ R_2}\,. 
 \end{displaymath}
-He has written the following two programs, each of which computes the
-parallel-resistors formula differently:
 
-彼は以下の2つのプログラムを書いた。それぞれが並列接続の抵抗値を異なる式で計算する。
+彼は以下の2つのプログラムを書きました。それぞれが並列接続の抵抗値を異なる式で計算します。
 
 \begin{scheme}
 (define (par1 r1 r2)
@@ -6447,8 +6199,6 @@ parallel-resistors formula differently:
                 (add-interval r1 r2)))
 \end{scheme}
 
-\begin{figure}[tb]
-
 \begin{scheme}
 (define (par2 r1 r2)
   (let ((one (make-interval 1 1)))
@@ -6457,42 +6207,14 @@ parallel-resistors formula differently:
                        (div-interval one r2)))))
 \end{scheme}
 
-\centering
-
-(define (par2 r1 r2)
-  (let ((one (make-interval 1 1)))
-    (div-interval 
-     one (add-interval (div-interval one r1)
-                       (div-interval one r2)))))
-
-
-\begin{quote}
-
-(define (par2 r1 r2)
-  (let ((one (make-interval 1 1)))
-    (div-interval 
-     one (add-interval (div-interval one r1)
-                       (div-interval one r2)))))
-
-\end{quote}
-\end{figure}
 \vspace{0.3em}
 
-Lem complains that Alyssa's program gives different answers for the two ways of
-computing. This is a serious complaint.
-
-LemはAlyssaのプログラムは2つの方法の演算にて異なる値を返すと抗議した。
-これは真剣な苦情だ。
+LemはAlyssaのプログラムは2つの方法の演算にて異なる値を返すと抗議しました。
+これは深刻な苦情です。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.14}Exercise 2.14:} Demonstrate that Lem is right.
-Investigate the behavior of the system on a variety of arithmetic
-expressions. Make some intervals \( A \) and \( B \), and use them in computing the
-expressions \( A \big/\! A \) and \( A \big/\! B \).  You will get the most insight by
-using intervals whose width is a small percentage of the center value. Examine
-the results of the computation in center-percent form (see \link{Exercise 2.12,,Ex. 2.12}).
-
-Lemが正しいことを確認せよ。様々な数値演算にてシステムの挙動を調べよ。
+\heading{\phantomsection\label{Exercise 2.14}Exercise 2.14:} Lemが正しいことを
+確認せよ。様々な数値演算にてシステムの挙動を調べよ。
 ある区間\( A \)と\( B \)を作成し、式\( A \big/\! A \)と\( A \big/\! B \)の計算において
 それらを用いよ。幅が中央値の小さなパーセンテージである区間を用いることで多くの実態を掴む
 ことができるだろう。center-percent形式(\link{Exercise 2.12,,Ex. 2.12}参照)の演算の結果を
@@ -6500,15 +6222,8 @@ Lemが正しいことを確認せよ。様々な数値演算にてシステム�
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.15}Exercise 2.15:} Eva Lu Ator, another user, has
-also noticed the different intervals computed by different but algebraically
-equivalent expressions. She says that a formula to compute with intervals using
-Alyssa's system will produce tighter error bounds if it can be written in such
-a form that no variable that represents an uncertain number is repeated.  Thus,
-she says, \code{par2} is a ``better'' program for parallel resistances than
-\code{par1}.  Is she right?  Why?
-
-Eva Lu Atorはもう一人のユーザで、彼女もまた異なるが代数的には等価な式により異なる区間が
+\heading{\phantomsection\label{Exercise 2.15}Exercise 2.15:} Eva Lu Atorは
+もう一人のユーザで、彼女もまた異なるが代数的には等価な式により異なる区間が
 算出されることに気付いた。彼女はAlyssaのシステムを用いて区間の計算をする式が、
 もし式が不確かな値を表現する変数がどれも繰り返されない形であれば、より厳しい
 エラーの限界を算出すると言う。
@@ -6517,12 +6232,8 @@ Eva Lu Atorはもう一人のユーザで、彼女もまた異なるが代数的
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.16}Exercise 2.16:} Explain, in general, why
-equivalent algebraic expressions may lead to different answers.  Can you devise
-an interval-arithmetic package that does not have this shortcoming, or is this
-task impossible?  (Warning: This problem is very difficult.)
-
-一般的に、なぜ等価な代数式が異なる答に導くのか説明せよ。
+\heading{\phantomsection\label{Exercise 2.16}Exercise 2.16:} 一般的に、
+なぜ等価な代数式が異なる答に導くのか説明せよ。
 この欠点を持たない区間演算パッケージを開発することは可能だろうか。
 または不可能だろうか。(警告：この問題はとても難しい)
 \end{quote}
