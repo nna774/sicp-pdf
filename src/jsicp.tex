@@ -5483,12 +5483,6 @@ Lispは他の言語と異なり、手続に完全な第一級の地位を与え�
 \end{itemize}
 
 \noindent
-We are using here a powerful strategy of synthesis: \newterm{wishful thinking}.
-We haven't yet said how a rational number is represented, or how the procedures
-\code{numer}, \code{denom}, and \code{make\-/rat} should be implemented.  Even
-so, if we did have these three procedures, we could then add, subtract,
-multiply, divide, and test equality by using the following relations:
-
 ここで統合のための強力な戦略、\newterm{wishful thinking}(希望的観測)を用います。
 私達はまだ分数がどのように表現されるのか、または手続\code{numer}, \code{denom}, \code{make\-/rat}が
 どのように実装されるべきであるのかについて語っていません。そうであっても、
@@ -5531,8 +5525,6 @@ d_1   d_2
 \end{align*}
 
 \noindent
-We can express these rules as procedures:
-
 これらのルールを手続として表現できます。
 
 \begin{scheme}
@@ -5556,10 +5548,6 @@ We can express these rules as procedures:
 
 \end{scheme}
 
-Now we have the operations on rational numbers defined in terms of the selector
-and constructor procedures \code{numer}, \code{denom}, and \code{make\-/rat}.
-But we haven't yet defined these.  What we need is some way to glue together a
-numerator and a denominator to form a rational number.
 
 これでセレクタとコンストラクタの手続である\code{numer}, \code{denom}, \code{make\-/rat}を用いて
 分数の操作を定義できました。必要な物は分子と分母を貼り合せて分数を形成する何らかの
@@ -5567,19 +5555,7 @@ numerator and a denominator to form a rational number.
 
 \subsubsection*{Pairs}
 
-To enable us to implement the concrete level of our data abstraction, our
-language provides a compound structure called a \newterm{pair}, which can be
-constructed with the primitive procedure \code{cons}.  This procedure takes two
-arguments and returns a compound data object that contains the two arguments as
-parts.  Given a pair, we can extract the parts using the primitive procedures
-\code{car} and \code{cdr}.\footnote{The name \code{cons} stands for
-``construct.''  The names \code{car} and \code{cdr} derive from the original
-implementation of Lisp on the IBM 704.  That machine had an addressing scheme
-that allowed one to reference the ``address'' and ``decrement'' parts of a
-memory location.  \code{Car} stands for ``Contents of Address part of
-Register'' and \code{cdr} (pronounced ``could-er'') stands for ``Contents of
-Decrement part of Register.''} Thus, we can use \code{cons}, \code{car}, and
-\code{cdr} as follows:
+
 
 データ抽象化の具体的レベルを実装できるようになるために、私達の言語は\newterm{pair}(ペア)
 と呼ばれる複合構造を提供します。それはプリミティブな手続\code{cons}を用いて構築できます。
@@ -5602,10 +5578,6 @@ Decrement part of Register.''} Thus, we can use \code{cons}, \code{car}, and
 \end{scheme}
 
 \noindent
-Notice that a pair is a data object that can be given a name and manipulated,
-just like a primitive data object.  Moreover, \code{cons} can be used to form
-pairs whose elements are pairs, and so on:
-
 ペアは名前を与えることができ、プリミティブなデータオブジェクトと同様に扱うこと
 ができるデータオブジェクトです。さらに\code{cons}は要素がペアやその以外であるペアを
 作ることも可能です。
@@ -5621,13 +5593,6 @@ pairs whose elements are pairs, and so on:
 \end{scheme}
 
 \noindent
-In \link{Section 2.2} we will see how this ability to combine pairs means that
-pairs can be used as general-purpose building blocks to create all sorts of
-complex data structures.  The single compound-data primitive \code{pair},
-implemented by the procedures \code{cons}, \code{car}, and \code{cdr}, is the
-only glue we need.  Data objects constructed from pairs are called
-\newterm{list-structured} data.
-
 \link{Section 2.2}においてペアを組み立てるこの能力が、
 ペアが全ての種類の複雑なデータ構造を作成するために汎用目的構築ブロックとして利用可能
 であることに対し、どのような意味を持つのかについて学びます。
@@ -5637,10 +5602,7 @@ only glue we need.  Data objects constructed from pairs are called
 
 \subsubsection*{Representing rational numbers}
 
-Pairs offer a natural way to complete the rational-number system.  Simply
-represent a rational number as a pair of two integers: a numerator and a
-denominator.  Then \code{make\-/rat}, \code{numer}, and \code{denom} are readily
-implemented as follows:
+
 
 ペアは分数システムを仕上げるための自然な方法を提供します。単純に分数を2つの
 整数、分子と分母のペアとして表現します。そして\code{make\-/rat}, \code{numer}, \code{denom}は
@@ -5656,22 +5618,13 @@ constructor is
 (define denom cdr)
 \end{smallscheme}
 
-The first definition associates the name \code{make\-/rat} with the value of the
-expression \code{cons}, which is the primitive procedure that constructs pairs.
-Thus \code{make\-/rat} and \code{cons} are names for the same primitive
-constructor.
+
 
 最初の定義は名前\code{make\-/rat}を式\code{cons}の値に関連付けます。それはペアを
 構築するプリミティブな手続です。従って\code{make\-/rat}と\code{cons}は同じプリミティブな
 コンストラクタになります。
 
-Defining selectors and constructors in this way is efficient: Instead of
-\code{make\-/rat} \emph{calling} \code{cons}, \code{make\-/rat} \emph{is}
-\code{cons}, so there is only one procedure called, not two, when
-\code{make\-/rat} is called.  On the other hand, doing this defeats debugging
-aids that trace procedure calls or put breakpoints on procedure calls: You may
-want to watch \code{make\-/rat} being called, but you certainly don't want to
-watch every call to \code{cons}.
+
 
 セレクタとコンストラクタをこのように定義するのは効率が良いです。\code{make\-/rat}が
 \code{cons}を\emph{calling}(呼び出す)代わりに、\code{make\-/rat}が\code{cons}で\emph{is}(ある)
@@ -5680,7 +5633,7 @@ watch every call to \code{cons}.
 の設定に対するデバッグ上の手助けを無効にしてしまいます。あなたは\code{make\-/rat}の呼出を
 見たくなるのであって、\code{cons}への全ての呼出を見たい訳ではないからです。
 
-We have chosen not to use this style of definition in this book.
+
 
 この本ではこの定義スタイルを使用しないことにしました。}
 
@@ -5691,14 +5644,6 @@ We have chosen not to use this style of definition in this book.
 \end{scheme}
 
 \noindent
-Also, in order to display the results of our computations, we can print
-rational numbers by printing the numerator, a slash, and the
-denominator:\footnote{\code{Display} is the Scheme primitive for printing data.
-The Scheme primitive \code{newline} starts a new line for printing.  Neither of
-these procedures returns a useful value, so in the uses of \code{print\-/rat}
-below, we show only what \code{print\-/rat} prints, not what the interpreter
-prints as the value returned by \code{print\-/rat}.}
-
 また演算結果を表示するために、分数を分子、スラッシュ、分母で表示することにします。\footnote{
 \code{display}はデータを表示するSchemeのプリミティブです。Schemeのプリミティブである\code{newline}
 は表示を新しい行から始めます。これらの手続のどちらも意味のある値は返しません。そのため
@@ -5714,8 +5659,6 @@ prints as the value returned by \code{print\-/rat}.}
 \end{scheme}
 
 \noindent
-Now we can try our rational-number procedures:
-
 これで分数手続を試すことができます。
 
 \begin{scheme}
@@ -5732,13 +5675,6 @@ Now we can try our rational-number procedures:
 \end{scheme}
 
 \noindent
-As the final example shows, our rational-number implementation does not reduce
-rational numbers to lowest terms.  We can remedy this by changing
-\code{make\-/rat}. If we have a \code{gcd} procedure like the one in 
-\link{Section 1.2.5} that produces the greatest common divisor of two integers, we can
-use \code{gcd} to reduce the numerator and the denominator to lowest terms
-before constructing the pair:
-
 最後の例が示すとおり、私達の分数実装は分数を最も小さな項に約分しません。
 これを\code{make\-/rat}を変更することで改良できます。もし\link{Section 1.2.5}で扱った
 2つの整数の最大公約数を生成する\code{gcd}手続を持っていれば、\code{gcd}を用いて
@@ -5751,7 +5687,6 @@ before constructing the pair:
 \end{scheme}
 
 \noindent
-Now we have
 これで次の希望した結果を得ます。
 
 \begin{scheme}
@@ -5760,21 +5695,12 @@ Now we have
 \end{scheme}
 
 \noindent
-as desired.  This modification was accomplished by changing the constructor
-\code{make\-/rat} without changing any of the procedures (such as \code{add\-/rat}
-and \code{mul\-/rat}) that implement the actual operations.
-
 この変更は(\code{add\-/rat}や\code{mul\-/rat}のような)実際の命令を実装する他の手続の変更無しに、
 コンストラクタ\code{make\-/rat}を変更することで達成されました。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.1}Exercise 2.1:} Define a better version of
-\code{make\-/rat} that handles both positive and negative arguments.
-\code{Make\-/rat} should normalize the sign so that if the rational number is
-positive, both the numerator and denominator are positive, and if the rational
-number is negative, only the numerator is negative.
-
-正と負の両方の引数を扱えるより良い版の\code{make\-/rat}を定義せよ。
+\heading{\phantomsection\label{Exercise 2.1}Exercise 2.1:} 正と負の両方の
+引数を扱えるより良い版の\code{make\-/rat}を定義せよ。
 \code{make\-/rat}は符号の正常化を行わなければならない。従ってもし分数が正であれば
 分子と分母の両方が正であるし、もし分数が負であれば分子のみが負でなければならない。
 \end{quote}
@@ -5783,19 +5709,11 @@ number is negative, only the numerator is negative.
 \label{Section 2.1.2}
 \subsection{Abstraction Barriers}
 
-Before continuing with more examples of compound data and data abstraction, let
-us consider some of the issues raised by the rational-number example.  We
-defined the rational-number operations in terms of a constructor
-\code{make\-/rat} and selectors \code{numer} and \code{denom}.  In general, the
-underlying idea of data abstraction is to identify for each type of data object
-a basic set of operations in terms of which all manipulations of data objects
-of that type will be expressed, and then to use only those operations in
-manipulating the data.
+
 
 さらなる複合データとデータ抽象化の例を続ける前に、分数の例にて持ち上がったいくつかの
 問題について考えてみましょう。私達は分数操作をコンストラクタ\code{make\-/rat}とセレクタ\code{numer}と
 \code{denom}を用いて定義しました。一般的にデータ抽象化の基となる考えは
-
 データオブジェクトの各型に対し、その型のデータオブジェクトの全ての操作が表される命令を用いて、
 命令の基本的な集合を判断し、そのデータを操作する時にそれらの命令のみを用いることです。
 
