@@ -9081,19 +9081,7 @@ Eva Lu Atorはインタプリタに次の式を入力した。
 \label{Section 2.3.2}
 \subsection{Example: Symbolic Differentiation}
 
-As an illustration of symbol manipulation and a further illustration of data
-abstraction, consider the design of a procedure that performs symbolic
-differentiation of algebraic expressions.  We would like the procedure to take
-as arguments an algebraic expression and a variable and to return the
-derivative of the expression with respect to the variable.  For example, if the
-arguments to the procedure are \( ax^2 + bx + c \) and \( x \), the
-procedure should return \( 2ax + b \).  Symbolic differentiation is of
-special historical significance in Lisp.  It was one of the motivating examples
-behind the development of a computer language for symbol manipulation.
-Furthermore, it marked the beginning of the line of research that led to the
-development of powerful systems for symbolic mathematical work, which are
-currently being used by a growing number of applied mathematicians and
-physicists.
+
 
 記号操作の説明として、及びより一層のデータ抽象の説明として、代数式の記号微分を
 行う手続の設計について考えてみましょう。手続は引数として代数式と変数を取り
@@ -9104,12 +9092,7 @@ physicists.
 及び科学者に用いられている記号数理の成果の
 ための強力なシステムの開発へと導く一連の研究の始まりに跡を残しました。
 
-In developing the symbolic-differentiation program, we will follow the same
-strategy of data abstraction that we followed in developing the rational-number
-system of \link{Section 2.1.1}.  That is, we will first define a differentiation
-algorithm that operates on abstract objects such as ``sums,'' ``products,'' and
-``variables'' without worrying about how these are to be represented.  Only
-afterward will we address the representation problem.
+
 
 記号微分プログラムの開発においても\link{Section 2.1.1}の分数システムの開発と
 同じデータ抽象化の戦略に従います。最初に``sums,'' ``products,'' ``variables''
@@ -9119,11 +9102,7 @@ afterward will we address the representation problem.
 
 \subsubsection*{The differentiation program with abstract data}
 
-In order to keep things simple, we will consider a very simple
-symbolic-differentiation program that handles expressions that are built up
-using only the operations of addition and multiplication with two arguments.
-Differentiation of any such expression can be carried out by applying the
-following reduction rules:
+
 
 問題を簡単にするために、二引数の足し算とかけ算の命令のみから構築される式のみを扱う
 とても簡単な記号微分プログラムについて考えましょう。任意のそのような式の微分は以下の
@@ -9166,27 +9145,12 @@ d(uv)     / dv \     / du \
 
 
 \noindent
-Observe that the latter two rules are recursive in nature.  That is, to obtain
-the derivative of a sum we first find the derivatives of the terms and add
-them.  Each of the terms may in turn be an expression that needs to be
-decomposed.  Decomposing into smaller and smaller pieces will eventually
-produce pieces that are either constants or variables, whose derivatives will
-be either 0 or 1.
-
 後者の2つのルールは自然に再帰的であることに注意して下さい。つまり和の導関数を得る
 ためには最初に項の導関数を求めそれらを足す必要があります。各項は順に分解が必要な
 式に成り得ます。順により小さな部分へと分解していくことはやがて定数か、その導関数が
 0か1のどちらかになる変数になります。
 
-To embody these rules in a procedure we indulge in a little wishful thinking,
-as we did in designing the rational-number implementation.  If we had a means
-for representing algebraic expressions, we should be able to tell whether an
-expression is a sum, a product, a constant, or a variable.  We should be able
-to extract the parts of an expression.  For a sum, for example we want to be
-able to extract the addend (first term) and the augend (second term).  We
-should also be able to construct expressions from parts.  Let us assume that we
-already have procedures to implement the following selectors, constructors, and
-predicates:
+
 
 これらのルールを手続で具体化するために、分数実装の設計で行ったように少し希望的観測
 に耽ります。もし代数式を表現するための手段があるのなら式が和か積か定数であるかを
@@ -9209,9 +9173,6 @@ predicates:
 \end{scheme}
 
 \noindent
-Using these, and the primitive predicate \code{number?}, which identifies
-numbers, we can express the differentiation rules as the following procedure:
-
 これらと数値であるかを判断するプリミティブな述語\code{number?}を用いて、以下の手続の
 様に微分のルールを表現できます。
 
@@ -9232,25 +9193,13 @@ numbers, we can express the differentiation rules as the following procedure:
 \end{scheme}
 
 \noindent
-This \code{deriv} procedure incorporates the complete differentiation
-algorithm.  Since it is expressed in terms of abstract data, it will work no
-matter how we choose to represent algebraic expressions, as long as we design a
-proper set of selectors and constructors.  This is the issue we must address
-next.
-
 この\code{deriv}手続は完全な微分アルゴリズムに立脚しています。代数データの項により
 表現されているため、適切なセレクタとコンストラクタを設計する限りにおいて、どのように
 代数式を表現しても動きます。この条件の部分が次に解決すべき問題です。
 
 \subsubsection*{Representing algebraic expressions}
 
-We can imagine many ways to use list structure to represent algebraic
-expressions.  For example, we could use lists of symbols that mirror the usual
-algebraic notation, representing \( ax + b \) as the list \code{(a * x +
-b)} .  However, one especially straightforward choice is to use the same
-parenthesized prefix notation that Lisp uses for combinations; that is, to
-represent \( ax + b \) as \code{(+ (* a x) b)}.  Then our data
-representation for the differentiation problem is as follows:
+
 
 代数式を表現するリスト構造を使用する手法は数多く想像できます。例えば通常の代数
 記法を真似する記号のリストを用い、\( ax + b \)をリスト\code{(a * x + b)}の様に
@@ -9261,9 +9210,6 @@ representation for the differentiation problem is as follows:
 \begin{itemize}
 
 \item
-The variables are symbols.  They are identified by the primitive predicate
-\code{symbol?}:
-
 変数はシンボルである。プリミティブな述語\code{symbol?}で判別される。
 
 \begin{scheme}
@@ -9271,8 +9217,6 @@ The variables are symbols.  They are identified by the primitive predicate
 \end{scheme}
 
 \item
-Two variables are the same if the symbols representing them are \code{eq?}:
-
 2つの変数はそれらを表現するシンボルが\code{eq?}である時同じだ。
 
 \begin{scheme}
@@ -9281,8 +9225,6 @@ Two variables are the same if the symbols representing them are \code{eq?}:
 \end{scheme}
 
 \item
-Sums and products are constructed as lists:
-
 和と積はリストとして構築される。
 
 \begin{scheme}
@@ -9291,8 +9233,6 @@ Sums and products are constructed as lists:
 \end{scheme}
 
 \item
-A sum is a list whose first element is the symbol \code{+}:
-
 和は最初の要素がシンボル\code{+}のリストだ。
 
 \begin{scheme}
@@ -9300,8 +9240,6 @@ A sum is a list whose first element is the symbol \code{+}:
 \end{scheme}
 
 \item
-The addend is the second item of the sum list:
-
 加数は和のリストの二つ目の項だ。
 
 \begin{scheme}
@@ -9309,8 +9247,6 @@ The addend is the second item of the sum list:
 \end{scheme}
 
 \item
-The augend is the third item of the sum list:
-
 被加数は和のリストの三つめの項だ。
 
 \begin{scheme}
@@ -9318,8 +9254,6 @@ The augend is the third item of the sum list:
 \end{scheme}
 
 \item
-A product is a list whose first element is the symbol \code{*}:
-
 積は最初の要素がシンボル\code{*}のリストだ。
 
 \begin{scheme}
@@ -9327,8 +9261,6 @@ A product is a list whose first element is the symbol \code{*}:
 \end{scheme}
 
 \item
-The multiplier is the second item of the product list:
-
 乗数は積のリストの二つ目の項だ。
 
 \begin{scheme}
@@ -9336,8 +9268,6 @@ The multiplier is the second item of the product list:
 \end{scheme}
 
 \item
-The multiplicand is the third item of the product list:
-
 被乗数は積のリストの三つめの項だ。
 
 \begin{scheme}
@@ -9347,10 +9277,6 @@ The multiplicand is the third item of the product list:
 \end{itemize}
 
 \noindent
-Thus, we need only combine these with the algorithm as embodied by \code{deriv}
-in order to have a working symbolic-differentiation program.  Let us look at
-some examples of its behavior:
-
 従って記号微分プログラムを得るためには、これらを\code{deriv}により組込まれた
 アルゴリズムを用いて組み立てることのみが必要でです。いくつかの例とその振舞を
 見てみましょう。
@@ -9367,9 +9293,6 @@ some examples of its behavior:
 \end{scheme}
 
 \noindent
-The program produces answers that are correct; however, they are unsimplified.
-It is true that
-
 プログラムは正しい解答を生成します。しかし、それらは簡略化されていません。
 \begin{comment}
 
@@ -9384,23 +9307,11 @@ d(xy)
  {{\it d\,(xy)} \over {\it dx}} = x \cdot 0 + 1 \cdot y, 
 \end{displaymath}
 \noindent
-but we would like the program to know that \( x \cdot 0 = 0 \), \( 1 \cdot y = y \),
-and \( 0 + y = y \).  The answer for the second example should have been
-simply \code{y}.  As the third example shows, this becomes a serious issue when
-the expressions are complex.
-
 しかし私達はこのプログラムに\( x \cdot 0 = 0 \), \( 1 \cdot y = y \),
 \( 0 + y = y \)を理解して欲しいと望みます。二つ目の例の解答は単純に\code{y}となるべき
 です。三つめの例が示すように、これは式が複雑な場合には深刻な問題となります。
 
-Our difficulty is much like the one we encountered with the rational-number
-implementation: we haven't reduced answers to simplest form.  To accomplish the
-rational-number reduction, we needed to change only the constructors and the
-selectors of the implementation.  We can adopt a similar strategy here.  We
-won't change \code{deriv} at all.  Instead, we will change \code{make\-/sum} so
-that if both summands are numbers, \code{make\-/sum} will add them and return
-their sum.  Also, if one of the summands is 0, then \code{make\-/sum} will return
-the other summand.
+
 
 この困難は分数実装において出くわしたものととても似ています。最も単純な形式に解答を
 約分していませんでした。分数を約分するためには実装のコンストラクタとセレクタのみを
@@ -9419,9 +9330,6 @@ the other summand.
 \end{scheme}
 
 \noindent
-This uses the procedure \code{=number?}, which checks whether an expression is
-equal to a given number:
-
 これには手続\code{=number?}を用いました。式が与えられた数値と等しいかチェックします。
 
 \begin{scheme}
@@ -9429,9 +9337,6 @@ equal to a given number:
 \end{scheme}
 
 \noindent
-Similarly, we will change \code{make\-/product} to build in the rules that 0
-times anything is 0 and 1 times anything is the thing itself:
-
 同様に\code{make\-/product}を変更し任意の項に0を掛ければ0、任意の項に1を掛ければそれ自身に
 するルールを構築します。
 
@@ -9446,8 +9351,6 @@ times anything is 0 and 1 times anything is the thing itself:
 \end{scheme}
 
 \noindent
-Here is how this version works on our three examples:
-
 これがこのバージョンが先程の3つの例でどのように動くかです
 
 \begin{scheme}
@@ -9460,12 +9363,6 @@ Here is how this version works on our three examples:
 \end{scheme}
 
 \noindent
-Although this is quite an improvement, the third example shows that there is
-still a long way to go before we get a program that puts expressions into a
-form that we might agree is ``simplest.''  The problem of algebraic
-simplification is complex because, among other reasons, a form that may be
-simplest for one purpose may not be for another.
-
 これはとても改善が見られますが、三つめの例は
 式を``最も単純''だと同意を得られる形式に変形するプログラムを得るまでには
 今だ長い道程があることを示します。代数の簡約の問題は複雑です。他の理由の中でも、
@@ -9473,10 +9370,7 @@ simplest for one purpose may not be for another.
 ためです。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.56}Exercise 2.56:} Show how to extend the basic
-differentiator to handle more kinds of expressions.  For instance, implement
-the differentiation rule
-
+\heading{\phantomsection\label{Exercise 2.56}Exercise 2.56:} 
 より多くの種類の式を扱うために基本的な微分をどのように拡張すべきか示せ。
 例として、以下の微分ルールを実装せよ。
 \begin{comment}
@@ -9492,22 +9386,13 @@ d(u^n)            du
  {{\it d\,(u^n\,)} \over {\it dx}} = nu^{n-1} {{\it du} \over {\it dx}} 
 \end{displaymath}
 \noindent
-by adding a new clause to the \code{deriv} program and defining appropriate
-procedures \code{exponentiation?}, \code{base}, \code{exponent}, and
-\code{make\-/exponentiation}.  (You may use the symbol \code{**} to denote
-exponentiation.)  Build in the rules that anything raised to the power 0 is 1
-and anything raised to the power 1 is the thing itself.
-
 \code{deriv}プログラムに新しい節を追加し、適切な手続\code{exponentiation?}, \code{base}, \code{exponent},
 \code{make\-/exponentiation}を定義せよ。(シンボル\code{**}を指数演算の表記に用いても良い)。
 任意の数の0乗は1であり、任意の数の1乗はそれ自身であるというルールを構築せよ。
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.57}Exercise 2.57:} Extend the differentiation
-program to handle sums and products of arbitrary numbers of (two or more)
-terms.  Then the last example above could be expressed as
-
+\heading{\phantomsection\label{Exercise 2.57}Exercise 2.57:} 
 微分プログラムを拡張し、(2以上の)任意の数の項の和と積を扱えるようにせよ。
 すると上の最後の例は以下のように表現できる。
 
@@ -9515,10 +9400,7 @@ terms.  Then the last example above could be expressed as
 (deriv '(* x y (+ x 3)) 'x)
 \end{scheme}
 
-Try to do this by changing only the representation for sums and products,
-without changing the \code{deriv} procedure at all.  For example, the
-\code{addend} of a sum would be the first term, and the \code{augend} would be
-the sum of the rest of the terms.
+
 
 この問題を和と積の表現のみを変更することで行え。\code{deriv}手続には全く変更を加えない。
 例えば和の\code{addend}(加数)は最初の項になり、\code{augend}(被加数)は残りの項の和と
@@ -9526,14 +9408,7 @@ the sum of the rest of the terms.
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.58}Exercise 2.58:} Suppose we want to modify the
-differentiation program so that it works with ordinary mathematical notation,
-in which \code{+} and \code{*} are infix rather than prefix operators.  Since
-the differentiation program is defined in terms of abstract data, we can modify
-it to work with different representations of expressions solely by changing the
-predicates, selectors, and constructors that define the representation of the
-algebraic expressions on which the differentiator is to operate.
-
+\heading{\phantomsection\label{Exercise 2.58}Exercise 2.58:} 
 微分プログラムを変更し通常の数学の記法を扱えるようにしたいとする。\code{+}と\code{*}は
 接中辞となり接頭辞演算子ではなくなる。微分プログラムは抽象データを用いて定義されて
 いるので、もっぱら微分プログラムが操作する代数式を表現する述語、セレクタ、コンストラクタを
@@ -9542,22 +9417,11 @@ algebraic expressions on which the differentiator is to operate.
 \begin{enumerate}[a]
 
 \item
-Show how to do this in order to differentiate algebraic expressions presented
-in infix form, such as \code{(x + (3 * (x + (y + 2))))}.  To simplify the task,
-assume that \code{+} and \code{*} always take two arguments and that
-expressions are fully parenthesized.
-
 \code{(x + (3 * (x + (y + 2))))}の様な接中辞で表される代数式を微分することを
 どのように行うのか示せ。作業を簡単にするために\code{+}と\code{*}は常に2つの引数を取り
 式は完全に括弧で括られていると仮定せよ。
 
 \item
-The problem becomes substantially harder if we allow standard algebraic
-notation, such as \code{(x + 3 * (x + y + 2))}, which drops unnecessary
-parentheses and assumes that multiplication is done before addition.  Can you
-design appropriate predicates, selectors, and constructors for this notation
-such that our derivative program still works?
-
 \code{(x + 3 * (x + y + 2))}のような標準的な代数記法を認めることで問題は大幅に難しくなる。
 これは必要の無い括弧を省略し、乗算は加算の前に行われると仮定している。
 私達の微分プログラムがそれでも働くこの記法に対する適切な述語、セレクタ、コンストラクタを設計できるだろうか?
@@ -9568,14 +9432,7 @@ such that our derivative program still works?
 \label{Section 2.3.3}
 \subsection{Example: Representing Sets}
 
-In the previous examples we built representations for two kinds of compound
-data objects: rational numbers and algebraic expressions.  In one of these
-examples we had the choice of simplifying (reducing) the expressions at either
-construction time or selection time, but other than that the choice of a
-representation for these structures in terms of lists was straightforward. When
-we turn to the representation of sets, the choice of a representation is not so
-obvious.  Indeed, there are a number of possible representations, and they
-differ significantly from one another in several ways.
+
 
 以前の例において2つ種類の複合データオブジェクトの表現を構築しました。分数と代数式
 です。これらの例の1つでは組立時と選択時のどちらかで式を単純化(簡約化)を行うか選択肢が
@@ -9585,20 +9442,7 @@ differ significantly from one another in several ways.
 本当に数多くの可能な表現が存在し、それらはお互いからいくつかの点において著しく
 異なります。
 
-Informally, a set is simply a collection of distinct objects.  To give a more
-precise definition we can employ the method of data abstraction.  That is, we
-define ``set'' by specifying the operations that are to be used on sets.  These
-are \code{union\-/set}, \code{intersection\-/set}, \code{element\-/of\-/set?}, and
-\code{adjoin\-/set}.  \code{Element\-/of\-/set?} is a predicate that determines
-whether a given element is a member of a set.  \code{Adjoin\-/set} takes an
-object and a set as arguments and returns a set that contains the elements of
-the original set and also the adjoined element.  \code{Union\-/set} computes the
-union of two sets, which is the set containing each element that appears in
-either argument.  \code{Intersection\-/set} computes the intersection of two
-sets, which is the set containing only elements that appear in both arguments.
-From the viewpoint of data abstraction, we are free to design any
-representation that implements these operations in a way consistent with the
-interpretations given above.
+
 
 非公式には集合は異なる要素の単純な集まりです。より正確な定義を与えるために
 私達はデータ抽象の手法を用いることができます。それは``集合''を集合上で用いられる
@@ -9610,52 +9454,28 @@ interpretations given above.
 要素含む集合である、2つの集合の和集合を計算します。
 \code{intersection\-/set}は両方の引数の中に現れる要素のみを含む、2つの集合の共通集合を計算します。
 データ抽象の視点から見れば、私達は上で与えられた解釈と一致する方法であれば、これらの
-命令を実装するどんな表現を設計することも自由です。\footnote{If we want to be more formal, we can
-specify ``consistent with the interpretations given above'' to mean that the
-operations satisfy a collection of rules such as these:
-
+命令を実装するどんな表現を設計することも自由です。\footnote{
 もしより正式でありたければ、``上で与えられた解釈と一致する''の部分を、命令群が
 以下のようなルールの集合を満たすと指定することができます。
 
 \noindent
-\( \bullet \) For any set \code{S} and any object \code{x},
-\code{(element\-/of\-/set? x (adjoin\-/set x S))}
-is true (informally: ``Adjoining an object to a
-set produces a set that contains the object'').
-
 任意の集合\code{S}と任意のオブジェクト\code{x}に対し、
 \code{(element\-/of\-/set? x (adjoin\-/set x S))}は真(非公式には``オブジェクトを集合にadjoin
 すればそのオブジェクトを含む集合を生成する'')
 
 \noindent
-\( \bullet \) For any sets \code{S} and \code{T} and any object \code{x},
-\code{(element\-/of\-/set? x (union\-/set S T))}
-is equal to
-\code{(or (element\-/of\-/set? x S) (element\-/of\-/set? x T))}
-(informally: ``The elements of \code{(union S T)} are the elements that
-are in \code{S} or in \code{T}'').
-
 任意の集合\code{S}と\code{T}と任意のオブジェクト\code{x}に対し、
 \code{(element\-/of\-/set? x (union\-/set S T))}は
 \code{(or (element\-/of\-/set? x S) (element\-/of\-/set? x T))}に等しい
 (非公式には``\code{(union S T)}の要素は\code{S}または\code{T}に存在する要素'')
 
 \noindent
-\( \bullet \) For any object \code{x},
-\code{(element\-/of\-/set? x '())}
-is false (informally: ``No object is an element of the empty set'').
-
 任意のオブジェクト\code{x}に対し\code{(element\-/of\-/set? x '())}は偽
 (非公式には``どのオブジェクトも空集合の要素ではない'')
 }
 
 \subsubsection*{Sets as unordered lists}
 
-One way to represent a set is as a list of its elements in which no element
-appears more than once.  The empty set is represented by the empty list.  In
-this representation, \code{element\-/of\-/set?} is similar to the procedure
-\code{memq} of \link{Section 2.3.1}.  It uses \code{equal?}  instead of
-\code{eq?} so that the set elements need not be symbols:
 
 集合を表現するための1つの方法は、どの要素も一度より多くは現れない要素のリストとします。
 空集合は空リストとして表現されます。この表現では\code{element\-/of\-/set?}は\link{Section 2.3.1}の
@@ -9670,10 +9490,6 @@ this representation, \code{element\-/of\-/set?} is similar to the procedure
 \end{scheme}
 
 \noindent
-Using this, we can write \code{adjoin\-/set}.  If the object to be adjoined is
-already in the set, we just return the set.  Otherwise, we use \code{cons} to
-add the object to the list that represents the set:
-
 これを用いて\code{adjoin\-/set}を書けます。adjoinされるオブジェクトが既に集合に
 存在する場合、単に元の集合を返します。そうでなければ\code{cons}を用いて
 オブジェクトを集合を表すリストに追加します。
@@ -9686,12 +9502,6 @@ add the object to the list that represents the set:
 \end{scheme}
 
 \noindent
-For \code{intersection\-/set} we can use a recursive strategy.  If we know how to
-form the intersection of \code{set2} and the \code{cdr} of \code{set1}, we only
-need to decide whether to include the \code{car} of \code{set1} in this.  But
-this depends on whether \code{(car set1)} is also in \code{set2}.  Here is the
-resulting procedure:
-
 \code{intersection\-/set}に対して再帰の戦略を使用できます。もし\code{set2}と
 \code{set1}の\code{cdr}の共通集合の求める方がわかれば、これに\code{set1}の\code{car}を
 含めるかどうか決定することのみが必要です。しかしこれは\code{(car set1)}が\code{set2}
@@ -9707,21 +9517,6 @@ resulting procedure:
 \end{scheme}
 
 \noindent
-In designing a representation, one of the issues we should be concerned with is
-efficiency.  Consider the number of steps required by our set operations.
-Since they all use \code{element\-/of\-/set?}, the speed of this operation has a
-major impact on the efficiency of the set implementation as a whole.  Now, in
-order to check whether an object is a member of a set, \code{element\-/of\-/set?}
-may have to scan the entire set. (In the worst case, the object turns out not
-to be in the set.)  Hence, if the set has \( n \) elements,
-\code{element\-/of\-/set?}  might take up to \( n \) steps.  Thus, the number of
-steps required grows as \( \Theta(n) \).  The number of steps required by
-\code{adjoin\-/set}, which uses this operation, also grows as \( \Theta(n) \).
-For \code{intersection\-/set}, which does an \code{element\-/of\-/set?} check for
-each element of \code{set1}, the number of steps required grows as the product
-of the sizes of the sets involved, or \( \Theta(n^2) \) for two sets of size
-\( n \).  The same will be true of \code{union\-/set}.
-
 表現の設計において、私達が考慮しなければならない問題の1つは効率です。
 集合操作により必要とされるステップ数を考えて下さい。
 それら全てが\code{element\-/of\-/set?}を使用するので、この命令のスピードは総じて
@@ -9737,23 +9532,13 @@ of the sizes of the sets involved, or \( \Theta(n^2) \) for two sets of size
 \( \Theta(n^2) \)で増加します。\code{union\-/set}に対しても同じことが言えます。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.59}Exercise 2.59:} Implement the \code{union\-/set}
-operation for the unordered-list representation of sets.
-
+\heading{\phantomsection\label{Exercise 2.59}Exercise 2.59:} 
 集合の順序無しリスト表現に対する\code{union\-/set}命令を実装せよ。
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.60}Exercise 2.60:} We specified that a set would be
-represented as a list with no duplicates.  Now suppose we allow duplicates.
-For instance, the set \( \{1, 2, 3\} \) could be represented as the list \code{(2 3 2 1
-3 2 2)}.  Design procedures \code{element\-/of\-/set?}, \code{adjoin\-/set},
-\code{union\-/set}, and \code{intersection\-/set} that operate on this
-representation.  How does the efficiency of each compare with the corresponding
-procedure for the non-duplicate representation?  Are there applications for
-which you would use this representation in preference to the non-duplicate one?
-
-集合は重複無しのリストとして表現されるだろうと指定した。ここで重複を許可すると
+\heading{\phantomsection\label{Exercise 2.60}Exercise 2.60:}
+集合は重複無しのリストとして表現されると指示した。ここで重複を許可すると
 仮定してみる。例として集合\( \{1, 2, 3\} \)はリスト\code{(2 3 2 1
 3 2 2)}として表現できるだろう。この表現上で操作を行う手続\code{element\-/of\-/set?}, \code{adjoin\-/set},
 \code{union\-/set}, \code{intersection\-/set}を設計せよ。
@@ -9763,18 +9548,6 @@ which you would use this representation in preference to the non-duplicate one?
 
 \subsubsection*{Sets as ordered lists}
 
-One way to speed up our set operations is to change the representation so that
-the set elements are listed in increasing order.  To do this, we need some way
-to compare two objects so that we can say which is bigger.  For example, we
-could compare symbols lexicographically, or we could agree on some method for
-assigning a unique number to an object and then compare the elements by
-comparing the corresponding numbers.  To keep our discussion simple, we will
-consider only the case where the set elements are numbers, so that we can
-compare elements using \code{>} and \code{<}.  We will represent a set of
-numbers by listing its elements in increasing order.  Whereas our first
-representation above allowed us to represent the set \( \{1, 3, 6, 10\} \) by listing
-the elements in any order, our new representation allows only the list \code{(1
-3 6 10)}.
 
 私達の集合操作を高速化するための1つの方法として表現を変更することで集合要素を
 昇順に並べる方法があります。これを行うには2つのオブジェクトを比較する何らかの
@@ -9786,10 +9559,7 @@ the elements in any order, our new representation allows only the list \code{(1
 上の最初の表現は集合\( \{1, 3, 6, 10\} \)を要素を任意の順で並べることで表現でき
 る一方で、新しい表現はリスト\code{(1 3 6 10)}のみを許します。
 
-One advantage of ordering shows up in \code{element\-/of\-/set?}: In checking for
-the presence of an item, we no longer have to scan the entire set.  If we reach
-a set element that is larger than the item we are looking for, then we know
-that the item is not in the set:
+
 
 順序付けの1つの利点は\code{element\-/of\-/set?}にて現れます。項目の存在をチェックする
 場合において、集合全体をスキャンする必要がありません。もし探している項目よりも
@@ -9804,17 +9574,6 @@ that the item is not in the set:
 \end{scheme}
 
 \noindent
-How many steps does this save?  In the worst case, the item we are looking for
-may be the largest one in the set, so the number of steps is the same as for
-the unordered representation.  On the other hand, if we search for items of
-many different sizes we can expect that sometimes we will be able to stop
-searching at a point near the beginning of the list and that other times we
-will still need to examine most of the list.  On the average we should expect
-to have to examine about half of the items in the set.  Thus, the average
-number of steps required will be about \( n \big/ 2 \).  This is still
-\( \Theta(n) \) growth, but it does save us, on the average, a factor of 2
-in number of steps over the previous implementation.
-
 これがどれだけのステップを割引くでしょうか? 最悪の場合、探している項目は
 集合の中で一番大きい物かもしれません。その場合ステップ数は順序無し表現と
 同じです。しかし一方でもし多くの異なるサイズの項目を探している場合、時々は
@@ -9825,21 +9584,7 @@ in number of steps over the previous implementation.
 \( \Theta(n) \)で増加しますが、以前の実装に対して平均的にはステップ数において
 半分に節約します。
 
-We obtain a more impressive speedup with \code{intersection\-/set}.  In the
-unordered representation this operation required \( \Theta(n^2) \) steps,
-because we performed a complete scan of \code{set2} for each element of
-\code{set1}.  But with the ordered representation, we can use a more clever
-method.  Begin by comparing the initial elements, \code{x1} and \code{x2}, of
-the two sets.  If \code{x1} equals \code{x2}, then that gives an element of the
-intersection, and the rest of the intersection is the intersection of the
-\code{cdr}-s of the two sets.  Suppose, however, that \code{x1} is less than
-\code{x2}.  Since \code{x2} is the smallest element in \code{set2}, we can
-immediately conclude that \code{x1} cannot appear anywhere in \code{set2} and
-hence is not in the intersection.  Hence, the intersection is equal to the
-intersection of \code{set2} with the \code{cdr} of \code{set1}.  Similarly, if
-\code{x2} is less than \code{x1}, then the intersection is given by the
-intersection of \code{set1} with the \code{cdr} of \code{set2}.  Here is the
-procedure:
+
 
 \code{intersection\-/set}ではより目覚ましい高速化を得ます。順序無し表現ではこの命令
 は\( \Theta(n^2) \)ステップを必要としました。\code{set1}の各要素に対して\code{set2}の
@@ -9867,14 +9612,6 @@ procedure:
 \end{scheme}
 
 \noindent
-To estimate the number of steps required by this process, observe that at each
-step we reduce the intersection problem to computing intersections of smaller
-sets---removing the first element from \code{set1} or \code{set2} or both.
-Thus, the number of steps required is at most the sum of the sizes of
-\code{set1} and \code{set2}, rather than the product of the sizes as with the
-unordered representation.  This is \( \Theta(n) \) growth rather than
-\( \Theta(n^2) \)---a considerable speedup, even for sets of moderate size.
-
 この処理により必要とされるステップ数を推定するために、各ステップにて共通集合問題は
 縮小され、\code{set1}か\code{set2}、又はその両方の最初の要素を削除することで、
 より小さな集合の共通部分を求める問題になっていることに注意して下さい。
@@ -9883,37 +9620,21 @@ unordered representation.  This is \( \Theta(n) \) growth rather than
 \( \Theta(n) \)で増加するため、例え中程度のサイズの集合に対してでも考慮に値する高速化です。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.61}Exercise 2.61:} Give an implementation of
-\code{adjoin\-/set} using the ordered representation.  By analogy with
-\code{element\-/of\-/set?} show how to take advantage of the ordering to produce a
-procedure that requires on the average about half as many steps as with the
-unordered representation.
-
+\heading{\phantomsection\label{Exercise 2.61}Exercise 2.61:} 
 順序有り表現を用いた\code{adjoin\-/set}の実装を与えよ。\code{element\-/of\-/set?}との類似点にて、
 どのように順序の利点を用いて順序無し表現に対し平均で約半分のステップを必要とする手続を
 生成するかを示せ。
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.62}Exercise 2.62:} Give a \( \Theta(n) \)
-implementation of \code{union\-/set} for sets represented as ordered lists.
-
+\heading{\phantomsection\label{Exercise 2.62}Exercise 2.62:} 
 順序付きリストとして表現された集合に対する\code{union\-/set}の実装を\( \Theta(n) \)の
 範囲で行え。
 \end{quote}
 
 \subsubsection*{Sets as binary trees}
 
-We can do better than the ordered-list representation by arranging the set
-elements in the form of a tree.  Each node of the tree holds one element of the
-set, called the ``entry'' at that node, and a link to each of two other
-(possibly empty) nodes.  The ``left'' link points to elements smaller than the
-one at the node, and the ``right'' link to elements greater than the one at the
-node.  \link{Figure 2.16} shows some trees that represent the set
-\( \{1, 3, 5, 7, 9, 11\} \).  The same set may be represented by a tree in a number of
-different ways.  The only thing we require for a valid representation is that
-all elements in the left subtree be smaller than the node entry and that all
-elements in the right subtree be larger.
+
 
 集合要素を木の形式にて準備することで順序有りリスト表現よりも良く行なうことができます。
 木の各ノードはそのノードにおける``エントリ''と呼ばれる集合の1つの要素と他の2つの(空にも有り得る)
@@ -9944,21 +9665,6 @@ elements in the right subtree be larger.
 \end{figure}
 
 \noindent
-The advantage of the tree representation is this: Suppose we want to check
-whether a number \( x \) is contained in a set.  We begin by comparing \( x \) with
-the entry in the top node.  If \( x \) is less than this, we know that we need
-only search the left subtree; if \( x \) is greater, we need only search the
-right subtree.  Now, if the tree is ``balanced,'' each of these subtrees will
-be about half the size of the original.  Thus, in one step we have reduced the
-problem of searching a tree of size \( n \) to searching a tree of size \( n \big/ 2 \).
-Since the size of the tree is halved at each step, we should expect that the
-number of steps needed to search a tree of size \( n \) grows as
-\( \Theta(\log n) \).\footnote{Halving the size of the problem at each
-step is the distinguishing characteristic of logarithmic growth, as we saw with
-the fast-exponentiation algorithm of \link{Section 1.2.4} and the half-interval
-search method of \link{Section 1.3.3}.} For large sets, this will be a
-significant speedup over the previous representations.
-
 木表現の優位点は次のとおりです。ある数値\( x \)がある集合に含まれているかどうかをチェック
 したいと想定します。\( x \)をトップノードのエントリと比較することから始めます。
 もし\( x \)がこれよりも小さければ、左の部分木のみを探索すれば良いことがわかります。
@@ -9972,16 +9678,6 @@ significant speedup over the previous representations.
 問題のサイズを半分にすることは対数増加の特徴的な性質です。}
 大きな集合に対しては以前の表現に比べこれは著しい高速化になるでしょう。
 
-We can represent trees by using lists.  Each node will be a list of three
-items: the entry at the node, the left subtree, and the right subtree.  A left
-or a right subtree of the empty list will indicate that there is no subtree
-connected there.  We can describe this representation by the following
-procedures:\footnote{We are representing sets in terms of trees, and trees in
-terms of lists---in effect, a data abstraction built upon a data abstraction.
-We can regard the procedures \code{entry}, \code{left\-/branch},
-\code{right\-/branch}, and \code{make\-/tree} as a way of isolating the abstraction
-of a ``binary tree'' from the particular way we might wish to represent such a
-tree in terms of list structure.}
 
 木はリストを用いて表現できます。各ノードは3つの項目のリストになります。ノードのエントリ、
 左部分木、右部分木です。左、または右部分木が空リストの場合はそこに接続された部分木が存在
@@ -10001,9 +9697,6 @@ tree in terms of list structure.}
 \end{scheme}
 
 \noindent
-Now we can write the \code{element\-/of\-/set?} procedure using the strategy
-described above:
-
 これで\code{element\-/of\-/set?}手続を上で説明された戦略を用いて書くことができます。
 
 \begin{scheme}
@@ -10017,16 +9710,6 @@ described above:
 \end{scheme}
 
 \noindent
-Adjoining an item to a set is implemented similarly and also requires
-\( \Theta(\log n) \) steps.  To adjoin an item \code{x}, we compare
-\code{x} with the node entry to determine whether \code{x} should be added to
-the right or to the left branch, and having adjoined \code{x} to the
-appropriate branch we piece this newly constructed branch together with the
-original entry and the other branch.  If \code{x} is equal to the entry, we
-just return the node.  If we are asked to adjoin \code{x} to an empty tree, we
-generate a tree that has \code{x} as the entry and empty right and left
-branches.  Here is the procedure:
-
 集合に項目を付加することは同様に実装され、そしてまた\( \Theta(\log n) \)ステップを
 必要とします。項目\code{x}を付加するためには、\code{x}をノードのエントリと比較し\code{x}が右か
 左のどちらの枝に追加されるべきを判断し、\code{x}を適切な枝に追加し、この新しく構築された枝を元の
@@ -10047,29 +9730,6 @@ branches.  Here is the procedure:
 \end{scheme}
 
 \noindent
-The above claim that searching the tree can be performed in a logarithmic
-number of steps rests on the assumption that the tree is ``balanced,'' i.e.,
-that the left and the right subtree of every tree have approximately the same
-number of elements, so that each subtree contains about half the elements of
-its parent.  But how can we be certain that the trees we construct will be
-balanced?  Even if we start with a balanced tree, adding elements with
-\code{adjoin\-/set} may produce an unbalanced result.  Since the position of a
-newly adjoined element depends on how the element compares with the items
-already in the set, we can expect that if we add elements ``randomly'' the tree
-will tend to be balanced on the average.  But this is not a guarantee.  For
-example, if we start with an empty set and adjoin the numbers 1 through 7 in
-sequence we end up with the highly unbalanced tree shown in \link{Figure 2.17}.
-In this tree all the left subtrees are empty, so it has no advantage over a
-simple ordered list.  One way to solve this problem is to define an operation
-that transforms an arbitrary tree into a balanced tree with the same elements.
-Then we can perform this transformation after every few \code{adjoin\-/set}
-operations to keep our set in balance.  There are also other ways to solve this
-problem, most of which involve designing new data structures for which
-searching and insertion both can be done in \( \Theta(\log n) \)
-steps.\footnote{Examples of such structures include \newterm{B-trees} and
-\newterm{red-black trees}.  There is a large literature on data structures
-devoted to this problem.  See \link{Cormen et al. 1990}.}
-
 上の木の検索は対数ステップで実行可能であるとの主張は木は``バランスが取れている''
 という前提に依存しています。すなわち、全ての木の左と右の部分木は大体同じ要素の
 数を持っているため、各部分木はその親の約半分の要素持っていることになります。
@@ -10116,9 +9776,7 @@ devoted to this problem.  See \link{Cormen et al. 1990}.}
 \end{figure}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.63}Exercise 2.63:} Each of the following two
-procedures converts a binary tree to a list.
-
+\heading{\phantomsection\label{Exercise 2.63}Exercise 2.63:} 
 以下の2つの手続はそれぞれ二分木をリストに変換する。
 
 \begin{scheme}
@@ -10144,18 +9802,10 @@ procedures converts a binary tree to a list.
 \begin{enumerate}[a]
 
 \item
-Do the two procedures produce the same result for every tree?  If not, how do
-the results differ?  What lists do the two procedures produce for the trees in
-\link{Figure 2.16}?
-
 2つの手続は全ての木に対して同じ結果を生成するか? もしそうでなければどのように
 結果は異なるか? \link{Figure 2.16}の木に対して2つの手続はどんなリストを生成するか?
 
 \item
-Do the two procedures have the same order of growth in the number of steps
-required to convert a balanced tree with \( n \) elements to a list?  If not,
-which one grows more slowly?
-
 2つの手続は\( n \)要素のバランスの取れた木をリストに変換するのに同じステップ数増加の
 オーダであるか? もしそうでなければどちらがより遅く増加するか?
 
@@ -10163,14 +9813,7 @@ which one grows more slowly?
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.64}Exercise 2.64:} The following procedure
-\code{list\-/>tree} converts an ordered list to a balanced binary tree.  The
-helper procedure \code{partial\-/tree} takes as arguments an integer \( n \) and
-list of at least \( n \) elements and constructs a balanced tree containing the
-first \( n \) elements of the list.  The result returned by \code{partial\-/tree}
-is a pair (formed with \code{cons}) whose \code{car} is the constructed tree
-and whose \code{cdr} is the list of elements not included in the tree.
-
+\heading{\phantomsection\label{Exercise 2.64}Exercise 2.64:} 
 以下の手続\code{list\-/>tree}は順序有りリストをバランスの取れた木に変換する。
 ヘルパ手続\code{partial\-/tree}は引数として整数\( n \)と少なくとも\( n \)要素のリスト
 を取り、リストの最初の\( n \)要素を含むバランスの取れた木を生成する。
@@ -10206,17 +9849,10 @@ and whose \code{cdr} is the list of elements not included in the tree.
 \begin{enumerate}[a]
 
 \item
-Write a short paragraph explaining as clearly as you can how
-\code{partial\-/tree} works.  Draw the tree produced by \code{list\-/>tree} for
-the list \code{(1 3 5 7 9 11)}.
-
 できるだけ明確に\code{partial\-/tree}がどのように働くのか文章で答えよ。
 リスト\code{(1 3 5 7 9 11)}に対し\code{list\-/>tree}により生成される木を描け。
 
 \item
-What is the order of growth in the number of steps required by
-\code{list\-/>tree} to convert a list of \( n \) elements?
-
 \code{list\-/>tree}が\( n \)要素のリストを変換するのに必要とされるステップ数の
 増加んオーダはいくらか?
 
@@ -10224,12 +9860,7 @@ What is the order of growth in the number of steps required by
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.65}Exercise 2.65:} Use the results of \link{Exercise 2.63} 
-and \link{Exercise 2.64} to give \( \Theta(n) \) implementations of
-\code{union\-/set} and \code{intersection\-/set} for sets implemented as (balanced)
-binary trees.\footnote{\link{Exercise 2.63} through \link{Exercise 2.65} are due
-to Paul Hilfinger.}
-
+\heading{\phantomsection\label{Exercise 2.65}Exercise 2.65:} 
 \link{Exercise 2.63}と\link{Exercise 2.64}の結果を用いて(バランスの取れた)二分木として
 実装された集合の\( \Theta(n) \)における実装を与えよ。\footnote{
 \link{Exercise 2.63}から\link{Exercise 2.65}はPaul Hilfingerによるものである。}
@@ -10237,11 +9868,6 @@ to Paul Hilfinger.}
 
 \subsubsection*{Sets and information retrieval}
 
-We have examined options for using lists to represent sets and have seen how
-the choice of representation for a data object can have a large impact on the
-performance of the programs that use the data.  Another reason for
-concentrating on sets is that the techniques discussed here appear again and
-again in applications involving information retrieval.
 
 リストを集合を表現するのに使用する選択肢について調べ、データオブジェクトに対する
 表現の選択がどのようにそのデータを使用するプログラムのパフォーマンスに大きな
@@ -10249,17 +9875,7 @@ again in applications involving information retrieval.
 テクニックが情報検索を含むアプリケーションにおいて何度も何度も現われることが
 上げられます。
 
-Consider a data base containing a large number of individual records, such as
-the personnel files for a company or the transactions in an accounting system.
-A typical data-management system spends a large amount of time accessing or
-modifying the data in the records and therefore requires an efficient method
-for accessing records.  This is done by identifying a part of each record to
-serve as an identifying \newterm{key}.  A key can be anything that uniquely
-identifies the record.  For a personnel file, it might be an employee's ID
-number.  For an accounting system, it might be a transaction number.  Whatever
-the key is, when we define the record as a data structure we should include a
-\code{key} selector procedure that retrieves the key associated with a given
-record.
+
 
 企業が持つ個人情報や会計システムの取引等、大量の個人レコードを持つデータベースに
 ついて考えてみて下さい。典型的なデータ管理システムはレコードの中のデータへの
@@ -10270,12 +9886,7 @@ record.
 取引番号であったりします。キーが何であれレコードをデータ構造として定義する時、
 与えられたレコードに関連するキーを取得する\code{key}セレクタ手続を含まなければなりません。
 
-Now we represent the data base as a set of records. To locate the record with a
-given key we use a procedure \code{lookup}, which takes as arguments a key and
-a data base and which returns the record that has that key, or false if there
-is no such record.  \code{Lookup} is implemented in almost the same way as
-\code{element\-/of\-/set?}.  For example, if the set of records is implemented as
-an unordered list, we could use
+
 
 さて、データベースをレコードの集合として表現します。与えられたキーでレコードを指し示す
 ためには手続\code{lookup}を用い、引数としてキーとデータベースを取り、そのキーを持つレコード
@@ -10291,19 +9902,6 @@ an unordered list, we could use
 \end{scheme}
 
 \noindent
-Of course, there are better ways to represent large sets than as unordered
-lists.  Information-retrieval systems in which records have to be ``randomly
-accessed'' are typically implemented by a tree-based method, such as the
-binary-tree representation discussed previously.  In designing such a system
-the methodology of data abstraction can be a great help.  The designer can
-create an initial implementation using a simple, straightforward representation
-such as unordered lists.  This will be unsuitable for the eventual system, but
-it can be useful in providing a ``quick and dirty'' data base with which to
-test the rest of the system.  Later on, the data representation can be modified
-to be more sophisticated.  If the data base is accessed in terms of abstract
-selectors and constructors, this change in representation will not require any
-changes to the rest of the system.
-
 もちろん、巨大な集合を表現するのには順序無しリストよりもより良い方法が存在します。
 レコードが``ランダムアクセス''される情報検索システムは一般的に木をベースにした手法で
 実装されます。以前に議論された二分木のような物です。そのようなシステムを設計する場合、
@@ -10315,10 +9913,7 @@ changes to the rest of the system.
 されるのならば、この表現上の変更は残りのシステムに対し何の変更も要求しません。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.66}Exercise 2.66:} Implement the \code{lookup}
-procedure for the case where the set of records is structured as a binary tree,
-ordered by the numerical values of the keys.
-
+\heading{\phantomsection\label{Exercise 2.66}Exercise 2.66:} 
 レコードの集合が二分木として構造化され、キーの数値で順序付けられている場合の
 \code{lookup}手続を実装せよ。
 \end{quote}
@@ -10326,15 +9921,7 @@ ordered by the numerical values of the keys.
 \label{Section 2.3.4}
 \subsection{Example: Huffman Encoding Trees}
 
-This section provides practice in the use of list structure and data
-abstraction to manipulate sets and trees.  The application is to methods for
-representing data as sequences of ones and zeros (bits).  For example, the
-ASCII standard code used to represent text in computers encodes each character
-as a sequence of seven bits.  Using seven bits allows us to distinguish \( 2^7 \),
-or 128, possible different characters.  In general, if we want to distinguish
-\( n \) different symbols, we will need to use \( \log_2\!n \) bits per
-symbol.  If all our messages are made up of the eight symbols A, B, C, D, E, F,
-G, and H, we can choose a code with three bits per character, for example
+
 
 この節では集合と木を操作するためのリスト構造とデータ抽象化の使用のための練習を提供
 します。アプリケーションの狙いは1と0の(ビットの)列としてのデータを表現するための
@@ -10351,8 +9938,6 @@ B 001    D 011    F 101    H 111
 \end{example}
 
 \noindent
-With this code, the message
-
 この符号を用いて、以下のメッセージは
 
 \begin{example}
@@ -10360,8 +9945,6 @@ BACADAEAFABBAAAGAH
 \end{example}
 
 \noindent
-is encoded as the string of 54 bits
-
 54ビットの列として符号化されます。
 
 \begin{example}
@@ -10369,18 +9952,6 @@ is encoded as the string of 54 bits
 \end{example}
 
 \noindent
-Codes such as ASCII and the A-through-H code above are known as
-\newterm{fixed-length} codes, because they represent each symbol in the message
-with the same number of bits.  It is sometimes advantageous to use
-\newterm{variable-length} codes, in which different symbols may be represented
-by different numbers of bits.  For example, Morse code does not use the same
-number of dots and dashes for each letter of the alphabet.  In particular, E,
-the most frequent letter, is represented by a single dot.  In general, if our
-messages are such that some symbols appear very frequently and some very
-rarely, we can encode data more efficiently (i.e., using fewer bits per
-message) if we assign shorter codes to the frequent symbols.  Consider the
-following alternative code for the letters A through H:
-
 ASCIIや上記のAからHの符号は\newterm{fixed-length}(固定長)符号として知られています。
 それらがメッセージの各記号を同じ数のビットを用いて表現するためです。
 時には\newterm{variable-length}(可変長)符号を使用することが有利な場合もあります。
@@ -10397,8 +9968,6 @@ B 100    D 1011    F 1101    H 1111
 \end{example}
 
 \noindent
-With this code, the same message as above is encoded as the string
-
 この符号では上の同じメッセージが以下の列として符号化されます。
 
 \begin{example}
@@ -10406,20 +9975,9 @@ With this code, the same message as above is encoded as the string
 \end{example}
 
 \noindent
-This string contains 42 bits, so it saves more than 20\% in space in comparison
-with the fixed-length code shown above.
-
 この列は42ビットですから上で示した固定長符号に比べ記憶域において20\%以上節約できています。
 
-One of the difficulties of using a variable-length code is knowing when you
-have reached the end of a symbol in reading a sequence of zeros and ones.
-Morse code solves this problem by using a special \newterm{separator code} (in
-this case, a pause) after the sequence of dots and dashes for each letter.
-Another solution is to design the code in such a way that no complete code for
-any symbol is the beginning (or \newterm{prefix}) of the code for another
-symbol.  Such a code is called a \newterm{prefix code}.  In the example above,
-A is encoded by 0 and B is encoded by 100, so no other symbol can have a code
-that begins with 0 or with 100.
+
 
 可変長符号を用いる上での難点の1つとして0と1の列を読んでいる時にいつシンボルの終わりに
 辿り着いたか知ることが上げられます。モールス符号はこの問題を各文字に対するトンとツーの
@@ -10429,17 +9987,7 @@ that begins with 0 or with 100.
 このような符号は\newterm{prefix code}(接頭符号)と呼ばれます。上の例ではAは0で符号化され
 Bは100で符号化されるので、他のどのシンボルも0、または100で始まる符号を持つことができません。
 
-In general, we can attain significant savings if we use variable-length prefix
-codes that take advantage of the relative frequencies of the symbols in the
-messages to be encoded.  One particular scheme for doing this is called the
-Huffman encoding method, after its discoverer, David Huffman.  A Huffman code
-can be represented as a binary tree whose leaves are the symbols that are
-encoded.  At each non-leaf node of the tree there is a set containing all the
-symbols in the leaves that lie below the node.  In addition, each symbol at a
-leaf is assigned a weight (which is its relative frequency), and each non-leaf
-node contains a weight that is the sum of all the weights of the leaves lying
-below it.  The weights are not used in the encoding or the decoding process.
-We will see below how they are used to help construct the tree.
+
 
 一般的に、もし符号化対象のメッセージ中のシンボルの相対頻度の利点を得られる
 可変長接頭符号を用いれば著しい倹約を達成することができます。これを行うための
@@ -10452,10 +10000,7 @@ We will see below how they are used to help construct the tree.
 重みはエンコード、またはデコード処理では利用されません。以下では重みがどのように
 木の構築を手助けするかについて学びます。
 
-\link{Figure 2.18} shows the Huffman tree for the A-through-H code given above.
-The weights at the leaves indicate that the tree was designed for messages in
-which A appears with relative frequency 8, B with relative frequency 3, and the
-other letters each with relative frequency 1.
+
 
 \link{Figure 2.18}は上で与えられたAからH符号に対するハフマン木を示しています。
 葉の重みは
@@ -10492,16 +10037,6 @@ other letters each with relative frequency 1.
 \end{figure}
 
 \noindent
-Given a Huffman tree, we can find the encoding of any symbol by starting at the
-root and moving down until we reach the leaf that holds the symbol.  Each time
-we move down a left branch we add a 0 to the code, and each time we move down a
-right branch we add a 1.  (We decide which branch to follow by testing to see
-which branch either is the leaf node for the symbol or contains the symbol in
-its set.)  For example, starting from the root of the tree in \link{Figure 2.18}, 
-we arrive at the leaf for D by following a right branch, then a left
-branch, then a right branch, then a right branch; hence, the code for D is
-1011.
-
 ハフマン木を与えられることで、任意のシンボルの符号を木の根から始めてそのシンボル
 を持つ葉に辿り着くまで降りていくことで見つけることができます。
 左の枝に降りる度に符号に0を追加し、右の枝に降りる度に1を追加します。(どの枝を降り
@@ -10510,19 +10045,7 @@ branch, then a right branch, then a right branch; hence, the code for D is
 Dに対する葉に辿り付くには右の枝を選択し、次に左の枝、次に右の枝、次に右の枝を
 辿ります。従ってDに対する符号は1011になります。
 
-To decode a bit sequence using a Huffman tree, we begin at the root and use the
-successive zeros and ones of the bit sequence to determine whether to move down
-the left or the right branch.  Each time we come to a leaf, we have generated a
-new symbol in the message, at which point we start over from the root of the
-tree to find the next symbol.  For example, suppose we are given the tree above
-and the sequence 10001010.  Starting at the root, we move down the right
-branch, (since the first bit of the string is 1), then down the left branch
-(since the second bit is 0), then down the left branch (since the third bit is
-also 0).  This brings us to the leaf for B, so the first symbol of the decoded
-message is B.  Now we start again at the root, and we make a left move because
-the next bit in the string is 0.  This brings us to the leaf for A.  Then we
-start again at the root with the rest of the string 1010, so we move right,
-left, right, left and reach C.  Thus, the entire message is BAC.
+
 
 ビット列をハフマン木を用いて複合するには、根から始めてビット列の一連の0と1を用いて
 左か右の枝を下りるのか決定します。葉に着く度に、メッセージの新しいシンボルを生成し、
@@ -10536,14 +10059,6 @@ left, right, left and reach C.  Thus, the entire message is BAC.
 
 \subsubsection*{Generating Huffman trees}
 
-Given an ``alphabet'' of symbols and their relative frequencies, how do we
-construct the ``best'' code?  (In other words, which tree will encode messages
-with the fewest bits?)  Huffman gave an algorithm for doing this and showed
-that the resulting code is indeed the best variable-length code for messages
-where the relative frequency of the symbols matches the frequencies with which
-the code was constructed.  We will not prove this optimality of Huffman codes
-here, but we will show how Huffman trees are constructed.\footnote{See \link{Hamming 1980} 
-for a discussion of the mathematical properties of Huffman codes.}
 
 シンボルの``アルファベット''とそれらに対応する頻度を与えられた時、どのように
 ``最高の''符号を構築できるでしょうか? (言い替えれば、どの木がメッセージを最も少ない
@@ -10554,19 +10069,6 @@ for a discussion of the mathematical properties of Huffman codes.}
 されるかについては示します。\footnote{ハフマン符号の数学上の特性についての議論に対しては
 \link{Hamming 1980}を参照して下さい。}
 
-The algorithm for generating a Huffman tree is very simple. The idea is to
-arrange the tree so that the symbols with the lowest frequency appear farthest
-away from the root. Begin with the set of leaf nodes, containing symbols and
-their frequencies, as determined by the initial data from which the code is to
-be constructed. Now find two leaves with the lowest weights and merge them to
-produce a node that has these two nodes as its left and right branches. The
-weight of the new node is the sum of the two weights. Remove the two leaves
-from the original set and replace them by this new node. Now continue this
-process. At each step, merge two nodes with the smallest weights, removing them
-from the set and replacing them with a node that has these two as its left and
-right branches. The process stops when there is only one node left, which is
-the root of the entire tree.  Here is how the Huffman tree of \link{Figure 2.18}
-was generated:
 
 ハフマン木を生成するためのアルゴリズムはとても簡単です。その考えは木を再配置することで
 最も低い頻度のシンボルが根から最も遠く現れるようにします。シンボルと頻度を含む葉のノード
@@ -10593,28 +10095,18 @@ merge
 \end{example}
 
 \noindent
-The algorithm does not always specify a unique tree, because there may not be
-unique smallest-weight nodes at each step.  Also, the choice of the order in
-which the two nodes are merged (i.e., which will be the right branch and which
-will be the left branch) is arbitrary.
-
 このアルゴリズムは常に同じ木を特定しません。各ステップにおいて重みが最小の
 ノードのペアが一意となるとは限らないためです。またどの2つのノードがマージされるかの順も
 決定しません。(つまりどれが右になり、どれが左になるのかはわかりません)。
 
 \subsubsection*{Representing Huffman trees}
 
-In the exercises below we will work with a system that uses Huffman trees to
-encode and decode messages and generates Huffman trees according to the
-algorithm outlined above.  We will begin by discussing how trees are
-represented.
 
 以下ではハフマン木を用いてメッセージの符号化・複合化を行い、かつ上で概説した
 アルゴリズムに基づきハフマン木を作成します。木はどのように表現されるかの議論から
 始めます。
 
-Leaves of the tree are represented by a list consisting of the symbol
-\code{leaf}, the symbol at the leaf, and the weight:
+
 
 木の葉はシンボル\code{leaf}、葉に対するシンボル、そして重みから構成される
 リストにて表現されます。
@@ -10629,15 +10121,6 @@ Leaves of the tree are represented by a list consisting of the symbol
 \end{scheme}
 
 \noindent
-A general tree will be a list of a left branch, a right branch, a set of
-symbols, and a weight.  The set of symbols will be simply a list of the
-symbols, rather than some more sophisticated set representation.  When we make
-a tree by merging two nodes, we obtain the weight of the tree as the sum of the
-weights of the nodes, and the set of symbols as the union of the sets of
-symbols for the nodes.  Since our symbol sets are represented as lists, we can
-form the union by using the \code{append} procedure we defined in 
-\link{Section 2.2.1}:
-
 一般的な木は左側の枝、右側の枝、シンボルの集合、そして重みのリストになります。
 シンボルの集合は単純にシンボルのリストとなり、より洗練された集合の表現を用いは
 しません。2つのノードをマージして木を作る時、木の重みを各ノードの重みの和として取得し、
@@ -10656,8 +10139,6 @@ form the union by using the \code{append} procedure we defined in
 \end{scheme}
 
 \noindent
-If we make a tree in this way, we have the following selectors:
-
 もしこのように木を作るのなら以下のようなセレクタを持つことになります。
 
 \begin{scheme}
@@ -10675,12 +10156,6 @@ If we make a tree in this way, we have the following selectors:
 \end{scheme}
 
 \noindent
-The procedures \code{symbols} and \code{weight} must do something slightly
-different depending on whether they are called with a leaf or a general tree.
-These are simple examples of \newterm{generic procedures} (procedures that can
-handle more than one kind of data), which we will have much more to say about
-in \link{Section 2.4} and \link{Section 2.5}.
-
 手続\code{symbols}と\code{weight}はそれらが葉と一般的な木のどちらと共に呼ばれたかに
 より少々異なったことをしなければなりません。これらは\newterm{generic procedures}
 (ジェネリック手続：二種類以上のデータを扱える手続)の簡単なサンプルであり、\link{Section 2.4}と
@@ -10688,8 +10163,6 @@ in \link{Section 2.4} and \link{Section 2.5}.
 
 \subsubsection*{The decoding procedure}
 
-The following procedure implements the decoding algorithm.  It takes as
-arguments a list of zeros and ones, together with a Huffman tree.
 
 以下の手続は複合化アルゴリズムを実装します。0と1のリストをハフマン木と共に引数として
 取ります。
@@ -10714,16 +10187,6 @@ arguments a list of zeros and ones, together with a Huffman tree.
 \end{scheme}
 
 \noindent
-The procedure \code{decode\-/1} takes two arguments: the list of remaining bits
-and the current position in the tree.  It keeps moving ``down'' the tree,
-choosing a left or a right branch according to whether the next bit in the list
-is a zero or a one.  (This is done with the procedure \code{choose\-/branch}.)
-When it reaches a leaf, it returns the symbol at that leaf as the next symbol
-in the message by \code{cons}ing it onto the result of decoding the rest of the
-message, starting at the root of the tree.  Note the error check in the final
-clause of \code{choose\-/branch}, which complains if the procedure finds
-something other than a zero or a one in the input data.
-
 手続\code{decode\-/1}は2つの引数を取ります。残りのビット列のリストと木における現在の
 位置です。木を``下り''続けるためリストの中の次のビットが0であるか1であるかに
 従って左、または右の枝を選択します。(これは手続\code{choose\-/branch}と共に行われます)。
@@ -10734,24 +10197,11 @@ something other than a zero or a one in the input data.
 
 \subsubsection*{Sets of weighted elements}
 
-In our representation of trees, each non-leaf node contains a set of symbols,
-which we have represented as a simple list.  However, the tree-generating
-algorithm discussed above requires that we also work with sets of leaves and
-trees, successively merging the two smallest items.  Since we will be required
-to repeatedly find the smallest item in a set, it is convenient to use an
-ordered representation for this kind of set.
-
 私達の木の表現において、各葉ではないノードは簡単にリストとして表現したシンボルの
 集合を持ちます。しかし上で議論した木の生成アルゴリズムはまた葉と木の集合に対しても
 働き、2つの最小の項目のマージを続けなければなりません。集合の中の最も小さな項目を
 繰り返し見つけなければなりませんから、このような集合に対しては順序有りの表現を用いる
 と便利です。
-
-We will represent a set of leaves and trees as a list of elements, arranged in
-increasing order of weight.  The following \code{adjoin\-/set} procedure for
-constructing sets is similar to the one described in \link{Exercise 2.61};
-however, items are compared by their weights, and the element being added to
-the set is never already in it.
 
 葉と木の集合を重みの昇順で配置した要素のリストとして表現することにします。
 以下の集合を構築するための\code{adjoin\-/set}手続は\link{Exercise 2.61}にて説明した
@@ -10768,10 +10218,6 @@ the set is never already in it.
 \end{scheme}
 
 \noindent
-The following procedure takes a list of symbol-frequency pairs such as
-\code{((A 4) (B 2) (C 1) (D 1))} and constructs an initial ordered set of
-leaves, ready to be merged according to the Huffman algorithm:
-
 以下の手続は\code{((A 4) (B 2) (C 1) (D 1))}の様なシンボルと頻度のペアのリストを
 取り、葉の初期順序有り集合を構築し、ハフマンアルゴリズムに従いマージできるよう
 準備します。
@@ -10787,9 +10233,7 @@ leaves, ready to be merged according to the Huffman algorithm:
 \end{scheme}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.67}Exercise 2.67:} Define an encoding tree and a
-sample message:
-
+\heading{\phantomsection\label{Exercise 2.67}Exercise 2.67:} 
 符号化木とサンプルのメッセージを定義する。
 
 \begin{scheme}
@@ -10802,16 +10246,11 @@ sample message:
 (define sample-message '(0 1 1 0 0 1 0 1 0 1 1 1 0))
 \end{scheme}
 
-Use the \code{decode} procedure to decode the message, and give the \mbox{result}.
-
 \code{decode}手続を用いてメッセージを複合し結果を与えよ。
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.68}Exercise 2.68:} The \code{encode} procedure takes
-as arguments a message and a tree and produces the list of bits that gives the
-encoded message.
-
+\heading{\phantomsection\label{Exercise 2.68}Exercise 2.68:} 
 \code{encode}手続は引数としてメッセージと木を取り、符号化されメッセージを与える
 ビットのリストを生成する。
 
@@ -10823,12 +10262,6 @@ encoded message.
               (encode (cdr message) tree))))
 \end{scheme}
 
-\code{Encode\-/symbol} is a procedure, which you must write, that returns the
-list of bits that encodes a given symbol according to a given tree.  You should
-design \code{encode\-/symbol} so that it signals an error if the symbol is not in
-the tree at all.  Test your procedure by encoding the result you obtained in
-\link{Exercise 2.67} with the sample tree and seeing whether it is the same as
-the original sample message.
 
 \code{encode\-/symbol}はあなたが書かねばならぬ手続である。与えられた木に従って与えられた
 シンボルの符号化を行いビットのリストを返す。\code{encode\-/symbol}をもしシンボルが
@@ -10838,11 +10271,7 @@ the original sample message.
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.69}Exercise 2.69:} The following procedure takes as
-its argument a list of symbol-frequency pairs (where no symbol appears in more
-than one pair) and generates a Huffman encoding tree according to the Huffman
-algorithm.
-
+\heading{\phantomsection\label{Exercise 2.69}Exercise 2.69:} 
 以下の手続はその引数としてシンボルと頻度のペアのリストを取り(どのシンボルも1つ
 より多くのペアには存在しない)、ハフマンアルゴリズムに従いハフマン符号化木を生成する。
 
@@ -10851,14 +10280,7 @@ algorithm.
   (successive-merge (make-leaf-set pairs)))
 \end{scheme}
 
-\code{Make\-/leaf\-/set} is the procedure given above that transforms the list of
-pairs into an ordered set of leaves.  \code{Successive\-/merge} is the procedure
-you must write, using \code{make\-/code\-/tree} to successively merge the
-smallest-weight elements of the set until there is only one element left, which
-is the desired Huffman tree.  (This procedure is slightly tricky, but not
-really complicated.  If you find yourself designing a complex procedure, then
-you are almost certainly doing something wrong.  You can take significant
-advantage of the fact that we are using an ordered set representation.)
+
 
 \code{make\-/leaf\-/set}は上で与えられた手続でペアのリストを葉の順序有り集合へと変換する。
 \code{successive\-/merge}はあなたが書かなければならぬ手続である。\code{make\-/code\-/tree}を
@@ -10869,11 +10291,7 @@ advantage of the fact that we are using an ordered set representation.)
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.70}Exercise 2.70:} The following eight-symbol
-alphabet with associated relative frequencies was designed to efficiently
-encode the lyrics of 1950s rock songs.  (Note that the ``symbols'' of an
-``alphabet'' need not be individual letters.)
-
+\heading{\phantomsection\label{Exercise 2.70}Exercise 2.70:} 
 以下の8つのシンボルによるアルファベット(文字体系)と関連する頻度は効率的に1950年代のロック
 の歌を符号化するために設計された。(``アルファベット''の``シンボル''は単体の
 文字である必要は無いことに注意せよ。)
@@ -10883,9 +10301,6 @@ A    2   GET 2   SHA 3   WAH 1
 BOOM 1   JOB 2   NA 16   YIP 9
 \end{example}
 
-Use \code{generate\-/huffman\-/tree} (\link{Exercise 2.69}) to generate a
-corresponding Huffman tree, and use \code{encode} (\link{Exercise 2.68}) to
-encode the following message:
 
 \code{generate\-/huffman\-/tree}(\link{Exercise 2.69}参照)を用いて対応するハフマン木を
 生成し、\code{encode} (\link{Exercise 2.68}参照)を用いて以下のメッセージを符号化
@@ -10900,21 +10315,12 @@ Wah yip yip yip yip yip yip yip yip yip
 Sha boom
 \end{example}
 
-How many bits are required for the encoding?  What is the smallest number of
-bits that would be needed to encode this song if we used a fixed-length code
-for the eight-symbol alphabet?
-
 符号化には何ビットが必要であるか? この歌をもし固定長符号を8つシンボルによる
 アルファベットに用いた時、最小で何ビットが必要であるか?
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.71}Exercise 2.71:} Suppose we have a Huffman tree
-for an alphabet of \( n \) symbols, and that the relative frequencies of the
-symbols are \( 1, 2, 4, \dots, 2^{n-1} \).  Sketch the tree for \( n=5 \); for
-\( n=10 \).  In such a tree (for general \( n \)) how many bits are required to
-encode the most frequent symbol?  The least frequent symbol?
-
+\heading{\phantomsection\label{Exercise 2.71}Exercise 2.71:} 
 \( n \)個のシンボルのアルファベットに対するハフマン木を持っているとする。
 各シンボルに関連する頻度は\( 1, 2, 4, \dots, 2^{n-1} \)だとしよう。
 \( n=5 \)、\( n=10 \)の場合の木をスケッチせよ。そのような(任意の\( n \)に対する)
@@ -10923,16 +10329,7 @@ encode the most frequent symbol?  The least frequent symbol?
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.72}Exercise 2.72:} Consider the encoding procedure
-that you designed in \link{Exercise 2.68}.  What is the order of growth in the
-number of steps needed to encode a symbol?  Be sure to include the number of
-steps needed to search the symbol list at each node encountered.  To answer
-this question in general is difficult.  Consider the special case where the
-relative frequencies of the \( n \) symbols are as described in \link{Exercise 2.71}, 
-and give the order of growth (as a function of \( n \)) of the number of
-steps needed to encode the most frequent and least frequent symbols in the
-alphabet.
-
+\heading{\phantomsection\label{Exercise 2.72}Exercise 2.72:} 
 あなたが\link{Exercise 2.68}にて設計した符号化手続について考える。シンボルを符号化する
 のに必要なステップ数の増加のオーダーはいくらか? 各ノードに辿りついた時にシンボルリスト
 を検索するのに必要なステップ数を含めることを確認するように。この質問の一般的な解答は
@@ -10943,22 +10340,6 @@ alphabet.
 
 \label{Section 2.4}
 \section{Multiple Representations for Abstract Data}
-
-We have introduced data abstraction, a methodology for structuring systems in
-such a way that much of a program can be specified independent of the choices
-involved in implementing the data objects that the program manipulates.  For
-example, we saw in \link{Section 2.1.1} how to separate the task of designing a
-program that uses rational numbers from the task of implementing rational
-numbers in terms of the computer language's primitive mechanisms for
-constructing compound data.  The key idea was to erect an abstraction barrier
--- in this case, the selectors and constructors for rational numbers
-(\code{make\-/rat}, \code{numer}, \code{denom})---that isolates the way rational
-numbers are used from their underlying representation in terms of list
-structure.  A similar abstraction barrier isolates the details of the
-procedures that perform rational arithmetic (\code{add\-/rat}, \code{sub\-/rat},
-\code{mul\-/rat}, and \code{div\-/rat}) from the ``higher-level'' procedures that
-use rational numbers.  The resulting program has the structure shown in
-\link{Figure 2.1}.
 
 ここまでデータ抽象化について紹介してきました。これはプログラムが操作するデータ
 オブジェクトの実装における選択に独立して多くのプログラムが指定され得る様な方法で
@@ -10971,28 +10352,13 @@ use rational numbers.  The resulting program has the structure shown in
 分数を用いる``より高いレベル''の手続から分離します。結果のプログラムは\link{Figure 2.1}
 で示される構造を持ちます。
 
-These data-abstraction barriers are powerful tools for controlling complexity.
-By isolating the underlying representations of data objects, we can divide the
-task of designing a large program into smaller tasks that can be performed
-separately.  But this kind of data abstraction is not yet powerful enough,
-because it may not always make sense to speak of ``the underlying
-representation'' for a data object.
-
 これらのデータ抽象化バリアは複雑さをコントロールする強力なツールです。
 基礎をなすデータオブジェクトの表現を分離することで、大きなプログラムを設計する
 タスクを小さなタスクに分割し別々に実行することを可能にします。しかしこの種の
 データ抽象化はまだ十分に強力ではありません。データオブジェクトに対して
 ``基礎をなす表現''について話すことが常に意味があるとは限らないためです。
 
-For one thing, there might be more than one useful representation for a data
-object, and we might like to design systems that can deal with multiple
-representations.  To take a simple example, complex numbers may be represented
-in two almost equivalent ways: in rectangular form (real and imaginary parts)
-and in polar form (magnitude and angle).  Sometimes rectangular form is more
-appropriate and sometimes polar form is more appropriate.  Indeed, it is
-perfectly plausible to imagine a system in which complex numbers are
-represented in both ways, and in which the procedures for manipulating complex
-numbers work with either representation.
+
 
 一例として、あるデータオブジェクトに対しては便利な表現が1つよりも多くあるかも
 しれません。そして私達はシステムを複数の表現を扱えるように設計したいと願う
@@ -11002,17 +10368,7 @@ numbers work with either representation.
 複素数が両者の方法にて表現され、複素数を操作する手続がどちらの表現でも働くこと
 ができるシステムを考えることは完全に適切であろうと思われます。
 
-More importantly, programming systems are often designed by many people working
-over extended periods of time, subject to requirements that change over time.
-In such an environment, it is simply not possible for everyone to agree in
-advance on choices of data representation.  So in addition to the
-data-abstraction barriers that isolate representation from use, we need
-abstraction barriers that isolate different design choices from each other and
-permit different choices to coexist in a single program.  Furthermore, since
-large programs are often created by combining pre-existing modules that were
-designed in isolation, we need conventions that permit programmers to
-incorporate modules into larger systems \newterm{additively}, that is, without
-having to redesign or reimplement these modules.
+
 
 より重要なこととして、プログラミングシステムは時折、長期間に渡り多くの人々が
 働くことにより設計されるため、長い間仕様変更にさらされます。
@@ -11025,15 +10381,6 @@ having to redesign or reimplement these modules.
 することを許可するための約束事が必要です。それはつまりこれらのモジュールを再設計、
 または再実装する必要が無いようにするためです。
 
-In this section, we will learn how to cope with data that may be represented in
-different ways by different parts of a program.  This requires constructing
-\newterm{generic procedures}---procedures that can operate on data that may be
-represented in more than one way.  Our main technique for building generic
-procedures will be to work in terms of data objects that have \newterm{type
-tags}, that is, data objects that include explicit information about how they
-are to be processed.  We will also discuss \newterm{data-directed} programming,
-a powerful and convenient implementation strategy for additively assembling
-systems with generic operations.
 
 この節ではプログラムの異なるパーツにより異なる方法で表現され得るデータをどのように
 処理するかについて学びます。これは\newterm{generic procedures}(ジェネリック手続)---
@@ -11044,20 +10391,6 @@ systems with generic operations.
 また\newterm{data-directed}(データ適従)プログラミングについても議論します。これは強力、かつ便利な
 ジェネリック命令を用いて付加的にシステムを組み立てる実装戦略です。
 
-We begin with the simple complex-number example. We will see how type tags and
-data-directed style enable us to design separate rectangular and polar
-representations for complex numbers while maintaining the notion of an abstract
-``complex-number'' data object.  We will accomplish this by defining arithmetic
-procedures for complex numbers (\code{add\-/complex}, \code{sub\-/complex},
-\code{mul\-/complex}, and \code{div\-/complex}) in terms of generic selectors that
-access parts of a complex number independent of how the number is represented.
-The resulting complex-number system, as shown in \link{Figure 2.19}, contains
-two different kinds of abstraction barriers.  The ``horizontal'' abstraction
-barriers play the same role as the ones in  \link{Figure 2.1}.  
-They isolate``higher-level'' operations from ``lower-level'' 
-representations.  In addition, there is a ``vertical'' barrier that 
-gives us the ability to separately design and install alternative 
-representations.
 
 簡単な複素数の例から始めます。どのようにタイプタグとデータに従うスタイルが
 抽象的な``複素数''データオブジェクトの概念を維持しながら
@@ -11099,13 +10432,6 @@ representations.
 \end{figure}
 
 \noindent
-In \link{Section 2.5} we will show how to use type tags and data-directed style
-to develop a generic arithmetic package.  This provides procedures (\code{add},
-\code{mul}, and so on) that can be used to manipulate all sorts of ``numbers''
-and can be easily extended when a new kind of number is needed.  In 
-\link{Section 2.5.3}, we'll show how to use generic arithmetic in a system that performs
-symbolic algebra.
-
 \link{Section 2.5}にてどのようにタイプタグとデータ適従スタイルを用いてジェネリックな数値演算パッケージを
 開発するかについて示します。これは全ての種類の``数値''を操作するのに用いることができる手続(\code{add},
 \code{mul}, その他)を提供します。\link{Section 2.5.3}ではどのようにして記号代数を実行するジェネリックな
@@ -11116,18 +10442,7 @@ symbolic algebra.
 \label{Section 2.4.1}
 \subsection{Representations for Complex Numbers}
 
-We will develop a system that performs arithmetic operations on complex numbers
-as a simple but unrealistic example of a program that uses generic operations.
-We begin by discussing two plausible representations for complex numbers as
-ordered pairs: rectangular form (real part and imaginary part) and polar form
-(magnitude and angle).\footnote{In actual computational systems, rectangular
-form is preferable to polar form most of the time because of roundoff errors in
-conversion between rectangular and polar form.  This is why the complex-number
-example is unrealistic.  Nevertheless, it provides a clear illustration of the
-design of a system using generic operations and a good introduction to the more
-substantial systems to be developed later in this chapter.}  
-\link{Section 2.4.2} will show how both representations can be made to coexist in a
-single system through the use of type tags and generic operations.
+
 
 ジェネリックな命令を用いる単純な代わりに非現実的なプログラムの例として複素数上で
 数値演算命令を実行するシステムを開発します。順序有りペアとしての複素数に対する
@@ -11141,14 +10456,6 @@ single system through the use of type tags and generic operations.
 \link{Section 2.4.2}がどのようにして両方の表現がタイプタグとジェネリック命令の使用を通して
 単一のシステム内にて共存できるように作成され得るのかについてを示します。
 
-Like rational numbers, complex numbers are naturally represented as ordered
-pairs.  The set of complex numbers can be thought of as a two-dimensional space
-with two orthogonal axes, the ``real'' axis and the ``imaginary'' axis. (See
-\link{Figure 2.20}.)  From this point of view, the complex number 
-\( z = x + iy \) (where \( i^2 = -1 \)) can be thought of as the point in the plane
-whose real coordinate is \( x \) and whose imaginary coordinate is \( y \).
-Addition of complex numbers reduces in this representation to addition of
-coordinates:
 
 分数と同様に、複素数は自然に順序有りペアとして表現されます。複素数の集合は
 2つの直行する軸を持つ二次元空間として考えることができます。この視点から複素数
@@ -11207,12 +10514,6 @@ Imaginary-part(z_1 + z_2) = Imaginary-part(z_1) + Imaginary-part(z_2)
 \end{figure}
 
 \noindent
-When multiplying complex numbers, it is more natural to think in terms of
-representing a complex number in polar form, as a magnitude and an angle (\( r \)
-and \( A \) in \link{Figure 2.20}).  The product of two complex numbers is the
-vector obtained by stretching one complex number by the length of the other and
-then rotating it through the angle of the other:
-
 複素数をかけ算する場合、複素数を大きさと角度(\link{Figure 2.20}内の\( r \)と\( A \))
 としての極形式の表現を用いて考える方がより自然です。2つの複素数の積は一方の複素数を
 もう一方の長さで延し次にもう一方の角度の分、回転することで得られるベクトルになります。
@@ -11249,16 +10550,6 @@ Angle(z_1 * z_2) = Angle(z_1) + Angle(z_2)
 \end{displaymath}
 
 \noindent
-Thus, there are two different representations for complex numbers, which are
-appropriate for different operations.  Yet, from the viewpoint of someone
-writing a program that uses complex numbers, the principle of data abstraction
-suggests that all the operations for manipulating complex numbers should be
-available regardless of which representation is used by the computer.  For
-example, it is often useful to be able to find the magnitude of a complex
-number that is specified by rectangular coordinates.  Similarly, it is often
-useful to be able to determine the real part of a complex number that is
-specified by polar coordinates.
-
 従って複素数には2つの異なる表現が存在し、それぞれは異なる操作に適しています。
 けれども、複素数を用いるプログラムを書いている誰かさんの視点からは、データ抽象化の
 主義が複素数を操作するための全ての命令はどの表現がコンピュータにより用いられるかに
@@ -11266,15 +10557,6 @@ specified by polar coordinates.
 求められることはしばしば便利であります。同様に極形式にて指定される複素数の実数部を
 決定できることも時折便利であります。
 
-To design such a system, we can follow the same data-abstraction strategy we
-followed in designing the rational-number package in \link{Section 2.1.1}.
-Assume that the operations on complex numbers are implemented in terms of four
-selectors: \code{real\-/part}, \code{imag\-/part}, \code{magnitude} and
-\code{angle}.  Also assume that we have two procedures for constructing complex
-numbers: \code{make\-/from\-/real\-/imag} returns a complex number with specified
-real and imaginary parts, and \code{make\-/from\-/mag\-/ang} returns a complex number
-with specified magnitude and angle.  These procedures have the property that,
-for any complex number \code{z}, both
 
 そのようなシステムを設計するために、\link{Section 2.1.1}にて分数パッケージの設計において従った
 のと同じデータ抽象化戦略に従えます。複素数上の命令が4つのセレクタを使用して実装される
@@ -11299,12 +10581,7 @@ produce complex numbers that are equal to \code{z}.
 
 の両方が\code{z}に等しい複素数を生成します。
 
-Using these constructors and selectors, we can implement arithmetic on complex
-numbers using the ``abstract data'' specified by the constructors and
-selectors, just as we did for rational numbers in \link{Section 2.1.1}.  As
-shown in the formulas above, we can add and subtract complex numbers in terms
-of real and imaginary parts while multiplying and dividing complex numbers in
-terms of magnitudes and angles:
+
 
 これらのコンストラクタとセレクタを用いて、\link{Section 2.1.1}で分数に対して行ったのと全く
 同様に、コンストラクタとセレクタにて指定された``抽象データ''を用いて複素数上での
@@ -11336,26 +10613,11 @@ terms of magnitudes and angles:
 \end{scheme}
 
 \noindent
-To complete the complex-number package, we must choose a representation and we
-must implement the constructors and selectors in terms of primitive numbers and
-primitive list structure.  There are two obvious ways to do this: We can
-represent a complex number in ``rectangular form'' as a pair (real part,
-imaginary part) or in ``polar form'' as a pair (magnitude, angle).  Which shall
-we choose?
-
 複素数パッケージを完了させるためには表現を選択し、コンストラクタとセレクタを
 プリミティブな数値とリスト構造を用いて実装しなければなりません。これを行うために
 2つ明らかな方法があります。``直行形式''の複素数はペア(実数部, 虚数部)として表現し、
 また極形式はペア(大きさ, 角度)にて表現します。どちらを選択するべきでしょうか?
 
-In order to make the different choices concrete, imagine that there are two
-programmers, Ben Bitdiddle and Alyssa P. Hacker, who are independently
-designing representations for the complex-number system.  Ben chooses to
-represent complex numbers in rectangular form.  With this choice, selecting the
-real and imaginary parts of a complex number is straightforward, as is
-constructing a complex number with given real and imaginary parts.  To find the
-magnitude and the angle, or to construct a complex number with a given
-magnitude and angle, he uses the trigonometric relations
 
 異なる選択を具体的にするために、二人のプログラマ、Ben BitdiddleとAlyssa P. Hacker
 がいると想像して下さい。二人は複素数システムのための表現を独立して設計します。
@@ -11385,13 +10647,6 @@ y = r sin A     A = arctan(y,x)
 \end{array}
 \end{displaymath}
 \noindent
-which relate the real and imaginary parts \( (x, y) \) to the magnitude and
-the angle \( (r, A) \).\footnote{The arctangent function referred to here,
-computed by Scheme's \code{atan} procedure, is defined so as to take two
-arguments \( y \) and \( x \) and to return the angle whose tangent is \( y \big/\! x \).
-The signs of the arguments determine the quadrant of the angle.}  Ben's
-representation is therefore given by the following selectors and constructors:
-
 これは実数部と虚数部\( (x, y) \)を大きさと角度\( (r, A) \)へと関係づけます。\footnote{
 ここで参照されたアークタンジェント関数は、Schemeの\code{atan}手続にて計算されますが、2つの
 引数\( y \)と\( x \)を取りタンジェントが\( y \big/\! x \)となる角度を返すように定義
@@ -11412,11 +10667,6 @@ Benの表現は従って以下のセレクタとコンストラクタにより�
 \end{scheme}
 
 \noindent
-Alyssa, in contrast, chooses to represent complex numbers in polar form.  For
-her, selecting the magnitude and angle is straightforward, but she has to use
-the trigonometric relations to obtain the real and imaginary parts.  Alyssa's
-representation is:
-
 一方、Alyssaは複素数を極形式にて表現することを選択しました。彼女にとっては大きさと
 角度を選択するのは直接的です。しかし実数部と虚数部を得るためには三角法の関係を用い
 ねばなりません。Alyssaの表現は次のとおりです。
@@ -11445,13 +10695,7 @@ representation.
 \label{Section 2.4.2}
 \subsection{Tagged data}
 
-One way to view data abstraction is as an application of the ``principle of
-least commitment.''  In implementing the complex-number system in 
-\link{Section 2.4.1}, we can use either Ben's rectangular representation or Alyssa's
-polar representation.  The abstraction barrier formed by the selectors and
-constructors permits us to defer to the last possible moment the choice of a
-concrete representation for our data objects and thus retain maximum
-flexibility in our system design.
+
 
 データ抽象化を考え方の1つは``最小責務の原則''の適用としてです。\link{Section 2.4.1}の
 複素数システムの実装において、私達はBenの直行形式表現とAlyssaの極形式表現の
@@ -11460,19 +10704,7 @@ flexibility in our system design.
 選択に従うことを可能にしています。従ってシステム設計において最高の柔軟性を
 維持することができるのです。
 
-The principle of least commitment can be carried to even further extremes.  If
-we desire, we can maintain the ambiguity of representation even \emph{after} we
-have designed the selectors and constructors, and elect to use both Ben's
-representation \emph{and} Alyssa's representation.  If both representations are
-included in a single system, however, we will need some way to distinguish data
-in polar form from data in rectangular form.  Otherwise, if we were asked, for
-instance, to find the \code{magnitude} of the pair (3, 4), we wouldn't know
-whether to answer 5 (interpreting the number in rectangular form) or 3
-(interpreting the number in polar form).  A straightforward way to accomplish
-this distinction is to include a \newterm{type tag}---the symbol
-\code{rectangular} or \code{polar}---as part of each complex number.  Then
-when we need to manipulate a complex number we can use the tag to decide which
-selector to apply.
+
 
 最小責務の原則はさらにもっと高みへと到達することができます。もし私達が望めば、
 セレクタとコンストラクタを設計した``後''にさえ表現の多義性を維持することが
@@ -11485,12 +10717,7 @@ selector to apply.
 各複素数の部分として導入します。すると複素数を操作せねばならない時にタグを用いてどち
 らのセレクタを適用するべきか決定することができます。
 
-In order to manipulate tagged data, we will assume that we have procedures
-\code{type\-/tag} and \code{contents} that extract from a data object the tag and
-the actual contents (the polar or rectangular coordinates, in the case of a
-complex number).  We will also postulate a procedure \code{attach\-/tag} that
-takes a tag and contents and produces a tagged data object.  A straightforward
-way to implement this is to use ordinary list structure:
+
 
 タグ付きデータを操作するためにデータオブジェクトからタグと(複素数の場合には極形式、
 または直行形式の)実際のコンテンツを抽出する手続\code{type\-/tag}と\code{contents}を持つと
@@ -11512,9 +10739,6 @@ way to implement this is to use ordinary list structure:
 \end{scheme}
 
 \noindent
-Using these procedures, we can define predicates \code{rectangular?}  and
-\code{polar?}, which recognize rectangular and polar numbers, respectively:
-
 これら手続を用いて述語\code{rectangular?}と\code{polar?}を定義し、直行形式と
 極形式のそれぞれを認識することができます。
 
@@ -11525,16 +10749,6 @@ Using these procedures, we can define predicates \code{rectangular?}  and
 \end{scheme}
 
 \noindent
-With type tags, Ben and Alyssa can now modify their code so that their two
-different representations can coexist in the same system.  Whenever Ben
-constructs a complex number, he tags it as rectangular.  Whenever Alyssa
-constructs a complex number, she tags it as polar.  In addition, Ben and Alyssa
-must make sure that the names of their procedures do not conflict.  One way to
-do this is for Ben to append the suffix \code{rectangular} to the name of each
-of his representation procedures and for Alyssa to append \code{polar} to the
-names of hers.  Here is Ben's revised rectangular representation from 
-\link{Section 2.4.1}:
-
 タイプタグを用いてBenとAlyssaはこれで彼等のコードを変更し2つの異なる表現が同じ
 システム内にて共存させることができるようになりました。Benが複素数を構築する度に
 彼は直行形式であるとタグを付けます。Alyssaが複素数を構築する度に、彼女はそれを
@@ -11560,8 +10774,6 @@ names of hers.  Here is Ben's revised rectangular representation from
 \end{scheme}
 
 \noindent
-and here is Alyssa's revised polar representation:
-
 そして以下はAlyssaの改訂版極形式表現です。
 
 \begin{scheme}
@@ -11581,14 +10793,6 @@ and here is Alyssa's revised polar representation:
 \end{scheme}
 
 \noindent
-Each generic selector is implemented as a procedure that checks the tag of its
-argument and calls the appropriate procedure for handling data of that type.
-For example, to obtain the real part of a complex number, \code{real\-/part}
-examines the tag to determine whether to use Ben's \code{real\-/part\-/rectangular}
-or Alyssa's \code{real\-/part\-/polar}.  In either case, we use \code{contents} to
-extract the bare, untagged datum and send this to the rectangular or polar
-procedure as required:
-
 各ジェネリックなセレクタは引数のタグをチェックし、そのタイプのデータを扱うのに
 適切な手続を呼び出す様に実装されます。例として、複素数の実数部を得る場合、
 \code{real\-/part}はタグを確かめBenの\code{real\-/part\-/rectangular}かAlyssaの\code{real\-/part\-/polar}の
@@ -11625,12 +10829,6 @@ procedure as required:
 \end{scheme}
 
 \noindent
-To implement the complex-number arithmetic operations, we can use the same
-procedures \code{add\-/complex}, \code{sub\-/complex}, \code{mul\-/complex}, and
-\code{div\-/complex} from \link{Section 2.4.1}, because the selectors they call
-are generic, and so will work with either representation.  For example, the
-procedure \code{add\-/complex} is still
-
 複素数演算命令を実装するためには\link{Section 2.4.1}から同じ手続\code{add\-/complex}, 
 \code{sub\-/complex}, \code{mul\-/complex}, \code{div\-/complex}を使うことができます。
 なぜならそれらが呼び出すセレクタはジェネリックであるためどちらの表現に対して
@@ -11643,11 +10841,6 @@ procedure \code{add\-/complex} is still
 \end{scheme}
 
 \noindent
-Finally, we must choose whether to construct complex numbers using Ben's
-representation or Alyssa's representation.  One reasonable choice is to
-construct rectangular numbers whenever we have real and imaginary parts and to
-construct polar numbers whenever we have magnitudes and angles:
-
 最後に、複素数をBenの表現とAlyssaの表現のどちらを利用して構築するのか決定
 しなければなりません。妥当な選択として実数部と虚数部がある場合には直行形式を
 用い、大きさと角度がある場合には極形式を用いて構築します。
@@ -11660,15 +10853,6 @@ construct polar numbers whenever we have magnitudes and angles:
 \end{scheme}
 
 \noindent
-The resulting complex-number system has the structure shown in \link{Figure 2.21}.  
-The system has been decomposed into three relatively independent parts:
-the complex-number-arithmetic operations, Alyssa's polar implementation, and
-Ben's rectangular implementation.  The polar and rectangular implementations
-could have been written by Ben and Alyssa working separately, and both of these
-can be used as underlying representations by a third programmer implementing
-the complex-arithmetic procedures in terms of the abstract constructor/selector
-interface.
-
 結果としての複素数システムは\link{Figure 2.21}にて表される構造を持ちます。
 システムは3つの関連する独立した部分に分離されます。複素数演算命令、Alyssaの
 極形式実装、そしてBenの直行形式実装です。極形式と直行形式の実装はBenとAlyssaが
@@ -11707,19 +10891,6 @@ interface.
 \end{figure}
 
 \noindent
-Since each data object is tagged with its type, the selectors operate on the
-data in a generic manner.  That is, each selector is defined to have a behavior
-that depends upon the particular type of data it is applied to.  Notice the
-general mechanism for interfacing the separate representations: Within a given
-representation implementation (say, Alyssa's polar package) a complex number is
-an untyped pair (magnitude, angle).  When a generic selector operates on a
-number of \code{polar} type, it strips off the tag and passes the contents on
-to Alyssa's code.  Conversely, when Alyssa constructs a number for general use,
-she tags it with a type so that it can be appropriately recognized by the
-higher-level procedures.  This discipline of stripping off and attaching tags
-as data objects are passed from level to level can be an important
-organizational strategy, as we shall see in \link{Section 2.5}.
-
 各データオブジェクトはその型にてタグ付けられているので、セレクタはデータに対し
 ジェネリックな方法で操作します。これは各セレクタがそれが適用される個々のデータの
 型に従う振舞を持つように定義されているということです。分けられた表現を結び付ける
@@ -11735,17 +10906,7 @@ organizational strategy, as we shall see in \link{Section 2.5}.
 \label{Section 2.4.3}
 \subsection{Data-Directed Programming and Additivity}
 
-The general strategy of checking the type of a datum and calling an appropriate
-procedure is called \newterm{dispatching on type}.  This is a powerful strategy
-for obtaining modularity in system design.  On the other hand, implementing the
-dispatch as in \link{Section 2.4.2} has two significant weaknesses.  One
-weakness is that the generic interface procedures (\code{real\-/part},
-\code{imag\-/part}, \code{magnitude}, and \code{angle}) must know about all the
-different representations.  For instance, suppose we wanted to incorporate a
-new representation for complex numbers into our complex-number system.  We
-would need to identify this new representation with a type, and then add a
-clause to each of the generic interface procedures to check for the new type
-and apply the appropriate selector for that representation.
+
 
 データの型をチェックし適切な手続を呼ぶ一般的な戦略は
 \newterm{dispatching on type}(タイプ別処理)と呼ばれる。これはシステム設計において
@@ -11756,30 +10917,12 @@ and apply the appropriate selector for that representation.
 この新しい表現を型にて識別し、次に全てのジェネリックインターフェイス手続に新しい型を
 チェックする条項を追加し、その表現に対する適切なセレクタを適用する必要が出てくるでしょう。
 
-Another weakness of the technique is that even though the individual
-representations can be designed separately, we must guarantee that no two
-procedures in the entire system have the same name.  This is why Ben and Alyssa
-had to change the names of their original procedures from 
-\link{Sec. 2.4.1,,2.4.1}.
 
 もう1つのこのテクニックの弱点は例え個々の表現が別々に設計できたとしても、システム全体の
 中でどの2つの手続も同じ名前を持たないことを保証せねばなりません。これがなぜBenとAlyssa
 が\link{Sec. 2.4.1,,2.4.1}の彼等の元の手続の名前を変更しなければいけないかの理由でした。
 
-The issue underlying both of these weaknesses is that the technique for
-implementing generic interfaces is not \newterm{additive}.  The person
-implementing the generic selector procedures must modify those procedures each
-time a new representation is installed, and the people interfacing the
-individual representations must modify their code to avoid name conflicts.  In
-each of these cases, the changes that must be made to the code are
-straightforward, but they must be made nonetheless, and this is a source of
-inconvenience and error.  This is not much of a problem for the complex-number
-system as it stands, but suppose there were not two but hundreds of different
-representations for complex numbers.  And suppose that there were many generic
-selectors to be maintained in the abstract-data interface.  Suppose, in fact,
-that no one programmer knew all the interface procedures or all the
-representations.  The problem is real and must be addressed in such programs as
-large-scale data-base-management systems.
+
 
 両者の弱点の根底にある問題はジェネリックインターフェイスを実装するためのテクニック
 が\newterm{additive}(付加的)でないことです。ジェネリックセレクタ手続を実装する人は
@@ -11792,18 +10935,7 @@ large-scale data-base-management systems.
 インターフェイス手続や全ての表現について知らないと想定してみて下さい。問題は現実的で
 あり大規模なデータベース管理システムのようなプログラムでは必ず解決される必要があります。
 
-What we need is a means for modularizing the system design even further.  This
-is provided by the programming technique known as \newterm{data-directed
-programming}.  To understand how data-directed programming works, begin with
-the observation that whenever we deal with a set of generic operations that are
-common to a set of different types we are, in effect, dealing with a
-two-dimensional table that contains the possible operations on one axis and the
-possible types on the other axis.  The entries in the table are the procedures
-that implement each operation for each type of argument presented.  In the
-complex-number system developed in the previous section, the correspondence
-between operation name, data type, and actual procedure was spread out among
-the various conditional clauses in the generic interface procedures.  But the
-same information could have been organized in a table, as shown in \link{Figure 2.22}.
+
 
 私達に必要なものはより一層のシステム設計のモジュール化のための手段です。
 これは\newterm{data-directed programming}(データ適従プログラミング)として知られる
@@ -11818,16 +10950,7 @@ same information could have been organized in a table, as shown in \link{Figure 
 しかし同じ情報が\link{Figure 2.22}の中に示されるように1つのテーブルの中に組込まれることが
 できたはずです。
 
-Data-directed programming is the technique of designing programs to work with
-such a table directly.  Previously, we implemented the mechanism that
-interfaces the complex-arithmetic code with the two representation packages as
-a set of procedures that each perform an explicit dispatch on type.  Here we
-will implement the interface as a single procedure that looks up the
-combination of the operation name and argument type in the table to find the
-correct procedure to apply, and then applies it to the contents of the
-argument.  If we do this, then to add a new representation package to the
-system we need not change any existing procedures; we need only add new entries
-to the table.
+
 
 データ適従プログラミングはそのようなテーブルと直接連携するためのプログラム設計の
 テクニックです。以前は私達は複素数演算コードをそれぞれが明示的に型に従う呼び出し
@@ -11863,9 +10986,6 @@ angle      | angle-polar     | angle-rectangular
 \end{figure}
 
 \noindent
-To implement this plan, assume that we have two procedures, \code{put} and
-\code{get}, for manipulating the operation-and-type table:
-
 この計画を実装するために、2つの手続\code{put}と\code{get}を命令と型のテーブルを操作するために
 持っていると仮定します。
 
@@ -11892,20 +11012,11 @@ returns the item found there.  If no item is found, \code{get} returns false.
 \end{itemize}
 
 \noindent
-For now, we can assume that \code{put} and \code{get} are included in our
-language.  In \link{Chapter 3} (\link{Section 3.3.3}) we
-will see how to implement these and other operations for manipulating tables.
-
 今のところは\code{put}と\code{get}が私達の言語に含まれていると仮定しましょう。
 \link{Chapter 3} (\link{Section 3.3.3})においてこれらと他のテーブル操作の命令をどのように実装するか
 について学びます。
 
-Here is how data-directed programming can be used in the complex-number system.
-Ben, who developed the rectangular representation, implements his code just as
-he did originally.  He defines a collection of procedures, or a
-\newterm{package}, and interfaces these to the rest of the system by adding
-entries to the table that tell the system how to operate on rectangular
-numbers.  This is accomplished by calling the following procedure:
+
 
 ここからはデータ適従プログラミングが複素数システムにおいてどのように使用できるかについて
 示します。直行形式表現を開発したBenは彼が元々行ったとおりにコードを実装しました。
@@ -11942,22 +11053,6 @@ numbers.  This is accomplished by calling the following procedure:
 \end{scheme}
 
 \noindent
-Notice that the internal procedures here are the same procedures from 
-\link{Section 2.4.1} that Ben wrote when he was working in isolation.  No changes are
-necessary in order to interface them to the rest of the system.  Moreover,
-since these procedure definitions are internal to the installation procedure,
-Ben needn't worry about name conflicts with other procedures outside the
-rectangular package.  To interface these to the rest of the system, Ben
-installs his \code{real\-/part} procedure under the operation name
-\code{real\-/part} and the type \code{(rectangular)}, and similarly for the other
-selectors.\footnote{We use the list \code{(rectangular)} rather than the symbol
-\code{rectangular} to allow for the possibility of operations with multiple
-arguments, not all of the same type.}  The interface also defines the
-constructors to be used by the external system.\footnote{The type the
-constructors are installed under needn't be a list because a constructor is
-always used to make an object of one particular type.}  These are identical to
-Ben's internally defined constructors, except that they attach the tag.
-
 この中の内部手続はBenが\link{Section 2.4.1}にて分離を行った時に彼が書いたものと同じ
 手続であることに注意して下さい。これらをシステムの残りに接続するためには
 全く変更が必要がありません。さらに、これらの手続の定義はインストールを行う
@@ -11974,7 +11069,6 @@ Ben's internally defined constructors, except that they attach the tag.
 オブジェクトを作成するために使用されるためです。}これらはBenの内部定義
 コンストラクタと全く同じです。ただしタグを付加することが異なります。
 
-Alyssa's polar package is analogous:
 
 Alyassaの極形式パッケージも同様です。
 
@@ -12005,39 +11099,24 @@ Alyassaの極形式パッケージも同様です。
 \end{scheme}
 
 \noindent
-Even though Ben and Alyssa both still use their original procedures defined
-with the same names as each other's (e.g., \code{real\-/part}), these definitions
-are now internal to different procedures (see \link{Section 1.1.8}), so there is
-no name conflict.
-
 BenとAlyssaの両者が今でも御互いに同じ名前(例えば\code{real\-/part})にて定義された
 彼等の元々の手続を使用してようとも、これらの定義は今では異なる手続の内部定義(\link{Section 1.1.8}参照)
 です。従って名前の衝突は起こりません。
 
-The complex-arithmetic selectors access the table by means of a general
-``operation'' procedure called \code{apply\-/generic}, which applies a generic
-operation to some arguments.  \code{Apply\-/generic} looks in the table under the
-name of the operation and the types of the arguments and applies the resulting
-procedure if one is present:
+
 
 複素数演算のセレクタは\code{apply\-/generic}と呼ばれる普遍的な``operation''手続を
 用いてテーブルにアクセスします。これはジェネリックな命令を引数に対して適用します。
 \code{apply\-/generic}は命令の名前と引数の型の下に表を調べ結果としての手続が存在すれば
 適用します。\footnote{
-\code{Apply\-/generic} uses the dotted-tail
-notation described in \link{Exercise 2.20}, because different generic operations
-may take different numbers of arguments.  In \code{apply\-/generic}, \code{op}
-has as its value the first argument to \code{apply\-/generic} and \code{args} has
-as its value a list of the remaining arguments.
+
 
 \code{apply\-/generic}は\link{Exercise 2.20}で説明したドット付き
 末尾記法を用います。異なるジェネリック命令は異なる数の引数を取る場合が考えられる
 ためです。\code{apply\-/generic}では\code{op}がその値として\code{apply\-/generic}の第一引数を
 持ち、\code{args}はその値として残りの引数のリストを持ちます。
 
-\code{Apply\-/generic} also uses the primitive procedure \code{apply}, which
-takes two arguments, a procedure and a list.  \code{Apply} applies the
-procedure, using the elements in the list as arguments.  For example,
+
 
 \code{apply\-/generic}はまたプリミティブな手続\code{apply}を用います。これは2つの引数、
 手続とリストを取ります。\code{apply}はリストの要素を引数として手続を適用します。
@@ -12048,8 +11127,6 @@ procedure, using the elements in the list as arguments.  For example,
 \end{smallscheme}
 
 \noindent
-returns 10.
-
 は10を返します。}
 
 \begin{scheme}
@@ -12064,8 +11141,6 @@ returns 10.
 \end{scheme}
 
 \noindent
-Using \code{apply\-/generic}, we can define our generic selectors as follows:
-
 \code{apply\-/generic}を用いることで、私達のジェネリックなセレクタを以下のように定義する
 ことができます。
 
@@ -12077,17 +11152,9 @@ Using \code{apply\-/generic}, we can define our generic selectors as follows:
 \end{scheme}
 
 \noindent
-Observe that these do not change at all if a new representation is added to the
-system.
-
 もし新しい表現がシステムに追加されたとしてもこれらが全く変更されないことに注意して
 下さい。
 
-We can also extract from the table the constructors to be used by the programs
-external to the packages in making complex numbers from real and imaginary
-parts and from magnitudes and angles.  As in \link{Section 2.4.2}, we construct
-rectangular numbers whenever we have real and imaginary parts, and polar
-numbers whenever we have magnitudes and angles:
 
 またテーブルからコンストラクタを抽出することもできます。コンストラクタはパッケージの
 外部プログラムにより使用でき、実数部と虚数部か大きさと角度から複素数を作ります。
@@ -12102,9 +11169,7 @@ numbers whenever we have magnitudes and angles:
 \end{scheme}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.73}Exercise 2.73:} \link{Section 2.3.2} described a
-program that performs symbolic differentiation:
-
+\heading{\phantomsection\label{Exercise 2.73}Exercise 2.73:} 
 \link{Section 2.3.2}は記号微分を行うプログラムについて説明した。
 
 \begin{scheme}
@@ -12127,11 +11192,7 @@ program that performs symbolic differentiation:
                       DERIV" exp))))
 \end{scheme}
 
-We can regard this program as performing a dispatch on the type of the
-expression to be differentiated.  In this situation the ``type tag'' of the
-datum is the algebraic operator symbol (such as \code{+}) and the operation
-being performed is \code{deriv}.  We can transform this program into
-data-directed style by rewriting the basic derivative procedure as
+
 
 このプログラムを微分する式のタイプにより呼出を行っていると解釈することもできる。
 このシチュエーションではデータの``タイプタグ''が代数演算子の記号(例えば\code{+})であり
@@ -12152,32 +11213,18 @@ data-directed style by rewriting the basic derivative procedure as
 \begin{enumerate}[a]
 
 \item
-Explain what was done above.  Why can't we assimilate the predicates
-\code{number?} and \code{variable?} into the data-directed dispatch?
-
 上で何が行われたのか説明せよ。なぜ手続\code{number?}と\code{variable?}をデータ適従呼出に
 吸収することができないのか?
 
 \item
-Write the procedures for derivatives of sums and products, and the auxiliary
-code required to install them in the table used by the program above.
-
 和と積の微分のための手続とそれらを上記のプログラムで使用されたテーブルにインストールする
 補助コードを書け。
 
 \item
-Choose any additional differentiation rule that you like, such as the one for
-exponents (\link{Exercise 2.56}), and install it in this data-directed
-system.
-
 貴方の好きな追加の微分ルール、例えば指数に対する物(\link{Exercise 2.56})を選択し、
 このデータ適従システムにインストールせよ。
 
 \item
-In this simple algebraic manipulator the type of an expression is the algebraic
-operator that binds it together.  Suppose, however, we indexed the procedures
-in the opposite way, so that the dispatch line in \code{deriv} looked like
-
 この単純な代数操作において、式の型はそれを一緒に束縛する代数演算子である。
 しかし手続を逆の向きに索引付けし\code{deriv}の呼出行を以下のようにした場合、
 
@@ -12186,27 +11233,13 @@ in the opposite way, so that the dispatch line in \code{deriv} looked like
 \end{scheme}
 
 \noindent
-What corresponding changes to the derivative system are required?
-
 微分システムへの対応する変更は何が必要か?
 
 \end{enumerate}
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.74}Exercise 2.74:} Insatiable Enterprises, Inc., is
-a highly decentralized conglomerate company consisting of a large number of
-independent divisions located all over the world.  The company's computer
-facilities have just been interconnected by means of a clever
-network-interfacing scheme that makes the entire network appear to any user to
-be a single computer.  Insatiable's president, in her first attempt to exploit
-the ability of the network to extract administrative information from division
-files, is dismayed to discover that, although all the division files have been
-implemented as data structures in Scheme, the particular data structure used
-varies from division to division.  A meeting of division managers is hastily
-called to search for a strategy to integrate the files that will satisfy
-headquarters' needs while preserving the existing autonomy of the divisions.
-
+\heading{\phantomsection\label{Exercise 2.74}Exercise 2.74:} 
 Insatiable Enterprises, Inc.(強欲エンタープライズ社)は高いレベルで非集中化された
 数多くの独立事業所を世界中に抱える複合企業である。社のコンピュータ施設は接続された
 ばかりであるが、賢いネットワーク接続計画を用いてネットワーク全体がどのユーザに対し
@@ -12216,13 +11249,7 @@ Schemeのデータ構造として実装されているのにも係らず、使�
 事業所の間で異なっていることに狼狽した。事業所長の会議が大急ぎで開催され既存の事業所の
 自立性を保ちつつ本社の要求を満足できるファイル統合の戦略を探すことになった。
 
-Show how such a strategy can be implemented with data-directed programming.  As
-an example, suppose that each division's personnel records consist of a single
-file, which contains a set of records keyed on employees' names.  The structure
-of the set varies from division to division.  Furthermore, each employee's
-record is itself a set (structured differently from division to division) that
-contains information keyed under identifiers such as \code{address} and
-\code{salary}.  In particular:
+
 
 そのような戦略がデータ適従戦略を用いてどのように実装できるか示せ。例として各事業所
 の職員記録は単一のファイルから成る従業員の名前をキーにしたレコードの集合であると
@@ -12233,41 +11260,22 @@ contains information keyed under identifiers such as \code{address} and
 \begin{enumerate}[a]
 
 \item
-Implement for headquarters a \code{get\-/record} procedure that retrieves a
-specified employee's record from a specified personnel file.  The procedure
-should be applicable to any division's file.  Explain how the individual
-divisions' files should be structured.  In particular, what type information
-must be supplied?
-
 本社のために指定された従業員のレコードを指定された職員記録ファイルから取得する
 \code{get\-/record}手続を実装せよ。手続は任意の事業所のファイルに適用できなければならない。
 個々の事業所のファイルがどのように構造化されねばならないか説明せよ。
 具体的にはどんな型の情報が提供されねばならないか
 
 \item
-Implement for headquarters a \code{get\-/salary} procedure that returns the
-salary information from a given employee's record from any division's personnel
-file.  How should the record be structured in order to make this operation
-work?
-
 本社のために任意の事業所の職員記録ファイルから与えられた職員記録から給与情報を返す
 \code{get\-/salary}手続を実装せよ。
 記録はこの操作が動くようどのように構造化されねばならないか?
 
 \item
-Implement for headquarters a \code{find\-/employee\-/record} procedure.  This
-should search all the divisions' files for the record of a given employee and
-return the record.  Assume that this procedure takes as arguments an employee's
-name and a list of all the divisions' files.
-
 本社のために\code{find\-/employee\-/record} 手続を実装せよ。これは全ての事業所のファイルに対し
 与えられた従業員のレコードを探し、レコードを返さねばならない。この手続が引数として
 従業員の名前と全ての事業所のファイルのリストを与えられると仮定せよ。
 
 \item
-When Insatiable takes over a new company, what changes must be made in order to
-incorporate the new personnel information into the central system?
-
 強欲社が新しい会社を吸収した時、どんな変更が新しい職員情報を中央システムに受け入れるため
 に必要であるか?
 
@@ -12276,13 +11284,7 @@ incorporate the new personnel information into the central system?
 
 \subsubsection*{Message passing}
 
-The key idea of data-directed programming is to handle generic operations in
-programs by dealing explicitly with operation-and-type tables, such as the
-table in \link{Figure 2.22}.  The style of programming we used in 
-\link{Section 2.4.2} organized the required dispatching on type by having each operation
-take care of its own dispatching.  In effect, this decomposes the
-operation-and-type table into rows, with each generic operation procedure
-representing a row of the table.
+
 
 データ適従プログラミングの鍵となる考えはプログラム中のジェネリックな命令を
 \link{Figure 2.22}の様な命令と型のテーブルを明示的に処理することで扱うことです。
@@ -12290,13 +11292,7 @@ representing a row of the table.
 呼出の世話を行うことで組織化しました。実際にこれは命令と型のテーブルを、
 テーブルの行を表す各ジェネリックな操作手続を用いて行に分解します。
 
-An alternative implementation strategy is to decompose the table into columns
-and, instead of using ``intelligent operations'' that dispatch on data types,
-to work with ``intelligent data objects'' that dispatch on operation names.  We
-can do this by arranging things so that a data object, such as a rectangular
-number, is represented as a procedure that takes as input the required
-operation name and performs the operation indicated.  In such a discipline,
-\code{make\-/from\-/real\-/imag} could be written as
+
 
 代替的な実装戦略はテーブルを列に分解し、データ型に基き呼び出しを行う``知的な命令''を
 用いる代わりに、命令名に基づき呼び出しを行う``知的なデータオブジェクト''を用いて動かす
@@ -12318,11 +11314,6 @@ operation name and performs the operation indicated.  In such a discipline,
 \end{scheme}
 
 \noindent
-The corresponding \code{apply\-/generic} procedure, which applies a generic
-operation to an argument, now simply feeds the operation's name to the data
-object and lets the object do the work:\footnote{One limitation of this
-organization is it permits only generic procedures of one argument.}
-
 対応する\code{apply\-/generic}手続はジェネリックな命令を引数に適用しますが、ここでは
 単純に命令の名前をデータオブジェクトに与えオブジェクトに仕事を行わせます。\footnote{
 この構造の1つの制約は一引数のジェネリック手続のみを許容することです。}
@@ -12332,25 +11323,11 @@ organization is it permits only generic procedures of one argument.}
 \end{scheme}
 
 \noindent
-Note that the value returned by \code{make\-/from\-/real\-/imag} is a procedure---the
-internal \code{dispatch} procedure.  This is the procedure that is invoked when
-\code{apply\-/generic} requests an operation to be performed.
-
 \code{make\-/from\-/real\-/imag}により返される値は手続---内部手続\code{dispatch}のである
 ことに注意して下さい。これが\code{apply\-/generic}が命令に実行を要求した時に起動
 される手続です。
 
-This style of programming is called \newterm{message passing}.  The name comes
-from the image that a data object is an entity that receives the requested
-operation name as a ``message.''  We have already seen an example of message
-passing in \link{Section 2.1.3}, where we saw how \code{cons}, \code{car}, and
-\code{cdr} could be defined with no data objects but only procedures.  Here we
-see that message passing is not a mathematical trick but a useful technique for
-organizing systems with generic operations.  In the remainder of this chapter
-we will continue to use data-directed programming, rather than message passing,
-to discuss generic arithmetic operations.  In \link{Chapter 3} we will return to
-message passing, and we will see that it can be a powerful tool for structuring
-simulation programs.
+
 
 このプログラミングスタイルは\newterm{message passing}(メッセージパッシング)と
 呼ばれます。その名前はデータオブジェクトが要求された命令の名前を``メッセージ''として
@@ -12363,24 +11340,13 @@ simulation programs.
 の構造化に対して強力なツールに成り得ることを学びます。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.75}Exercise 2.75:} Implement the constructor
-\code{make\-/from\-/mag\-/ang} in message-passing style.  This procedure should be
-analogous to the \code{make\-/from\-/real\-/imag} procedure given above.
-
+\heading{\phantomsection\label{Exercise 2.75}Exercise 2.75:} 
 コンストラクタ\code{make\-/from\-/mag\-/ang}をメッセージパッシングスタイルにて実装せよ。
 この手続は上で与えられた\code{make\-/from\-/real\-/imag}と同様でなければならない。
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.76}Exercise 2.76:} As a large system with generic
-operations evolves, new types of data objects or new operations may be needed.
-For each of the three strategies---generic operations with explicit dispatch,
-data-directed style, and message-passing-style---describe the changes that
-must be made to a system in order to add new types or new operations.  Which
-organization would be most appropriate for a system in which new types must
-often be added?  Which would be most appropriate for a system in which new
-operations must often be added?
-
+\heading{\phantomsection\label{Exercise 2.76}Exercise 2.76:} 
 ジェネリックな命令を用いた巨大システムが発展するにつれ、新しい型のデータオブジェクトや
 命令が必要となるかもしれない。3つの戦略---ジェネリック命令の明示的呼出、データ適従スタイル、
 メッセージパッシング---のそれぞれに対して新しい型や命令を追加するために必要な
@@ -12392,19 +11358,7 @@ operations must often be added?
 \label{Section 2.5}
 \section{Systems with Generic Operations}
 
-In the previous section, we saw how to design systems in which data objects can
-be represented in more than one way.  The key idea is to link the code that
-specifies the data operations to the several representations by means of
-generic interface procedures.  Now we will see how to use this same idea not
-only to define operations that are generic over different representations but
-also to define operations that are generic over different kinds of arguments.
-We have already seen several different packages of arithmetic operations: the
-primitive arithmetic (\code{+}, \code{-}, \code{*}, \code{/}) built into our
-language, the rational-number arithmetic (\code{add\-/rat}, \code{sub\-/rat},
-\code{mul\-/rat}, \code{div\-/rat}) of \link{Section 2.1.1}, and the complex-number
-arithmetic that we implemented in \link{Section 2.4.3}.  We will now use
-data-directed techniques to construct a package of arithmetic operations that
-incorporates all the arithmetic packages we have already constructed.
+
 
 前の節ではデータオブジェクトが2つ以上の方法で表現されるシステムをどのように設計するか
 について学んだ。鍵となる考えはデータ操作を指定するコードをいくつかの表現に対し
@@ -12450,21 +11404,6 @@ incorporates all the arithmetic packages we have already constructed.
 \end{figure}
 
 \noindent
-\link{Figure 2.23} shows the structure of the system we shall build.  
-Notice the
-abstraction barriers.  From the perspective of someone using ``numbers,'' there
-is a single procedure \code{add} that operates on whatever numbers are
-supplied.  \code{Add} is part of a generic interface that allows the separate
-ordinary-arithmetic, rational-arithmetic, and complex-arithmetic 
-packages to be
-accessed uniformly by programs that use numbers.  Any individual arithmetic
-package (such as the complex package) may itself be accessed through generic
-procedures (such as \code{add\-/complex}) that combine packages designed for
-different representations (such as rectangular and polar).  Moreover, the
-structure of the system is additive, so that one can design the individual
-arithmetic packages separately and combine them to produce a generic arithmetic
-system.
-
 \link{Figure 2.23}は私達が構築するシステムの構造を示しています。
 抽象化バリアに注目して下さい。``数値''を扱う第三者の視点からはそこにあるのは
 どの種類の数値が提供されても単一の手続\code{add}です。\code{add}はジェネリックインターフェイスの
@@ -12480,16 +11419,6 @@ system.
 \label{Section 2.5.1}
 \subsection{Generic Arithmetic Operations}
 
-The task of designing generic arithmetic operations is analogous to that of
-designing the generic complex-number operations.  We would like, for instance,
-to have a generic addition procedure \code{add} that acts like ordinary
-primitive addition \code{+} on ordinary numbers, like \code{add\-/rat} on
-rational numbers, and like \code{add\-/complex} on complex numbers.  We can
-implement \code{add}, and the other generic arithmetic operations, by following
-the same strategy we used in \link{Section 2.4.3} to implement the generic
-selectors for complex numbers.  We will attach a type tag to each kind of
-number and cause the generic procedure to dispatch to an appropriate package
-according to the data type of its arguments.
 
 ジェネリックな数値演算命令の設計タスクはジェネリックな複素数命令を設計するのと同様です。
 例えば、実数上での通常の加算のプリミティブ\code{+}、分数上の\code{add\-/rat}や複素数上の
@@ -12498,8 +11427,6 @@ according to the data type of its arguments.
 セレクタを実装するのに用いたのと同じ戦略に従うことで実装することが可能です。
 全ての種類の数値にタイプタグをアタッチすることでジェネリック手続にその引数のデータタイプ
 に従って適切なパッケージを呼び出す理由とします。
-
-The generic arithmetic procedures are defined as follows:
 
 ジェネリックな数値演算は以下のように定義されます。
 
@@ -12511,14 +11438,6 @@ The generic arithmetic procedures are defined as follows:
 \end{scheme}
 
 \noindent
-We begin by installing a package for handling \newterm{ordinary} numbers, that
-is, the primitive numbers of our language.  We will tag these with the symbol
-\code{scheme\-/number}.  The arithmetic operations in this package are the
-primitive arithmetic procedures (so there is no need to define extra procedures
-to handle the untagged numbers).  Since these operations each take two
-arguments, they are installed in the table keyed by the list
-\code{(scheme\-/number scheme\-/number)}:
-
 \newterm{ordinary}(通常の)数値を扱うためのパッケージをインストールすることで始めます。
 これは私達の言語のプリミティブな数値のことです。これらにシンボル\code{scheme\-/number}で
 タグを付けます。このパッケージ内の数値演算命令はプリミティブな数値演算手続です。
@@ -12542,9 +11461,6 @@ arguments, they are installed in the table keyed by the list
 \end{scheme}
 
 \noindent
-Users of the Scheme-number package will create (tagged) ordinary numbers by
-means of the procedure:
-
 scheme-numberパッケージのユーザは(タグ付きの)普通の数値を手続を用いて作成します。
 
 \begin{scheme}
@@ -12553,12 +11469,6 @@ scheme-numberパッケージのユーザは(タグ付きの)普通の数値を�
 \end{scheme}
 
 \noindent
-Now that the framework of the generic arithmetic system is in place, we can
-readily include new kinds of numbers.  Here is a package that performs rational
-arithmetic.  Notice that, as a benefit of additivity, we can use without
-modification the rational-number code from \link{Section 2.1.1} as the internal
-procedures in the package:
-
 さてこのジェネリック数値演算システムのフレームワークが準備できたので新しい種類の
 数値も容易に含めることができます。ここに分数演算を実行するパッケージがあります。
 付加的あることの利点として\link{Section 2.1.1}の分数コードをパッケージ内の内部手続として変更無しに
@@ -12604,13 +11514,6 @@ procedures in the package:
 \end{scheme}
 
 \noindent
-We can install a similar package to handle complex numbers, using the tag
-\code{complex}.  In creating the package, we extract from the table the
-operations \code{make\-/from\-/real\-/imag} and \code{make\-/from\-/mag\-/ang} that were
-defined by the rectangular and polar packages.  Additivity permits us to use,
-as the internal operations, the same \code{add\-/complex}, \code{sub\-/complex},
-\code{mul\-/complex}, and \code{div\-/complex} procedures from \link{Section 2.4.1}.
-
 複素数を扱うために同様のパッケージをタグ\code{complex}を用いてインストールできます。
 パッケージを作る際に、直行形式と極形式のパッケージにて定義された\code{make\-/from\-/real\-/imag}と
 \code{make\-/from\-/mag\-/ang}の命令をテーブルから抽出します。付加性が内部命令として同じ
@@ -12655,12 +11558,6 @@ as the internal operations, the same \code{add\-/complex}, \code{sub\-/complex},
 \end{scheme}
 
 \noindent
-Programs outside the complex-number package can construct complex numbers
-either from real and imaginary parts or from magnitudes and angles.  Notice how
-the underlying procedures, originally defined in the rectangular and polar
-packages, are exported to the complex package, and exported from there to the
-outside world.
-
 複素数パッケージの外側のプログラムは複素数を実数部と虚数部からでも大きさと角度からでも
 構築することができます。元は直行形式と極形式のパッケージ内にて定義された内在する手続が
 どのように複素数パッケージにエクスポートされているか、そしてそこからどのようにして
@@ -12674,17 +11571,6 @@ outside world.
 \end{scheme}
 
 \noindent
-What we have here is a two-level tag system.  A typical complex number, such as
-\( 3 + 4i \) in rectangular form, would be represented as shown in \link{Figure 2.24}.  
-The outer tag (\code{complex}) is used to direct the number to the
-complex package.  Once within the complex package, the next tag
-(\code{rectangular}) is used to direct the number to the rectangular package.
-In a large and complicated system there might be many levels, each interfaced
-with the next by means of generic operations.  As a data object is passed
-``downward,'' the outer tag that is used to direct it to the appropriate
-package is stripped off (by applying \code{contents}) and the next level of tag
-(if any) becomes visible to be used for further dispatching.
-
 ここで私達が行ったのは2つのレベルのタグシステムです。典型的な複素数、直交形式で
 \( 3 + 4i \)のような物は\link{Figure 2.24}で示されるように表現されます。
 外型のタグ(\code{complex})は数値を複素数パッケージへと導きます。複素数パッケージに入れば、
@@ -12718,28 +11604,13 @@ package is stripped off (by applying \code{contents}) and the next level of tag
 \end{figure}
 
 \noindent
-In the above packages, we used \code{add\-/rat}, \code{add\-/complex}, and the
-other arithmetic procedures exactly as originally written.  Once these
-definitions are internal to different installation procedures, however, they no
-longer need names that are distinct from each other: we could simply name them
-\code{add}, \code{sub}, \code{mul}, and \code{div} in both packages.
-
 上記のパッケージでは、\code{add\-/rat}, \code{add\-/complex}, それに他の数値演算手続を
 全く元々書かれた状態で利用しました。しかし、これらの定義が異なるインストール手続の内部と
 なれば直ぐに、お互いから識別可能である名前にする必要は無くなります。単純に両者のパッケージにて
 \code{add}, \code{sub}, \code{mul}, \code{div}と名付けることが可能になります。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.77}Exercise 2.77:} Louis Reasoner tries to evaluate
-the expression \code{(magnitude z)} where \code{z} is the object shown in
-\link{Figure 2.24}.  To his surprise, instead of the answer 5 he gets an error
-message from \code{apply\-/generic}, saying there is no method for the operation
-\code{magnitude} on the types \code{(complex)}.  He shows this interaction to
-Alyssa P. Hacker, who says ``The problem is that the complex-number selectors
-were never defined for \code{complex} numbers, just for \code{polar} and
-\code{rectangular} numbers.  All you have to do to make this work is add the
-following to the \code{complex} package:''
-
+\heading{\phantomsection\label{Exercise 2.77}Exercise 2.77:} 
 Louis Reasonerは\code{z}が\link{Figure 2.24}で示されるオブジェクトである場合に式
 \code{(magnitude z)}を評価しようとした。驚いたことに、答の5の代わりに彼が受け取ったのは
 \code{apply\-/generic}からのエラーメッセージで、型\code{(complex)}上に\code{magnitude}命令の
@@ -12755,11 +11626,6 @@ Louis Reasonerは\code{z}が\link{Figure 2.24}で示されるオブジェクト�
 (put 'angle '(complex) angle)
 \end{scheme}
 
-Describe in detail why this works.  As an example, trace through all the
-procedures called in evaluating the expression \code{(magnitude z)} where
-\code{z} is the object shown in \link{Figure 2.24}.  In particular, how many
-times is \code{apply\-/generic} invoked?  What procedure is dispatched to in each
-case?
 
 これでなぜ動くのか詳細を説明せよ。例として式\code{(magnitude z)}を\code{z}が\link{Figure 2.24}にて
 示されるデータオブジェクトの場合に評価する時、呼び出される全ての手続をトレースせよ
@@ -12767,20 +11633,7 @@ case?
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.78}Exercise 2.78:} The internal procedures in the
-\code{scheme\-/number} package are essentially nothing more than calls to the
-primitive procedures \code{+}, \code{-}, etc.  It was not possible to use the
-primitives of the language directly because our type-tag system requires that
-each data object have a type attached to it.  In fact, however, all Lisp
-implementations do have a type system, which they use internally.  Primitive
-predicates such as \code{symbol?} and \code{number?}  determine whether data
-objects have particular types.  Modify the definitions of \code{type\-/tag},
-\code{contents}, and \code{attach\-/tag} from \link{Section 2.4.2} so that our
-generic system takes advantage of Scheme's internal type system.  That is to
-say, the system should work as before except that ordinary numbers should be
-represented simply as Scheme numbers rather than as pairs whose \code{car} is
-the symbol \code{scheme\-/number}.
-
+\heading{\phantomsection\label{Exercise 2.78}Exercise 2.78:} 
 \code{scheme\-/number}パッケージの内部手続は本質的にプリミティブな手続\code{+}, \code{-}, その他の
 呼出し以上の物ではない。言語のプリミティブを直接使用することはできない。
 私達のタイプタグシステムが各データオブジェクトに対し型付けられていることを要件とするため
@@ -12794,22 +11647,14 @@ the symbol \code{scheme\-/number}.
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.79}Exercise 2.79:} Define a generic equality
-predicate \code{equ?} that tests the equality of two numbers, and install it in
-the generic arithmetic package.  This operation should work for ordinary
-numbers, rational numbers, and complex numbers.
-
+\heading{\phantomsection\label{Exercise 2.79}Exercise 2.79:} 
 2つの数値の等値関係をテストするジェネリックな等値の述語\code{equ?}を定義し、
 ジェネリック数値演算パッケージにインストールせよ。この命令は通常の数値、分数、
 複素数に対しても働くこと。
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.80}Exercise 2.80:} Define a generic predicate
-\code{=zero?} that tests if its argument is zero, and install it in the generic
-arithmetic package.  This operation should work for ordinary numbers, rational
-numbers, and complex numbers.
-
+\heading{\phantomsection\label{Exercise 2.80}Exercise 2.80:} 
 引数が0であるかテストするジェネリックな述語\code{=zero?}を定義しジェネリック数値
 演算パッケージにインストールせよ。この命令は通常の数値、分数、
 複素数に対しても働くこと。
@@ -12818,18 +11663,7 @@ numbers, and complex numbers.
 \label{Section 2.5.2}
 \subsection{Combining Data of Different Types}
 
-We have seen how to define a unified arithmetic system that encompasses
-ordinary numbers, complex numbers, rational numbers, and any other type of
-number we might decide to invent, but we have ignored an important issue.  The
-operations we have defined so far treat the different data types as being
-completely independent.  Thus, there are separate packages for adding, say, two
-ordinary numbers, or two complex numbers.  What we have not yet considered is
-the fact that it is meaningful to define operations that cross the type
-boundaries, such as the addition of a complex number to an ordinary number.  We
-have gone to great pains to introduce barriers between parts of our programs so
-that they can be developed and understood separately.  We would like to
-introduce the cross-type operations in some carefully controlled way, so that
-we can support them without seriously violating our module boundaries.
+
 
 通常の数値、複素数、分数、そして開発するだろう任意の他の型の数値を包括する
 統一数値演算システムをどのように定義するかについて学びました。しかし私達は
@@ -12843,13 +11677,6 @@ we can support them without seriously violating our module boundaries.
 私達のモジュール境界を重大な侵害が起こらないようにそれらをサポートすることがで
 きるようにです。
 
-One way to handle cross-type operations is to design a different procedure for
-each possible combination of types for which the operation is valid.  For
-example, we could extend the complex-number package so that it provides a
-procedure for adding complex numbers to ordinary numbers and installs this in
-the table using the tag \code{(complex scheme\-/number)}:\footnote{We also have
-to supply an almost identical procedure to handle the types
-\code{(scheme\-/number complex)}.}
 
 クロスタイプ(型を渡る)命令を扱う1つの方法は命令が有効な型の可能な組み合わせそれぞれに
 対して異なる手続を設計することです。例えば複素数パッケージを拡張し、それが複素数と実数
@@ -12866,22 +11693,6 @@ to supply an almost identical procedure to handle the types
 \end{scheme}
 
 \noindent
-This technique works, but it is cumbersome.  With such a system, the cost of
-introducing a new type is not just the construction of the package of
-procedures for that type but also the construction and installation of the
-procedures that implement the cross-type operations.  This can easily be much
-more code than is needed to define the operations on the type itself.  The
-method also undermines our ability to combine separate packages additively, or
-at least to limit the extent to which the implementors of the individual packages
-need to take account of other packages.  For instance, in the example above, it
-seems reasonable that handling mixed operations on complex numbers and ordinary
-numbers should be the responsibility of the complex-number package.  Combining
-rational numbers and complex numbers, however, might be done by the complex
-package, by the rational package, or by some third package that uses operations
-extracted from these two packages.  Formulating coherent policies on the
-division of responsibility among packages can be an overwhelming task in
-designing systems with many packages and many cross-type operations.
-
 このテクニックはうまく行きますが、面倒です。このようなシステムでは新しい型を導入する
 コストはその型のための手続のパッケージを構築するだけでなく、クロスタイプの命令を
 実装する手続の構築とインストールに及びます。これは簡単にその型自身の命令を定義するため
@@ -12897,18 +11708,7 @@ designing systems with many packages and many cross-type operations.
 
 \subsubsection*{Coercion}
 
-In the general situation of completely unrelated operations acting on
-completely unrelated types, implementing explicit cross-type operations,
-cumbersome though it may be, is the best that one can hope for.  Fortunately,
-we can usually do better by taking advantage of additional structure that may
-be latent in our type system.  Often the different data types are not
-completely independent, and there may be ways by which objects of one type may
-be viewed as being of another type.  This process is called \newterm{coercion}.
-For example, if we are asked to arithmetically combine an ordinary number with
-a complex number, we can view the ordinary number as a complex number whose
-imaginary part is zero.  This transforms the problem to that of combining two
-complex numbers, which can be handled in the ordinary way by the
-complex-arithmetic package.
+
 
 完全に依存しない型達上にて振る舞う完全に依存しない命令群が一般的な状況においては
 明示的にクロスタイプ命令を実装することは、面倒かもしれませんが、人が望む最高の
@@ -12921,10 +11721,7 @@ complex-arithmetic package.
 見做すことができます。これはこの問題を2つの複素数の合成へと変換し、複素数パッケージ
 により通常の方法にて取り扱うことが可能になります。
 
-In general, we can implement this idea by designing coercion procedures that
-transform an object of one type into an equivalent object of another type.
-Here is a typical coercion procedure, which transforms a given ordinary number
-to a complex number with that real part and zero imaginary part:
+
 
 一般的に、ある型のオブジェクトを等価な他の型のオブジェクトに変換する強制手続を
 設計することでこの考えを実装することができます。以下は典型的な強制手続です。
@@ -12936,9 +11733,6 @@ to a complex number with that real part and zero imaginary part:
 \end{scheme}
 
 \noindent
-We install these coercion procedures in a special coercion table, indexed under
-the names of the two types:
-
 これらの強制手続を2つの型の名前により索引付けした特別な強制テーブルにインストールします。
 
 \begin{scheme}
@@ -12948,33 +11742,12 @@ the names of the two types:
 \end{scheme}
 
 \noindent
-(We assume that there are \code{put\-/coercion} and \code{get\-/coercion}
-procedures available for manipulating this table.)  Generally some of the slots
-in the table will be empty, because it is not generally possible to coerce an
-arbitrary data object of each type into all other types.  For example, there is
-no way to coerce an arbitrary complex number to an ordinary number, so there
-will be no general \code{complex\-/>scheme\-/number} procedure included in the
-table.
-
 (このテーブルを操作するために手続\code{put\-/coercion}と\code{get\-/coercion}が存在すると仮定します)。
 一般にこのテーブルの枠のいくつかは空になります。全ての型の任意のデータオブジェクトを全ての
 他の型へと強制することは一般には不可能です。例えば任意の複素数を実数に強制することはできません。
 そのため普遍的な\code{complex\-/>scheme\-/number}手続はテーブルに含まれることはありません。
 
-Once the coercion table has been set up, we can handle coercion in a uniform
-manner by modifying the \code{apply\-/generic} procedure of \link{Section 2.4.3}.
-When asked to apply an operation, we first check whether the operation is
-defined for the arguments' types, just as before.  If so, we dispatch to the
-procedure found in the operation-and-type table.  Otherwise, we try coercion.
-For simplicity, we consider only the case where there are two
-arguments.\footnote{See \link{Exercise 2.82} for generalizations.}  We check the
-coercion table to see if objects of the first type can be coerced to the second
-type.  If so, we coerce the first argument and try the operation again.  If
-objects of the first type cannot in general be coerced to the second type, we
-try the coercion the other way around to see if there is a way to coerce the
-second argument to the type of the first argument.  Finally, if there is no
-known way to coerce either type to the other type, we give up.  Here is the
-procedure:
+
 
 強制テーブルが準備されれば、\link{Section 2.4.3}の\code{apply\-/generic}手続を変更することで
 統一的な作法で強制を取り扱うことができます。命令を適用するよう求められた時、
@@ -13011,23 +11784,6 @@ procedure:
 \end{smallscheme}
 
 \noindent
-This coercion scheme has many advantages over the method of defining explicit
-cross-type operations, as outlined above.  Although we still need to write
-coercion procedures to relate the types (possibly \( n^2 \) procedures for a
-system with \( n \) types), we need to write only one procedure for each pair of
-types rather than a different procedure for each collection of types and each
-generic operation.\footnote{If we are clever, we can usually get by with fewer
-than \( n^2 \) coercion procedures.  For instance, if we know how to convert from
-type 1 to type 2 and from type 2 to type 3, then we can use this knowledge to
-convert from type 1 to type 3.  This can greatly decrease the number of
-coercion procedures we need to supply explicitly when we add a new type to the
-system.  If we are willing to build the required amount of sophistication into
-our system, we can have it search the ``graph'' of relations among types and
-automatically generate those coercion procedures that can be inferred from the
-ones that are supplied explicitly.}  What we are counting on here is the fact
-that the appropriate transformation between types depends only on the types
-themselves, not on the operation to be applied.
-
 この強制スキームは上で概説された様に明示的なクロスタイプ命令の定義手法上に多くの利点を持ちます。
 私達は依然、型に関係する強制手続を書かねばなりませんが(\( n \)個の型のシステムに対し
 場合により\( n^2 \)の手続)、全ての型の集合と各ジェネリック命令に対し異なる手続を書くのでなく、
@@ -13040,13 +11796,7 @@ themselves, not on the operation to be applied.
 ここで私達が信頼しているものはタイプ間の適切な変換は型それ自身のみに依存し、適用される命令には
 依存しないという事実です。
 
-On the other hand, there may be applications for which our coercion scheme is
-not general enough.  Even when neither of the objects to be combined can be
-converted to the type of the other it may still be possible to perform the
-operation by converting both objects to a third type.  In order to deal with
-such complexity and still preserve modularity in our programs, it is usually
-necessary to build systems that take advantage of still further structure in
-the relations among types, as we discuss next.
+
 
 一方で、私達の強制スキームが十分に汎用ではないアプリケーションが存在するかもしれません。
 たとえ合成されるオブジェクトの両方ともが他方に変換できないとしても両者を第三の型に
@@ -13056,21 +11806,7 @@ the relations among types, as we discuss next.
 
 \subsubsection*{Hierarchies of types}
 
-The coercion scheme presented above relied on the existence of natural
-relations between pairs of types.  Often there is more ``global'' structure in
-how the different types relate to each other.  For instance, suppose we are
-building a generic arithmetic system to handle integers, rational numbers, real
-numbers, and complex numbers.  In such a system, it is quite natural to regard
-an integer as a special kind of rational number, which is in turn a special
-kind of real number, which is in turn a special kind of complex number.  What
-we actually have is a so-called \newterm{hierarchy of types}, in which, for
-example, integers are a \newterm{subtype} of rational numbers (i.e., any
-operation that can be applied to a rational number can automatically be applied
-to an integer).  Conversely, we say that rational numbers form a
-\newterm{supertype} of integers.  The particular hierarchy we have here is of a
-very simple kind, in which each type has at most one supertype and at most one
-subtype.  Such a structure, called a \newterm{tower}, is illustrated in
-\link{Figure 2.25}.
+
 
 上で展開された強制スキームは型のペアの間の自然な関係の存在に当てにしていました。
 より``一般的な''構造が、異なる型のお互いへの関係の仕方には良く存在します。
@@ -13110,17 +11846,6 @@ integer
 \end{figure}
 
 \noindent
-If we have a tower structure, then we can greatly simplify the problem of
-adding a new type to the hierarchy, for we need only specify how the new type
-is embedded in the next supertype above it and how it is the supertype of the
-type below it.  For example, if we want to add an integer to a complex number,
-we need not explicitly define a special coercion procedure
-\code{integer\-/>complex}.  Instead, we define how an integer can be transformed
-into a rational number, how a rational number is transformed into a real
-number, and how a real number is transformed into a complex number.  We then
-allow the system to transform the integer into a complex number through these
-steps and then add the two complex numbers.
-
 もしタワー構造を持つ場合、階層に新しい型を追加する問題を著しく単純化できます。
 新しい型がどのようにその上のスーパータイプの隣に組込まれるか、そしてどのように
 その型がその下の型に対してスーパータイプであるかを指定するだけです。
@@ -13130,12 +11855,6 @@ steps and then add the two complex numbers.
 るかを定義します。そうしたらシステムに整数を複素数に変換することをこれらのステップ
 を通して変換することを許可し、次に2つの複素数を加算します。
 
-We can redesign our \code{apply\-/generic} procedure in the following way: For
-each type, we need to supply a \code{raise} procedure, which ``raises'' objects
-of that type one level in the tower.  Then when the system is required to
-operate on objects of different types it can successively raise the lower types
-until all the objects are at the same level in the tower.  (\link{Exercise 2.83}
-and \link{Exercise 2.84} concern the details of implementing such a strategy.)
 
 \code{apply\-/generic}手続を以下のように再設計することもできます。各型に対して
 \code{raise}手続を与える必要があります。これはある型のオブジェクトをタワーにおいて
@@ -13144,17 +11863,7 @@ and \link{Exercise 2.84} concern the details of implementing such a strategy.)
 (\link{Exercise 2.83}と\link{Exercise 2.84}がそのような戦略の実装の詳細について
 考察しています)。
 
-Another advantage of a tower is that we can easily implement the notion that
-every type ``inherits'' all operations defined on a supertype.  For instance,
-if we do not supply a special procedure for finding the real part of an
-integer, we should nevertheless expect that \code{real\-/part} will be defined
-for integers by virtue of the fact that integers are a subtype of complex
-numbers.  In a tower, we can arrange for this to happen in a uniform way by
-modifying \code{apply\-/generic}.  If the required operation is not directly
-defined for the type of the object given, we raise the object to its supertype
-and try again.  We thus crawl up the tower, transforming our argument as we go,
-until we either find a level at which the desired operation can be performed or
-hit the top (in which case we give up).
+
 
 タワーの別の利点には全ての型がスーパータイプ上に定義された全ての命令を``継承''する
 概念を簡単に実装できることが上げられます。例えばもし整数の実数部を求めるための
@@ -13167,13 +11876,7 @@ hit the top (in which case we give up).
 這い上がりながら望まれた命令が実行可能になるまで引数を変換するか、頂上まで辿り
 ついてそこで諦めることができます。
 
-Yet another advantage of a tower over a more general hierarchy is that it gives
-us a simple way to ``lower'' a data object to the simplest representation.  For
-example, if we add \( 2 + 3i \) to \( 4 - 3i \), it would be nice to obtain the
-answer as the integer 6 rather than as the complex number \( 6 + 0i \).
-\link{Exercise 2.85} discusses a way to implement such a lowering operation.
-(The trick is that we need a general way to distinguish those objects that can
-be lowered, such as \( 6 + 0i \), from those that cannot, such as \( 6 + 2i \).)
+
 
 別のより一般的な階層に比べた場合、もう1つタワーの利点はデータオブジェクトをより簡単な
 表現へ``下げる''簡単な方法を提供することです。例えば\( 2 + 3i \)を\( 4 - 3i \)に
@@ -13184,41 +11887,7 @@ be lowered, such as \( 6 + 0i \), from those that cannot, such as \( 6 + 2i \).)
 
 \subsubsection*{Inadequacies of hierarchies}
 
-If the data types in our system can be naturally arranged in a tower, this
-greatly simplifies the problems of dealing with generic operations on different
-types, as we have seen.  Unfortunately, this is usually not the case.
-\link{Figure 2.26} illustrates a more complex arrangement of mixed types, this
-one showing relations among different types of geometric figures.  We see that,
-in general, a type may have more than one subtype.  Triangles and
-quadrilaterals, for instance, are both subtypes of polygons.  In addition, a
-type may have more than one supertype.  For example, an isosceles right
-triangle may be regarded either as an isosceles triangle or as a right
-triangle.  This multiple-supertypes issue is particularly thorny, since it
-means that there is no unique way to ``raise'' a type in the hierarchy.
-Finding the ``correct'' supertype in which to apply an operation to an object
-may involve considerable searching through the entire type network on the part
-of a procedure such as \code{apply\-/generic}.  Since there generally are
-multiple subtypes for a type, there is a similar problem in coercing a value
-``down'' the type hierarchy.  Dealing with large numbers of interrelated types
-while still preserving modularity in the design of large systems is very
-difficult, and is an area of much current research.\footnote{This statement,
-which also appears in the first edition of this book, is just as true now as it
-was when we wrote it twelve years ago.  Developing a useful, general framework
-for expressing the relations among different types of entities (what
-philosophers call ``ontology'') seems intractably difficult.  The main
-difference between the confusion that existed ten years ago and the confusion
-that exists now is that now a variety of inadequate ontological theories have
-been embodied in a plethora of correspondingly inadequate programming
-languages.  For example, much of the complexity of object-oriented programming
-languages---and the subtle and confusing differences among contemporary
-object-oriented languages---centers on the treatment of generic operations on
-interrelated types.  Our own discussion of computational objects in
-\link{Chapter 3} avoids these issues entirely.  Readers familiar with
-object-oriented programming will notice that we have much to say in
-chapter 3 about local state, but we do not even mention ``classes'' or
-``inheritance.''  In fact, we suspect that these problems cannot be adequately
-addressed in terms of computer-language design alone, without also drawing on
-work in knowledge representation and automated reasoning.}
+
 
 もしシステムのデータの型が自然にタワーに配置できる場合、ここまで見てきた通りに、
 異なる型上のジェネリック命令の取扱の問題を著しく単純化できます。
@@ -13236,11 +11905,11 @@ work in knowledge representation and automated reasoning.}
 研究領域です。\footnote{
 第一版でも存在したこの文は12年前と同じく今も変わりません。実用的で汎用的な異なる型の
 要素間の関係の表現するフレームワーク(哲学者が``オントロジー''(存在論)と呼ぶもの)を
-開発することは不可能に見えるほど難しいです。10年前に存在した混乱と現在存在する混乱との間の
-違いは種々の不適切な存在論上の理論が過多の相対する不適切なプログラミング言語に組込まれてい
-ることです。例えばオブジェクト指向言語の複雑性の多くは---そして現在のオブジェクト指向言語の
+開発することは不可能に見えるほど難しいことです。10年前に存在した混乱と現在に存在する混乱との間の
+違いは、種々の不適切な存在論上の理論が、相応して不適切なプログラミング言語に過剰に組込まれてい
+ることです。例えばオブジェクト指向言語の複雑性の多くは---そして現在のオブジェクト指向言語間の
 微妙で混乱させる違いは---相互に関係する型上のジェネリック命令の扱いを中心とします。
-\link{Chapter 3}での私達自身による計算上のオブジェクトの議論はこれらの問題を完全に避けます。
+\link{Chapter 3}での私達自身による計算オブジェクトの議論はこれらの問題を完全に避けます。
 オブジェクト指向言語に親しみのある読者は\link{Chapter 3}においてローカルの状態について多くの
 触れるべきことが存在すると気付くでしょう。しかし私達は``クラス''や``継承''についてさえ
 述べることはしません。実際に私達はこれらの問題が知識表現上の成果の利用と自動的な推論無しに
