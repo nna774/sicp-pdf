@@ -1084,11 +1084,9 @@ Lispによるプログラミングはとても楽しいのです。
 言語に関わる最も単純な要素を表現する
 
 \item \textbf{合成化の手段},
-by which compound elements are built from simpler ones, and
 これにより、より単純なものより複合要素が構築される
 
 \item \textbf{抽象化の手段},
-by which compound elements can be named and manipulated as units.
 これにより複合要素は名前を付けて個体として扱える
 
 \end{itemize}
@@ -1722,7 +1720,7 @@ Lispは適用順序評価を用いています。理由の一部は上の\code{(
 示されたような式の複数回評価を避けることで付加的な効率を得るためです。
 そしてより重要な理由は正規順序評価は代入によりモデル化可能な手続の範囲を離れる時の
 取扱がとても複雑なためです。一方で、正規順序評価はとても価値のあるツールです。
-その意味のいくらかを\link{Chapter 3} and \link{Chapter 4}にて調査します。
+その意味のいくらかを\link{Chapter 3} と \link{Chapter 4}にて調査します。
 \footnote{\link{Chapter 3}では\newterm{stream processing}を紹介します。これは
 一見して``無限''のデータ構造を正規順評価の制約形式に立脚して取り扱う手法です。
 \link{Section 4.2}ではSchemeインタプリタを変更しSchemeの正規順異種を作成します。}
@@ -6332,22 +6330,6 @@ numbers 1, 2, 3, and 4.
 \end{figure}
 
 \noindent
-The ability to create pairs whose elements are pairs is the essence of list
-structure's importance as a representational tool.  We refer to this ability as
-the \newterm{closure property} of \code{cons}.  In general, an operation for
-combining data objects satisfies the closure property if the results of
-combining things with that operation can themselves be combined using the same
-operation.\footnote{The use of the word ``closure'' here comes from abstract
-algebra, where a set of elements is said to be closed under an operation if
-applying the operation to elements in the set produces an element that is again
-an element of the set.  The Lisp community also (unfortunately) uses the word
-``closure'' to describe a totally unrelated concept: A closure is an
-implementation technique for representing procedures with free variables.  We
-do not use the word ``closure'' in this second sense in this book.  } Closure
-is the key to power in any means of combination because it permits us to create
-\newterm{hierarchical} structures---structures made up of parts, which
-themselves are made up of parts, and so on.
-
 要素がペアであるペアを作成する能力は表現ツールとしてのリスト構造の重要性の本質です。
 私達はこの能力を\code{cons}の\newterm{閉包性}(closure property)と呼びます。
 一般的に、データオブジェクトを組み合わせる操作は
@@ -6363,28 +6345,7 @@ themselves are made up of parts, and so on.
 複数のパーツから成る構造であり、パーツ自身も複数のパーツから成るような構造を作成することが
 可能になるためです。
 
-From the outset of \link{Chapter 1}, we've made essential use of closure in
-dealing with procedures, because all but the very simplest programs rely on the
-fact that the elements of a combination can themselves be combinations.  In
-this section, we take up the consequences of closure for compound data.  We
-describe some conventional techniques for using pairs to represent sequences
-and trees, and we exhibit a graphics language that illustrates closure in a
-vivid way.\footnote{The notion that a means of combination should satisfy
-closure is a straightforward idea.  Unfortunately, the data combiners provided
-in many popular programming languages do not satisfy closure, or make closure
-cumbersome to exploit.  In Fortran or Basic, one typically combines data
-elements by assembling them into arrays---but one cannot form arrays whose
-elements are themselves arrays.  Pascal and C admit structures whose elements
-are structures.  However, this requires that the programmer manipulate pointers
-explicitly, and adhere to the restriction that each field of a structure can
-contain only elements of a prespecified form.  Unlike Lisp with its pairs,
-these languages have no built-in general-purpose glue that makes it easy to
-manipulate compound data in a uniform way.  This limitation lies behind Alan
-Perlis's comment in his foreword to this book: ``In Pascal the plethora of
-declarable data structures induces a specialization within functions that
-inhibits and penalizes casual cooperation.  It is better to have 100 functions
-operate on one data structure than to have 10 functions operate on 10 data
-structures.''}
+
 
 \link{Chapter 1}の始めから、手続の取扱において閉包を本質的に利用してきました。
 とても簡単なプログラムを除けば全てのプログラムは組み合わせの要素はそれ自身も
@@ -6408,17 +6369,7 @@ structures.''}
 \label{Section 2.2.1}
 \subsection{Representing Sequences}
 
-One of the useful structures we can build with pairs is a
-\newterm{sequence}---an ordered collection of data objects.  There are, of
-course, many ways to represent sequences in terms of pairs.  One particularly
-straightforward representation is illustrated in \link{Figure 2.4}, where the
-sequence 1, 2, 3, 4 is represented as a chain of pairs.  The \code{car} of each
-pair is the corresponding item in the chain, and the \code{cdr} of the pair is
-the next pair in the chain.  The \code{cdr} of the final pair signals the end
-of the sequence by pointing to a distinguished value that is not a pair,
-represented in box-and-pointer diagrams as a diagonal line and in programs as
-the value of the variable \code{nil}.  The entire sequence is constructed by
-nested \code{cons} operations:
+
 
 ペアを用いて構築可能な便利な構造の1つが\newterm{sequence}(列)---順に並べたデータ
 オブジェクトの集合です。もちろんペアを用いて列を表現する方法は数多く存在します。
@@ -6459,14 +6410,6 @@ nested \code{cons} operations:
 \end{figure}
 
 \noindent
-Such a sequence of pairs, formed by nested \code{cons}es, is called a
-\newterm{list}, and Scheme provides a primitive called \code{list} to help in
-constructing lists.\footnote{In this book, we use \newterm{list} to mean a
-chain of pairs terminated by the end-of-list marker.  In contrast, the term
-\newterm{list structure} refers to any data structure made out of pairs, not
-just to lists.}  The above sequence could be produced by \code{(list 1 2 3 4)}.
-In general,
-
 そのようなペアの列は入れ子の\code{cons}にて形成され、\newterm{list}(リスト)と呼ばれます。
 そしてSchemeは\code{list}と呼ばれるプリミティブを提供しリストの構築を手助けします。\footnote{
 この本では\newterm{list}をリスト終端マーカーにて終端化されたペアの鎖を意味するように
@@ -6492,10 +6435,6 @@ is equivalent to
 \end{scheme}
 
 \noindent
-Lisp systems conventionally print lists by printing the sequence of elements,
-enclosed in parentheses.  Thus, the data object in \link{Figure 2.4} is printed
-as \code{(1 2 3 4)}:
-
 Lispシステムは慣習としてリストを括弧で括られた要素の列を表示することで表します。
 従って\link{Figure 2.4}のデータオブジェクトは\code{(1 2 3 4)}の様に表示されます。
 
@@ -6506,33 +6445,12 @@ one-through-four
 \end{scheme}
 
 \noindent
-Be careful not to confuse the expression \code{(list 1 2 3 4)} with the list
-\mbox{\code{(1 2 3 4)}}, which is the result obtained when the expression is
-evaluated.  Attempting to evaluate the expression \code{(1 2 3 4)} will signal
-an error when the interpreter tries to apply the procedure \code{1} to
-arguments \code{2}, \code{3}, and \code{4}.
-
 式\code{(list 1 2 3 4)}とリスト\mbox{\code{(1 2 3 4)}}を取り違えないよう気をつけて下さい。
 リストは式が評価された時に得られた結果です。式\code{(1 2 3 4)}を評価しようとする試みは
 インタプリタが手続\code{1}を引数\code{2}, \code{3}, \code{4}に適用しようとした時にエラーを
 発します。
 
-We can think of \code{car} as selecting the first item in the list, and of
-\code{cdr} as selecting the sublist consisting of all but the first item.
-Nested applications of \code{car} and \code{cdr} can be used to extract the
-second, third, and subsequent items in the list.\footnote{Since nested
-applications of \code{car} and \code{cdr} are cumbersome to write, Lisp
-dialects provide abbreviations for them---for instance,
 
-\begin{smallscheme}
-(cadr ~\( \dark \langle \)~~\( \dark arg \)~~\( \dark \rangle \)~) = (car (cdr ~\( \dark \langle \)~~\( \dark arg \)~~\( \dark \rangle \)~))
-\end{smallscheme}
-
-The names of all such procedures start with \code{c} and end with \code{r}.
-Each \code{a} between them stands for a \code{car} operation and each \code{d}
-for a \code{cdr} operation, to be applied in the same order in which they
-appear in the name.  The names \code{car} and \code{cdr} persist because simple
-combinations like \code{cadr} are pronounceable.}
 
 \code{car}をリスト内の最初のアイテムを選択すると考えることもでき、\code{cdr}を
 最初のアイテム以外の全てにより成り立つサブ(副)リストを選択すると考えることも
@@ -6549,8 +6467,6 @@ combinations like \code{cadr} are pronounceable.}
 意図し、\code{d}は\code{cdr}命令を意図し、その名前に現れた順と同じ順にて適用されます。\code{car}と\code{cdr}の
 名前は存続します。なぜなら\code{cadr}のような単純な組み合わせが発音可能だからです。}
 
-The constructor \code{cons} makes a list like the original one, but with an additional item at the
-beginning.
 
 コンストラクタ\code{cons}は元のリストと同様のリストを作りますが、最初に追加のアイテムを入れます。
 
@@ -6568,22 +6484,7 @@ beginning.
 \end{scheme}
 
 \noindent
-The value of \code{nil}, used to terminate the chain of pairs, can be thought
-of as a sequence of no elements, the \newterm{empty list}.  The word
-\newterm{nil} is a contraction of the Latin word \emph{nihil}, which means
-``nothing.''\footnote{It's remarkable how much energy in the standardization of
-Lisp dialects has been dissipated in arguments that are literally over nothing:
-Should \code{nil} be an ordinary name?  Should the value of \code{nil} be a
-symbol?  Should it be a list?  Should it be a pair?  In Scheme, \code{nil} is
-an ordinary name, which we use in this section as a variable whose value is the
-end-of-list marker (just as \code{true} is an ordinary variable that has a true
-value).  Other dialects of Lisp, including Common Lisp, treat \code{nil} as a
-special symbol.  The authors of this book, who have endured too many language
-standardization brawls, would like to avoid the entire issue.  Once we have
-introduced quotation in \link{Section 2.3}, we will denote the empty list as
-\code{'()} and dispense with the variable \code{nil} entirely.}
-
-\code{nil}の値はペアの鎖を終了するために使用されますが、全く要素が無い列\newterm{empty list}
+code{nil}の値はペアの鎖を終了するために使用されますが、全く要素が無い列\newterm{empty list}
 (空リスト)として考えることもできます。\newterm{nil}という単語はラテン語の単語\emph{nihil}
 の省略形で、``無''を意味します。\footnote{
 どれだけのエネルギーがLisp方言の標準化において文字通り意味の無い議論に浪費されたかについて
@@ -6597,12 +6498,6 @@ introduced quotation in \link{Section 2.3}, we will denote the empty list as
 
 \subsubsection*{List operations}
 
-The use of pairs to represent sequences of elements as lists is accompanied by
-conventional programming techniques for manipulating lists by successively
-``\code{cdr}ing down'' the lists.  For example, the procedure \code{list\-/ref}
-takes as arguments a list and a number \( n \) and returns the \( n^{\hbox{th}} \) item of
-the list.  It is customary to number the elements of the list beginning with 0.
-The method for computing \code{list\-/ref} is the following:
 
 複数のペアを使用して要素の列をリストのように表現することは、慣習的なプログラミングテクニック
 である連続してリストを``\code{cdr}で縮小する''ことによりリストを操作するのと同時に生じます。
@@ -6613,14 +6508,9 @@ The method for computing \code{list\-/ref} is the following:
 \begin{itemize}
 
 \item
-For \( n = 0 \), \code{list\-/ref} should return the \code{car} of the list.
-
 \( n = 0 \)の場合、\code{list\-/ref}はリストの\code{car}を返す。
 
 \item
-Otherwise, \code{list\-/ref} should return  the \( (n - 1) \)-st item of the
-\code{cdr} of the list.
-
 そうでなければ、\code{list\-/ref}はリストの\code{cdr}の\( (n - 1) \)番目の項目を返す。
 
 \end{itemize}
@@ -6636,11 +6526,6 @@ Otherwise, \code{list\-/ref} should return  the \( (n - 1) \)-st item of the
 \end{scheme}
 
 \noindent
-Often we \code{cdr} down the whole list.  To aid in this, Scheme includes a
-primitive predicate \code{null?}, which tests whether its argument is the empty
-list.  The procedure \code{length}, which returns the number of items in a
-list, illustrates this typical pattern of use:
-
 時折、私達はリスト全体を\code{cdr}で下ります。これを手助けするために、Schemeは
 プリミティブな手続\code{null?}を持っており、その引数が空リストであるかどうかを試験します。
 手続\code{length}はリスト内の要素数を返しますが、\code{null?}の使用の典型的なパターンを説明します。
@@ -6656,38 +6541,26 @@ list, illustrates this typical pattern of use:
 \end{scheme}
 
 \noindent
-The \code{length} procedure implements a simple recursive plan. The reduction
-step is:
-
 手続\code{length}は単純な最近計画を実装します。集約ステップは以下の通りです。
 
 \begin{itemize}
 
 \item
-The \code{length} of any list is 1 plus the \code{length} of the \code{cdr} of
-the list.
-
 任意のリストの\code{length}はリストの\code{cdr}の\code{length}に1を足した値
 
 \end{itemize}
 
 \noindent
-This is applied successively until we reach the base case:
-
 これが底となるケースに到達するまで繰り返し適用される
 
 \begin{itemize}
 
 \item
-The \code{length} of the empty list is 0.
-
 空リストの\code{length}は0
 
 \end{itemize}
 
 \noindent
-We could also compute \code{length} in an iterative style:
-
 また\code{length}は反復スタイルでも計算可能です。
 
 \begin{scheme}
@@ -6700,10 +6573,6 @@ We could also compute \code{length} in an iterative style:
 \end{scheme}
 
 \noindent
-Another conventional programming technique is to ``\code{cons} up'' an answer
-list while \code{cdr}ing down a list, as in the procedure \code{append}, which
-takes two lists as arguments and combines their elements to make a new list:
-
 もう1つの慣習的なプログラミングテクニックは\code{cdr}を繰り返し利用しリストを下る間に、
 答のリストを``\code{cons}で積み上げ''ることです。これは手続\code{append}にて利用され、
 \code{append}は2つのリストを引数として取り、それらの要素を結合し、新しいリストを作ります。
@@ -6716,23 +6585,15 @@ takes two lists as arguments and combines their elements to make a new list:
 \end{scheme}
 
 \noindent
-\code{Append} is also implemented using a recursive plan.  To \code{append}
-lists \code{list1} and \code{list2}, do the following:
-
 \code{append}もまた再帰計画を用いて実装されます。リスト\code{list1}と\code{list2}を
 \code{append}するためには以下の通りに行います。
 
 \begin{itemize}
 
 \item
-If \code{list1} is the empty list, then the result is just \code{list2}.
-
 もし\code{list1}が空リストであれば、結果は単に\code{list2}
 
 \item
-Otherwise, \code{append} the \code{cdr} of \code{list1} and \code{list2}, and
-\code{cons} the \code{car} of \code{list1} onto the result:
-
 そうでない場合、\code{list1}の\code{cdr}と\code{list2}を\code{append}し、その結果の上に
 \code{list1}の\code{car}を\code{cons}する
 
@@ -6746,11 +6607,8 @@ Otherwise, \code{append} the \code{cdr} of \code{list1} and \code{list2}, and
 \end{scheme}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.17}Exercise 2.17:} Define a procedure
-\code{last\-/pair} that returns the list that contains only the last element of a
-given (nonempty) list:
-
-与えられた(空でない)リストの最初の要素のみを持つリストを返す手続\code{last\-/pair}を定義せよ。
+\heading{\phantomsection\label{Exercise 2.17}Exercise 2.17:} 与えられた(空でない)
+リストの最初の要素のみを持つリストを返す手続\code{last\-/pair}を定義せよ。
 
 \begin{scheme}
 (last-pair (list 23 72 149 34))
@@ -6759,11 +6617,7 @@ given (nonempty) list:
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.18}Exercise 2.18:} Define a procedure \code{reverse}
-that takes a list as argument and returns a list of the same elements in
-reverse order:
-
-リストを引数として取り、同じ要素を逆順に持つリストを返す手続\code{reverse}を定義せよ。
+\heading{\phantomsection\label{Exercise 2.18}Exercise 2.18:}リストを引数として取り、同じ要素を逆順に持つリストを返す手続\code{reverse}を定義せよ。
 
 \begin{scheme}
 (reverse (list 1 4 9 16 25))
@@ -6772,25 +6626,14 @@ reverse order:
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.19}Exercise 2.19:} Consider the change-counting
-program of \link{Section 1.2.2}.  It would be nice to be able to easily change
-the currency used by the program, so that we could compute the number of ways
-to change a British pound, for example.  As the program is written, the
-knowledge of the currency is distributed partly into the procedure
-\code{first\-/denomination} and partly into the procedure \code{count\-/change}
-(which knows that there are five kinds of U.S. coins).  It would be nicer to be
-able to supply a list of coins to be used for making change.
-
-\link{Section 1.2.2}の両替数え上げプログラムについて考える。プログラムにて用いられる
+\heading{\phantomsection\label{Exercise 2.19}Exercise 2.19:} \link{Section 1.2.2}の
+両替数え上げプログラムについて考える。プログラムにて用いられる
 通貨を容易に変更できるようになればとても良いだろう。そうすることで例えば
 イギリスのポンドの両替方法の数を計算できるようになるだろう。プログラムが書かれた時には、
 通貨の知識はある部分は手続\code{first\-/denomination}の中に、またある部分は手続\code{count\-/change}の
 中に存在した。(\code{count\-/change}は米国の貨幣には5種類あることを知っていた)。
 両替を行うため利用される貨幣のリストが提供できるようになればより良くなるだろう。
 
-We want to rewrite the procedure \code{cc} so that its second argument is a
-list of the values of the coins to use rather than an integer specifying which
-coins to use.  We could then have lists that defined each kind of currency:
 
 \code{cc}を変更することで、その2つ目の引数がどの貨幣を使用するかを指定する整数ではなく、
 使用する貨幣の値のリストとなるようにしたいと考える。そして通貨の各種類を定義する
@@ -6801,7 +6644,6 @@ coins to use.  We could then have lists that defined each kind of currency:
 (define uk-coins (list 100 50 20 10 5 2 1 0.5))
 \end{scheme}
 
-We could then call \code{cc} as follows:
 
 次に\code{cc}を以下のように呼び出す。
 
@@ -6810,9 +6652,6 @@ We could then call \code{cc} as follows:
 ~\textit{292}~
 \end{scheme}
 
-To do this will require changing the program \code{cc} somewhat.  It will still
-have the same form, but it will access its second argument differently, as
-follows:
 
 これを行うためにはプログラム\code{cc}に何らかの変更が必要だ。同じ形態を保つが、
 2つ目の引数に異なる方法でアクセスする。以下のようになる。
@@ -6831,11 +6670,6 @@ follows:
                 coin-values)))))
 \end{scheme}
 
-Define the procedures \code{first\-/denomination},
-\code{except\-/first\-/de- nomination}, and \code{no\-/more?} in terms of primitive
-operations on list structures.  Does the order of the list \code{coin\-/values}
-affect the answer produced by \code{cc}?  Why or why not?
-
 リスト構造に対するプリミティブな命令を用いて
 手続\code{first\-/denomination}, \code{except\-/first\-/de- nomination}, and \code{no\-/more?}を定義せよ。
 リスト\code{coin\-/values}の順は\code{cc}により生成される解答に影響を与えるか?
@@ -6843,16 +6677,8 @@ affect the answer produced by \code{cc}?  Why or why not?
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.20}Exercise 2.20:} The procedures \code{+},
-\code{*}, and \code{list} take arbitrary numbers of arguments. One way to
-define such procedures is to use \code{define} with \newterm{dotted-tail
-notation}.  In a procedure definition, a parameter list that has a dot before
-the last parameter name indicates that, when the procedure is called, the
-initial parameters (if any) will have as values the initial arguments, as
-usual, but the final parameter's value will be a \newterm{list} of any
-remaining arguments.  For instance, given the definition
-
-手続\code{+}, \code{*}, \code{list}は任意の数の引数を取る。そのような手続を定義する1つの
+\heading{\phantomsection\label{Exercise 2.20}Exercise 2.20:}手続
+\code{+}, \code{*}, \code{list}は任意の数の引数を取る。そのような手続を定義する1つの
 方法として\newterm{dotted-tail notation}(ドット付き末尾記法)と共に\code{define}を使用することが上げられる。
 手続定義において、最後のパラメータ名の前にドットがあるパラメータリストは手続が呼び出された時に、
 最初以下のパラメータが(もし存在したら)初期引数の値を通常通りに持つが、最後のパラメータの値は
@@ -6863,9 +6689,6 @@ remaining arguments.  For instance, given the definition
 \end{scheme}
 
 \noindent
-the procedure \code{f} can be called with two or more arguments.  If we
-evaluate
-
 手続\code{f}は2つ以上の引数で呼び出すことが可能だ。もし次を評価すれば、
 
 \begin{scheme}
@@ -6873,9 +6696,6 @@ evaluate
 \end{scheme}
 
 \noindent
-then in the body of \code{f}, \code{x} will be 1, \code{y} will be 2, and
-\code{z} will be the list \mbox{\code{(3 4 5 6)}}.  Given the definition
-
 \code{f}のボディでは\code{x}が1、 \code{y}が2、そして\code{z}はリスト\mbox{\code{(3 4 5 6)}}となる。
 以下の定義を与えられた時、
 
@@ -6884,9 +6704,6 @@ then in the body of \code{f}, \code{x} will be 1, \code{y} will be 2, and
 \end{scheme}
 
 \noindent
-the procedure \code{g} can be called with zero or more arguments.  If we
-evaluate
-
 手続\code{g}はゼロ個以上の引数にて呼び出し可能となる。
 次を評価すれば、
 
@@ -6895,9 +6712,6 @@ evaluate
 \end{scheme}
 
 \noindent
-then in the body of \code{g}, \code{w} will be the list \code{(1 2 3 4 5
-6)}.
-
 \code{g}のボディでは\code{w}はリスト\code{(1 2 3 4 5 6)}となる。\footnote{
 To define \code{f} and \code{g} using \code{lambda} we would
 write
@@ -6911,9 +6725,7 @@ write
 \end{smallscheme}
 }
 
-Use this notation to write a procedure \code{same\-/parity} that takes one or
-more integers and returns a list of all the arguments that have the same
-even-odd parity as the first argument.  For example,
+
 
 この記法を用いて手続\code{same\-/parity}を書け。\code{same\-/parity}は1つまたは
 それ以上の整数を引数として取り、最初の引数と同じ偶奇性を持つ全ての引数の
@@ -6928,10 +6740,6 @@ even-odd parity as the first argument.  For example,
 \end{quote}
 
 \subsubsection*{Mapping over lists}
-
-One extremely useful operation is to apply some transformation to each element
-in a list and generate the list of results.  For instance, the following
-procedure scales each number in a list by a given factor:
 
 あるとても便利な命令は、ある変換をリストの各要素に適用し、結果のリストを返します。
 例えば以下の手続はリストの各数値を与えられた因数で拡大します。
@@ -6948,27 +6756,6 @@ procedure scales each number in a list by a given factor:
 \end{scheme}
 
 \noindent
-We can abstract this general idea and capture it as a common pattern expressed
-as a higher-order procedure, just as in \link{Section 1.3}.  The higher-order
-procedure here is called \code{map}.  \code{Map} takes as arguments a procedure
-of one argument and a list, and returns a list of the results produced by
-applying the procedure to each element in the list:\footnote{\label{Footnote 12}
-Scheme standardly provides a \code{map} procedure that
-is more general than the one described here.  This more general \code{map}
-takes a procedure of \( n \) arguments, together with \( n \) lists, and applies
-the procedure to all the first elements of the lists, all the second elements
-of the lists, and so on, returning a list of the results.  For example:
-
-\begin{smallscheme}
-(map + (list 1 2 3) (list 40 50 60) (list 700 800 900))
-~\textit{(741 852 963)}~
-(map (lambda (x y) (+ x (* 2 y)))
-     (list 1 2 3)
-     (list 4 5 6))
-~\textit{(9 12 15)}~
-\end{smallscheme}
-}
-
 私達は\link{Section 1.3}のように、この一般的な考えを抽象化し、高階手続にて表現された共通なパターン
 として捉えることができます。ここでの高階手続は\code{map}と呼ばれます。\code{map}は引数として
 1引数の手続とリストを取り、返り値としてその手続をリストの各要素に適用することで得られた
@@ -7001,8 +6788,6 @@ Schemeは標準としてここで説明される物よりもより汎用的な\c
 \end{scheme}
 
 \noindent
-Now we can give a new definition of \code{scale\-/list} in terms of \code{map}:
-
 これで\code{map}を用いた新しい\code{scale\-/list}の定義を与えられる。
 
 \begin{scheme}
@@ -7012,23 +6797,6 @@ Now we can give a new definition of \code{scale\-/list} in terms of \code{map}:
 \end{scheme}
 
 \noindent
-\code{Map} is an important construct, not only because it captures a common
-pattern, but because it establishes a higher level of abstraction in dealing
-with lists.  In the original definition of \code{scale\-/list}, the recursive
-structure of the program draws attention to the element-by-element processing
-of the list.  Defining \code{scale\-/list} in terms of \code{map} suppresses that
-level of detail and emphasizes that scaling transforms a list of elements to a
-list of results.  The difference between the two definitions is not that the
-computer is performing a different process (it isn't) but that we think about
-the process differently.  In effect, \code{map} helps establish an abstraction
-barrier that isolates the implementation of procedures that transform lists
-from the details of how the elements of the list are extracted and combined.
-Like the barriers shown in \link{Figure 2.1}, this abstraction gives us the
-flexibility to change the low-level details of how sequences are implemented,
-while preserving the conceptual framework of operations that transform
-sequences to sequences.  \link{Section 2.2.3} expands on this use of sequences
-as a framework for organizing programs.
-
 \code{map}は重要な構造です。それが共通なパターンを掴むからだけでなく、リストを扱う
 より高いレベルの抽象化を確立させるためです。\code{scale\-/list}の元の定義では
 プログラムの再帰構造はリストのエレメント毎の処理に注意を引きました。
@@ -7043,19 +6811,14 @@ as a framework for organizing programs.
 としての列の利用を拡張している。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.21}Exercise 2.21:} The procedure \code{square\-/list}
-takes a list of numbers as argument and returns a list of the squares of those
-numbers.
-
-手続\code{square\-/list}は数値のリストを引数として取りそれらの数値の二乗のリストを返す。
+\heading{\phantomsection\label{Exercise 2.21}Exercise 2.21:} T手続
+\code{square\-/list}は数値のリストを引数として取りそれらの数値の二乗のリストを返す。
 
 \begin{scheme}
 (square-list (list 1 2 3 4))
 ~\textit{(1 4 9 16)}~
 \end{scheme}
 
-Here are two different definitions of \code{square\-/list}.  Complete both of
-them by filling in the missing expressions:
 
 ここに2つの異なる\code{square\-/list}がある。失なわれた式を埋めることで両者を
 完成させよ。
@@ -7071,11 +6834,8 @@ them by filling in the missing expressions:
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.22}Exercise 2.22:} Louis Reasoner tries to rewrite
-the first \code{square\-/list} procedure of \link{Exercise 2.21} so that it
-evolves an iterative process:
-
-Louis Reasonerは\link{Exercise 2.21}の最初の\code{square\-/list}手続を書き直し、
+\heading{\phantomsection\label{Exercise 2.22}Exercise 2.22:} Louis Reasonerは
+\link{Exercise 2.21}の最初の\code{square\-/list}手続を書き直し、
 反復プロセスを展開させようと試みている。
 
 \begin{scheme}
@@ -7089,13 +6849,11 @@ Louis Reasonerは\link{Exercise 2.21}の最初の\code{square\-/list}手続を�
   (iter items nil))
 \end{scheme}
 
-Unfortunately, defining \code{square\-/list} this way produces the answer list in
-the reverse order of the one desired.  Why?
+
 
 残念なことに、\code{square\-/list}をこのように定義しては解答のリストは希望の逆順に
 なってしまう。何故か?
 
-Louis then tries to fix his bug by interchanging the arguments to \code{cons}:
 
 Louisはそこで彼のバグを\code{cons}への引数を逆順にすることで直そうと試みた。
 
@@ -7110,20 +6868,12 @@ Louisはそこで彼のバグを\code{cons}への引数を逆順にすること�
   (iter items nil))
 \end{scheme}
 
-This doesn't work either.  Explain.
 これもまたうまく行かない。説明せよ。
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.23}Exercise 2.23:} The procedure \code{for\-/each} is
-similar to \code{map}.  It takes as arguments a procedure and a list of
-elements.  However, rather than forming a list of the results, \code{for\-/each}
-just applies the procedure to each of the elements in turn, from left to right.
-The values returned by applying the procedure to the elements are not used at
-all---\code{for\-/each} is used with procedures that perform an action, such as
-printing.  For example,
-
-手続\code{for\-/each}は\code{map}に似ている。手続と要素のリストを引数として取る。しかし
+\heading{\phantomsection\label{Exercise 2.23}Exercise 2.23:} 手続
+\code{for\-/each}は\code{map}に似ている。手続と要素のリストを引数として取る。しかし
 結果のリストを形成するのではなく、\code{for\-/each}はただ手続を左から右へと毎回各要素に適用する。
 手続を要素に適用し返された値は全く利用しない---\code{for\-/each}は表示のような行動を起こす手続と共に
 利用される。例えば、
@@ -7138,9 +6888,7 @@ printing.  For example,
 ~\textit{88}~
 \end{scheme}
 
-The value returned by the call to \code{for\-/each} (not illustrated above) can
-be something arbitrary, such as true.  Give an implementation of
-\code{for\-/each}.
+
 
 (上では示されていない)\code{for\-/each}呼出による返り値は真のような不定な何かである。
 \code{for\-/each}の実装を与えよ。
@@ -7149,9 +6897,7 @@ be something arbitrary, such as true.  Give an implementation of
 \label{Section 2.2.2}
 \subsection{Hierarchical Structures}
 
-The representation of sequences in terms of lists generalizes naturally to
-represent sequences whose elements may themselves be sequences.  For example,
-we can regard the object \code{((1 2) 3 4)} constructed by
+
 
 リストを用いた列の表現は要素が列自身である列を表現することを自然に一般化する。
 例えば以下の様に構築されたオブジェクト\code{((1 2) 3 4)}を
@@ -7161,11 +6907,6 @@ we can regard the object \code{((1 2) 3 4)} constructed by
 \end{scheme}
 
 \noindent
-as a list of three items, the first of which is itself a list, \code{(1 2)}.
-Indeed, this is suggested by the form in which the result is printed by the
-interpreter.  \link{Figure 2.5} shows the representation of
-this structure in terms of pairs.
-
 最初の項目はそれ自身がリスト\code{(1 2)}である、3つの項目のリストであると見做すことができる。
 実際に、インタプリタにより表示される結果の形式によりこれは推奨されている。
 \link{Figure 2.5}がペアを用いたこの構造の表現を示している。
@@ -7202,11 +6943,6 @@ this structure in terms of pairs.
 \end{figure}
 
 \noindent
-Another way to think of sequences whose elements are sequences is as
-\newterm{trees}.  The elements of the sequence are the branches of the tree,
-and \mbox{elements} that are themselves sequences are subtrees.  \link{Figure 2.6}
-shows \mbox{the structure} in \link{Figure 2.5} viewed as a tree.
-
 要素それ自身が列である列のもう1つの考え方は木としての考え方である。
 列の要素は木の枝であり、それ自身が列である\mbox{elements}(複数の要素)は部分木である。
 \link{Figure 2.6}は木として見た場合の\link{Figure 2.5}を示している。
@@ -7233,13 +6969,6 @@ shows \mbox{the structure} in \link{Figure 2.5} viewed as a tree.
 \end{figure}
 
 \noindent
-Recursion is a natural tool for dealing with tree structures, since we can
-often reduce operations on trees to operations on their branches, which reduce
-in turn to operations on the branches of the branches, and so on, until we
-reach the leaves of the tree.  As an example, compare the \code{length}
-procedure of \link{Section 2.2.1} with the \code{count\-/leaves} procedure, which
-returns the total number of leaves of a tree:
-
 再帰は木構造を扱うのに自然なツールです。良く木に対する操作を枝に対する操作へと
 還元でき、それは順に枝の枝への操作へと還元され、木の葉に辿り着くまで繰り返され
 ます。例として、\link{Section 2.2.1}の\code{length}手続を木の葉の総数を求める\code{count\-/leaves}
@@ -7260,45 +6989,29 @@ returns the total number of leaves of a tree:
 \end{scheme}
 
 \noindent
-To implement \code{count\-/leaves}, recall the recursive plan for computing
-\code{length}:
-
 \code{count\-/leaves}を実装するには\code{length}を求める再帰計画を思い出します。
 
 \begin{itemize}
 
 \item
-\code{Length} of a list \code{x} is 1 plus \code{length} of the
-\code{cdr} of \code{x}.
-
 リスト\code{x}の\code{length}は\code{x}の\code{cdr}の\code{length}に1を足した物
 
 \item
-\code{Length} of the empty list is 0.
-
 空リストの\code{length}は0
 
 \end{itemize}
 
 \noindent
-\code{Count\-/leaves} is similar.  The value for the empty list is the same:
-
 \code{count\-/leaves}も同様えす。空リストの値は同じで
 
 \begin{itemize}
 
 \item
-\code{Count\-/leaves} of the empty list is 0.
-
 空リストの\code{count\-/leaves}は0
 
 \end{itemize}
 
 \noindent
-But in the reduction step, where we strip off the \code{car} of the list, we
-must take into account that the \code{car} may itself be a tree whose leaves we
-need to count.  Thus, the appropriate reduction step is
-
 しかし集約ステップにおいて、リストの\code{car}を取り除く時、\code{car}はそれ自身が
 後で数えねばならない木である可能性があることを計算に入れねばなりません。
 従って適切な集約ステップは
@@ -7306,36 +7019,22 @@ need to count.  Thus, the appropriate reduction step is
 \begin{itemize}
 
 \item
-\code{Count\-/leaves} of a tree \code{x} is \code{count\-/leaves} of the \code{car}
-of \code{x} plus \code{count\-/leaves} of the \code{cdr} of \code{x}.
-
 木\code{x}の\code{count\-/leaves}は\code{x}の\code{car}の\code{count\-/leaves}と、
 \code{x}の\code{cdr}の\code{count\-/leaves}の和
 
 \end{itemize}
 
 \noindent
-Finally, by taking \code{car}s we reach actual leaves, so we need another base
-case:
-
 最終的に\code{car}を取ることにより実際の葉に届くので別の規範を必要とする。
 
 \begin{itemize}
 
 \item
-\code{Count\-/leaves} of a leaf is 1.
-
 葉の\code{count\-/leaves}は1
 
 \end{itemize}
 
 \noindent
-To aid in writing recursive procedures on trees, Scheme provides the primitive
-predicate \code{pair?}, which tests whether its argument is a pair.  Here is
-the complete procedure:\footnote{The order of the first two clauses in the
-\code{cond} matters, since the empty list satisfies \code{null?} and also is
-not a pair.}
-
 木に対する再帰手続を書くのを助けるために、Schemeはプリミティブな手続\code{pair?}を提供します。
 \code{pair?}は引数がペアであるかをテストします。以下に完成した手続を置きます。\footnote{
 \code{cond}の最初の2つの項の順が大事です。空リストは\code{null?}を満たし、その上でペアでも
@@ -7350,20 +7049,14 @@ not a pair.}
 \end{scheme}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.24}Exercise 2.24:} Suppose we evaluate the
-expression \code{(list 1 (list 2 (list 3 4)))}.  Give the result printed by the
-interpreter, the corresponding box-and-pointer structure, and the
-interpretation of this as a tree (as in \link{Figure 2.6}).
-
-式\code{(list 1 (list 2 (list 3 4)))}を評価したとする。インタプリタの表示する
+\heading{\phantomsection\label{Exercise 2.24}Exercise 2.24:} 式
+\code{(list 1 (list 2 (list 3 4)))}を評価したとする。インタプリタの表示する
 結果、対応する箱と点構造、木としての解釈(\link{Figure 2.6}相当)を示せ。
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.25}Exercise 2.25:} Give combinations of \code{car}s
-and \code{cdr}s that will pick 7 from each of the following lists:
-
-以下の各リストから7を抽出する\code{car}と\code{cdr}の組み合わせを与えよ。
+\heading{\phantomsection\label{Exercise 2.25}Exercise 2.25:} 以下の
+各リストから7を抽出する\code{car}と\code{cdr}の組み合わせを与えよ。
 
 \begin{scheme}
 (1 3 (5 7) 9)
@@ -7373,18 +7066,13 @@ and \code{cdr}s that will pick 7 from each of the following lists:
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.26}Exercise 2.26:} Suppose we define \code{x} and
-\code{y} to be two lists:
-
-2つのリスト\code{x}と\code{y}を定義したとする。
+\heading{\phantomsection\label{Exercise 2.26}Exercise 2.26:} 2つのリスト\code{x}と\code{y}を定義したとする。
 
 \begin{scheme}
 (define x (list 1 2 3))
 (define y (list 4 5 6))
 \end{scheme}
 
-What result is printed by the interpreter in response to evaluating each of the
-following expressions:
 
 以下の各式を評価した場合にレスポンスとしてインタプリタがどのような結果を表示するか?
 
@@ -7396,12 +7084,8 @@ following expressions:
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.27}Exercise 2.27:} Modify your \code{reverse}
-procedure of \link{Exercise 2.18} to produce a \code{deep\-/reverse} procedure
-that takes a list as argument and returns as its value the list with its
-elements reversed and with all sublists deep-reversed as well.  For example,
-
-\link{Exercise 2.18}\code{reverse}手続を変更してリストを引数として取り、
+\heading{\phantomsection\label{Exercise 2.27}Exercise 2.27:} \link{Exercise 2.18}の
+\code{reverse}手続を変更してリストを引数として取り、
 全ての要素が逆順に、さらに全てのサブリストも同様に逆順にされたリストをその値として
 返す手続\code{deep\-/reverse}を作れ。例として、
 
@@ -7417,12 +7101,8 @@ x
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.28}Exercise 2.28:} Write a procedure \code{fringe}
-that takes as argument a tree (represented as a list) and returns a list whose
-elements are all the leaves of the tree arranged in left-to-right order.  For
-example,
-
-リストとして表現された木を引数に取り、その木の全ての葉を左から右への順で要素とした
+\heading{\phantomsection\label{Exercise 2.28}Exercise 2.28:} リストとして
+表現された木を引数に取り、その木の全ての葉を左から右への順で要素とした
 リストを返す手続\code{fringe}を書け。
 
 \begin{scheme}
@@ -7435,17 +7115,10 @@ example,
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.29}Exercise 2.29:} A binary mobile consists of two
-branches, a left branch and a right branch.  Each branch is a rod of a certain
-length, from which hangs either a weight or another binary mobile.  We can
-represent a binary mobile using compound data by constructing it from two
-branches (for example, using \code{list}):
-
-バイナリモバイル(binary mobile)\footnote{
+\heading{\phantomsection\label{Exercise 2.29}Exercise 2.29:} バイナリモバイル(binary mobile)\footnote{
 訳注：天井から糸で釣ってあり、絶妙なバランスで揺れ、回る数々の棒のインテリア。
 枝が必ず2つに分かれるのでバイナリ(二進)と名付けられている。Google Imagesで
-mobileを検索すると実物が見られる。名詞mobileは米語でモービル、英語でモバイルと
-発音するが前者は乗り物のイメージが強いので後者を採用した}
+mobileを検索すると実物が見られる。}
 は左の枝と右の枝の2つの枝で構成される。各枝はある長さを持つ
 棒であり、そこから重りか別のバイナリモバイルをぶら下げる。
 バイナリモバイルを複合データを用いて2つの枝から組み立てることで表現できる。
@@ -7456,9 +7129,6 @@ mobileを検索すると実物が見られる。名詞mobileは米語でモー�
   (list left right))
 \end{scheme}
 
-A branch is constructed from a \code{length} (which must be a number) together
-with a \code{structure}, which may be either a number (representing a simple
-weight) or another mobile:
 
 枝は\code{length}(数値であること)と\code{structure}から組み立てられ、\code{structure}は
 数値(簡単に重りを表わす)かまたは他のモバイルである。
@@ -7471,29 +7141,15 @@ weight) or another mobile:
 \begin{enumerate}[a]
 
 \item
-Write the corresponding selectors \code{left\-/branch} and \code{right\-/branch},
-which return the branches of a mobile, and \code{branch\-/length} and
-\code{branch\-/structure}, which return the components of a branch.
-
 対応するセレクタ\code{left\-/branch}を\code{right\-/branch}を書け。このセレクタは
 モバイルの複数の枝を返す。また\code{branch\-/length}と\code{branch\-/structure}
 は枝のそれぞれのコンポーネント(構成要素)を返す。
 
 \item
-Using your selectors, define a procedure \code{total\-/weight} that returns the
-total weight of a mobile.
-
 セレクタを用いて手続\code{total\-/weight}を定義せよ。それはモバイルの総重量を
 返す。
 
 \item
-A mobile is said to be \newterm{balanced} if the torque applied by its top-left
-branch is equal to that applied by its top-right branch (that is, if the length
-of the left rod multiplied by the weight hanging from that rod is equal to the
-corresponding product for the right side) and if each of the submobiles hanging
-off its branches is balanced. Design a predicate that tests whether a binary
-mobile is balanced.
-
 モバイルは一番上の左枝にかかるトルク(回転力)が一番上の右の枝にかかるトルクと等しい時
 (これはつまり、もし左の棒のの長さと
 その棒にかかる重さを掛けた値が、相対する右側の積の値と同じ場合である)、かつ
@@ -7502,8 +7158,6 @@ mobile is balanced.
 あるバイナリモバイルがバランスが取れているかテストする述語を設計せよ。
 
 \item
-Suppose we change the representation of mobiles so that the constructors are
-
 モバイルの表現をコンストラクタが以下になるように変更すると考える。
 
 \begin{scheme}
@@ -7512,8 +7166,7 @@ Suppose we change the representation of mobiles so that the constructors are
   (cons length structure))
 \end{scheme}
 
-How much do you need to change your programs to convert to the new
-representation?
+
 
 新しい表現へとあなたのプログラムを変更するのにどれほどが必要か?
 
@@ -7522,13 +7175,7 @@ representation?
 
 \subsubsection*{Mapping over trees}
 
-Just as \code{map} is a powerful abstraction for dealing with sequences,
-\code{map} together with recursion is a powerful abstraction for dealing with
-trees.  For instance, the \code{scale\-/tree} procedure, analogous to
-\code{scale\-/list} of \link{Section 2.2.1}, takes as arguments a numeric factor
-and a tree whose leaves are numbers.  It returns a tree of the same shape,
-where each number is multiplied by the factor.  The recursive plan for
-\code{scale\-/tree} is similar to the one for \code{count\-/leaves}:
+
 
 \code{map}が列を扱うのに強力な抽象化であるのと同様に、再帰を伴なう\code{map}は木を
 扱うのに強力な抽象化です。例えば\link{Section 2.2.1}の\code{scale\-/list}に同類な\code{scale\-/tree}
@@ -7547,11 +7194,6 @@ where each number is multiplied by the factor.  The recursive plan for
 \end{scheme}
 
 \noindent
-Another way to implement \code{scale\-/tree} is to regard the tree as a sequence
-of sub-trees and use \code{map}.  We map over the sequence, scaling each
-sub-tree in turn, and return the list of results.  In the base case, where the
-tree is a leaf, we simply multiply by the factor:
-
 \code{scale\-/tree}を実装するもう1つの方法は木を部分木の列と見做し\code{map}を使用します。
 列全体に\code{map}をかけ、各部分木を順に拡大し、結果のリストを返します。その木が葉である
 場合には単純に因数を掛けます。
@@ -7566,17 +7208,11 @@ tree is a leaf, we simply multiply by the factor:
 \end{scheme}
 
 \noindent
-Many tree operations can be implemented by similar combinations of sequence
-operations and recursion.
-
 多くの木の操作が同様な列操作と再帰の組み合わせにて実装可能です。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.30}Exercise 2.30:} Define a procedure
-\code{square\-/tree} analogous to the \code{square\-/list} procedure of
-\link{Exercise 2.21}.  That is, \code{square\-/tree} should behave as follows:
-
-\link{Exercise 2.21}の\code{square\-/list}と同様の手続\code{square\-/tree}を定義せよ。
+\heading{\phantomsection\label{Exercise 2.30}Exercise 2.30:} \link{Exercise 2.21}の
+\code{square\-/list}と同様の手続\code{square\-/tree}を定義せよ。
 \code{square\-/tree}は以下の振舞を行う。
 
 \begin{scheme}
@@ -7587,19 +7223,13 @@ operations and recursion.
 ~\textit{(1 (4 (9 16) 25) (36 49))}~
 \end{scheme}
 
-Define \code{square\-/tree} both directly (i.e., without using any higher-order
-procedures) and also by using \code{map} and recursion.
-\end{quote}
-
 \code{square\-/tree}を直接な(つまり高階関数を全く用いない)方法と\code{map}と再帰を
 用いる方法の両者を定義せよ。
+\end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.31}Exercise 2.31:} Abstract your answer to
-\link{Exercise 2.30} to produce a procedure \code{tree\-/map} with the property
-that \code{square\-/tree} could be defined as
-
-あなたの\link{Exercise 2.30}への解答を抽象化し、手続\code{tree\-/map}を作れ。
+\heading{\phantomsection\label{Exercise 2.31}Exercise 2.31:} 
+\link{Exercise 2.30}への解答を抽象化し、手続\code{tree\-/map}を作れ。
 \code{tree\-/map}を用いて\code{square\-/tree}は以下のように定義できる。
 
 \begin{scheme}
@@ -7608,14 +7238,8 @@ that \code{square\-/tree} could be defined as
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.32}Exercise 2.32:} We can represent a set as a list
-of distinct elements, and we can represent the set of all subsets of the set as
-a list of lists.  For example, if the set is \code{(1 2 3)}, then the set of
-all subsets is \code{(() (3) (2) (2 3) (1) (1 3) (1 2) (1 2 3))}.  Complete the
-following definition of a procedure that generates the set of subsets of a set
-and give a clear explanation of why it works:
-
-集合は識別可能な要素のリストとして表現できる。そして集合の全ての部分集合集合を
+\heading{\phantomsection\label{Exercise 2.32}Exercise 2.32:} 集合は
+識別可能な要素のリストとして表現できる。そして集合の全ての部分集合集合を
 リストのリストとして表わせられる。例えば、集合が\code{(1 2 3)}である時、全ての
 部分集合の集合は\code{(() (3) (2) (2 3) (1) (1 3) (1 2) (1 2 3))}だ。
 以下の集合の全ての部分集合の集合を生成する手続の定義を完成し、なぜうまくいくのか
@@ -7633,25 +7257,14 @@ and give a clear explanation of why it works:
 \label{Section 2.2.3}
 \subsection{Sequences as Conventional Interfaces}
 
-In working with compound data, we've stressed how data abstraction permits us
-to design programs without becoming enmeshed in the details of data
-representations, and how abstraction preserves for us the flexibility to
-experiment with alternative representations.  In this section, we introduce
-another powerful design principle for working with data structures---the use of
-\newterm{conventional interfaces}.
+
 
 複合データを用いて働く場合、これまでデータ抽象化がどれだけプログラムの設計を
 データ表現の詳細に陥らずに行えるか、また抽象化がどれだけ代替的な表現方法を
 試みる柔軟性を保つかについて強調してきました。この節ではもう1つの強力なデータ構造を用いる
 設計原則を紹介します。\newterm{conventional interfaces}(慣習的インターフェイス)の使用です。
 
-In \link{Section 1.3} we saw how program abstractions, implemented as
-higher-order procedures, can capture common patterns in programs that deal with
-numerical data.  Our ability to formulate analogous operations for working with
-compound data depends crucially on the style in which we manipulate our data
-structures.  Consider, for example, the following procedure, analogous to the
-\code{count\-/leaves} procedure of \link{Section 2.2.2}, which takes a tree as
-argument and computes the sum of the squares of the leaves that are odd:
+
 
 \link{Section 1.3}においてプログラム抽象化、高階手続としての実装がどのようにして数値データを取り扱う
 プログラムの共通パターンを掴むことができるのかを学んできました。複合データを扱う類似の操作を
@@ -7669,10 +7282,6 @@ argument and computes the sum of the squares of the leaves that are odd:
 \end{scheme}
 
 \noindent
-On the surface, this procedure is very different from the following one, which
-constructs a list of all the even Fibonacci numbers \( {\rm Fib}(k) \), where
-\( k \) is less than or equal to a given integer \( n \):
-
 表面上では、この手続は以下の物ととても異なっています。以下では全ての偶数のフィボナッチ数
 \( {\rm Fib}(k) \)のリストを、\( k \)が与えられた\( n \)以下の範囲にて作成しています。
 
@@ -7689,73 +7298,45 @@ constructs a list of all the even Fibonacci numbers \( {\rm Fib}(k) \), where
 \end{scheme}
 
 \noindent
-Despite the fact that these two procedures are structurally very different, a
-more abstract description of the two computations reveals a great deal of
-similarity.  The first program
-
 これらの2つの手続は構造的にとても異なっているという事実にも係らず、2つの計算の
 より抽象的な記述は大きな類似性を明らかにします。最初のプログラムは
 
 \begin{itemize}
 
 \item
-enumerates the leaves of a tree;
 木の葉を列挙する
 
 \item
-filters them, selecting the odd ones;
 フィルタを通して奇数のみを選ぶ
 
 \item
-squares each of the selected ones; and
 選択された数の二乗を求める
 
 \item
-accumulates the results using \code{+}, starting with 0.
 初期値0にて\code{+}を用いて集積する。
 
 \end{itemize}
 
 \noindent
-The second program
-
 2つ目のプログラムは
 
 \begin{itemize}
 
 \item
-enumerates the integers from 0 to \( n \);
 0から\( n \)を列挙する
 
 \item
-computes the Fibonacci number for each integer;
 各整数のフィボナッチ数を求める
 
 \item
-filters them, selecting the even ones; and
 フィルタを通して偶数を選択する
 
 \item
-accumulates the results using \code{cons},  starting with the
-empty list.
-
 初期値は空リストにて\code{cons}を用いて結果を集積する
 
 \end{itemize}
 
 \noindent
-A signal-processing engineer would find it natural to conceptualize these
-processes in terms of signals flowing through a cascade of stages, each of
-which implements part of the program plan, as shown in \link{Figure 2.7}.  In
-\code{sum\-/odd\-/squares}, we begin with an \newterm{enumerator}, which generates
-a ``signal'' consisting of the leaves of a given tree.  This signal is passed
-through a \newterm{filter}, which eliminates all but the odd elements.  The
-resulting signal is in turn passed through a \newterm{map}, which is a
-``transducer'' that applies the \code{square} procedure to each element.  The
-output of the map is then fed to an \newterm{accumulator}, which combines the
-elements using \code{+}, starting from an initial 0.  The plan for
-\code{even\-/fibs} is analogous.
-
 信号処理のエンジニアはこれらの処理をステージのカスケードを通して流れる信号を
 用いて処理するという概念的説明を自然だと思われるでしょう。各ステージはプログラム設計の
 部分を\link{Figure 2.7}に示すように実装しています。
@@ -7765,18 +7346,7 @@ elements using \code{+}, starting from an initial 0.  The plan for
 それが\code{square}手続を各要素に適用します。mapの出力は次に\newterm{accumulator}(集積機)に
 与えられ、それが要素を初期値0と\code{+}を用いて連結します。\code{even\-/fibs}の設計も同様です。
 
-Unfortunately, the two procedure definitions above fail to exhibit this
-signal-flow structure.  For instance, if we examine the \code{sum\-/odd\-/squares}
-procedure, we find that the enumeration is implemented partly by the
-\code{null?} and \code{pair?} tests and partly by the tree-recursive structure
-of the procedure.  Similarly, the accumulation is found partly in the tests and
-partly in the addition used in the recursion.  In general, there are no
-distinct parts of either procedure that correspond to the elements in the
-signal-flow description.  Our two procedures decompose the computations in a
-different way, spreading the enumeration over the program and mingling it with
-the map, the filter, and the accumulation.  If we could organize our programs
-to make the signal-flow structure manifest in the procedures we write, this
-would increase the conceptual clarity of the resulting code.
+
 
 残念ながら上記の2つの手続の定義はこの信号の流れの構造を提示するのは失敗しています。
 例えば\code{sum\-/odd\-/squares}を調べてみるとenumeration(列挙)は部分的に\code{null?}の\code{pair?}の
@@ -7817,12 +7387,7 @@ the commonality between the two programs.
 
 \subsubsection*{Sequence Operations}
 
-The key to organizing programs so as to more clearly reflect the signal-flow
-structure is to concentrate on the ``signals'' that flow from one stage in the
-process to the next.  If we represent these signals as lists, then we can use
-list operations to implement the processing at each of the stages.  For
-instance, we can implement the mapping stages of the signal-flow diagrams using
-the \code{map} procedure from \link{Section 2.2.1}:
+
 
 プログラムを体系化し信号伝達構造をより明確に反映する鍵はある段階の処理から次へと流れる
 ``信号''に集中することです。もしこれらの信号をリストとして表現するなら、各段階の処理を
@@ -7835,9 +7400,6 @@ the \code{map} procedure from \link{Section 2.2.1}:
 \end{scheme}
 
 \noindent
-Filtering a sequence to select only those elements that satisfy a given
-predicate is accomplished by
-
 列をフィルタリングして与えられた述語を満足する要素のみを選択することは以下の様に達成できます。
 
 \begin{scheme}
@@ -7850,8 +7412,6 @@ predicate is accomplished by
 \end{scheme}
 
 \noindent
-For example,
-
 例として、
 
 \begin{scheme}
@@ -7860,8 +7420,6 @@ For example,
 \end{scheme}
 
 \noindent
-Accumulations can be implemented by
-
 集積は次のように実装します。
 
 \begin{scheme}
@@ -7879,10 +7437,6 @@ Accumulations can be implemented by
 \end{scheme}
 
 \noindent
-All that remains to implement signal-flow diagrams is to enumerate the sequence
-of elements to be processed.  For \code{even\-/fibs}, we need to generate the
-sequence of integers in a given range, which we can do as follows:
-
 信号伝達図を実装するのに残っているもの全ては処理すべき要素の列を列挙することです。
 \code{even\-/fibs}のためには与えられた区間の整数の列を生成しなければならず、以下のように
 行うことができます。
@@ -7897,11 +7451,6 @@ sequence of integers in a given range, which we can do as follows:
 \end{scheme}
 
 \noindent
-To enumerate the leaves of a tree, we can use\footnote{This is, in fact,
-precisely the \code{fringe} procedure from \link{Exercise 2.28}.  Here we've
-renamed it to emphasize that it is part of a family of general
-sequence-manipulation procedures.}
-
 木の葉を列挙するには、以下の様にして可能です。\footnote{これは実際には
 \link{Exercise 2.28}の\code{fringe}手続そのものです。ここではその名を変えて
 列操作手続一般に属するパーツであることを強調しています。}
@@ -7917,11 +7466,6 @@ sequence-manipulation procedures.}
 \end{scheme}
 
 \noindent
-Now we can reformulate \code{sum\-/odd\-/squares} and \code{even\-/fibs} as in the
-signal-flow diagrams.  For \code{sum\-/odd\-/squares}, we enumerate the sequence of
-leaves of the tree, filter this to keep only the odd numbers in the sequence,
-square each element, and sum the results:
-
 これで\code{sum\-/odd\-/squares}と\code{even\-/fibs}を信号伝達図の様に再形式化することができます。
 \code{sum\-/odd\-/squares}のためには木の葉の列を列挙し、これをフィルタにかけ列の奇数のみを保持し、
 各要素を二乗し、結果の合計を求めます。
@@ -7933,10 +7477,6 @@ square each element, and sum the results:
 \end{scheme}
 
 \noindent
-For \code{even\-/fibs}, we enumerate the integers from 0 to \( n \), generate the
-Fibonacci number for each of these integers, filter the resulting sequence to
-keep only the even elements, and accumulate the results into a list:
-
 \code{even\-/fibs}に対しては0から\( n \)の整数を列挙し、これらの整数のそれぞれに対する
 フィボナッチ数を生成し、結果列をフィルタにかけ偶数の要素のみを保持し、結果をリストの
 中に集積します。
@@ -7950,26 +7490,13 @@ keep only the even elements, and accumulate the results into a list:
 \end{scheme}
 
 \noindent
-The value of expressing programs as sequence operations is that this helps us
-make program designs that are modular, that is, designs that are constructed by
-combining relatively independent pieces.  We can encourage modular design by
-providing a library of standard components together with a conventional
-interface for connecting the components in flexible ways.
-
 列操作としての伝達プログラムの価値はこれがモジュラ形式のプログラムデザインを
 行うことを手助けしてくれることにあります。モジュラであるとは相対的に独立した
 部品を組み立てることで構築される設計です。柔軟な形でコンポーネントを
 接続するための慣習的なインターフェイスと共に、標準コンポーネントのライブラリを
 提供することで、モジュラ設計を推進することができます。
 
-Modular construction is a powerful strategy for controlling complexity in
-engineering design.  In real signal-processing applications, for example,
-designers regularly build systems by cascading elements selected from
-standardized families of filters and transducers.  Similarly, sequence
-operations provide a library of standard program elements that we can mix and
-match.  For instance, we can reuse pieces from the \code{sum\-/odd\-/squares} and
-\code{even\-/fibs} procedures in a program that constructs a list of the squares
-of the first \( n + 1 \) Fibonacci numbers:
+
 
 モジュラ構築は複雑性を工学的設計において複雑性をコントロールすることに対して強力な戦略です。
 例えば現実の信号処理アプリケーションでは、設計者は恒常的にフィルタと変換器の標準化された
@@ -7989,9 +7516,6 @@ of the first \( n + 1 \) Fibonacci numbers:
 \end{scheme}
 
 \noindent
-We can rearrange the pieces and use them in computing the product of the squares of the odd
-integers in a sequence:
-
 部品を再配置し、列の奇数の二乗の積を計算するのに使うことも可能です。
 
 \begin{scheme}
@@ -8002,13 +7526,6 @@ integers in a sequence:
 \end{scheme}
 
 \noindent
-We can also formulate conventional data-processing applications in terms of
-sequence operations.  Suppose we have a sequence of personnel records and we
-want to find the salary of the highest-paid programmer.  Assume that we have a
-selector \code{salary} that returns the salary of a record, and a predicate
-\code{programmer?} that tests if a record is for a programmer.  Then we can
-write
-
 慣習的なデータ処理アプリケーションを列操作を用いて説明することもできます。
 個人の記録の列があるとし、最も高給なプログラマの給料を見つけたいとします。
 記録の給料を返すセレクタ\code{salary}と記録がプログラマの物であるかを判定する
@@ -8021,18 +7538,6 @@ write
 \end{scheme}
 
 \noindent
-These examples give just a hint of the vast range of operations that can be
-expressed as sequence operations.\footnote{Richard \link{Waters (1979)} developed a
-program that automatically analyzes traditional Fortran programs, viewing them
-in terms of maps, filters, and accumulations.  He found that fully 90 percent
-of the code in the Fortran Scientific Subroutine Package fits neatly into this
-paradigm.  One of the reasons for the success of Lisp as a programming language
-is that lists provide a standard medium for expressing ordered collections so
-that they can be manipulated using higher-order operations.  The programming
-language APL owes much of its power and appeal to a similar choice. In APL all
-data are represented as arrays, and there is a universal and convenient set of
-generic operators for all sorts of array operations.}
-
 この例は列操作として表わすことができる広範囲な処理のヒントを与えたにすぎません。\footnote{
 Richard \link{Waters (1979)}は伝統的なFrotranプログラムを自動的に解析し、map, フィルタ,
 集積を用いてそらを俯瞰するプログラムを開発しました。彼はFortranの科学サブルーチンパッケージの
@@ -8043,14 +7548,7 @@ Lispがプログラミング言語として成功した理由の1つにリスト
 全てのデータは配列として表現され、統一的、かつ便利な全ての種類の配列操作のための
 包括的な命令集合が存在します。}
 
-Sequences, implemented here as lists, serve as a conventional interface that
-permits us to combine processing modules.  Additionally, when we uniformly
-represent structures as sequences, we have localized the data-structure
-dependencies in our programs to a small number of sequence operations.  By
-changing these, we can experiment with alternative representations of
-sequences, while leaving the overall design of our programs intact.  We will
-exploit this capability in \link{Section 3.5}, when we generalize the
-sequence-processing paradigm to admit infinite sequences.
+
 
 ここではリストとして実装された列は処理モジュールを接続することを可能にする
 慣習的インターフェイスとしての役割を行います。その上、私達が構造を列として
@@ -8060,10 +7558,7 @@ sequence-processing paradigm to admit infinite sequences.
 列処理パラダイムを無限列を許可するよう一般化する時に利用します。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.33}Exercise 2.33:} Fill in the missing expressions
-to complete the following definitions of some basic list-manipulation
-operations as accumulations:
-
+\heading{\phantomsection\label{Exercise 2.33}Exercise 2.33:} 
 欠けた式を埋めて次の集積としてのいくつかの基本的なリスト操作命令の定義を完成させよ。
 
 \begin{scheme}
@@ -8077,10 +7572,7 @@ operations as accumulations:
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.34}Exercise 2.34:} Evaluating a polynomial in \( x \)
-at a given value of \( x \) can be formulated as an accumulation.  We evaluate
-the polynomial
-
+\heading{\phantomsection\label{Exercise 2.34}Exercise 2.34:} 
 \( x \)の多項式を\( x \)の与えられた値にて評価することは集積として表すことができる。
 以下の多項式を良く知られた\newterm{Horner's rule}(ホーナー法)と呼ばれるアルゴリズムを用いて評価する。
 \begin{comment}
@@ -8094,9 +7586,6 @@ a_n x^n + a_(n-1) x^(n-1) + ... + a_1 x + a_0
  a_n x^n + a_{n-1} x^{n-1} + \ldots + a_1 x + a_0 
 \end{displaymath}
 \noindent
-using a well-known algorithm called \newterm{Horner's rule}, which structures
-the computation as
-
 ホーナー法は上記の計算を以下のような構造にする。
 
 \begin{comment}
@@ -8110,23 +7599,6 @@ the computation as
  (\ldots (a_n x + a_{n-1}) x + \ldots + a_1) x + a_0. 
 \end{displaymath}
 \noindent
-In other words, we start with \( a_n \), multiply by \( x \), add
-\( a_{n-1} \), multiply by \( x \), and so on, until we reach
-\( a_0 \).\footnote{According to \link{Knuth 1981}, this rule was formulated by
-W. G. Horner early in the nineteenth century, but the method was actually used
-by Newton over a hundred years earlier.  Horner's rule evaluates the polynomial
-using fewer additions and multiplications than does the straightforward method
-of first computing \( a_n x^n \), then adding
-\( a_{n-1}x^{n-1} \), and so on.  In fact, it is possible to prove
-that any algorithm for evaluating arbitrary polynomials must use at least as
-many additions and multiplications as does Horner's rule, and thus Horner's
-rule is an optimal algorithm for polynomial evaluation.  This was proved (for
-the number of additions) by A. M. Ostrowski in a 1954 paper that essentially
-founded the modern study of optimal algorithms.  The analogous statement for
-multiplications was proved by V. Y. Pan in 1966.  The book by \link{Borodin and Munro (1975)} 
-provides an overview of these and other results about optimal
-algorithms.}
-
 すなわち\( a_n \)で始め、\( x \)を掛け、\( a_{n-1} \)を足し、\( x \)を掛け、を\( a_0 \)
 に到達するまで繰り返す。\footnote{\link{Knuth 1981}によるとこの方法はW. G. Hornerにより
 19世紀始めに考案された。しかしその手法は実際にはニュートンにより100年を越えた前に使用されていた。
@@ -8139,9 +7611,6 @@ algorithms.}
 \link{Borodin and Munro (1975)}による本がこれらと他の最適アルゴリズムについての結果について概観
 している。}
 
-Fill in the following template to produce a procedure that evaluates a
-polynomial using Horner's rule.  Assume that the coefficients of the polynomial
-are arranged in a sequence, from \( a_0 \) through \( a_n \).
 
 以下のテンプレートを埋めホーナー法を用いて多項式を評価する手続を作り出せ。
 多項式の係数\( a_0 \)から\( a_n \)は列で用意されると想定せよ。
@@ -8153,8 +7622,7 @@ are arranged in a sequence, from \( a_0 \) through \( a_n \).
               coefficient-sequence))
 \end{scheme}
 
-For example, to compute \( 1 + 3x + 5x^3 + x^5 \) at \( x = 2 \) you
-would evaluate
+
 
 例えば\( 1 + 3x + 5x^3 + x^5 \)を\( x = 2 \)の時の値を求める場合、
 次のように評価を行う。
@@ -8165,9 +7633,7 @@ would evaluate
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.35}Exercise 2.35:} Redefine \code{count\-/leaves} from
-\link{Section 2.2.2} as an accumulation:
-
+\heading{\phantomsection\label{Exercise 2.35}Exercise 2.35:} 
 \link{Section 2.2.2}の\code{count\-/leaves}を集積として再定義せよ。
 
 \begin{scheme}
@@ -8177,17 +7643,7 @@ would evaluate
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.36}Exercise 2.36:} The procedure \code{accumulate\-/n}
-is similar to \code{accumu\-/late} except that it takes as its third argument a
-sequence of sequences, which are all assumed to have the same number of
-elements.  It applies the designated accumulation procedure to combine all the
-first elements of the sequences, all the second elements of the sequences, and
-so on, and returns a sequence of the results.  For instance, if \code{s} is a
-sequence containing four sequences, \code{((1 2 3) (4 5 6) (7 8 9) (10 11
-12)),} then the value of \code{(accumulate\-/n + 0 s)} should be the sequence
-\code{(22 26 30)}.  Fill in the missing expressions in the following definition
-of \code{accumulate\-/n}:
-
+\heading{\phantomsection\label{Exercise 2.36}Exercise 2.36:} 
 手続\code{accumulate\-/n}は\code{accumulate}に似ているが3番目の引数として列の列を取り、
 その要素の列の長さは全て一定である。指定された集積手続を複数の列の最初の要素、二番目の要素、
 以下繰り返し、を全て連結するため適用し、結果の列を返す。例えばもし\code{s}が4つの列を含む列、
@@ -8205,10 +7661,6 @@ of \code{accumulate\-/n}:
 
 \begin{quote}
 \heading{\phantomsection\label{Exercise 2.37}Exercise 2.37:}
-Suppose we represent vectors \( {\bf v} = (v_i) \) as sequences of numbers, and
-matrices \( {\bf m} = (m_{ij}) \) as sequences of vectors (the rows of the
-matrix).  For example, the matrix
-
 ベクトル\( {\bf v} = (v_i) \)を数値の列として表現し、行列\( {\bf m} = (m_{ij}) \)を
 ベクトル(行列の行)の列として表現するとする。例えば以下の行列は、
 \begin{comment}
@@ -8236,11 +7688,6 @@ matrix).  For example, the matrix
 \right) 
 \end{displaymath}
 \noindent
-is represented as the sequence \code{((1 2 3 4) (4 5 6 6) (6 7 8 9))}.  With
-this representation, we can use sequence operations to concisely express the
-basic matrix and vector operations.  These operations (which are described in
-any book on matrix algebra) are the following:
-
 列\code{((1 2 3 4) (4 5 6 6) (6 7 8 9))}として表現される。この表現と共に列操作を
 用いることで簡潔に基本的な行列とベクトルの操作を表現することができる。これらの
 操作は(行列演算のどんな本にも記述されている)次のものである。
@@ -8286,9 +7733,6 @@ any book on matrix algebra) are the following:
 		&\; {\rm where\;} n_{ij} = m_{ji}.
 \end{array}
 \end{displaymath}
-We can define the dot product as\footnote{This definition uses the extended
-version of \code{map} described in \link{Footnote 12}.}
-
 ドット積を次のように定義できる。\footnote{この定義は\link{Footnote 12}にて説明した
 \code{map}の拡張バージョンを使用する}
 
@@ -8297,9 +7741,7 @@ version of \code{map} described in \link{Footnote 12}.}
   (accumulate + 0 (map * v w)))
 \end{scheme}
 
-Fill in the missing expressions in the following procedures for computing the
-other matrix operations.  (The procedure \code{accumulate\-/n} is defined in
-\link{Exercise 2.36}.)
+
 
 以下の他の行列操作を演算するための手続の欠けた式を補え。(手続\code{accumulate\-/n}は
 \link{Exercise 2.36}で定義されている。)
@@ -8316,12 +7758,7 @@ other matrix operations.  (The procedure \code{accumulate\-/n} is defined in
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.38}Exercise 2.38:} The \code{accumulate} procedure
-is also known as \code{fold\-/right}, because it combines the first element of
-the sequence with the result of combining all the elements to the right.  There
-is also a \code{fold\-/left}, which is similar to \code{fold\-/right}, except that
-it combines elements working in the opposite direction:
-
+\heading{\phantomsection\label{Exercise 2.38}Exercise 2.38:} 
 \code{accumulate}手続はまた\code{fold\-/right}としても知られている。それが列の最初の要素と
 右側の要素全てを結合した結果とを結合するためである。\code{fold\-/left}も存在し、\code{fold\-/right}と
 似ているが、要素の結合を逆の向きに行う。
@@ -8336,7 +7773,6 @@ it combines elements working in the opposite direction:
   (iter initial sequence))
 \end{scheme}
 
-What are the values of
 
 以下の式の値はいくらか。
 
@@ -8347,19 +7783,14 @@ What are the values of
 (fold-left list nil (list 1 2 3))
 \end{scheme}
 
-Give a property that \code{op} should satisfy to guarantee that
-\code{fold\-/right} and \code{fold\-/left} will produce the same values for any
-sequence.
+
 
 \code{op}が\code{fold\-/right}と\code{fold\-/left}にて同じ値を任意の列に対し生成することを保証するのに
 必要な特性を答えよ。
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.39}Exercise 2.39:} Complete the following
-definitions of \code{reverse} (\link{Exercise 2.18}) in terms of
-\code{fold\-/right} and \code{fold\-/left} from \link{Exercise 2.38}:
-
+\heading{\phantomsection\label{Exercise 2.39}Exercise 2.39:} 
 以下の\code{reverse}(\link{Exercise 2.18})の\code{fold\-/right}と\code{fold\-/left}(\link{Exercise 2.38})を用いた
 定義を完成させよ。
 
@@ -8373,16 +7804,7 @@ definitions of \code{reverse} (\link{Exercise 2.18}) in terms of
 
 \subsubsection*{Nested Mappings}
 
-We can extend the sequence paradigm to include many computations that are
-commonly expressed using nested loops.\footnote{This approach to nested
-mappings was shown to us by David Turner, whose languages KRC and Miranda
-provide elegant formalisms for dealing with these constructs.  The examples in
-this section (see also \link{Exercise 2.42}) are adapted from \link{Turner 1981}.  In
-\link{Section 3.5.3}, we'll see how this approach generalizes to infinite
-sequences.} Consider this problem: Given a positive integer \( n \), find all
-ordered pairs of distinct positive integers \( i \) and \( j \), where 
-\( 1 \le j < i \le n \), such that \( i + j \) is prime.  For example, if \( n \) is 6,
-then the pairs are the following:
+
 
 列のパラダイムを拡張し、一般的に入れ子ループを用いて表現される多くの演算を含めてみます。\footnote{
 この入れ子マッピングへの取り組み方はDavid Turnerにより示されました。彼の言語であるKRCとMirandaは
@@ -8422,26 +7844,13 @@ $j$ 	& 1 & 2 & 1 & 3 & 2 & 1 & 5 \cr
 $i + j$	& 3 & 5 & 5 & 7 & 7 & 7 & 11 \cr}
 }
 \end{displaymath}
-A natural way to organize this computation is to generate the sequence of all
-ordered pairs of positive integers less than or equal to \( n \), filter to
-select those pairs whose sum is prime, and then, for each pair \( (i, j) \)
-that passes through the filter, produce the triple \( (i, j, i + j) \).
+
 
 この演算を体系化する自然な方法は全ての順序付けられた\( n \)以下の正の整数のペア
 を生成し、フィルタを通してその合計が素数であるもののみを選択し、フィルタを通った
 各ペア\( (i, j) \)に対し三つ組\( (i, j, i + j) \)を生成することです。
 
-Here is a way to generate the sequence of pairs: For each integer \( i \le n \), 
-enumerate the integers \( j < i \), and for each such \( i \) and \( j \)
-generate the pair \( (i, j) \).  In terms of sequence operations, we map along
-the sequence \code{(enumerate\-/interval 1 n)}.  For each \( i \) in this sequence,
-we map along the sequence \code{(enumerate\-/interval 1 (- i 1))}.  For each
-\( j \) in this latter sequence, we generate the pair \code{(list i j)}.  This
-gives us a sequence of pairs for each \( i \).  Combining all the sequences for
-all the \( i \) (by accumulating with \code{append}) produces the required
-sequence of pairs:\footnote{We're representing a pair here as a list of two
-elements rather than as a Lisp pair.  Thus, the ``pair'' \( (i, j) \) is
-represented as \code{(list i j)}, not \code{(cons i j)}.}
+
 
 ここでペアの列を生成する方法を上げます：全ての整数\( i \le n \)に対し、
 整数\( j < i \)を列挙し、全てのそのような\( i \)と\( j \)に対し、
@@ -8462,9 +7871,6 @@ represented as \code{(list i j)}, not \code{(cons i j)}.}
 \end{scheme}
 
 \noindent
-The combination of mapping and accumulating with \code{append} is so common in
-this sort of program that we will isolate it as a separate procedure:
-
 mapと集積の組み合わせを\code{append}と共に用いるのはこの種のプログラムにおいて
 とても一般的ですので、これを分離したプログラムとして分けます。
 
@@ -8474,11 +7880,6 @@ mapと集積の組み合わせを\code{append}と共に用いるのはこの種�
 \end{scheme}
 
 \noindent
-Now filter this sequence of pairs to find those whose sum is prime. The filter
-predicate is called for each element of the sequence; its argument is a pair
-and it must extract the integers from the pair.  Thus, the predicate to apply
-to each element in the sequence is
-
 これでこのペアの列をフィルタにかけ和が素数であるものを探します。フィルタの述語が
 各要素に対して呼ばれます。その引数はペアであり、ペアから整数を抽出せねばなりません。
 従って列の各要素に適用される述語は以下のようになります。
@@ -8489,10 +7890,6 @@ to each element in the sequence is
 \end{scheme}
 
 \noindent
-Finally, generate the sequence of results by mapping over the filtered pairs
-using the following procedure, which constructs a triple consisting of the two
-elements of the pair along with their sum:
-
 最後に、フィルタを通ったペア全体に以下の手続を用いてmapをかけた結果の列を生成します。
 以下の手続は2つの要素のペアとそれらの和を用いて3つ組を構築します。
 
@@ -8502,8 +7899,6 @@ elements of the pair along with their sum:
 \end{scheme}
 
 \noindent
-Combining all these steps yields the complete procedure:
-
 これらのステップ全てを接続すれば手続は完了です。
 
 \begin{smallscheme}
@@ -8518,21 +7913,6 @@ Combining all these steps yields the complete procedure:
 \end{smallscheme}
 
 \noindent
-Nested mappings are also useful for sequences other than those that enumerate
-intervals.  Suppose we wish to generate all the permutations of a set \( S; \)
-that is, all the ways of ordering the items in the set.  For instance, the
-permutations of \( \{1, 2, 3\} \) are \( \{1, 2, 3\} \), \( \{1, 3, 2\} \), \( \{2, 1, 3\} \), \( \{2, 3, 1\} \),
-\( \{3, 1, 2\} \), and \( \{3, 2, 1\} \).  Here is a plan for generating the permutations of
-\( S \): For each item \( x \) in \( S \), recursively generate the sequence of
-permutations of \( S - x \),\footnote{The set \( S - x \) is the set of all
-elements of \( S \), excluding \( x \).} and adjoin \( x \) to the front of each one.
-This yields, for each \( x \) in \( S \), the sequence of permutations of \( S \)
-that begin with \( x \).  Combining these sequences for all \( x \) gives all the
-permutations of \( S \):\footnote{Semicolons in Scheme code are used to introduce
-\newterm{comments}.  Everything from the semicolon to the end of the line is
-ignored by the interpreter.  In this book we don't use many comments; we try to
-make our programs self-documenting by using descriptive names.}
-
 入れ子のmapは区間を列挙するもの以外の列に対しても便利です。ある集合\( S \)の全ての順列を
 生成したいとします。つまり集合内の項目の全ての並べ方です。例えば\( \{1, 2, 3\} \)の順列は
 \( \{1, 2, 3\} \), \( \{1, 3, 2\} \), \( \{2, 1, 3\} \), \( \{2, 3, 1\} \),
@@ -8557,15 +7937,6 @@ make our programs self-documenting by using descriptive names.}
 \end{scheme}
 
 \noindent
-Notice how this strategy reduces the problem of generating permutations of
-\( S \) to the problem of generating the permutations of sets with fewer elements
-than \( S \).  In the terminal case, we work our way down to the empty list,
-which represents a set of no elements.  For this, we generate \code{(list
-nil)}, which is a sequence with one item, namely the set with no elements.  The
-\code{remove} procedure used in \code{permutations} returns all the items in a
-given sequence except for a given item.  This can be expressed as a simple
-filter:
-
 この戦略がどのように\( S \)の順列を生成する問題から\( S \)よりもより少ない要素の
 集合の順列生成の問題へと縮小しているかに注意して下さい。境界条件に関しては要素無しの
 集合を表す空リストまで順に処理を繰り返します。空リストに対して\code{(list nil)}を
@@ -8581,54 +7952,20 @@ filter:
 \end{scheme}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.40}Exercise 2.40:} Define a procedure
-\code{unique\-/pairs} that, given an integer \( n \), generates the sequence of
-pairs \( (i, j) \) with \( 1 \le j < i \le n \).  Use \code{unique\-/pairs}
-to simplify the definition of \code{prime\-/sum\-/pairs} given above.
-\end{quote}
-
+\heading{\phantomsection\label{Exercise 2.40}Exercise 2.40:} 
 整数\( n \)を与えられ、ペア\( (i, j) \)を\( 1 \le j < i \le n \)の条件で
 生成する手続\code{unique\-/pairs}を定義せよ。\code{unique\-/pairs}を用いて
 上で与えられた\code{prime\-/sum\-/pairs}の定義をより簡単にせよ。
+\end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.41}Exercise 2.41:} Write a procedure to find all
-ordered triples of distinct positive integers \( i \), \( j \), and \( k \) less than
-or equal to a given integer \( n \) that sum to a given integer \( s \).
-
+\heading{\phantomsection\label{Exercise 2.41}Exercise 2.41:} 
 与えられた整数\( n \)以下でかつ合計が与えられた整数\( s \)である、全ての異なる正の整数
 \( i \), \( j \), \( k \)の順序有りの3つ組を求める手続を書け。
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.42}Exercise 2.42:} The ``eight-queens puzzle'' asks
-how to place eight queens on a chessboard so that no queen is in check from any
-other (i.e., no two queens are in the same row, column, or diagonal).  One
-possible solution is shown in \link{Figure 2.8}.  One way to solve the puzzle is
-to work across the board, placing a queen in each column.  Once we have placed
-\( k - 1 \) queens, we must place the \( k^{\hbox{th}} \) queen in a position where it does
-not check any of the queens already on the board.  We can formulate this
-approach recursively: Assume that we have already generated the sequence of all
-possible ways to place \( k - 1 \) queens in the first \( k - 1 \) columns of the
-board.  For each of these ways, generate an extended set of positions by
-placing a queen in each row of the \( k^{\hbox{th}} \) column.  Now filter these, keeping
-only the positions for which the queen in the \( k^{\hbox{th}} \) column is safe with
-respect to the other queens.  This produces the sequence of all ways to place
-\( k \) queens in the first \( k \) columns.  By continuing this process, we will
-produce not only one solution, but all solutions to the puzzle.
-
-``8クイーンパズル''は8つのクイーンをチェス盤の上に、どのクイーンも他のクイーンを
-取ることができないようにするにはどのように置くかを尋ねる。(これはつまりどの2つのクイーンも
-同じ列、行、または斜めの線上に有ってはならないということである)。
-考えられる解の1つを\link{Figure 2.8}に示す。このパズルを解く1つの方法は盤上に渡って
-各列にクイーンを置く。\( k - 1 \)個のクイーンを置いたら\( k \)番目のクイーンは
-既に盤上に置いてあるどのクイーンも取れない場所に置かなければならない。この取り組み方を
-再帰的に形式化できる：盤上の最初の\( k - 1 \)列内の\( k - 1 \)個のクイーンの可能な置き方
-全ての列を既に生成したと想定する。これら全ての方法に対し拡張した位置の拡張集合を
-\( k \)番目の列の各行にクイーンを置くことで生成する。次にこれらをフィルタにかけて
-\( k \)番目の列のクイーンが他のクイーンを考慮しても安全な位置のみを保持する。
-これは\( k \)個のクイーンを最初の\( k \)列内に置く全ての方法を生成する。
-この過程を繰り返すことで1つの解答のみでなく、このパズルの全ての解答を生成できる。
+\heading{\phantomsection\label{Exercise 2.42}Exercise 2.42:} 
 
 \begin{figure}[tb]
 \phantomsection\label{Figure 2.8}
@@ -8662,11 +7999,19 @@ produce not only one solution, but all solutions to the puzzle.
 \heading{Figure 2.8:} A solution to the eight-queens puzzle.
 \end{figure}
 
-We implement this solution as a procedure \code{queens}, which returns a
-sequence of all solutions to the problem of placing \( n \) queens on an
-\( n \times n \) chessboard.  \code{Queens} has an internal procedure
-\code{queen\-/cols} that returns the sequence of all ways to place queens in the
-first \( k \) columns of the board.
+``8クイーンパズル''は8つのクイーンをチェス盤の上に、どのクイーンも他のクイーンを
+取ることができないようにするにはどのように置くかを尋ねる。(これはつまりどの2つのクイーンも
+同じ列、行、または斜めの線上に有ってはならないということである)。
+考えられる解の1つを\link{Figure 2.8}に示す。このパズルを解く1つの方法は盤上に渡って
+各列にクイーンを置く。\( k - 1 \)個のクイーンを置いたら\( k \)番目のクイーンは
+既に盤上に置いてあるどのクイーンも取れない場所に置かなければならない。この取り組み方を
+再帰的に形式化できる：盤上の最初の\( k - 1 \)列内の\( k - 1 \)個のクイーンの可能な置き方
+全ての列を既に生成したと想定する。これら全ての方法に対し拡張した位置の拡張集合を
+\( k \)番目の列の各行にクイーンを置くことで生成する。次にこれらをフィルタにかけて
+\( k \)番目の列のクイーンが他のクイーンを考慮しても安全な位置のみを保持する。
+これは\( k \)個のクイーンを最初の\( k \)列内に置く全ての方法を生成する。
+この過程を繰り返すことで1つの解答のみでなく、このパズルの全ての解答を生成できる。
+
 
 この解法を手続\code{queens}として実装した。\( n \)個のクイーンを\( n \times n \)の
 チェス盤上に置く問題に対する全ての解の列を返す。\code{queens}は内部手続\code{queen\-/cols}を
@@ -8690,16 +8035,7 @@ first \( k \) columns of the board.
   (queen-cols board-size))
 \end{scheme}
 
-In this procedure \code{rest\-/of\-/queens} is a way to place \( k - 1 \) queens in
-the first \( k - 1 \) columns, and \code{new\-/row} is a proposed row in which to
-place the queen for the \( k^{\hbox{th}} \) column.  Complete the program by implementing
-the representation for sets of board positions, including the procedure
-\code{adjoin\-/position}, which adjoins a new row-column position to a set of
-positions, and \code{empty\-/board}, which represents an empty set of positions.
-You must also write the procedure \code{safe?}, which determines for a set of
-positions, whether the queen in the \( k^{\hbox{th}} \) column is safe with respect to the
-others.  (Note that we need only check whether the new queen is safe---the
-other queens are already guaranteed safe with respect to each other.)
+
 
 この手続の中で、\code{rest\-/of\-/queens}は最初の\( k - 1 \)列内に\( k - 1 \)個のクイーンを
 置く方法であり、\code{new\-/row}は\code{k}番目の列に対してクイーンを置くように提案された行である。
@@ -8711,13 +8047,7 @@ other queens are already guaranteed safe with respect to each other.)
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.43}Exercise 2.43:} Louis Reasoner is having a
-terrible time doing \link{Exercise 2.42}.  His \code{queens} procedure seems to
-work, but it runs extremely slowly.  (Louis never does manage to wait long
-enough for it to solve even the \( 6\times6 \) case.)  When Louis asks Eva Lu Ator for
-help, she points out that he has interchanged the order of the nested mappings
-in the \code{flatmap}, writing it as
-
+\heading{\phantomsection\label{Exercise 2.43}Exercise 2.43:} 
 Louis Reasonerは\link{Exercise 2.42}を行うことで酷い時間を過している。彼の\code{queens}手続は
 動いているように見える。しかし実行がとても遅い。(Louisは\( 6\times6 \)の場合でさえそれを
 解くのにかかる長い時間を待つことができなかった)。LouisがEva Lu Atorに助けを求めた時、
@@ -8733,32 +8063,14 @@ Louis Reasonerは\link{Exercise 2.42}を行うことで酷い時間を過して�
  (enumerate-interval 1 board-size))
 \end{scheme}
 
-Explain why this interchange makes the program run slowly.  Estimate how long
-it will take Louis's program to solve the eight-queens puzzle, assuming that
-the program in \link{Exercise 2.42} solves the puzzle in time \( T \).
-\end{quote}
-
 この交換がなぜプログラムの実行を遅くするのか説明せよ。Louisのプログラムが8クイーンパズルを
 解くのにどれだけの時間がかかるか推察せよ。\link{Exercise 2.42}のプログラムが同じパズルを解く
 のに必要な時間が\( T \)であるとの前提で行え。
+\end{quote}
 
 \label{Section 2.2.4}
 \subsection{Example: A Picture Language}
 
-This section presents a simple language for drawing pictures that illustrates
-the power of data abstraction and closure, and also exploits higher-order
-procedures in an essential way.  The language is designed to make it easy to
-experiment with patterns such as the ones in \link{Figure 2.9}, which are
-composed of repeated elements that are shifted and scaled.\footnote{The picture
-language is based on the language Peter Henderson created to construct images
-like M.C. Escher's ``Square Limit'' woodcut (see \link{Henderson 1982}).  The woodcut
-incorporates a repeated scaled pattern, similar to the arrangements drawn using
-the \code{square\-/limit} procedure in this section.} In this language, the data
-objects being combined are represented as procedures rather than as list
-structure.  Just as \code{cons}, which satisfies the closure property, allowed
-us to easily build arbitrarily complicated list structure, the operations in
-this language, which also satisfy the closure property, allow us to easily
-build arbitrarily complicated patterns.
 
 この節では絵を描く簡単な言語をお見せします。これがデータ抽象と閉包の力を図示し、
 また高階手続を本質的な方法で利用します。この言語は\link{Figure 2.9}のようなパターンを
@@ -8774,10 +8086,7 @@ build arbitrarily complicated patterns.
 
 \subsubsection*{The picture language}
 
-When we began our study of programming in \link{Section 1.1}, we emphasized the
-importance of describing a language by focusing on the language's primitives,
-its means of combination, and its means of abstraction.  We'll follow that
-framework here.
+
 
 \link{Section 1.1}でプログラミングの学習を始めたとき、言語のプリミティブ、その組み合わせの手段、
 抽象化の手段に集中することが言語の説明の重要性だと強調しました。
@@ -8814,17 +8123,6 @@ lines, are not part of the images.
 \end{figure}
 
 \noindent
-Part of the elegance of this picture language is that there is only one kind of
-element, called a \newterm{painter}.  A painter draws an image that is shifted
-and scaled to fit within a designated parallelogram-shaped frame.  For example,
-there's a primitive painter we'll call \code{wave} that makes a crude line
-drawing, as shown in \link{Figure 2.10}.  The actual shape of the drawing
-depends on the frame---all four images in figure 2.10 are produced by the
-same \code{wave} painter, but with respect to four different frames.  Painters
-can be more elaborate than this: The primitive painter called \code{rogers}
-paints a picture of \acronym{MIT}'s founder, William Barton Rogers, as shown in
-\link{Figure 2.11}.
-
 このピクチャー言語の優雅さの部分は要素の種類が\newterm{painter}(ペインタ)と呼ばれる
 ものたった1つしかないことです。ペインタは指定された平行四辺形の枠の中にイメージを
 移動し、拡大縮小して描きます。例えば\code{wave}と呼ぶペインタがありそれは\link{Figure 2.10}
@@ -8834,12 +8132,6 @@ paints a picture of \acronym{MIT}'s founder, William Barton Rogers, as shown in
 呼ばれるプリミティブなペインタは\acronym{MIT}の創始者であるWilliam Barton Rogersの
 絵を\link{Figure 2.11}に示されるように描きます。\footnote{
 
-William Barton Rogers (1804-1882) was the founder
-and first president of \acronym{MIT}.  A geologist and talented teacher, he
-taught at William and Mary College and at the University of Virginia.  In 1859
-he moved to Boston, where he had more time for research, worked on a plan for
-establishing a ``polytechnic institute,'' and served as Massachusetts's first
-State Inspector of Gas Meters.
 
 William Barton Rogers (1804-1882)は
 \acronym{MIT}の創始者であり、かつ初代学長です。地質学者であり、才能溢れる教師である彼は
@@ -8848,34 +8140,20 @@ William and Mary CollegeとUniversity of Virginiaにて教鞭を取りました�
 進めました。またマサチューセッツ州の最初のガスメータの州検査官も務めました。
 
 
-When \acronym{MIT} was established in 1861, Rogers was elected its first
-president.  Rogers espoused an ideal of ``useful learning'' that was different
-from the university education of the time, with its overemphasis on the
-classics, which, as he wrote, ``stand in the way of the broader, higher and
-more practical instruction and discipline of the natural and social sciences.''
-This education was likewise to be different from narrow trade-school education.
-In Rogers's words:
+
 
 \acronym{MIT}が1861年に創設された時、Rogersは最初の学長に選ばれました。
 Rogersは``useful learning''(実用的学習)の活用を信奉しました。これは当時の
-大学教育からは異なるものでした。彼は依れば古典の過度の強調が``より幅広く、
+大学教育からは異なるものでした。彼に依れば古典の過度の強調が``より幅広く、
 高く、より現実的な教育と自然科学、及び社会科学の前に立ち塞がっている''と書いています。
 同様に彼の教育は職業専門学校の狭い教育からも異なるものになろうとしていました。
 
 \begin{quote}
-The world-enforced distinction between the practical and the scientific worker
-is utterly futile, and the whole experience of modern times has demonstrated
-its utter worthlessness.
-
 実利的であることと科学実務者の間の区別を強制する世界は全く無益だ。現代の経験全てが
 その完全な無益さを示している。
 \end{quote}
 
-Rogers served as president of \acronym{MIT} until 1870, when he resigned due to
-ill health.  In 1878 the second president of \acronym{MIT}, John Runkle,
-resigned under the pressure of a financial crisis brought on by the Panic of
-1873 and strain of fighting off attempts by Harvard to take over \acronym{MIT}.
-Rogers returned to hold the office of president until 1881.
+
 
 Rogersは\acronym{MIT}の学長を健康上の理由で辞任する1870年まで務めました。
 1878年に二代目の\acronym{MIT}学長John Runkleは1873年からの大不況によりもたらさ
@@ -8884,26 +8162,11 @@ Rogersは\acronym{MIT}の学長を健康上の理由で辞任する1870年まで
 Rogerは学長のオフィスを支えるため1881年まで戻りました。
 
 
-Rogers collapsed and died while addressing \acronym{MIT}'s graduating class at
-the commencement exercises of 1882.  Runkle quoted Rogers's last words in a
-memorial address delivered that same year:
 
 Rogersは1882年、\acronym{MIT}の大学院の卒業試験に取り組む最中に倒れ、亡くなられました。
 RunkleがRogerの最後の言葉を同年に送られた弔事から引用しています。
 
 \begin{quote}
-``As I stand here today and see what the Institute is, \( \dots \) I call to mind
-the beginnings of science.  I remember one hundred and fifty years ago Stephen
-Hales published a pamphlet on the subject of illuminating gas, in which he
-stated that his researches had demonstrated that 128 grains of bituminous coal
--- '' ``Bituminous coal,'' these were his last words on earth.  Here he bent
-forward, as if consulting some notes on the table before him, then slowly
-regaining an erect position, threw up his hands, and was translated from the
-scene of his earthly labors and triumphs to ``the tomorrow of death,'' where
-the mysteries of life are solved, and the disembodied spirit finds unending
-satisfaction in contemplating the new and still unfathomable mysteries of the
-infinite future.
-
 ``本日ここに立ち本校とは何であるかを考えると\( \dots \) 科学の始まりを思い受かべます。
 150年前にStephen Halesは灯用のガスを主題にした小論文を発表しました。その中で彼は
 彼の研究が128グレインの瀝青炭-- '' ``瀝青炭'' これが地上での彼の最後の言葉でした。
@@ -8914,22 +8177,13 @@ infinite future.
 ことに終りの無い充足を見つけるのです。
 \end{quote}
 
-In the words of Francis A. Walker (\acronym{MIT}'s third president):
-
 Francis A. Walker(\acronym{MIT}の三代目の学長)の言葉では
 
 \begin{quote}
-All his life he had borne himself most faithfully and heroically, and he died
-as so good a knight would surely have wished, in harness, at his post, and in
-the very part and act of public duty.
-
 彼自身が負うた彼の人生全ては最も誠実で雄々しく、そして彼は騎士が心から望んだか
 のごとく、仕事中に、その役職のまま、公務の行いの最中に亡くなった。
 \end{quote}
-} The four images in figure 2.11 are drawn with respect to the same four
-frames as the \code{wave} images in figure 2.10.
-
-\link{Figure 2.11}の4つのイメージは\link{Figure 2.10}の\code{wave}のイメージと
+} \link{Figure 2.11}の4つのイメージは\link{Figure 2.10}の\code{wave}のイメージと
 同じ4つのフレームを考慮して描かれています。
 
 \begin{figure}[tb]
@@ -8950,17 +8204,6 @@ permission of the \acronym{MIT} Museum).
 \end{figure}
 
 \noindent
-To combine images, we use various operations that construct new painters from
-given painters.  For example, the \code{beside} operation takes two painters
-and produces a new, compound painter that draws the first painter's image in
-the left half of the frame and the second painter's image in the right half of
-the frame.  Similarly, \code{below} takes two painters and produces a compound
-painter that draws the first painter's image below the second painter's image.
-Some operations transform a single painter to produce a new painter.  For
-example, \code{flip\-/vert} takes a painter and produces a painter that draws its
-image upside-down, and \code{flip\-/horiz} produces a painter that draws the
-original painter's image left-to-right reversed.
-
 イメージを結合するには与えられたペインタから新しいペインタを構築する種々の命令を
 使用します。例えば\code{beside}命令は2つのペインタを取り新しい最初のペインタのイメージを
 フレームの左半分に、2つ目のペインタのイメージをフレームの右半分に描く複合ペインタを
@@ -8969,8 +8212,6 @@ original painter's image left-to-right reversed.
 生成します。例えば\code{flip\-/vert}はペインタを取りそのイメージを上下逆さに描くペインタを
 生成し、\code{flip\-/horiz}は元のペインタのイメージを左右逆に描くペインタを生成します。
 
-\link{Figure 2.12} shows the drawing of a painter called
-\code{wave4} that is built up in two stages starting from \code{wave}:
 
 \link{Figure 2.12}は\code{wave4}を呼んだペインタの描画を見せており、これは\code{wave}で始め
 2段階を経て構築されています。
@@ -9001,27 +8242,13 @@ from the \code{wave} painter of \link{Figure 2.10}.
 \end{figure}
 
 \noindent
-In building up a complex image in this manner we are exploiting the fact that
-painters are closed under the language's means of combination.  The
-\code{beside} or \code{below} of two painters is itself a painter; therefore,
-we can use it as an element in making more complex painters.  As with building
-up list structure using \code{cons}, the closure of our data under the means of
-combination is crucial to the ability to create complex structures while using
-only a few operations.
-
 複雑なイメージをこの様式で構築する場合はペインタが言語の接続手段の下で閉じている
 という事実を利用しています。2つのペインタの\code{beside}や\code{below}はそれ自身がペインタです。
 従ってそれをより複雑なペインタを作るための要素として使用できます。
 \code{cons}を用いてリスト構造を構築するのと同様に、結合手段の下のデータの閉包は
 ほんのわずかな命令を用いて複雑な構造を作成する能力にとって重大です。
 
-Once we can combine painters, we would like to be able to abstract typical
-patterns of combining painters.  We will implement the painter operations as
-Scheme procedures.  This means that we don't need a special abstraction
-mechanism in the picture language: Since the means of combination are ordinary
-Scheme procedures, we automatically have the capability to do anything with
-painter operations that we can do with procedures.  For example, we can
-abstract the pattern in \code{wave4} as
+
 
 ペインタを結合できれば直ぐに、ペインタを接続する典型的なパターンを抽象化できるように
 なりたいと願うでしょう。ペインタ操作をSchemeの手続として実装することにします。それは
@@ -9036,8 +8263,6 @@ abstract the pattern in \code{wave4} as
 \end{scheme}
 
 \noindent
-and define \code{wave4} as an instance of this pattern:
-
 そして\code{wave4}をこのパターンのインスタンスとして定義します。
 
 \begin{scheme}
@@ -9077,10 +8302,6 @@ and define \code{wave4} as an instance of this pattern:
 \end{figure}
 
 \noindent
-We can also define recursive operations.  Here's one that makes painters split
-and branch towards the right as shown in \link{Figure 2.13}
-and \link{Figure 2.14}:
-
 また再帰命令を手続することも可能です。以下はペインタを分割し、\link{Figure 2.13}に示すように
 右へ向けて枝分かれします。
 
@@ -9093,9 +8314,6 @@ and \link{Figure 2.14}:
 \end{scheme}
 
 \noindent
-We can produce balanced patterns by branching upwards as well as towards the
-right (see exercise \link{Exercise 2.44,,2.44} and figures \link{Figure 2.13,,2.13} and \link{Figure 2.14,,2.14}):
-
 右に向けてと同じように上方向にも枝分かれすることでバランスの取れたパターンを生成することも可能です。
 (課題\link{Exercise 2.44,,2.44}と図\link{Figure 2.13,,2.13}と\link{Figure 2.14,,2.14}を参照して下さい)。
 
@@ -9113,10 +8331,6 @@ right (see exercise \link{Exercise 2.44,,2.44} and figures \link{Figure 2.13,,2.
 \end{scheme}
 
 \noindent
-By placing four copies of a \code{corner\-/split} appropriately, we obtain a
-pattern called \code{square\-/limit}, whose application to \code{wave} and
-\code{rogers} is shown in \link{Figure 2.9}:
-
 \code{corner\-/split}の4つのコピーを置くことで\code{square\-/limit}と呼ばれるパターンを
 獲得することができ、\code{wave}と\code{rogers}に対する適用が\link{Figure 2.9}に
 示されます。
@@ -9129,11 +8343,7 @@ pattern called \code{square\-/limit}, whose application to \code{wave} and
 \end{scheme}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.44}Exercise 2.44:} Define the procedure
-\code{up\-/split} used by \code{corner\-/split}.  It is similar to
-\code{right\-/split}, except that it switches the roles of \code{below} and
-\code{beside}.
-
+\heading{\phantomsection\label{Exercise 2.44}Exercise 2.44:} 
 \code{corner\-/split}にて使用された手続\code{up\-/split}を定義せよ。\code{right\-/split}に
 似ているが、\code{below}と\code{beside}の役割を入れ替える。
 \end{quote}
@@ -9164,11 +8374,7 @@ pattern called \code{square\-/limit}, whose application to \code{wave} and
 
 \subsubsection*{Higher-order operations}
 
-In addition to abstracting patterns of combining painters, we can work at a
-higher level, abstracting patterns of combining painter operations.  That is,
-we can view the painter operations as elements to manipulate and can write
-means of combination for these elements---procedures that take painter
-operations as arguments and create new painter operations.
+
 
 ペインタ命令のパターンを抽象化するのに加えて、より高いレベルのペインタ命令接続の
 抽象化パターンについて取り組むことができます。
@@ -9176,15 +8382,7 @@ operations as arguments and create new painter operations.
 取り新しいペインタ命令を作成する手続と見做し、そしてこれらの要素のための
 組み合わせの手段の記述が可能だということです。
 
-For example, \code{flipped\-/pairs} and \code{square\-/limit} each arrange four
-copies of a painter's image in a square pattern; they differ only in how they
-orient the copies.  One way to abstract this pattern of painter combination is
-with the following procedure, which takes four one-argument painter operations
-and produces a painter operation that transforms a given painter with those
-four operations and arranges the results in a square.  \code{Tl}, \code{tr},
-\code{bl}, and \code{br} are the transformations to apply to the top left copy,
-the top right copy, the bottom left copy, and the bottom right copy,
-respectively.
+
 
 例として、\code{flipped\-/pairs}と\code{square\-/limit}はペインタのイメージを四角のパターン内にて
 4つのコピーをそれぞれが準備します。それらはどのような位置と向きに置くかということのみ
@@ -9202,15 +8400,6 @@ respectively.
 \end{scheme}
 
 \noindent
-Then \code{flipped\-/pairs} can be defined in terms of \code{square\-/of\-/four} as
-follows:\footnote{Equivalently, we could write
-
-\begin{smallscheme}
-(define flipped-pairs
-  (square-of-four identity flip-vert identity flip-vert))
-\end{smallscheme}
-}
-
 すると\code{flipped\-/pairs}は\code{square\-/of\-/four}を以下のように用いて定義可能です。\footnote{
 同等に、こうも書けます。
 
@@ -9228,11 +8417,6 @@ follows:\footnote{Equivalently, we could write
 \end{scheme}
 
 \noindent
-and \code{square\-/limit} can be expressed as\footnote{\code{Rotate180} rotates a
-painter by 180 degrees (see \link{Exercise 2.50}).  Instead of \code{rotate180}
-we could say \code{(compose flip\-/vert flip\-/horiz)}, using the \code{compose}
-procedure from \link{Exercise 1.42}.}
-
 そして\code{square\-/limit}は以下の様に表現可能です。\footnote{\code{Rotate180}は
 ペインタを180度回転します(\link{Exercise 2.50}参照)。\code{rotate180}の代わりに
 \code{(compose flip\-/vert flip\-/horiz)}と言うこともできます。\code{compose}手続は
@@ -9246,10 +8430,7 @@ procedure from \link{Exercise 1.42}.}
 \end{scheme}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.45}Exercise 2.45:} \code{Right\-/split} and
-\code{up\-/split} can be expressed as instances of a general splitting operation.
-Define a procedure \code{split} with the property that evaluating
-
+\heading{\phantomsection\label{Exercise 2.45}Exercise 2.45:} 
 \code{right\-/split}と\code{up\-/split}は一般的な分割命令のインスタンスだと言うことができる。
 手続\code{split}を以下の式を評価する場合に、
 
@@ -9259,9 +8440,6 @@ Define a procedure \code{split} with the property that evaluating
 \end{scheme}
 
 \noindent
-produces procedures \code{right\-/split} and \code{up\-/split} with the same
-behaviors as the ones already defined.
-
 既に定義住みのものと全く同じ振舞を行う手続\code{right\-/split}と\code{up\-/split}を
 生成するよう定義せよ。
 \end{quote}
@@ -9269,13 +8447,6 @@ behaviors as the ones already defined.
 
 \subsubsection*{Frames}
 
-Before we can show how to implement painters and their means of combination, we
-must first consider frames.  A frame can be described by three vectors---an
-origin vector and two edge vectors.  The origin vector specifies the offset of
-the frame's origin from some absolute origin in the plane, and the edge vectors
-specify the offsets of the frame's corners from its origin.  If the edges are
-perpendicular, the frame will be rectangular.  Otherwise the frame will be a
-more general parallelogram.
 
 ペインタとどのように実装しその接続手段を示す前に、始めにフレームについて考えなけ
 ればなりません。フレームは3つのベクトル---始点ベクトルと2つの辺ベクトルで説明でき
@@ -9284,12 +8455,6 @@ more general parallelogram.
 垂直であればフレームは長方形になります。それ以外ではフレームはより一般的な平行四辺形に
 なります。
 
-\link{Figure 2.15} shows a frame and its associated vectors.
-In accordance with data abstraction, we need not be specific yet about how
-frames are represented, other than to say that there is a constructor
-\code{make\-/frame}, which takes three vectors and produces a frame, and three
-corresponding selectors \code{origin\-/frame}, \code{edge1\-/frame}, and
-\code{edge2\-/frame} (see \link{Exercise 2.47}).
 
 \link{Figure 2.15}はフレームとその対応するベクトルを示します。
 データ抽象化に従い、まだフレームがどのように表現されるかについては、
@@ -9328,12 +8493,6 @@ vector    \    __--        edge1
 \end{figure}
 
 \noindent
-We will use coordinates in the unit square \( (0 \le x, y \le 1) \) to specify
-images.  With each frame, we associate a \newterm{frame coordinate map}, which
-will be used to shift and scale images to fit the frame.  The map transforms
-the unit square into the frame by mapping the vector \( {\bf v} = (x, y) \) to
-the vector sum
-
 私達は単位正方形\( (0 \le x, y \le 1) \)内の座標をイメージを指定するのに用いることにします。
 各フレームは、フレームに適合するようにイメージの移動と拡大縮小をするのに使われる
 \newterm{frame coordinate map}(フレーム座標マップ)に関連付けられます。
@@ -9351,15 +8510,6 @@ Origin(Frame) + x * Edge_1(Frame) + y * Edge_2(Frame)
  {\rm Origin(Frame)} + x \cdot {\rm Edge_1(Frame)} + y \cdot {\rm Edge_2(Frame)}. 
 \end{displaymath}
 \noindent
-For example, (0, 0) is mapped to the origin of the frame, (1, 1) to the vertex
-diagonally opposite the origin, and (0.5, 0.5) to the center of the frame.  We
-can create a frame's coordinate map with the following
-procedure:\footnote{\code{Frame\-/coord\-/map} uses the vector operations described
-in \link{Exercise 2.46} below, which we assume have been implemented using some
-representation for vectors.  Because of data abstraction, it doesn't matter
-what this vector representation is, so long as the vector operations behave
-correctly.}
-
 例えば、(0, 0)はフレームの始点に、(1, 1)は対角線上に始点の反対の頂点へ、そして
 (0.5, 0.5)はフレームの中心点にマッピングされます。フレーム座標マップは以下の手続により
 作成できます。\footnote{\code{frame\-/coord\-/map}はこの先の\link{Exercise 2.46}にて説明される
@@ -9379,10 +8529,6 @@ correctly.}
 \end{scheme}
 
 \noindent
-Observe that applying \code{frame\-/coord\-/map} to a frame returns a procedure
-that, given a vector, returns a vector.  If the argument vector is in the unit
-square, the result vector will be in the frame.  For example,
-
 \code{frame\-/coord\-/map}をフレームに適用すると、ベクトルを取りベクトルを返す手続を返すことに
 注意して下さい。もし引数ベクトルが単位正方形の中なら、結果のベクトルはフレームの範囲内に
 なります。例として、
@@ -9392,8 +8538,6 @@ square, the result vector will be in the frame.  For example,
 \end{scheme}
 
 \noindent
-returns the same vector as
-
 は以下のベクトルと同じものを返します。
 
 \begin{scheme}
@@ -9401,15 +8545,7 @@ returns the same vector as
 \end{scheme}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.46}Exercise 2.46:} A two-dimensional vector \( \bf v \)
-running from the origin to a point can be represented as a pair consisting of
-an \( x \)-coordinate and a \( y \)-coordinate.  Implement a data abstraction for
-vectors by giving a constructor \code{make\-/vect} and corresponding selectors
-\code{xcor\-/vect} and \code{ycor\-/vect}.  In terms of your selectors and
-constructor, implement procedures \code{add\-/vect}, \code{sub\-/vect}, and
-\code{scale\-/vect} that perform the operations vector addition, vector
-subtraction, and multiplying a vector by a scalar:
-
+\heading{\phantomsection\label{Exercise 2.46}Exercise 2.46:} 
 始点からある点へと走る2次元ベクトル\( \bf v \)は\( x \)-座標と\( y \)-座標から成る
 ペアにより表現できる。ベクトルに対するデータ抽象をコンストラクタ\code{make\-/vect}と関連する
 セレクタ\code{xcor\-/vect}と\code{ycor\-/vect}を与えることにより実装せよ。
@@ -9441,9 +8577,7 @@ subtraction, and multiplying a vector by a scalar:
 
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.47}Exercise 2.47:} Here are two possible
-constructors for frames:
-
+\heading{\phantomsection\label{Exercise 2.47}Exercise 2.47:} 
 ここに2つの有り得そうなフレームのコンストラクタがある
 
 \begin{scheme}
@@ -9453,31 +8587,18 @@ constructors for frames:
   (cons origin (cons edge1 edge2)))
 \end{scheme}
 
-For each constructor supply the appropriate selectors to produce an
-implementation for frames.
-\end{quote}
 
 各コンストラクタに適切な、フレームに対応する実装を生成するセレクタを提供せよ。
+\end{quote}
 
 \subsubsection*{Painters}
 
-A painter is represented as a procedure that, given a frame as argument, draws
-a particular image shifted and scaled to fit the frame.  That is to say, if
-\code{p} is a painter and \code{f} is a frame, then we produce \code{p}'s image
-in \code{f} by calling \code{p} with \code{f} as argument.
 
-ペインタはフレームを引数として与えられ特定のイメージをフレームにはまるように移動、拡大縮小
+ペインタはフレームを引数として与え、特定のイメージをフレームにはまるように移動、拡大縮小
 して描く手続として表現される。すなわちもし\code{p}がペインタで\code{f}がフレームである場合、
 \code{f}を引数として\code{p}を呼び出すことで\code{f}の中に\code{p}のイメージを生成する。
 
-The details of how primitive painters are implemented depend on the particular
-characteristics of the graphics system and the type of image to be drawn.  For
-instance, suppose we have a procedure \code{draw\-/line} that draws a line on the
-screen between two specified points.  Then we can create painters for line
-drawings, such as the \code{wave} painter in \link{Figure 2.10}, from lists of
-line segments as follows:\footnote{\code{Segments\-/>painter} uses the
-representation for line segments described in \link{Exercise 2.48} below.  It
-also uses the \code{for\-/each} procedure described in \link{Exercise 2.23}.}
+
 
 プリミティブなペインタがどのように実装されているかの詳細は特定のグラフィックシステムの
 特質と描画されるイメージのタイプに依存します。例えばスクリーン上の2つの指定された点の間に
@@ -9500,29 +8621,10 @@ also uses the \code{for\-/each} procedure described in \link{Exercise 2.23}.}
 \end{scheme}
 
 \noindent
-The segments are given using coordinates with respect to the unit square.  For
-each segment in the list, the painter transforms the segment endpoints with the
-frame coordinate map and draws a line between the transformed points.
-
 線分は単位正方形に対しての座標を用いて与えられます。リスト中の各線分に対して
 ペインタは線分の終端をフレーム座標マップを用いて変換し、変換後の点の間に線を引きます。
 
-Representing painters as procedures erects a powerful abstraction barrier in
-the picture language.  We can create and intermix all sorts of primitive
-painters, based on a variety of graphics capabilities. The details of their
-implementation do not matter.  Any procedure can serve as a painter, provided
-that it takes a frame as argument and draws something scaled to fit the
-frame.\footnote{For example, the \code{rogers} painter of \link{Figure 2.11} was
-constructed from a gray-level image.  For each point in a given frame, the
-\code{rogers} painter determines the point in the image that is mapped to it
-under the frame coordinate map, and shades it accordingly.  By allowing
-different types of painters, we are capitalizing on the abstract data idea
-discussed in \link{Section 2.1.3}, where we argued that a rational-number
-representation could be anything at all that satisfies an appropriate
-condition.  Here we're using the fact that a painter can be implemented in any
-way at all, so long as it draws something in the designated frame.  
-\link{Section 2.1.3} also showed how pairs could be implemented as procedures.  Painters
-are our second example of a procedural representation for data.}
+
 
 手続としてペインタを表現することは強力な抽象化バリアをピクチャーランゲージの中に
 確立します。私達は全ての種類のプリミティブなペインタを種々のグラフィック機能の基盤の
@@ -9539,13 +8641,7 @@ are our second example of a procedural representation for data.}
 ペインタはデータに対する手続表現の二つ目の例です。}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.48}Exercise 2.48:} A directed line segment in the
-plane can be represented as a pair of vectors---the vector running from the
-origin to the start-point of the segment, and the vector running from the
-origin to the end-point of the segment.  Use your vector representation from
-\link{Exercise 2.46} to define a representation for segments with a constructor
-\code{make\-/segment} and selectors \code{start\-/segment} and \code{end\-/segment}.
-
+\heading{\phantomsection\label{Exercise 2.48}Exercise 2.48:} 
 平面上で方向を持つ線分はベクトルのペア---原点から
 線分の始点へと向かうベクトルと原点から線分の終点へと向かうベクトルとして
 表現可能だ。\link{Exercise 2.46}のベクトル表現を用いて、コンストラクタ\code{make\-/segment}と
@@ -9553,32 +8649,21 @@ origin to the end-point of the segment.  Use your vector representation from
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.49}Exercise 2.49:} Use \code{segments\-/>painter}
-to define the following primitive painters:
-
+\heading{\phantomsection\label{Exercise 2.49}Exercise 2.49:} 
 \code{segments\-/>painter}を用いて以下のプリミティブなペインタを定義せよ。
 
 \begin{enumerate}[a]
 
 \item
-The painter that draws the outline of the designated frame.
-
 指定したフレームの外枠を描くペインタ
 
 \item
-The painter that draws an ``X'' by connecting opposite corners of the frame.
-
 フレームの反対の角を繋いで``X''を描くペインタ
 
 \item
-The painter that draws a diamond shape by connecting the midpoints of the sides
-of the frame.
-
 フレームの辺の中点を結んでダイヤモンドの形を描くペインタ
 
 \item
-The \code{wave} painter.
-
 \code{wave}ペインタ
 
 \end{enumerate}
@@ -9586,12 +8671,7 @@ The \code{wave} painter.
 
 \subsubsection*{Transforming and combining painters}
 
-An operation on painters (such as \code{flip\-/vert} or \code{beside}) works by
-creating a painter that invokes the original painters with respect to frames
-derived from the argument frame.  Thus, for example, \code{flip\-/vert} doesn't
-have to know how a painter works in order to flip it---it just has to know how
-to turn a frame upside down: The flipped painter just uses the original
-painter, but in the inverted frame.
+
 
 ペインタに対する操作(例えば\code{flip\-/vert}や\code{beside})はフレーム引数に由来する
 フレームに対して元のペインタを実行するペインタを作成することで働いています。
@@ -9601,15 +8681,6 @@ painter, but in the inverted frame.
 いるのです。
 
 
-Painter operations are based on the procedure \code{transform\-/painter}, which
-takes as arguments a painter and information on how to transform a frame and
-produces a new painter.  The transformed painter, when called on a frame,
-transforms the frame and calls the original painter on the transformed frame.
-The arguments to \code{transform\-/painter} are points (represented as vectors)
-that specify the corners of the new frame: When mapped into the frame, the
-first point specifies the new frame's origin and the other two specify the ends
-of its edge vectors.  Thus, arguments within the unit square specify a frame
-contained within the original frame.
 
 ペインタ操作は\code{transform\-/painter}手続を基にしており、それはペインタとどのように
 フレームを変換するかの情報を引数に取り、新しいペインタを生成します。変換されたペインタは
@@ -9631,8 +8702,6 @@ contained within the original frame.
 \end{scheme}
 
 \noindent
-Here's how to flip painter images vertically:
-
 次はどのようにペインタのイメージを縦方向に逆向きにするかです。
 
 \begin{scheme}
@@ -9644,10 +8713,6 @@ Here's how to flip painter images vertically:
 \end{scheme}
 
 \noindent
-Using \code{transform\-/painter}, we can easily define new transformations.
-For example, we can define a painter that shrinks its image to the
-upper-right quarter of the frame it is given:
-
 \code{transform\-/painter}を用いることで簡単に新しい変換を定義することができます。
 右上4分の1のフレームは次のようにして与えられます。
 
@@ -9659,10 +8724,6 @@ upper-right quarter of the frame it is given:
 \end{scheme}
 
 \noindent
-Other transformations rotate images counterclockwise by 90
-degrees\footnote{\code{Rotate90} is a pure rotation only for square frames,
-because it also stretches and shrinks the image to fit into the rotated frame.}
-
 他の変換はイメージを時計回りの逆に90度回転したり、\footnote{\code{rotate90}は
 四角形のフレームに対してのみの純粋な回転です。イメージもまた拡大縮小して
 回転したフレームに合わせられるためです。}
@@ -9676,11 +8737,9 @@ because it also stretches and shrinks the image to fit into the rotated frame.}
 \end{scheme}
 
 \noindent
-or squash images towards the center of the frame:\footnote{The diamond-shaped
-images in \link{Figure 2.10} and \link{Figure 2.11} were created with
-\code{squash\-/inwards} applied to \code{wave} and \code{rogers}.}
-
-イメージをフレームの中心に向けて潰したりします。
+イメージをフレームの中心に向けて潰したりします。\footnote{\link{Figure 2.10}と
+\link{Figure 2.11}内のひし形のイメージは\code{squash\-/inwards}を
+\code{wave}と\code{rogers}に適用することで作成されました。}
 
 \begin{scheme}
 (define (squash-inwards painter)
@@ -9691,14 +8750,6 @@ images in \link{Figure 2.10} and \link{Figure 2.11} were created with
 \end{scheme}
 
 \noindent
-Frame transformation is also the key to defining means of combining two or more
-painters.  The \code{beside} procedure, for example, takes two painters,
-transforms them to paint in the left and right halves of an argument frame
-respectively, and produces a new, compound painter.  When the compound painter
-is given a frame, it calls the first transformed painter to paint in the left
-half of the frame and calls the second transformed painter to paint in the
-right half of the frame:
-
 フレーム変換は2つ以上のペインタを接続する手段を定義するための鍵でもあります。
 例えば\code{beside}手続は2つのペインタを取りそれらを引数のフレームの左半分と右半分に
 それぞれ描画するように変換する新しい複合ペインタを生成します。複合ペインタがフレームを
@@ -9726,34 +8777,18 @@ right half of the frame:
 \end{scheme}
 
 \noindent
-Observe how the painter data abstraction, and in particular the representation
-of painters as procedures, makes \code{beside} easy to implement.  The
-\code{beside} procedure need not know anything about the details of the
-component painters other than that each painter will draw something in its
-designated frame.
-
 ペインタのデータ抽象化と、特にペインタの手続としての表現がどのように\code{beside}の
 実装を簡単にしているのか注目して下さい。\code{beside}手続はコンポーネントのペイントの
 詳細について各ペインタが指定されたフレームに何かを描くこと以外は一切知る必要がありません。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.50}Exercise 2.50:} Define the transformation
-\code{flip\-/horiz}, which flips painters horizontally, and transformations that
-rotate painters counterclockwise by 180 degrees and 270 degrees.
-
+\heading{\phantomsection\label{Exercise 2.50}Exercise 2.50:} 
 ペインタを水平方向に引っくり返す変換\code{flip\-/horiz}を定義せよ。
 またペインタを時計と逆回りに180度と270度回す変換を定義せよ。
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.51}Exercise 2.51:} Define the \code{below} operation
-for painters.  \code{Below} takes two painters as arguments.  The resulting
-painter, given a frame, draws with the first painter in the bottom of the frame
-and with the second painter in the top.  Define \code{below} in two different
-ways---first by writing a procedure that is analogous to the \code{beside}
-procedure given above, and again in terms of \code{beside} and suitable
-rotation operations (from \link{Exercise 2.50}).
-
+\heading{\phantomsection\label{Exercise 2.51}Exercise 2.51:} 
 ペインタに対する\code{below}命令を定義せよ。\code{below}は2つのペインタを引数に取る。
 結果のペインタはフレームを与えられ、1つ目のペインタにてフレームの底部を描き、
 2つ目のペインタにて上部を描く。\code{below}を2つの異なる方法で定義せよ。
@@ -9763,13 +8798,7 @@ rotation operations (from \link{Exercise 2.50}).
 
 \subsubsection*{Levels of language for robust design}
 
-The picture language exercises some of the critical ideas we've introduced
-about abstraction with procedures and data.  The fundamental data abstractions,
-painters, are implemented using procedural representations, which enables the
-language to handle different basic drawing capabilities in a uniform way.  The
-means of combination satisfy the closure property, which permits us to easily
-build up complex designs.  Finally, all the tools for abstracting procedures
-are available to us for abstracting means of combination for painters.
+
 
 ピクチャー言語は私達が紹介した手続とデータにようる抽象化についての重要なアイデアの
 いくつかを訓練しました。基本的なデータ抽象化であるペインタは手続表現を用いて実装され
@@ -9778,14 +8807,6 @@ are available to us for abstracting means of combination for painters.
 最後に、抽象化手続に対する全てのツールはペインタに対する接続手段の抽象化にとって
 有効でした。
 
-We have also obtained a glimpse of another crucial idea about languages and
-program design.  This is the approach of \newterm{stratified design}, the
-notion that a complex system should be structured as a sequence of levels that
-are described using a sequence of languages.  Each level is constructed by
-combining parts that are regarded as primitive at that level, and the parts
-constructed at each level are used as primitives at the next level.  The
-language used at each level of a stratified design has primitives, means of
-combination, and means of abstraction appropriate to that level of detail.
 
 私達はまた言語とプログラム設計に関する素晴しい考えを垣間見ることができました。
 これは\newterm{stratified design}(階層化設計)の方法で、複雑なシステムは一連の
@@ -9795,15 +8816,7 @@ combination, and means of abstraction appropriate to that level of detail.
 使用されます。階層化された設計の各レベルで使用される言語はプリミティブ、
 接続手段、そしてそのレベルの詳細さに適切な抽象化手段を持っています。
 
-Stratified design pervades the engineering of complex systems.  For example, in
-computer engineering, resistors and transistors are combined (and described
-using a language of analog circuits) to produce parts such as and-gates and
-or-gates, which form the primitives of a language for digital-circuit
-design.\footnote{\link{Section 3.3.4} describes one such language.} These parts
-are combined to build processors, bus structures, and memory systems, which are
-in turn combined to form computers, using languages appropriate to computer
-architecture.  Computers are combined to form distributed systems, using
-languages appropriate for describing network interconnections, and so on.
+
 
 階層化された設計は複雑なシステムの設計において普及しています。例えば
 計算機設計では抵抗とトランジスタは接続され(そしてアナログ回路
@@ -9814,16 +8827,6 @@ languages appropriate for describing network interconnections, and so on.
 相応しい言語を用います。コンピュータは分散システムを形成するために接続され、
 ネットワーク相互接続その他を記述するに適切な言語を用います。
 
-As a tiny example of stratification, our picture language uses primitive
-elements (primitive painters) that are created using a language that specifies
-points and lines to provide the lists of line segments for
-\code{segments\-/>painter}, or the shading details for a painter like
-\code{rogers}.  The bulk of our description of the picture language focused on
-combining these primitives, using geometric combiners such as \code{beside} and
-\code{below}.  We also worked at a higher level, regarding \code{beside} and
-\code{below} as primitives to be manipulated in a language whose operations,
-such as \code{square\-/of\-/four}, capture common patterns of combining geometric
-combiners.
 
 階層化の簡単な例として、ピクチャー言語はプリミティブな要素(プリミティブペインタ)を
 用い、それらは点と線を指定し\code{segments\-/>painter}のための線分のリストを提供したり、
@@ -9834,16 +8837,7 @@ combiners.
 \code{square\-/of\-/four}のような命令を持つ言語において幾何学的結合器を接続する共通の
 パターンを獲得することに努めました。
 
-Stratified design helps make programs \newterm{robust}, that is, it makes it
-likely that small changes in a specification will require correspondingly small
-changes in the program.  For instance, suppose we wanted to change the image
-based on \code{wave} shown in \link{Figure 2.9}.  We could work at the lowest
-level to change the detailed appearance of the \code{wave} element; we could
-work at the middle level to change the way \code{corner\-/split} replicates the
-\code{wave}; we could work at the highest level to change how
-\code{square\-/limit} arranges the four copies of the corner.  In general, each
-level of a stratified design provides a different vocabulary for expressing the
-characteristics of the system, and a different kind of ability to change it.
+
 
 階層化設計はプログラムを\newterm{robust}(堅牢)にすることを手助けします。
 それはつまりプログラムにおける仕様上の小さな変更が相応した小さな変更を
@@ -9856,35 +8850,21 @@ characteristics of the system, and a different kind of ability to change it.
 提供します。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.52}Exercise 2.52:} Make changes to the square limit
-of \code{wave} shown in \link{Figure 2.9} by working at each of the levels
-described above.  In particular:
-
+\heading{\phantomsection\label{Exercise 2.52}Exercise 2.52:} 
 \link{Figure 2.9}の\code{wave}のsquare-limitに、上で説明された各レベルで働くことで
 変更を加えよ。より詳細には、
 
 \begin{enumerate}[a]
 
 \item
-Add some segments to the primitive \code{wave} painter of \link{Exercise 2.49}
-(to add a smile, for example).
-
 \link{Exercise 2.49}のプリミティブな\code{wave}ペインタにいくつか線分を加えよ。
 (例えば笑顔を追加せよ)
 
 \item
-Change the pattern constructed by \code{corner\-/split} (for example, by using
-only one copy of the \code{up\-/split} and \code{right\-/split} images instead of
-two).
-
 \code{corner\-/split}により構築されるパターンを変更せよ
 (例えば\code{up\-/split}や\code{right\-/split}のイメージを2つでなく1つにせよ)
 
 \item
-Modify the version of \code{square\-/limit} that uses \code{square\-/of\-/four} so as
-to assemble the corners in a different pattern.  (For example, you might make
-the big Mr. Rogers look outward from each corner of the square.)
-
 \code{square\-/of\-/four}を用いる\code{square\-/limit}のバージョンを変更し角を異なるパターンで
 組み立てるようにせよ。
 (例えば正方形の各角にてMr. Rogersをそれぞれ外に向けよ)
@@ -9895,9 +8875,7 @@ the big Mr. Rogers look outward from each corner of the square.)
 \label{Section 2.3}
 \section{Symbolic Data}
 
-All the compound data objects we have used so far were constructed ultimately
-from numbers.  In this section we extend the representational capability of our
-language by introducing the ability to work with arbitrary symbols as data.
+
 
 私達がここまで使用した全ての複合データオブジェクトは最終的には数値から構築されていました。
 この節では任意のシンボル(記号)をデータとして用いる能力を紹介することで、言語の表現力を拡張します。
@@ -9907,7 +8885,7 @@ language by introducing the ability to work with arbitrary symbols as data.
 \label{Section 2.3.1}
 \subsection{Quotation}
 
-If we can form compound data using symbols, we can have lists such as
+
 
 もし記号を用いて複合データを形成できれば以下のようなリストを持つことができます。
 
@@ -9918,9 +8896,6 @@ If we can form compound data using symbols, we can have lists such as
 \end{scheme}
 
 \noindent
-Lists containing symbols can look just like the expressions of our
-language:
-
 記号を含むリストは言語の式と全く同じように見えます。
 
 \begin{scheme}
@@ -9931,33 +8906,6 @@ language:
 \end{scheme}
 
 \noindent
-In order to manipulate symbols we need a new element in our language: the
-ability to \newterm{quote} a data object.  Suppose we want to construct the
-list \code{(a b)}.  We can't accomplish this with \code{(list a b)}, because
-this expression constructs a list of the \newterm{values} of \code{a} and
-\code{b} rather than the symbols themselves.  This issue is well known in the
-context of natural languages, where words and sentences may be regarded either
-as semantic entities or as character strings (syntactic entities).  The common
-practice in natural languages is to use quotation marks to indicate that a word
-or a sentence is to be treated literally as a string of characters.  For
-instance, the first letter of ``John'' is clearly ``J.''  If we tell somebody
-``say your name aloud,'' we expect to hear that person's name.  However, if we
-tell somebody ``say `your name' aloud,'' we expect to hear the words ``your
-name.''  Note that we are forced to nest quotation marks to describe what
-somebody else might say.\footnote{Allowing quotation in a language wreaks havoc
-with the ability to reason about the language in simple terms, because it
-destroys the notion that equals can be substituted for equals.  For example,
-three is one plus two, but the word ``three'' is not the phrase ``one plus
-two.''  Quotation is powerful because it gives us a way to build expressions
-that manipulate other expressions (as we will see when we write an interpreter
-in \link{Chapter 4}). But allowing statements in a language that talk about
-other statements in that language makes it very difficult to maintain any
-coherent principle of what ``equals can be substituted for equals'' should
-mean.  For example, if we know that the evening star is the morning star, then
-from the statement ``the evening star is Venus'' we can deduce ``the morning
-star is Venus.''  However, given that ``John knows that the evening star is
-Venus'' we cannot infer that ``John knows that the morning star is Venus.''}
-
 記号を扱う目的のためには言語に新しい要素を必要とします。データオブジェクトを
 \newterm{quote}(引用)する能力です。例えばリスト\code{(a b)}を構築したいとします。
 私達はこれを\code{(list a b)}を用いては達成できません。なぜならこの式は\code{a}と
@@ -9982,17 +8930,7 @@ Venus'' we cannot infer that ``John knows that the morning star is Venus.''}
 しかし``Johnは宵の明星が金星であることを知っている''を与えられても``Johnは明けの明星
 が金星であることを知っている''とは推論することはできません。}
 
-We can follow this same practice to identify lists and symbols that are to be
-treated as data objects rather than as expressions to be evaluated.  However,
-our format for quoting differs from that of natural languages in that we place
-a quotation mark (traditionally, the single quote symbol \code{'}) only at the
-beginning of the object to be quoted.  We can get away with this in Scheme
-syntax because we rely on blanks and parentheses to delimit objects.  Thus, the
-meaning of the single quote character is to quote the next object.\footnote{The
-single quote is different from the double quote we have been using to enclose
-character strings to be printed.  Whereas the single quote can be used to
-denote lists or symbols, the double quote is used only with character strings.
-In this book, the only use for character strings is as items to be printed.}
+
 
 データオブジェクトとして扱われるべきであり、式として評価
 されるべきではないリストとシンボルを区別するために、これと同じ習慣に従うことができます。
@@ -10005,7 +8943,6 @@ Schemeの文法でこの様に逃れられるのはオブジェクトを区切�
 文字列と共にのみ利用されます。この本では文字列の使用方法は表示されるための項目としてのみ
 です。}
 
-Now we can distinguish between symbols and their values:
 
 これでシンボルとその値を区別することが可能です。
 
@@ -10021,21 +8958,6 @@ Now we can distinguish between symbols and their values:
 \end{scheme}
 
 \noindent
-Quotation also allows us to type in compound objects, using the conventional
-printed representation for lists:\footnote{Strictly, our use of the quotation
-mark violates the general rule that all compound expressions in our language
-should be delimited by parentheses and look like lists.  We can recover this
-consistency by introducing a special form \code{quote}, which serves the same
-purpose as the quotation mark.  Thus, we would type \code{(quote a)} instead of
-\code{'a}, and we would type \code{(quote (a b c))} instead of \code{'(a b c)}.
-This is precisely how the interpreter works.  The quotation mark is just a
-single-character abbreviation for wrapping the next complete expression with
-\code{quote} to form \( \hbox{\ttfamily(quote}\;\langle\kern0.06em\hbox{\ttfamily\slshape expression}\kern0.08em\rangle\hbox{\ttfamily)} \).  This is
-important because it maintains the principle that any expression seen by the
-interpreter can be manipulated as a data object.  For instance, we could
-construct the expression \code{(car '(a b c))}, which is the same as \code{(car
-(quote (a b c)))}, by evaluating \code{(list 'car (list 'quote '(a b c)))}.}
-
 クォーテーションはまた慣習的なリストに対する印字された表現を用いて
 複合オブジェクトの入力も可能にします。\footnote{厳密には私達のクォーテーションマークの
 使用方法は言語における全ての複合式は括弧で区切られリストのように見えるという
@@ -10059,23 +8981,10 @@ construct the expression \code{(car '(a b c))}, which is the same as \code{(car
 \end{scheme}
 
 \noindent
-In keeping with this, we can obtain the empty list by evaluating \code{'()},
-and thus dispense with the variable \code{nil}.
-
 これを守ることで、空リストを\code{'()}を評価して得ることができます。
 従って、変数\code{nil}の使用を止められます。
 
-One additional primitive used in manipulating symbols is \code{eq?}, which
-takes two symbols as arguments and tests whether they are the same.\footnote{We
-can consider two symbols to be ``the same'' if they consist of the same
-characters in the same order.  Such a definition skirts a deep issue that we
-are not yet ready to address: the meaning of ``sameness'' in a programming
-language.  We will return to this in \link{Chapter 3} (\link{Section 3.1.3}).}
-Using \code{eq?}, we can implement a useful procedure called \code{memq}.  This
-takes two arguments, a symbol and a list.  If the symbol is not contained in
-the list (i.e., is not \code{eq?} to any item in the list), then \code{memq}
-returns false.  Otherwise, it returns the sublist of the list beginning with
-the first occurrence of the symbol:
+
 
 記号を操作するのに使われるもう1つ追加のプリミティブとして\code{eq?}があります。
 これは2つのシンボルを引数として取りそれらが同じであるかテストします。\footnote{
@@ -10096,7 +9005,6 @@ the first occurrence of the symbol:
 \end{scheme}
 
 \noindent
-For example, the value of
 例えば、次の式の値は
 
 \begin{scheme}
@@ -10104,8 +9012,6 @@ For example, the value of
 \end{scheme}
 
 \noindent
-is false, whereas the value of
-
 falseになります。そして次の式の値は
 
 \begin{scheme}
@@ -10113,14 +9019,10 @@ falseになります。そして次の式の値は
 \end{scheme}
 
 \noindent
-is \code{(apple pear)}.
-
 \code{(apple pear)}です。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.53}Exercise 2.53:} What would the interpreter print
-in response to evaluating each of the following expressions?
-
+\heading{\phantomsection\label{Exercise 2.53}Exercise 2.53:} 
 以下の式のそれぞれを評価した応答としてインタプリタは何を表示するか?
 
 \begin{scheme}
@@ -10135,10 +9037,7 @@ in response to evaluating each of the following expressions?
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.54}Exercise 2.54:} Two lists are said to be
-\code{equal?} if they contain equal elements arranged in the same order.  For
-example,
-
+\heading{\phantomsection\label{Exercise 2.54}Exercise 2.54:} 
 2つのリストはそれぞれが同じ要素を同じ順で持っている場合に\code{equal?}と言える。
 例えば
 
@@ -10147,8 +9046,6 @@ example,
 \end{scheme}
 
 \noindent
-is true, but
-
 は真であるが
 
 \begin{scheme}
@@ -10156,120 +9053,31 @@ is true, but
 \end{scheme}
 
 \noindent
-is false.  To be more precise, we can define \code{equal?}  recursively in
-terms of the basic \code{eq?} equality of symbols by saying that \code{a} and
-\code{b} are \code{equal?} if they are both symbols and the symbols are
-\code{eq?}, or if they are both lists such that \code{(car a)} is \code{equal?}
-to \code{(car b)} and \code{(cdr a)} is \code{equal?} to \code{(cdr b)}.  Using
-this idea, implement \code{equal?} as a procedure.\footnote{In practice,
-programmers use \code{equal?} to compare lists that contain numbers as well as
-symbols.  Numbers are not considered to be symbols.  The question of whether
-two numerically equal numbers (as tested by \code{=}) are also \code{eq?} is
-highly implementation-dependent.  A better definition of \code{equal?} (such as
-the one that comes as a primitive in Scheme) would also stipulate that if
-\code{a} and \code{b} are both numbers, then \code{a} and \code{b} are
-\code{equal?} if they are numerically equal.}
-
 は偽である。具体的には基本となる\code{eq?}の記号の等価性を再帰的に用いて\code{equal?}
 を定義できる。\code{a}と\code{b}が\code{equal?}であるとはそれらが両方とも記号である場合、かつ
 記号が\code{eq?}である場合、または両方ともリストであり\code{(car a)}が\code{(car b)}に
 \code{equal?}であり、かつ\code{(cdr a)}が\code{(cdr b)}に\code{equal?}であるような場合である。
 この考えを用いて\code{equal?}を手続として実装せよ。\footnote{
-実際にはプログラマは\code{equal?}を数値と同じくシンボルを含むリストの比較に用いる。
-数値は記号とは認識されない。数の上では等しい二つの数値(\code{=}でテストした場合の様に)が
-\code{eq?}でもそうであるかどうかという問題は高度に実装依存である。\code{equal?}の
-(Schemeにプリミティブとして提供されているような)より良い定義でももし\code{a}と\code{b}が
-数値であるならそれらが数の上で等しい場合に\code{equal?}であると明記するだろう。}
+実際には、プログラマは\code{equal?}を数値と同じくシンボルを含むリストの比較に用いる。
+数値は記号とは認識されない。数の上で等しい二つの数値(\code{=}でテストした場合の様に)が
+\code{eq?}でもそうであるかという問題は高度に実装依存である。\code{equal?}の
+(Schemeにプリミティブとして提供されているような)より良い定義でも、もし\code{a}と\code{b}が
+数値であるなら、それらが数値として等しい場合に\code{equal?}であると明記するだろう。}
  
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.55}Exercise 2.55:} Eva Lu Ator types to the
-interpreter the expression
-
+\heading{\phantomsection\label{Exercise 2.55}Exercise 2.55:} 
 Eva Lu Atorはインタプリタに次の式を入力した。
 
 \begin{scheme}
 (car ''abracadabra)
 \end{scheme}
 
-To her surprise, the interpreter prints back \code{quote}.  Explain.
-
 驚いたことにインタプリタは\code{quote}を応答として表示した。説明せよ。
 \end{quote}
 
-\label{Section 2.3.2}
-\subsection{Example: Symbolic Differentiation}
 
-As an illustration of symbol manipulation and a further illustration of data
-abstraction, consider the design of a procedure that performs symbolic
-differentiation of algebraic expressions.  We would like the procedure to take
-as arguments an algebraic expression and a variable and to return the
-derivative of the expression with respect to the variable.  For example, if the
-arguments to the procedure are \( ax^2 + bx + c \) and \( x \), the
-procedure should return \( 2ax + b \).  Symbolic differentiation is of
-special historical significance in Lisp.  It was one of the motivating examples
-behind the development of a computer language for symbol manipulation.
-Furthermore, it marked the beginning of the line of research that led to the
-development of powerful systems for symbolic mathematical work, which are
-currently being used by a growing number of applied mathematicians and
-physicists.
-
-記号操作の説明として、及びより一層のデータ抽象の説明として、代数式の記号微分を
-行う手続の設計について考えてみましょう。手続は引数として代数式と変数を取り
-変数に対する式の導関数を返すことにします。例えば手続に対する引数が
-\( ax^2 + bx + c \)と\( x \)の時、手続は\( 2ax + b \)を返さなければいけません。
-記号微分はLispにとって歴史的に特別な意味があります。記号操作のためのコンピュータ言語
-の開発の裏にこれがその動機の一例として存在しました。さらにこれが現在増大する応用数学者
-及び科学者に用いられている記号数理の成果の
-ための強力なシステムの開発へと導く一連の研究の始まりに跡を残しました。
-
-In developing the symbolic-differentiation program, we will follow the same
-strategy of data abstraction that we followed in developing the rational-number
-system of \link{Section 2.1.1}.  That is, we will first define a differentiation
-algorithm that operates on abstract objects such as ``sums,'' ``products,'' and
-``variables'' without worrying about how these are to be represented.  Only
-afterward will we address the representation problem.
-
-記号微分プログラムの開発においても\link{Section 2.1.1}の分数システムの開発と
-同じデータ抽象化の戦略に従います。最初に``sums,'' ``products,'' ``variables''
-のような抽象オブジェクトを操作する微分アルゴリズムを定義します。
-これらがどのように表現されているのかについて心配することありません。
-後程、表現上の問題については解決しましょう。
-
-\subsubsection*{The differentiation program with abstract data}
-
-In order to keep things simple, we will consider a very simple
-symbolic-differentiation program that handles expressions that are built up
-using only the operations of addition and multiplication with two arguments.
-Differentiation of any such expression can be carried out by applying the
-following reduction rules:
-
-問題を簡単にするために、二引数の足し算とかけ算の命令のみから構築される式のみを扱う
-とても簡単な記号微分プログラムについて考えましょう。任意のそのような式の微分は以下の
-簡約ルールを適用することで実行されます。
-
-\begin{comment}
-
-\begin{example}
-dc
--- = 0  for c a constant, or a variable different from x
-dx
-
-dx
--- = 1
-dx
-
-d(u + v)   du   dv
--------- = -- + --
-   dx      dx   dx
-
-d(uv)     / dv \     / du \
------ = u | -- | + v | -- |
- dx       \ dx /     \ dx /
-\end{example}
-
-\end{comment}
 \label{Section 2.3.2}
 \subsection{Example: Symbolic Differentiation}
 

@@ -2628,7 +2628,7 @@ Lispは適用順序評価を用いています。理由の一部は上の\code{(
 示されたような式の複数回評価を避けることで付加的な効率を得るためです。
 そしてより重要な理由は正規順序評価は代入によりモデル化可能な手続の範囲を離れる時の
 取扱がとても複雑なためです。一方で、正規順序評価はとても価値のあるツールです。
-その意味のいくらかを\link{Chapter 3} and \link{Chapter 4}にて調査します。
+その意味のいくらかを\link{Chapter 3}と\link{Chapter 4}にて調査します。
 \footnote{\link{Chapter 3}では\newterm{stream processing}を紹介します。これは
 一見して``無限''のデータ構造を正規順評価の制約形式に立脚して取り扱う手法です。
 \link{Section 4.2}ではSchemeインタプリタを変更しSchemeの正規順異種を作成します。}
@@ -12838,7 +12838,9 @@ or squash images towards the center of the frame:\footnote{The diamond-shaped
 images in \link{Figure 2.10} and \link{Figure 2.11} were created with
 \code{squash\-/inwards} applied to \code{wave} and \code{rogers}.}
 
-イメージをフレームの中心に向けて潰したりします。
+イメージをフレームの中心に向けて潰したりします。\footnote{\link{Figure 2.10}と
+\link{Figure 2.11}内のひし形のイメージは\code{squash\-/inwards}を
+\code{wave}と\code{rogers}に適用することで作成されました。}
 
 \begin{scheme}
 (define (squash-inwards painter)
@@ -13333,11 +13335,11 @@ the one that comes as a primitive in Scheme) would also stipulate that if
 記号が\code{eq?}である場合、または両方ともリストであり\code{(car a)}が\code{(car b)}に
 \code{equal?}であり、かつ\code{(cdr a)}が\code{(cdr b)}に\code{equal?}であるような場合である。
 この考えを用いて\code{equal?}を手続として実装せよ。\footnote{
-実際にはプログラマは\code{equal?}を数値と同じくシンボルを含むリストの比較に用いる。
-数値は記号とは認識されない。数の上では等しい二つの数値(\code{=}でテストした場合の様に)が
-\code{eq?}でもそうであるかどうかという問題は高度に実装依存である。\code{equal?}の
-(Schemeにプリミティブとして提供されているような)より良い定義でももし\code{a}と\code{b}が
-数値であるならそれらが数の上で等しい場合に\code{equal?}であると明記するだろう。}
+実際には、プログラマは\code{equal?}を数値と同じくシンボルを含むリストの比較に用いる。
+数値は記号とは認識されない。数の上で等しい二つの数値(\code{=}でテストした場合の様に)が
+\code{eq?}でもそうであるかという問題は高度に実装依存である。\code{equal?}の
+(Schemeにプリミティブとして提供されているような)より良い定義でも、もし\code{a}と\code{b}が
+数値であるなら、それらが数値として等しい場合に\code{equal?}であると明記するだろう。}
  
 \end{quote}
 
