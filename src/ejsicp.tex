@@ -18352,7 +18352,7 @@ guarantee, we could have implemented \code{adjoin\-/term} to be similar to the
 where \code{=zero?} is as defined in \link{Exercise 2.80}.  (See also
 \link{Exercise 2.87} below.)
 
-\code{=zero?}\link{Exercise 2.80}で定義されています。(下の\link{Exercise 2.87}も参照して下さい)。
+\code{=zero?}は\link{Exercise 2.80}で定義されています。(下の\link{Exercise 2.87}も参照して下さい)。
 
 Users of the polynomial package will create (tagged) polynomials by means of
 the procedure:
@@ -18779,7 +18779,7 @@ division by hand.
 \code{greatest\-/common\-/divisor}(\link{Exercise 2.94})を用いて\( Q_1 \)と\( Q_2 \)
 の\acronym{GCD}を求めよ。答が\( P_1 \)と同じにならないことに注意せよ。これが
 非整数命令の演算が\acronym{GCD}に伴なう困難さを生じさせることの例を示している。\footnote{
-\acronym{MIT}Schemeの様な実装ではこの問題は\( Q_1 \)と\( Q_2 \)の実際の約数を分数係数を
+\acronym{MIT} Schemeの様な実装ではこの問題は\( Q_1 \)と\( Q_2 \)の実際の約数を分数係数を
 伴なって生成します。多くのSchemeシステムでは整数の除算が精度に限界のある少数を生成するため、
 正しい約数を得るのに失敗します。}
 何が起こったのか正しく理解するため、\acronym{GCD}を求める間\code{gcd\-/terms}をトレースするか
@@ -22653,6 +22653,8 @@ two mutators:
 inserts the item at the rear of the queue and returns the modified queue as its
 value.
 
+キューの最後尾にアイテムを挿入し、変更されたキューをその値として返す。
+
 \begin{scheme}
 (delete-queue! ~\( \dark \langle \)~~\var{\dark queue}~~\( \dark \rangle \)~)
 \end{scheme}
@@ -24249,7 +24251,10 @@ The agenda is made up of \newterm{time segments}.  Each time segment is a pair
 consisting of a number (the time) and a queue (see \link{Exercise 3.32}) that
 holds the procedures that are scheduled to be run during that time segment.
 
-予定表は\newterm{time segments}
+予定表は\newterm{time segments}(タイムセグメント、時間区分)により構成されています。
+各タイムセグメントは数値(時刻)と、
+そのタイムセグメントの間に実行されるよう予定された手続を持つキュー (\link{Exercise 3.32}参照)から
+成るペアです。
 
 \begin{scheme}
 (define (make-time-segment time queue)
@@ -24262,6 +24267,8 @@ holds the procedures that are scheduled to be run during that time segment.
 We will operate on the time-segment queues using the queue operations described
 in \link{Section 3.3.2}.
 
+タイムセグメントのキューは\link{Section 3.3.2}.で説明したキューの命令を用いて操作します。
+
 The agenda itself is a one-dimensional table of time segments.  It differs from
 the tables described in \link{Section 3.3.3} in that the segments will be sorted
 in order of increasing time.  In addition, we store the \newterm{current time}
@@ -24271,7 +24278,7 @@ of 0:\footnote{The agenda is a headed list, like the tables in
 \link{Section 3.3.3}, but since the list is headed by the time, we do not need an
 additional dummy header (such as the \code{*table*} symbol used with tables).}
 
-予定表自身は1次元のtime segments(タイムセグメント、時間区分)の表です。\link{Section 3.3.3}で説明された表とは
+予定表自身は1次元のタイムセグメントの表です。\link{Section 3.3.3}で説明された表との違いは
 セグメントが時間の増す順にソートされることです。加えて\newterm{current time}(現在時刻)
 (言い換えると最後に処理された行動の時刻)を予定表の頭に保存します。新しく構築された予定表は
 タイムセグメントを持っておらず現在時刻として0を持ちます。\footnote{予定表は\link{Section 3.3.3}のような
@@ -26997,7 +27004,7 @@ discuss this point further at the end of \link{Section 3.5.4}.  In
 従ってストリームを作成し、使用して、リストの作成と使用と同様に、準備された列のデータの
 集約を表現することができます。具体的には、\link{Chapter 2}からストリーム用のリスト命令の類似手続、
 例えば\code{list\-/ref}, \code{map}, \code{for\-/each}を構築できます。\footnote{これはあなたを困惑させ
-るでしょう。そのような似た手続をストリームとリストに定義するという事実はは、私達がその根底にある
+るでしょう。そのような似た手続をストリームとリストに定義するという事実は、私達がその根底にある
 抽象を見逃していることを示します。残念なことに、この抽象を利用するためには、現在可能なものより
 より細かな評価過程に対するコントロールを行使する必要があります。この点については\link{Section 3.5.4}の
 終わりにてより詳細に議論します。\link{Section 4.2}ではリストとストリームを統合するフレームワークを
@@ -27077,6 +27084,7 @@ let us use these to construct streams.
 ことを強要します。以下で\code{delay}と\code{force}がどのように実装できるかについて学びますが、
 最初にこれらを用いてストリームを構築しましょう。
 
+\noindent
 \code{Cons\-/stream} is a special form defined so that
 
 \code{cons\-/stream}は特別な形式で、
@@ -28572,12 +28580,12 @@ less efficient because it performs redundant computation.  Explain Alyssa's
 answer.  Would the two versions still differ in efficiency if our
 implementation of \code{delay} used only \code{(lambda () <\var{exp}>)} without
 using the optimization provided by \code{memo\-/proc} (\link{Section 3.5.1})?
-\end{quote}
 
 Alyssa P. Hackerが問題の手続のこの版は冗長な演算を行うため、かなり非効率であるからと答えた。
 Alyssaの答を説明せよ。もし\code{delay}の実装が\code{memo\-/proc} (\link{Section 3.5.1})で提供された最適化を
 用いずに\code{(lambda () <\var{exp}>)}のみを使用したならば2つの版の間に依然として効率上の
 違いは存在するだろうか?
+\end{quote}
 
 \begin{quote}
 \heading{\phantomsection\label{Exercise 3.64}Exercise 3.64:} Write a procedure
@@ -30695,13 +30703,13 @@ procedures, \code{lookup\-/variable\-/value} accesses the values of variables, a
 \code{apply\-/primitive\-/procedure} applies a primitive procedure to a given list
 of arguments.
 
-評価機の実装は評価される式の\newterm{syntax}(文法)を定義する手続に依存します。
+評価機の実装は評価される式の\newterm{syntax}(構文)を定義する手続に依存します。
 私達はデータ抽象化を用いて評価機を言語の表現に非依存にします。
 例えば代入はシンボル\code{set!}で始まるリストにより表現されるべきという選択に
 委ねるのではなく、代入のためのテストに抽象述語\code{assignment?}を用い、そして
 代入の部品にアクセスするために抽象セレクタ\code{assignment\-/variable}と\code{assignment\-/value}を
 用います。式の実装については\link{Section 4.1.2}で詳細に説明されます。また\link{Section 4.1.3}で
-説明される命令も存在し、これは手続と環境の表現を指定します。例えば\code{make\-/procedure}は
+説明される``命令''もあり、これは手続と環境の表現を指定します。例えば\code{make\-/procedure}は
 複合手続を構築し、\code{lookup\-/variable\-/value}は変数の値にアクセスし、
 \code{apply\-/primitive\-/procedure}はプリミティブな手続を与えられた引数のリストに対し
 適用します。
@@ -30770,7 +30778,7 @@ syntax procedures.
 \code{eval}は評価される式の構文上の方の事例分析として構造化されます。
 手続の一般性を保つため、式の型の決定を抽象的に表現し、多種の式に対するどんな
 特定の表現にも委託しません。式の各型はそれをテストする述語と、その部分を選択する
-抽象手段を持ちます。この\newterm{abstract syntax}(抽象文法)は同じ評価機を用いつつ、
+抽象手段を持ちます。この\newterm{abstract syntax}(抽象構文)は同じ評価機を用いつつ、
 異なる構文手続の集合と合わせることで、言語の文法をどのようにして変更できるかについて
 知ることを簡単にします。
 
@@ -30958,7 +30966,7 @@ procedures.}
 用いることで(そして\code{operands}がリストを返すよう規定することで)より単純にすることが
 できました。ここでは\code{map}を用いないことを選択することで高階手続を用いなくとも、
 例え評価機がサポートする言語が高階手続をサポートすることになっても、評価機が
-実装できることを強調しました。(そして、従って高階手続を持たない言語で評価機を書くことも可能です)。}
+実装できることを強調しました。(従って高階手続を持たない言語で評価機を書くことも可能です)。}
 
 \begin{scheme}
 (define (list-of-values exps env)
@@ -31117,14 +31125,14 @@ expressions.
 双方のプログラムが記号式を操作します。両方のプログラムにおいて、複合式上の操作の
 結果は式の断片を再帰的に操作し、式の型に依存した方法で結合することにより決定します。
 両方のプログラムにおいて、私達はデータ抽象化を用いて式がどのように表現されるかの
-詳細から命令の一般的なルールを分離します。微分プログラムではこれが同じ微分手続が
+詳細から命令の一般的なルールを分離します。微分プログラムではこのことが、同じ微分手続が
 接頭辞形式、接中辞形式、またはいくつかの他の形式の代数式を扱えることを意味しました。
-評価機にとっては、これは評価される言語の文法がもっぱら式を分類し、断片を抽出する
+評価機にとっては、これは評価される言語の構文がもっぱら式を分類し、断片を抽出する
 手続により決定されることを意味します。
 
 Here is the specification of the syntax of our language:
 
-以下に私達の言語の文法の仕様を示します。
+以下に私達の言語の構文の仕様を示します。
 
 \begin{itemize}
 
@@ -32680,7 +32688,7 @@ assignment.  For example, the procedure
 
 しかし内部定義の名前が真に同時にスコープを持つようになる簡単な定義の扱い方が存在します。
 単に現在の環境に入ることになる全てのローカル変数をどの値の式が評価されるよりも早く
-作成することです。これを行う1つの方法は\code{lambda}式上の文法変形によります。
+作成することです。これを行う1つの方法は\code{lambda}式上の構文変形によります。
 \code{lambda}式のボディを評価する前に、ボディの中の全ての内部定義を走査し、削除します。
 内部で定義された変数は\code{let}を用いて作成され、次に代入を用いてそれらの値に設定されます。
 例えば、以下の手続は、
@@ -32764,7 +32772,6 @@ Which place is better?  Why?
 
 \code{scan\-/out\-/defines}をインタプリタの\code{make\-/procedure}または
 \code{procedure\-/body} (see \link{Section 4.1.3})の中に導入せよ。
-
 どちらの場所が良いか? それは何故か?
 
 \end{enumerate}
@@ -32873,7 +32880,7 @@ Benは結果は\code{define}に対する逐次的実行のルールを用いて�
 Evaは3つ目の立ち位置を取る。彼女はもし\code{a}と\code{b}の定義が真に同時であることを意味
 するのであれば、\code{a}に対する値5は\code{b}の評価にて用いられるべきであると述べた。
 従ってEvaの視点では\code{a}は5でなければならず、\code{b}は15でなければならない。そして
-結果は20にならなければならない。(もし存在するなら)3人の視点であなたはどれを指示するのか?
+結果は20にならなければならない。(もし同意するなら)3人の視点であなたはどれを支持するのか?
 あなたはEvaが好んだように振る舞う内部定義を実装する方法を考案できるか?\footnote{\acronym{MIT} Schemeの
 実装者達は次の根拠に従ってAlyssaを支持する。Evaは原理上は正しい。定義は同時だと見做される
 べきだ。しかしEvaが要求することを行う一般的でかつ効率的な仕組みを実装することは難しく
@@ -32944,10 +32951,10 @@ above or in \link{Exercise 4.18}.  That is, the \code{letrec} variables should
 be created with a \code{let} and then be assigned their values with
 \code{set!}.
 
-\code{letrec}を派生式として実装せよ。\code{letrec}式を\code{let}を上で示されたように、
+\code{letrec}を派生式として実装せよ。\code{letrec}式を\code{let}を上で示したように、
 または\link{Exercise 4.18}の様に変形することで行え。
 即ち、\code{letrec}の変数は\code{let}を用いて作成しなければならず、そして次に
-それらの値を\code{set!}で代入されねばならない。
+それらの値を\code{set!}で代入すること。
 
 \item
 Louis Reasoner is confused by all this fuss about internal definitions.  The
@@ -33028,7 +33035,7 @@ definitions:
 Fill in the missing expressions to complete an alternative definition of
 \code{f}, which uses neither internal definitions nor \code{letrec}:
 
-\code{f}の代替的な定義を完成するために書けている式を埋めよ。これは内部定義も
+\code{f}の代替的な定義を完成するために欠けている式を埋めよ。これは内部定義も
 \code{letrec}も使用してはいない。
 
 \begin{scheme}
@@ -33051,8 +33058,8 @@ Thus if a program is executed many times, its syntax is analyzed many times.
 Consider, for example, evaluating \code{(factorial 4)} using the following
 definition of \code{factorial}:
 
-上で実装された評価機は簡単ですが、非効率です。式の文法上の分析がその実行と相互
-配置されているためです。従ってもしプログラムが何度も実行された場合、その文法は
+上で実装された評価機は簡単ですが、非効率です。式の構文上の分析がその実行と相互
+配置されているためです。従ってもしプログラムが何度も実行された場合、その構文は
 何度も分析されます。例えば次の\code{factorial}を用いて\code{(factorial 4)}を評価する
 ことを考えてみて下さい。
 
@@ -33072,11 +33079,11 @@ application, and must extract its operator and operands.  This analysis is
 expensive.  Performing it repeatedly is wasteful.
 
 \code{factorial}が呼ばれる度に、評価機はボディが\code{if}式であることを判断せねばならず、
-それから述語を取り出します。その後にのみ述語を評価しその値により呼出が行えます。
+それから述語を取り出します。その後にのみ述語を評価しその値により振り分けが行えます。
 式\code{(* (factorial (- n 1)) n)}、または部分式
 \code{(factorial (- n 1))}と\code{(- n 1)}を評価する度に、評価機は\code{eval}にて状況分析を
 行い式が適用であるかを判断せねばならず、また演算子とオペランドの抽出をせねばなりません。
-この分析はコストが高いです。これを繰り返し実行することは無駄が多いでしょう。
+この分析はコストが高いのです。これを繰り返し実行することは無駄が多いでしょう。
 
 We can transform the evaluator to be significantly more efficient by arranging
 things so that syntactic analysis is performed only once.\footnote{This
@@ -33094,15 +33101,15 @@ because \code{analyze} will be called only once on an expression, while the
 execution procedure may be called many times.
 
 評価機を変形し文法上の分析をたった1度のみ実行されるように準備することで
-著しくより効率的にすることができます。\footnote{この技はコンパイル過程に
+著しく効率良くすることができます。\footnote{この技はコンパイル過程に
 不可欠な要素であり、\link{Chapter 5}で議論します。Jonathan Reesは1982年頃に
 このようなSchemeインタプリタをTプロジェクトのために書きました(\link{Rees and Adams 1982})。
 Marc \link{Feeley (1986)} (\link{Feeley and Lapalme 1987}も参照)は彼の修士論文にて
 独力でこの技を発明しました。}私達は式と環境を取る\code{eval}を2つに分けます。
-手続\code{analyze}は式のみを取ります。文法上の分析を行い新しい手続
+手続\code{analyze}は式のみを取ります。構文上の分析を行い新しい手続
 \newterm{execution procedure}(実行手続)を返します。この手続は分析された式を
 実行するにおいて行われた結果をカプセル化します。実行手続は環境を引数として
-取り評価を完了します。これは実行手続が何度呼ばれるのに対し、\code{analyze}が式に
+取り評価を完了します。これは実行手続が何度も呼ばれるのに対し、\code{analyze}が式に
 対して1度しか呼ばれないため作業量を減らせます。
 
 With the separation into analysis and execution, \code{eval} now becomes
@@ -33146,7 +33153,7 @@ Here is the simplest syntactic analysis procedure, which handles
 self-evaluating expressions.  It returns an execution procedure that ignores
 its environment argument and just returns the expression:
 
-以下に最も簡単な文法分析手続があります。これは自己評価式です。環境引数を無視し、
+以下に最も簡単な構文分析手続があります。これは自己評価式です。環境引数を無視し、
 ただ式を返す実行手続を返します。
 
 \begin{scheme}
@@ -33178,7 +33185,7 @@ be found, thus obviating the need to scan the environment for the entry that
 matches the variable.}
 
 変数の値の探索は依然として実行フェーズで行わねばなりません。これは環境を知ることに
-依存するためです。\footnote{しかし、文法上の分析の部分にて終わらせられる変数探索の
+依存するためです。\footnote{しかし、構文上の分析の部分にて終わらせられる変数探索の
 重要な部分があります。\link{Section 5.5.6}にて示されるように、環境構造の中でどこで変数の値が
 見つかるか、その位置を決定することが可能です。従って変数にマッチするエントリのために
 環境を走査する必要を防ぐことができます。}
@@ -33321,10 +33328,10 @@ for the body on the extended environment.
 
 \noindent
 Our new evaluator uses the same data structures, syntax procedures, and
-run-time support procedures as in sections \link{Sec. 4.1.2,,4.1.2}, \link{Sec. 4.1.3,,4.1.3}, and
-\link{Sec. 4.1.4,,4.1.4}.
+run-time support procedures as in sections \link{Sec. 4.1.2}, \link{Sec. 4.1.3}, and
+\link{Sec. 4.1.4}.
 
-私達の新しい評価機は節\link{Sec. 4.1.2,,4.1.2}, \link{Sec. 4.1.3,,4.1.3}, \link{Sec. 4.1.4,,4.1.4}に
+私達の新しい評価機は節\link{Sec. 4.1.2}, \link{Sec. 4.1.3}, \link{Sec. 4.1.4}に
 あるように、同じデータ構造、構文手続、実行時サポート手続を用います。
 
 \begin{quote}
@@ -33430,7 +33437,7 @@ expressive power.
 加えて組込むことは設計者に対し下層の言語から機能をsnarfする\footnote{Snarf: ``つかみ
 取ること、特に巨大な文書やファイルを持ち主の許可を得ても得なくても使う目的のため''
 Snarf Down: ``snarfすること、稀に吸収する、処理する、または理解するの含意を持つ''
-(これらの定義は\link{Steele et al. 1983}からsnarfされた。\link{Raymond 1993}も参照すること)}
+(これらの定義は\link{Steele et al. 1983}からsnarfした。\link{Raymond 1993}も参照すること)}
 ことを可能にします。これは
 私達の組込Lisp評価機が下層のLispからプリミティブやコントロール構造を使用するのと同じです。
 設計者は(もし必要があれば)後で低レベル言語やハードウェアにて完全な実装を構築するだけです。
@@ -33462,7 +33469,7 @@ used interchangeably.}  Consider the procedure
 遅らせることは\newterm{lazy evaluation}(遅延評価)と呼ばれます。\footnote{専門用語
 ``lazy''と``normal-order''の間の違いはいささか曖昧(fuzzy)です。一般的に``lazy''は特定の
 評価機の仕組みを参照しますが、一方で``normal-order''は言語の意味を参照し、どんな特定の評価戦術からも
-独立しています。しかしこれは確かな区別ではありあえん。そして2つの専門用語は良く同義的に
+独立しています。しかしこれは確かな区別ではありません。そして2つの専門用語は良く同義的に
 用いられています。} 以下の手続について考えてみましょう。
 
 \begin{scheme}
@@ -33590,7 +33597,7 @@ than as a special form.
 
 Ben BitdiddleとAlyssa P. Hackerは\code{unless}のような物を実装するための
 遅延評価の重要性について意見が分かれた。Benは\code{unless}を適用順序でも特別形式として
-実装可能である点を指摘した。Alyssaはもしそれを行えば\code{unless}はただ単に文法であり
+実装可能である点を指摘した。Alyssaはもしそれを行えば\code{unless}はただ単に構文であり
 高階手続と連動して使用できる手続ではないと反論した。議論の両サイド上の詳細を埋めよ。
 \code{unless}をどのようにして派生手続として(\code{cond}や\code{let}のように)実装するかを示せ。
 そして特別形式ではなく手続として存在する\code{unless}を持つことが有効である状況の
@@ -33624,7 +33631,7 @@ is needed, as if it had been evaluated at the time of the application.  Thus,
 the thunk must contain the argument expression and the environment in which the
 procedure application is being evaluated.
 
-基本的な考えは、手続を適用する時、インタプリタはどの引数が評価されるべきかとそして、
+基本的な考えは、手続を適用する時、インタプリタはどの引数が評価されるべきかと、
 どの引数が遅延されるべきかを決定しなければなりません。遅延化された引数は評価されません。
 その代わりにそれらは\newterm{thunks}(サンク)と呼ばれるオブジェクトに変形されます。\footnote{\newterm{thunk}という
 単語は非公式な作業部会により考案されました。彼等はAlgol 60にてcall\-/by\-/nameの
@@ -33863,7 +33870,7 @@ something that is not a thunk:
 私達の評価機は手続が引数に適用される時にサンクを作成することと、これらのサンクを
 後で強制することの準備をせねばなりません。サンクは式を環境と一緒にまとめなければ
 なりません。そうすることで引数が後から生成されることができます。
-サンクを強制するためには単純に式と感応をサンクから取り出しその環境の中で式を評価します。
+サンクを強制するためには単純に式と環境をサンクから取り出しその環境の中で式を評価します。
 \code{eval}ではなく\code{actual\-/value}を用いることで式の値それ自身がサンクである場合にその
 強制をサンクでない物に辿り着くまで繰り返します。
 
@@ -33966,7 +33973,7 @@ your answers.\footnote{This exercise demonstrates that the interaction between
 lazy evaluation and side effects can be very confusing.  This is just what you
 might expect from the discussion in \link{Chapter 3}.}
 
-以下の一連の応答の書けた値を与えよ。そして貴方の回答について説明せよ。\footnote{この
+以下の一連の応答の欠けた値を与えよ。そして貴方の回答について説明せよ。\footnote{この
 課題は遅延評価と副作用の間の応答が大きな混乱の原因となりえることを実演している。
 これこそが\link{Chapter 3}の議論からあなたが予期するかもしれないことである。}
 
@@ -33996,8 +34003,9 @@ an example that demonstrates the need for this forcing.
 \code{eval}は\code{eval}でなく\code{actual\-/value}を用いて\code{apply}に渡す前に
 演算子を評価する。演算子の値を強制するためである。この強制の必要性を実演する
 例を与えよ。
+\end{quote}
 
-\noindent
+\begin{quote}
 \heading{\phantomsection\label{Exercise 4.29}Exercise 4.29:} Exhibit a program that you would
 expect to run much more slowly without memoization than with memoization.
 Also, consider the following interaction, where the \code{id} procedure is
@@ -34073,7 +34081,7 @@ He claims that the evaluator in the text (with the original
 \code{eval\-/sequence}) handles this correctly:
 
 彼はテキストの評価機(オリジナルの\code{eval\-/sequence}を持つ物)は
-これを正しく取り扱う。
+これを正しく取り扱うと主張した。
 
 \begin{scheme}
 ~\textit{;;; L-Eval input:}~
@@ -34097,7 +34105,7 @@ change to \code{eval\-/sequence}.  He defines the following two procedures in th
 lazy evaluator:
 
 CyはBenが\code{for\-/each}について正しいのは同意した。しかし彼が\code{eval\-/sequence}に対する
-変更を提案した時、彼が考えていたのはこの種のプログラムではないと彼は言った。
+変更を提案した時、彼が考えていたのはこの種のプログラムではないと言った。
 彼は以下の2つの遅延評価の手続を定義した。
 
 \begin{scheme}
@@ -34147,9 +34155,9 @@ between delaying with and without memoization.  For example, the definition
 
 この節で取り上げられた取り組み方は少々、不愉快である。Schemeに対して互換性のない
 変更を行うためだ。遅延評価を\newterm{upward-compatible extension}(上位互換性のある拡張)として
-実装することがより良いだろう。それは通常のSchemeプログラムが依然と同じように
+実装するほうがより良いだろう。それは通常のSchemeプログラムが依然と同じように
 働くということである。これをユーザに引数が遅延されるか、されないかを
-コントロールさせるように手続定義の文法を拡張することで可能である。それを行う間、
+コントロールさせるように手続定義の構文を拡張することで可能である。それを行う間、
 ユーザに遅延をメモ化させるか、させないかの選択も同様に与えることができるだろう。
 例えば、以下の定義は
 
@@ -34173,14 +34181,14 @@ to force or delay arguments accordingly, and you must arrange for forcing to
 memoize or not, as appropriate.
 
 \code{f}は4つの引数の手続であり、最初と3番目の引数は手続が呼ばれた時に評価され、
-2番目と遅延化され、4番目は遅延化とメモ化が行われる。従って通常の手続定義は
+2番目は遅延化され、4番目は遅延化とメモ化が行われる。従って通常の手続定義は
 通常のSchemeと同じ振舞を行うが、\code{lazy\-/memo}宣言を各複合手続の各パラメタに
 追加することでこの節で定義された遅延評価の振舞を行う。この変更の設計と実装は
-Schemeに対しそのような拡張の生成を必要とする。あなたは\code{define}に対する新しい文法を
+Schemeに対しそのような拡張の生成を必要とする。あなたは\code{define}に対する新しい構文を
 取り扱う新しい構文手続を実装しなければならない。また引数がいつ遅延化されるか、そして
 いつ強制するか、またはそれに応じて引数を遅延化するか決定するために\code{eval}や
 \code{apply}に対して準備もしなければならない。同時に強制に対してメモ化するか、しないかも
-適切に準備しなければならない。
+適切に準備すること。
 \end{quote}
 
 \label{Section 4.2.3}
@@ -35108,7 +35116,7 @@ Also determine how many solutions there are if we are not told that Mary Ann's
 last name is Moore.
 
 効率良く実行されるプログラムを書くように努めること(\link{Exercise 4.40}参照)。
-またもしMary Annの家族名がMooreであることを伝えなければ、いくつの解が存在するだろうか?
+また、もしMary Annの家族名がMooreであることを伝えなければ、いくつの解が存在するだろうか?
 @end quotation
 
 \begin{quote}
@@ -36052,12 +36060,15 @@ arguments:
       ((car aprocs)
        env
        ;;~\textrm{success continuation for this \code{aproc}}~
+       ;;~\textrm{この\code{aproc}のための成功継続}~
        (lambda (arg fail2)
          (get-args
           (cdr aprocs)
           env
           ;;~\textrm{success continuation for}~
           ;;~\textrm{recursive call to \code{get\-/args}}~
+          ;;~\textrm{\code{get\-/args}の再帰呼出のための}~
+          ;;~\textrm{成功継続}~
           (lambda (args fail3)
             (succeed (cons arg args) fail3))
           fail2))
@@ -36733,7 +36744,7 @@ All of these people are in the computer division, as indicated by the word
 Ben is a high-level employee.  His supervisor is the company's big wheel
 himself:
 
-Benは高位の従業員です。彼の監督官は会社の有力者である彼自身です。
+Benは高位の従業員です。彼の監督者は会社の有力者である彼自身です。
 
 \begin{scheme}
 (supervisor (Bitdiddle Ben) (Warbucks Oliver))
@@ -40708,7 +40719,8 @@ motions are caused by a most simple and material force, just as all motions of
 the clock are caused by a single weight.
 
 私の目的は天の機械は神からの授かり物や生き物ではなく、時計仕掛のような物であることを
-示すことです。(そして時計が魂を持つと信ずる人はその仕事によりメーカーの栄光に起因すると考えることです)。
+示すことです。
+(そして時計が魂を持つと信ずる人はその理由をその仕事に対するメーカーの栄光に帰するでしょう。)
 それはほとんど全ての多様な運動が最も単純な物質の力により引き起こされるとする限りにおいて、
 時計の全ての動作が1つの錘により引き起こされるのと全く同じように。
 
