@@ -409,19 +409,23 @@ and subscripts (`\_').  Divining \emph{which} has been left as an exercise to
 the reader. But at least we don't put our brave astronauts at risk by encoding
 the \emph{greater-than-or-equal} symbol as \code{<u>\&gt;</u>}.
 
-Texinfoへの変換は可能な範囲で直接的な翻字でした。{\TeX}-to-\acronym{HTML}変換の様に
+Texinfoへの変換は可能な範囲での直接的な翻字でした。{\TeX}-to-\acronym{HTML}変換の様に
 ある程度の破れが含まれること無しにはできませんでした。非公式TexInfo形式においては
 図が「失なわれた技術」であるアスキーアートによる下手糞な"復活"を被りました。また
 多量の上付き文字と下付き文字のいくつかの変換の間に不明瞭さによる変換の
 失敗が含まれてしまった可能性が大いにあります。読者への課題として残されたと予測します。
 しかし、最低でも\emph{``以上''}の記号を\texttt{<u>\&gt;</u>}と符号化することで
-我等の勇敢な宇宙飛行士を危険に置くようなことはしませんでした。
+我等の勇敢な宇宙飛行士を危険に晒すようなことはしませんでした。
 
 If you modify \texttt{sicp.texi} to correct errors or improve the
-\acronym{ASCII} art, then update the \code{hoge}
+\acronym{ASCII} art, then update the \code{@set utfversion {utfversion}}
 line to reflect your delta.  For example, if you started with Lytha's version
 \code{1}, and your name is Bob, then you could name your successive versions
-\code{1.bob1}, \code{1.bob2},  \dots , \code{1.bob\textit{n}}. 
+\code{1.bob1}, \code{1.bob2},  \dots , \code{1.bob\textit{n}}.  Also update
+\code{utfversiondate}.  If you want to distribute your version on the Web, then
+embedding the string ``sicp.texi'' somewhere in the file or Web page will make
+it easier for people to find with Web search engines.
+
 
 もしあなたが\texttt{sicp.texi}を変更しエラーを訂正したり、アスキーアートを向上させたなら
 \code{@set utfversion {utfversion}}の行を更新し、あなたの修正を反映して下さい。
@@ -3355,7 +3359,7 @@ kind of end test.  Does this work better for small and large numbers?
 見つける場合にはあまり効果的ではないだろう。また実際のコンピュータでは数値演算
 命令はほとんど常に精度に制限のある状態で実行される。これが我々のテストをとても
 大きな数値に対して不適切にする。ここまでの記述についてテストがどのように小さな値と
-大きな値にて失敗するか例を用いて説明せよ。\code{good\-/enough?}実装の代替戦略について
+大きな値にて失敗するか例を用いて説明せよ。\code{good\-/enough?}実装の代替戦略は
 \code{guess}がある試行から次に向けどのように変化するか監視し、変化が推定値の割合に
 おいてとても小さい時に止めることである。このような終了テストを用いるsquare-rootを
 設計せよ。これは小さな、及び、大きな数値に対してより良く働くだろうか?
@@ -3665,7 +3669,7 @@ procedure to have internal definitions that are local to that procedure.  For
 example, in the square-root problem we can write
 
 このプログラムの問題は\code{sqrt}のユーザにとって重要な手続は\code{sqrt}のみであることです。
-他の手続(\code{sqrt\-/iter}, \code{good\-/enough?}, t{improve})は彼らにとって余計なものです。
+他の手続(\code{sqrt\-/iter}, \code{good\-/enough?}, \code{improve})は彼らにとって余計なものです。
 ユーザは他に\code{good\-/enough?}という名の手続を、square-rootプログラムと一緒に使用する
 他のプログラムの一部として定義することができません。なぜなら\code{sqrt}がそれを必要と
 するからです。この問題は多くの異なるプログラマにより巨大システムを構築する場合に特に
@@ -6867,7 +6871,7 @@ directly as procedures.
 関係する特定の数値から独立させました。\link{Section 1.3.1}の\code{integral}手続のような
 高階手続ではより強力な種類の抽象化について学び始めました。
 関係する特定の関数から独立した汎用的演算手法を表現するのに利用される手続でした。
-この節では2つのより複雑な例---零と関数の固定点を見付けるための汎用手法---について議論します。
+この節では2つのより複雑な例---零と関数の不動点を見付けるための汎用手法---について議論します。
 そしてこれらの手法がどのように手続として直接的に表現されるのかを示します。
 
 \subsubsection*{Finding roots of equations by the half-interval method}
@@ -12239,7 +12243,7 @@ We can also define recursive operations.  Here's one that makes painters split
 and branch towards the right as shown in \link{Figure 2.13}
 and \link{Figure 2.14}:
 
-また再帰命令を手続することも可能です。以下はペインタを分割し、\link{Figure 2.13}に示すように
+また再帰命令を定義することも可能です。以下はペインタを分割し、\link{Figure 2.13}に示すように
 右へ向けて枝分かれします。
 
 \begin{scheme}
@@ -29583,7 +29587,8 @@ stream of successive values of \( y \).
 これは\( d^2\!y\! \big/\! d\!t^2 \)の値が\( y \)と\( d\!y\! \big/\! d\!t \)の値に依存し、
 これらの両方が\( d^2\!y\! \big/\! d\!t^2 \)を積分することにより決定されるからである。
 \link{Figure 3.35}に示される図の符号化を行いたい。定数\( a \), \( b \), \( d\!t \)と
-\( y \)の初期値\( y_0 \)と\( d\!y_0 \)
+初期値、\( y \)に対する\( y_0 \)と\( d\!y_0 \)を引数として取り、\( y \)の一連の値の
+ストリームを生成する手続\code{solve-2nd}を書け。
 \end{quote}
 
 \begin{figure}[tb]
@@ -32333,7 +32338,7 @@ our evaluator the definition of \code{factorial}, as shown in \link{Figure 4.3},
 the evaluator will be able to compute factorials.
 
 同様な方法で、評価機を入力として機械の説明書を取るとても特殊な機械だと見做すことができます。
-この入力を与えられると、評価機はそれ自身を記述された機械へと設定します。
+この入力を与えられると、評価機はそれ自身を記述された機械を真似するように設定します。
 例えばもし評価機に\link{Figure 4.3}で示される\code{factorial}の記述を与えれば、
 評価機は階乗の計算ができるようになります。
 
@@ -39778,11 +39783,11 @@ the equation \( y = 1 + y \big/ 2 \).  Beginning with the expression \( 1 + y \b
 and repeatedly substituting \( 1 + y \big/ 2 \) for \( y \) gives
 
 一般的に、\code{?y}を\code{?y}を含む式にユニフィケーションを行う場合には、
-方程式\code{?y} = <\var{expression involving \code{?y}}>の固定点を見つけられなければなりません。
-偶に解が存在する式を構文的に形成することが可能です。例えば、\code{?y} = \code{(f ?y)}は固定点
+方程式\code{?y} = <\var{expression involving \code{?y}}>の不動点を見つけられなければなりません。
+偶に解が存在する式を構文的に形成することが可能です。例えば、\code{?y} = \code{(f ?y)}は不動点
 \code{(f (f (f \( \dots \) )))}を持つように見えます。これは式\code{(f ?y)}で始め、繰り返し\code{?y}を
 \code{(f ?y)}で置き換えることで生成できます。残念ながら全てのそのような方程式が意味のある
-固定点を持つわけではありません。ここで浮かび上がる問題は数学で無限級数を扱う場合の
+不動点を持つわけではありません。ここで浮かび上がる問題は数学で無限級数を扱う場合の
 問題と似ています。例えば、私達は2が方程式\( y = 1 + y \big/ 2 \)の解であることを知っています。
 式\( 1 + y \big/ 2 \)で始めて、繰り返し\( y \)を\( 1 + y \big/ 2 \)で置き換えていくと
 以下の様になります。
