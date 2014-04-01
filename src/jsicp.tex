@@ -358,9 +358,9 @@ based on \href{http://www.neilvandyke.org/sicp-texi/}{2.neilvandyke4} (January 1
 
 %=======================================================================================================
 
-\label{UTF}
 \chapter*{非公式Texinfoフォーマット}
 \addcontentsline{toc}{chapter}{非公式Texinfoフォーマット}
+\label{UTF}
 
 これは\acronym{SICP}の第二版非公式Texinfo版です。
 
@@ -434,10 +434,60 @@ Texinfoへの変換は可能な範囲での直接的な翻字でした。{\TeX}-
 \textit{A.R, May, 2011}
 
 %============================================================================================================
+\chapter*{非公式日本語版}
+\addcontentsline{toc}{chapter}{非公式日本語版}
+\label{Unofficail Japanese Edition}
 
-\label{Dedication}
+SICPはかつて第一版、第二版共に日本にて公式に翻訳が商業出版されていました。
+第二版を出版していたピアソン桐原が2013年8月に
+\href{http://slashdot.jp/story/13/08/09/0517250/}{日本市場から撤退したため}、
+日本語でSICPを読む機会は失われました。
+このことがこの翻訳を行うことの契機となりました。
+
+実際にはその後、2014年1月付近に、寛大にも第二版の訳者、和田英一先生がオンライン上にてSICPの訳書、
+\href{http://sicp.iijlab.net/}{「計算機プログラムの構造と解釈」}全文を公開して下さいました。この時点でこの非公式日本語版の
+価値は随分と小さくなりました。
+
+しかし、その時、既に3章まで翻訳していたこと、そして非公式TexInfo版が2013年11月に大改訂を行い、
+当初の日本語には正式に対応していないtexi2pdfから変更を行いXeLaTeXを採用したために、
+日本語でも美しい組版ができる可能性が出てきたことが、この原稿を廃棄することを押し止めました。
+
+SICPのライセンスについてはインターネットアーカイブにて調べてみました。
+2001年1月にMITがSICPを寛大にもオンラインで無料で読むことができるように公開された時にはライセンスが指定されていませんでした。全てを信用されてのことだと思います。
+
+2008年4月にMITはSICPのライセンスをCC BY-NCと指定しました。その後ライセンスは2011年10月に一旦CC BY-SAに変更されます。
+そして2年後の2013年9月に再びCC BY-NCへと戻されました。この事実がSICP原文のライセンスの解釈を難しくしています。
+ライセンスの変更はオーナーの自由ですが、ライセンシーはコンテンツ取得時のライセンスを尊重すれば良いからです。
+
+最初に非公式TexInfo版を作成したLytha Aythはライセンス指定の無いSICP公開をWeb文化に基づくものだと理解しました。
+次にLaTeXの組版を開発したAndres RabaはCC BY-SAに基き正式な許諾の下、PDF版を作成しました。
+私の翻訳はPDF版のライセンスであるCC BY-SAに従うことが求められます。しかし、現在のMITが非商業を求めて
+いることを鑑みて、Raba氏に許可を頂いた上で非商業制約を追加したCC BY-NC-SAにてリリースすることにしました。
+
+CC BY-NC、及びBY-SAは共に翻訳の許可を明記しています。従ってこの翻訳にはLythaが心配したような法的問題は
+起こらないと信じています。しかし同時に、法的問題は常に一方的に起こされることがあることもまた現実です。
+従って読者の皆様には常にネットワーク上のデータは(そしてプログラムも!)消えてなくなってしまうシャボン玉で
+あることを忘れずに御用心願います。
+
+TeX、LaTeX環境の日本語対応を進めて下さった全ての関係者の皆様に感謝します。
+特に最新の情報を常に更新し続けて下さっている\href{http://oku.edu.mie-u.ac.jp/~okumura/texwiki/}{TeX Wiki}の奥村~晴彦氏、
+W32TeXを自動でインストールし更新可能な
+\href{http://www.math.sci.hokudai.ac.jp/~abenori/soft/abtexinst.html}{TeXインストーラ}作者の阿部~紀行氏、
+XeLaTeX向け日本語パッケージ
+\href{http://zrbabbler.sp.land.to/zxjatype.html}{``ZXjatype''}
+を開発して下さった八登~崇之氏に感謝致します。
+
+海外ではSICPの新しい形の開発が非常に盛んです。PDFはもちろん、epubやインタラクティブ版、ClojureやJavaScriptに
+よるSICP等が公開されています。この翻訳はCC BY-NC-SAですので非商業であればそのような
+派生や翻案に利用することが可能です。日本でもSICPの世界が広がっていくことを期待しています。
+
+
+%============================================================================================================
+
+
 \chapter*{献辞}
 \addcontentsline{toc}{chapter}{献辞}
+\label{Dedication}
 
 
 
@@ -471,9 +521,10 @@ Texinfoへの変換は可能な範囲での直接的な翻字でした。{\TeX}-
 
 %===========================================================================================================
 
-\label{Foreword}
+
 \chapter*{前書き}
 \addcontentsline{toc}{chapter}{前書き}
+\label{Foreword}
 
 \vspace{-0.6em}
 
@@ -635,9 +686,10 @@ New Haven, Connecticut
 
 %=========================================================================================================
 
-\label{Preface}
+
 \chapter*{第二版~序文}
 \addcontentsline{toc}{chapter}{第二版~序文}
+\label{Preface}
 
 \begin{quote}
 ソフトウェアが他の何物にも似ていないと言うことはできるでしょうか。それが捨てられる
@@ -690,9 +742,10 @@ World-Wide-Webサイト \href{http://mitpress.mit.edu/sicp}{http://mitpress.mit.
 Scheme方言の実装が含まれます。
 
 %============================================================================================================
-\label{Preface 1e}
+
 \chapter*{第一版~序文}
 \addcontentsline{toc}{chapter}{第一版~序文}
+\label{Preface 1e}
 
 % \vspace{-0.6em}
 \begin{quote}
@@ -785,9 +838,10 @@ Church(チャーチ)の\(lambda\)-calculus(ラムダ演算)のプログラミン
 Haskell Curry等が含まれております。
 
 %============================================================================================================
-\label{Acknowledgements}
+
 \chapter*{謝辞}
 \addcontentsline{toc}{chapter}{謝辞}
+\label{Acknowledgements}
 
 
 この本とこのカリキュラムの開発を手助けして下さった大くの人々に感謝致します。
@@ -915,47 +969,13 @@ Hewlett-Packardからのサポートを可能にして下さったIra Goldstein�
 それに\acronym{DARPA}からのサポートを可能にして下さったBob Kahnを含みます。
 
 %============================================================================================================
-\label{Unofficail Japanese Edition}
-\chapter*{非公式日本語版}
-\addcontentsline{toc}{chapter}{非公式日本語版}
-SICPはかつて第一版、第二版共に日本にて公式に翻訳が商業出版されていました。
-第二版を出版していたピアソンが2013年8月に日本市場から撤退したために日本語でSICPを読む機会は失われました。
-このことがこの翻訳を行うことの契機となりました。
-
-実際にはその後直ぐ2014年1月付近に、寛大にも第二版の訳者、和田英一先生がオンライン上にてSICPの訳書、
-「計算機プログラムの構造と解釈」全文を公開して下さいました。この時点でこの非公式日本語版の
-価値は大分疑わしいものとなりました。
-
-しかし、その時、既に3章まで翻訳していたこと、そして非公式TexInfo版が2013年11月に大改訂を行い、
-当初の日本語には正式に対応していないtexi2pdfから変更を行いXeLaTeXを採用したために、
-日本語でも美しい組版の可能性が出てきたことが、この原稿を廃棄することを押し止めました。
-
-2001年にMITがSICPを寛大にもオンラインで無料で読むことができるように公開された時にはライセンスが指定されていませんでした。全てを信用されてのことだと思います。
-
-2008年にMITはSICPのライセンスをCC By NCと指定しました。その後ライセンスは一旦CC By SAに変更されます。
-そして2年後に再びCC BY NCへと戻されました。この事実がSICP原文のライセンスの解釈を難しくしています。
-ライセンスの変更はオーナーの自由ですが、ライセンシーはコンテンツ取得時のライセンスを尊重すれば良いからです。
-
-最初に非公式TexInfo版を作成したLytha Aythはライセンス指定の無いSICP公開をWeb文化に基づくものだと理解しました。
-次にLaTeXの組版を開発したAndres RabaはCC BY SAに基き正式な許可の下、作成しました。
-私の翻訳はオリジナルのライセンスであるCC BY SAに従うことが求められます。しかし、現在のMITが非商業を求めて
-いることを鑑みて非商業制約を追加したCC BY NC-SAにてリリースすることにしました。
-
-CC BY NCもSAも共に、翻訳の許可を明記しています。従ってこの翻訳にはLythaが心配したような法的問題は
-起こらないと信じています。しかし同時に、法的問題は常に一方的に起こされることがあることもまた現実です。
-従って読者の皆様には常にネットワーク上のデータは(そしてプログラムも!)消えてなくなってしまうシャボン玉で
-あることを忘れずに御用心願います。
-
-TeX、LaTeX環境の日本語対応を進めて下さった全ての関係者の皆様に感謝します。
-特に
-
-%============================================================================================================
 %\pagenumbering{arabic}
 
 \mainmatter
 
-\label{Chapter 1}
+
 \chapter{手続を用いた抽象化の構築}
+\label{Chapter 1}
 
 \begin{quote}
 心がその中で、その力を単純な考えの上に発揮する``心の働き''は、主としてこれら3つです。1. いくつかの
@@ -1102,8 +1122,8 @@ Lispによるプログラミングはとても楽しいのです。
 
 
 
-\label{Section 1.1}
 \section{プログラミングの要素}
+\label{Section 1.1}
 
 
 
@@ -1151,8 +1171,9 @@ Lispによるプログラミングはとても楽しいのです。
 
 
 
-\label{Section 1.1.1}
+
 \subsection{式}
+\label{Section 1.1.1}
 
 プログラミングを始める１つの簡単な方法はいくつかの典型的な対話を
 Lispの方言であるSchemeのインタプリタを用いて試してみることです。コンピュータ
@@ -1282,8 +1303,9 @@ Lispシステムは式を整形しユーザを手助けするための機能を�
 をもじった皮肉のネタ元になっています。曰く``Lispプログラマは全ての値を知っている
 がそのコストはどれについても知らない''}
 
-\label{Section 1.1.2}
+
 \subsection{名前付けと環境}
+\label{Section 1.1.2}
 プログラミング言語の重要な特徴は演算対象を参照するための名前を利用するために
 それが提供する手段です。名前は\newterm{value}(\jnewterm{値})としてオブジェクトを持つ\newterm{variable}(\jnewterm{変数})を
 識別します。
@@ -1345,8 +1367,9 @@ circumference
 概念がインタプリタがどのように働くか、またどのようにインタプリタを実装するかに
 おいて重要であることを示します。}
 
-\label{Section 1.1.3}
+
 \subsection{組み合わせの評価}
+\label{Section 1.1.3}
 この章の目標の1つは手続的な思考上の問題を分離することです。
 代表例として、組み合わせの評価においてインタプリタはそれ自身が手続に従うことを
 考えてみましょう。
@@ -1479,8 +1502,9 @@ Lispプログラマは一般に構文上の問題に気をつかいません。(
 曰く、``構文糖はセミコロンの癌を引き起こす''}
 
 
-\label{Section 1.1.4}
+
 \subsection{複合手続}
+\label{Section 1.1.4}
 他の強力なプログラミング言語に必ず存在する要素をいくつかLispでも確認しました。
 
 \begin{itemize}
@@ -1596,8 +1620,9 @@ Lispプログラマは一般に構文上の問題に気をつかいません。(
 インタプリタに組込まれているのか、複合手続として定義されているのか見分けがつか
 ないでしょう。
 
-\label{Section 1.1.5}
+
 \subsection{手続適用の置換モデル}
+\label{Section 1.1.5}
 オペレータの名前が合成式を示す合成を評価する時、 インタプリタは
 \link{Section 1.1.3}で説明した合成式のオペレータがプリミティブである場合と
 ほぼ同じ手順を追います。インタプリタは合成の各要素を評価し、
@@ -1758,8 +1783,9 @@ Lispは適用順序評価を用いています。理由の一部は上の\code{(
 一見して``無限''のデータ構造を正規順評価の制約形式に立脚して取り扱う手法です。
 \link{Section 4.2}ではSchemeインタプリタを変更しSchemeの正規順異種を作成します。}
 
-\label{Section 1.1.6}
+
 \subsection{条件式と述語}
+\label{Section 1.1.6}
 
 この時点で私達が定義可能な種類の手続の表現力はとても限られています。テストを作成し、
 テストの結果により異なる命令を実行する方法が無いためです。例えば数値の絶対値を
@@ -2042,9 +2068,8 @@ Benは正規順評価を用いるインタプリタではどのような挙動�
 
 \end{quote}
 
-\label{Section 1.1.7}
 \subsection{例: ニュートン法による平方根}
-
+\label{Section 1.1.7}
 
 
 ここまでで説明された通り、手続は普通の数学の関数にとても似ています。
@@ -2286,8 +2311,8 @@ x/y^2 + 2y
 square-rootとcube-rootの抽象化としての汎用なニュートン法の実装方法を学習します。)
 \end{quote}
 
-\label{Section 1.1.8}
 \subsection{ブラックボックス抽象化としての手続}
+\label{Section 1.1.8}
 
 
 
@@ -2516,8 +2541,8 @@ square-rootとcube-rootの抽象化としての汎用なニュートン法の実
 る重要なツールです。
 
 
-\label{Section 1.2}
 \section{手続とそれが生成するプロセス}
+\label{Section 1.2}
 
 
 
@@ -2561,9 +2586,8 @@ square-rootとcube-rootの抽象化としての汎用なニュートン法の実
 パターンであり、それら自身の目的に沿った現実的な例ではありません。
 
 
-\label{Section 1.2.1}
 \subsection{線形再帰と反復}
-
+\label{Section 1.2.1}
 
 
 階乗を求める関数を考えることから始めましょう。定義を以下に示します。
@@ -2826,9 +2850,9 @@ Schemeの実装が末尾再帰であることを必須要件としています�
 \end{quote}
 
 
+\subsection{木再帰}
 \label{Sec. 1.2.2}
 \label{Section 1.2.2}
-\subsection{木再帰}
 もう1つの演算の一般的パターンは\newterm{tree recursion}(\jnewterm{木再帰})と呼ばれます。
 例として、フィボナッチ数の計算について考えてみましょう。各数値は先行する2つの数の
 和となります。
@@ -3158,8 +3182,8 @@ Fib(\( n \))に等しいことを示すのは難しくありません。従っ�
 であることを証明せよ。
 \end{quote}
 
-\label{Section 1.2.3}
 \subsection{増加のオーダー}
+\label{Section 1.2.3}
 
 
 
@@ -3267,8 +3291,8 @@ sin x = 3 sin --- - 4 sin^3 ---
 \end{quote}
 
 
-\label{Section 1.2.4}
 \subsection{指数計算}
+\label{Section 1.2.4}
 
 
 
@@ -3497,8 +3521,8 @@ Fib(\( n+1 \))とFib(\( n \))のペアを算出することに注意せよ。言
 \end{scheme}
 \end{quote}
 
-\label{Section 1.2.5}
 \subsection{最大公約数}
+\label{Section 1.2.5}
 
 
 
@@ -3607,8 +3631,8 @@ GCD(206,40) = GCD(40,6)
 \end{quote}
 
 
-\label{Section 1.2.6}
 \subsection{例: 素数判定}
+\label{Section 1.2.6}
 
 
 
@@ -3928,8 +3952,8 @@ Evaが言う。``手続をそのように記述することで、\( \Theta(\log 
 \end{quote}
 
 \vspace{0.5em}
-\label{Section 1.3}
 \section{高階手続による抽象の形式化}
+\label{Section 1.3}
 
 
 
@@ -3972,9 +3996,9 @@ Evaが言う。``手続をそのように記述することで、\( \Theta(\log 
 
 
 
+\subsection{引数としての手続}
 \label{Sec. 1.3.1}
 \label{Section 1.3.1}
-\subsection{引数としての手続}
 
 
 次の3つの手続について考えてみて下さい。1つ目は\code{a}から\code{b}の整数の合計を
@@ -4304,8 +4328,8 @@ pi   2 * 4 * 4 * 6 * 6 * 8 ...
 \end{quote}
 
 
-\label{Section 1.3.2}
 \subsection{\code{lambda}を用いた手続の構築}
+\label{Section 1.3.2}
 
 
 
@@ -4607,8 +4631,8 @@ in  ~\( \dark \langle \)~~\var{\dark body}~~\( \dark \rangle \)~
 \end{quote}
 
 
-\label{Section 1.3.3}
 \subsection{汎用手法としての手続}
+\label{Section 1.3.3}
 
 
 \link{Section 1.1.4}にて複合手続を数値演算の抽象化パターンのメカニズムとして紹介し、
@@ -5294,8 +5318,8 @@ Lispは他の言語と異なり、手続に完全な第一級の地位を与え�
 %=======================================================================================================
 %=======================================================================================================
 
-\label{Chapter 2}
 \chapter{データを用いた抽象化の構築}
+\label{Chapter 2}
 
 \begin{quote}
 私達は今、数学上の抽象化の重要なステップに到達しました。
@@ -5457,8 +5481,8 @@ Lispは他の言語と異なり、手続に完全な第一級の地位を与え�
 その実装の中では多項式の係数は整数、分数、複素数、さらには多項式にもなりえます。
 
 
-\label{Section 2.1}
 \section{データ抽象化のイントロダクション}
+\label{Section 2.1}
 
 
 
@@ -5486,8 +5510,8 @@ Lispは他の言語と異なり、手続に完全な第一級の地位を与え�
 
 
 
-\label{Section 2.1.1}
 \subsection{例: 分数のための数値演算命令}
+\label{Section 2.1.1}
 
 
 
@@ -5730,16 +5754,15 @@ constructor is
 コンストラクタ\code{make\-/rat}を変更することで達成されました。
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.1}Exercise 2.1:} 正と負の両方の
 引数を扱えるより良い版の\code{make\-/rat}を定義せよ。
+\heading{\phantomsection\label{Exercise 2.1}Exercise 2.1:} 正と負の両方の
 \code{make\-/rat}は符号の正常化を行わなければならない。従ってもし分数が正であれば
 分子と分母の両方が正であるし、もし分数が負であれば分子のみが負でなければならない。
 \end{quote}
 
 
-\label{Section 2.1.2}
 \subsection{抽象化バリア}
-
+\label{Section 2.1.2}
 
 
 さらなる複合データとデータ抽象化の例を続ける前に、分数の例にて持ち上がったいくつかの
@@ -5872,8 +5895,8 @@ constructor is
 
 \end{quote}
 
-\label{Section 2.1.3}
 \subsection{データにより何が意味されるのか}
+\label{Section 2.1.3}
 
 
 
@@ -6032,8 +6055,8 @@ Alonzo Churchは\( \lambda \)-演算を発明した論理学者である。
 \end{quote}
 
 
-\label{Section 2.1.4}
 \subsection{延長課題: 区間演算}
+\label{Section 2.1.4}
 
 
 
@@ -6271,8 +6294,8 @@ LemはAlyssaのプログラムは2つの方法の演算にて異なる値を返�
 
 %=======================================================================================================
 
-\label{Section 2.2}
 \section{階層データと閉包性}
+\label{Section 2.2}
 
 
 
@@ -6386,8 +6409,8 @@ LemはAlyssaのプログラムは2つの方法の演算にて異なる値を返�
 不利にし、抑制してしまう。1つのデータ構造を操作する100の関数を持つほうが、10のデータ構造を
 操作する10の関数を持つよりも良い。''}
 
-\label{Section 2.2.1}
 \subsection{列の表現}
+\label{Section 2.2.1}
 
 
 
@@ -6914,8 +6937,8 @@ Louisはそこで彼のバグを\code{cons}への引数を逆順にすること�
 \code{for\-/each}の実装を与えよ。
 \end{quote}
 
-\label{Section 2.2.2}
 \subsection{階層構造}
+\label{Section 2.2.2}
 
 
 
@@ -7274,8 +7297,8 @@ mobileを検索すると実物が見られる。}
 \end{scheme}
 \end{quote}
 
-\label{Section 2.2.3}
 \subsection{慣習的インターフェイスとしての列}
+\label{Section 2.2.3}
 
 
 
@@ -8068,8 +8091,8 @@ mapと集積の組み合わせを\code{append}と共に用いるのはこの種�
 \end{quote}
 
 \begin{quote}
-\heading{\phantomsection\label{Exercise 2.43}Exercise 2.43:} 
 Louis Reasonerは\link{Exercise 2.42}を行うことで酷い時間を過している。彼の\code{queens}手続は
+\heading{\phantomsection\label{Exercise 2.43}Exercise 2.43:} 
 動いているように見える。しかし実行がとても遅い。(Louisは\( 6\times6 \)の場合でさえそれを
 解くのにかかる長い時間を待つことができなかった)。LouisがEva Lu Atorに助けを求めた時、
 彼女はLouisが\code{flatmap}内の入れ子のマッピングの順を交換してしまったことを指摘した。
@@ -8089,8 +8112,8 @@ Louis Reasonerは\link{Exercise 2.42}を行うことで酷い時間を過して�
 のに必要な時間が\( T \)であるとの前提で行え。
 \end{quote}
 
-\label{Section 2.2.4}
 \subsection{例: ピクチャー言語}
+\label{Section 2.2.4}
 
 
 この節では絵を描く簡単な言語をお見せします。これがデータ抽象と閉包の力を図示し、
@@ -8892,8 +8915,8 @@ Origin(Frame) + x * Edge_1(Frame) + y * Edge_2(Frame)
 \end{enumerate}
 \end{quote}
 
-\label{Section 2.3}
 \section{記号データ}
+\label{Section 2.3}
 
 
 
@@ -8902,8 +8925,8 @@ Origin(Frame) + x * Edge_1(Frame) + y * Edge_2(Frame)
 
 
 
-\label{Section 2.3.1}
 \subsection{クォート}
+\label{Section 2.3.1}
 
 
 
@@ -9098,8 +9121,8 @@ Eva Lu Atorはインタプリタに次の式を入力した。
 \end{quote}
 
 
-\label{Section 2.3.2}
 \subsection{例: 記号微分}
+\label{Section 2.3.2}
 
 
 
@@ -9449,8 +9472,8 @@ d(u^n)            du
 \end{enumerate}
 \end{quote}
 
-\label{Section 2.3.3}
 \subsection{例: 集合を表現する}
+\label{Section 2.3.3}
 
 
 
@@ -9938,7 +9961,6 @@ d(u^n)            du
 \code{lookup}手続を実装せよ。
 \end{quote}
 
-\label{Section 2.3.4}
 \subsection{例: ハフマン符号化木}
 
 
@@ -10358,8 +10380,8 @@ Sha boom
 必要なステップ数の(\( n \)の関数としての)増加のオーダーを与えよ。
 \end{quote}
 
-\label{Section 2.4}
 \section{抽象データの多重表現}
+\label{Section 2.4}
 
 ここまでデータ抽象化について紹介してきました。これはプログラムが操作するデータ
 オブジェクトの実装における選択に独立して多くのプログラムが指定され得る様な方法で
@@ -10458,9 +10480,9 @@ Sha boom
 数値演算をシステム内にて用いるかについて示します。
 
 
-\label{Sec. 2.4.1}
-\label{Section 2.4.1}
 \subsection{複素数のための表現}
+\label{Section 2.4.1}
+\label{Sec. 2.4.1}
 
 
 
@@ -10712,8 +10734,8 @@ representation.
 \code{div\-/complex}の同じ実装がBenの表現とAlyssaの表現のどちらに対してもうまく
 いくことを保証します。
 
-\label{Section 2.4.2}
 \subsection{タグ付きデータ}
+\label{Section 2.4.2}
 
 
 
@@ -10923,8 +10945,8 @@ representation.
 組織的戦略となります。\link{Section 2.5}にてこれについて学びます。
 
 
-\label{Section 2.4.3}
 \subsection{データ適従プログラミングと付加性}
+\label{Section 2.4.3}
 
 
 
@@ -11375,8 +11397,8 @@ Schemeのデータ構造として実装されているのにも係らず、使�
 どれが新しい命令が良く追加されねばならぬシステムに対して最も適切であるか?
 \end{quote}
 
-\label{Section 2.5}
 \section{ジェネリック命令を持つシステム}
+\label{Section 2.5}
 
 
 
@@ -11436,8 +11458,8 @@ Schemeのデータ構造として実装されているのにも係らず、使�
 
 
 
-\label{Section 2.5.1}
 \subsection{ジェネリックな数値演算命令}
+\label{Section 2.5.1}
 
 
 ジェネリックな数値演算命令の設計タスクはジェネリックな複素数命令を設計するのと同様です。
@@ -11680,8 +11702,8 @@ Louis Reasonerは\code{z}が\link{Figure 2.24}で示されるオブジェクト�
 複素数に対しても働くこと。
 \end{quote}
 
-\label{Section 2.5.2}
 \subsection{異なる型のデータを組み合わす}
+\label{Section 2.5.2}
 
 
 
@@ -12074,8 +12096,8 @@ Louisの強制手続がインストールされると\code{apply\-/generic}が�
 出てくるであろう。
 \end{quote}
 
-\label{Section 2.5.3}
 \subsection{例: 記号代数}
+\label{Section 2.5.3}
 
 
 記号代数表現の操作は巨大なスケールのシステムの設計において起こり得る最も困難な問題の
@@ -12838,8 +12860,8 @@ Zippelの本(\link{Zippel 1993})はこの手法を多項式の\acronym{GCD}を�
 %=======================================================================================================
 %=======================================================================================================
 
-\label{Chapter 3}
 \chapter{モジュール方式、オブジェクト、状態}
+\label{Chapter 3}
 
 \begin{quote}
 \({\rm
@@ -12908,8 +12930,8 @@ Plus \c{c}a change, plus c'est la m\^{e}me chose.
 
 
 
-\label{Section 3.1}
 \section{代入と局所状態}
+\label{Section 3.1}
 
 
 
@@ -12945,8 +12967,8 @@ Plus \c{c}a change, plus c'est la m\^{e}me chose.
 
 
 
-\label{Section 3.1.1}
 \subsection{局所状態変数}
+\label{Section 3.1.1}
 
 
 
@@ -13261,8 +13283,8 @@ Plus \c{c}a change, plus c'est la m\^{e}me chose.
 (警察を呼ぶ)を実行するようにせよ。
 \end{quote}
 
-\label{Section 3.1.2}
 \subsection{代入導入の利点}
+\label{Section 3.1.2}
 
 
 
@@ -13460,8 +13482,8 @@ Kolmogorov, Solomonoff, それにChaitinはこれらの問題の解明におい�
 
 \end{quote}
 
-\label{Section 3.1.3}
 \subsection{代入導入のコスト}
+\label{Section 3.1.3}
 
 
 ここまで見てきたとおり、\code{set!}命令はローカルな状態を持つオブジェクトのモデル化を可能にします。
@@ -13804,8 +13826,8 @@ Peterが\code{peter\-/acc}から引き出しを行えばPaulは\code{paul\-/acc}
 簡単な手続\code{f}を定義せよ。
 \end{quote}
 
-\label{Section 3.2}
 \section{評価の環境モデル}
+\label{Section 3.2}
 
 
 複合手続を\link{Chapter 1}で紹介した時、手続を引数に適用することが何を意味するか
@@ -13890,8 +13912,8 @@ Peterが\code{peter\-/acc}から引き出しを行えばPaulは\code{paul\-/acc}
 
 
 
-\label{Section 3.2.1}
 \subsection{評価のルール}
+\label{Section 3.2.1}
 
 
 
@@ -14077,8 +14099,8 @@ env       | square: --+                        |
 述べます。
 
 
-\label{Section 3.2.2}
 \subsection{単純な手続の適用}
+\label{Section 3.2.2}
 
 
 
@@ -14234,8 +14256,8 @@ env       +-----------------------------------------------------+
 \end{quote}
 
 
-\label{Section 3.2.3}
 \subsection{局所状態のレポジトリとしてのフレーム}
+\label{Section 3.2.3}
 
 
 手続と代入がどのようにしてローカルな状態を持つオブジェクトを表現するために利用できるかを知るために
@@ -14561,8 +14583,8 @@ env      | W1: --+                        |                |
 \end{quote}
 
 
-\label{Section 3.2.4}
 \subsection{内部定義}
+\label{Section 3.2.4}
 
 
 \link{Section 1.1.8}では手続が内部定義を持つこことができ、結果としてブロック構造へと導くことを
@@ -14726,8 +14748,8 @@ E1内に存在する\code{x}の束縛を参照します。即ち元の\code{sqrt
 共有されるか?
 \end{quote}
 
-\label{Section 3.3}
 \section{ミュータブルデータによるモデリング}
+\label{Section 3.3}
 
 
 
@@ -14765,8 +14787,8 @@ E1内に存在する\code{x}の束縛を参照します。即ち元の\code{sqrt
 
 
 
-\label{Section 3.3.1}
 \subsection{ミュータブルなリスト構造}
+\label{Section 3.3.1}
 
 
 
@@ -15332,8 +15354,8 @@ clever idea.)
 上で与えられた手続型の実装を用いよ。(\link{Exercise 3.11}と比較せよ)。
 \end{quote}
 
-\label{Section 3.3.2}
 \subsection{キューの表現}
+\label{Section 3.3.2}
 
 
 
@@ -15675,8 +15697,8 @@ Eva Luが話していることを説明せよ。具体的にはなぜBenの例�
 全ての命令は\( \Theta \)(1)ステップで達成すること。
 \end{quote}
 
-\label{Section 3.3.3}
 \subsection{テーブルの表現}
+\label{Section 3.3.3}
 
 
 
@@ -16024,8 +16046,8 @@ table
 場合にもSchemeは正しく処理できるだろうか?
 \end{quote}
 
-\label{Section 3.3.4}
 \subsection{デジタル回路のシミュレータ}
+\label{Section 3.3.4}
 
 コンピュータのような複雑なデジタルシステムの設計は重要な工学の活動領域です。
 デジタルシステムは簡単な要素を相互接続することで構築されます。これらの個々の要素の
@@ -16709,8 +16731,8 @@ C ------+   |     +-----+   |     +-----+   |     :  ------+   |
 \end{quote}
 
 
-\label{Section 3.3.5}
 \subsection{制約伝播}
+\label{Section 3.3.5}
 
 
 
@@ -17317,8 +17339,8 @@ Lispは手続の値として複合オブジェクトを返すことができる�
 式指向スタイルを命令型の実装を用いて実装するのは簡単ですが、逆はとても難しいのです。}
 \end{quote}
 
-\label{Section 3.4}
 \section{並行性: 時間が本質}
+\label{Section 3.4}
 
 
 
@@ -17381,8 +17403,8 @@ Lispは手続の値として複合オブジェクトを返すことができる�
 
 
 
-\label{Section 3.4.1}
 \subsection{並行システム内の時間の性質}
+\label{Section 3.4.1}
 
 
 
@@ -17621,8 +17643,8 @@ Mary:  (set! balance (- balance (/ balance 2)))
 \end{enumerate}
 \end{quote}
 
-\label{Section 3.4.2}
 \subsection{並行性制御のための仕組み}
+\label{Section 3.4.2}
 
 
 並行プロセスの取扱における困難は異なるプロセスのイベント順の交互配置について考える
@@ -18285,8 +18307,8 @@ PeterとPaulが独立して観察する振舞と同期直後の口座の``状態
 私達の計算モデルの時間と状態を取り扱うために遭遇した複雑性は実際に物理的宇宙の
 根本的な複雑性を映しているのかもしれません。
 
-\label{Section 3.5}
 \section{ストリーム}
+\label{Section 3.5}
 
 
 モデリングにおけるツールとしての代入について、また代入が生じる複雑な問題の認識に
@@ -18338,8 +18360,8 @@ PeterとPaulが独立して観察する振舞と同期直後の口座の``状態
 
 
 
-\label{Section 3.5.1}
 \subsection{ストリームとは遅延化リスト}
+\label{Section 3.5.1}
 
 
 
@@ -18795,8 +18817,8 @@ expressions
 かった場合に異なるだろうか? 説明せよ。
 \end{quote}
 
-\label{Section 3.5.2}
 \subsection{無限ストリーム}
+\label{Section 3.5.2}
 
 
 
@@ -19312,8 +19334,8 @@ sinとcosの級数をどのように生成するか示せ。sinの導関数がco
 結果と一緒にどのように用いてtanの羃級数を生成するか示せ。
 \end{quote}
 
-\label{Section 3.5.3}
 \subsection{ストリームパラダイムの利用}
+\label{Section 3.5.3}
 
 
 遅延評価を伴なうストリームは強力なモデリングツールにすることができ、局所状態と
@@ -20117,8 +20139,8 @@ Eva Lu Atorは\link{Exercise 3.75}におけるLouisの取り組み方を批判�
 スタイルにて用いよ。
 \end{quote}
 
-\label{Section 3.5.4}
 \subsection{ストリームと遅延評価}
+\label{Section 3.5.4}
 
 
 
@@ -20509,8 +20531,8 @@ v_C -+- C                     _)  v_L
 ように、変更可能性と遅延評価はプログラミング言語の中でうまく混ざりません。
 そしてこれらの両方を一度に取り扱う方法の発明は活発な研究領域です。
 
-\label{Section 3.5.5}
 \subsection{関数型プログラムのモジュール化とオブジェクトのモジュール化}
+\label{Section 3.5.5}
 
 
 \link{Section 3.1.2}で学んだように、代入の導入の主な利点の1つは巨大システムの状態の一部を
@@ -20765,8 +20787,8 @@ PeterとPaulにより知覚される``実時間''に制約された何らかの�
 関数型の視点と統一することはプログラミングとはあまり関係が無いかもしれません。
 しかしより根本的な認識論の問題と関係するのです。}
 
-\label{Chapter 4}
 \chapter{メタ言語抽象化}
+\label{Chapter 4}
 
 \begin{quote}
 
@@ -20913,8 +20935,8 @@ Lispを基盤として用い、評価機をLispの手続として実装します
 
 
 
-\label{Section 4.1}
 \section{メタ循環評価機}
+\label{Section 4.1}
 
 
 
@@ -21035,9 +21057,9 @@ Arguments   |  8     Eval          `888888888888888888) | Environment
 
 
 
+\subsection{評価機の核}
 \label{Sec. 4.1.1}
 \label{Section 4.1.1}
-\subsection{評価機の核}
 
 
 
@@ -21275,9 +21297,9 @@ alternative(代替)を評価します。
 版を書け。またオペランドを右から左へ評価する\code{list\-/of\-/values}の版も書け。
 \end{quote}
 
+\subsection{式の表現}
 \label{Sec. 4.1.2}
 \label{Section 4.1.2}
-\subsection{式の表現}
 
 
 
@@ -21596,6 +21618,7 @@ Louisは彼の計画がうまく行かないことに激昂した。彼は他の
 \end{quote}
 
 \begin{quote}
+\heading{\phantomsection\label{Exercise 4.5}Exercise 4.5:} 
 Schemeは\code{cond}の節に追加の文法、\code{(<\var{test}> => <\var{recipient}>)}を認めている。
 もし\( \langle \)\var{test}\( \kern0.08em\rangle \)がtrueとして評価されるなら、
 \( \langle \)\var{recipient}\( \kern0.08em\rangle \)が評価される。その値は1引数の手続でなければならない。
@@ -21706,9 +21729,9 @@ Schemeでは反復処理が通常の手続呼出を用いて表現できるた�
 なくこの節の手続を変更することでSchemeの新しい文法を設計し、実装せよ。
 \end{quote}
 
+\subsection{評価機のデータ構造}
 \label{Sec. 4.1.3}
 \label{Section 4.1.3}
-\subsection{評価機のデータ構造}
 
 式の外側の文法を定義するのに加えて、評価機の実装は評価機が内部的に操作するデータ構造も
 プログラムの実行の一部として、手続と環境の表現やtrueとfalseの表現を定義しなければなりません。
@@ -21934,9 +21957,9 @@ Schemeは\code{define}を用いて新しい束縛を作成することができ�
 理由を述べよ。
 \end{quote}
 
+\subsection{評価機をプログラムとして実行する}
 \label{Sec. 4.1.4}
 \label{Section 4.1.4}
-\subsection{評価機をプログラムとして実行する}
 
 
 評価機を与えられたことで、Lisp式が評価されるプロセスの(Lispで表現された)記述を
@@ -22101,7 +22124,6 @@ Louisは逆に\code{map}のシステム版をメタ循環評価機のプリミ�
 Louisの\code{map}は失敗するのか。説明せよ。
 \end{quote}
 
-\label{Section 4.1.5}
 \subsection{プログラムとしてのデータ}
 
 
@@ -22288,8 +22310,8 @@ Douglas Hofstadter(ダグラス ホフスタッター)の美しい本
 言い換えれば、計算手続として実行不可能なうまく設定された課題である。}
 \end{quote}
 
-\label{Section 4.1.6}
 \subsection{内部定義}
+\label{Section 4.1.6}
 
 
 私達の評価の環境モデルとメタ循環評価機は定義を順に実行し、環境のフレームを1度に
@@ -22579,8 +22601,8 @@ Louis Reasonerは内部定義に関するこの全ての空騒ぎにより混乱
 \end{enumerate}
 \end{quote}
 
-\label{Section 4.1.7}
 \subsection{構文分析を実行から分離する}
+\label{Section 4.1.7}
 
 上で実装された評価機は簡単ですが、非効率です。式の構文上の分析がその実行と相互
 配置されているためです。従ってもしプログラムが何度も実行された場合、その構文は
@@ -22821,9 +22843,9 @@ Eva Lu AtorはAlyssaに対し、テキストの版は分析時に列を評価す
 概算せよ。
 \end{quote}
 
+\section{Scheme上でのバリエーション --- 遅延評価}
 \label{Sec. 4.2}
 \label{Section 4.2}
-\section{Scheme上でのバリエーション --- 遅延評価}
 
 今や私達はLispプログラムとして表現された評価機を得ました。これで言語設計上の代替となる
 選択を単純に評価機を変更することで試験することができます。実際に新しい言語は良く、
@@ -22843,8 +22865,8 @@ Snarf Down: ``snarfすること、稀に吸収する、処理する、または�
 
 
 
-\label{Section 4.2.1}
 \subsection{正規順と適用順}
+\label{Section 4.2.1}
 
 \link{Section 1.1}では評価のモデルについての議論を始めましたが、Schemeは\newterm{applicative-order}(\jnewterm{適用順序})
 言語であると記しました。即ち、Schemeの手続への全ての引数は手続が適用される時に評価される、と。
@@ -22934,8 +22956,8 @@ Ben BitdiddleとAlyssa P. Hackerは\code{unless}のような物を実装する�
 例を与えよ。
 \end{quote}
 
-\label{Section 4.2.2}
 \subsection{遅延評価を持つインタプリタ}
+\label{Section 4.2.2}
 
 
 この節ではSchemeと同じですが、複合手続が全ての引数に対して非厳密であることが異なる
@@ -23336,8 +23358,8 @@ Schemeに対しそのような拡張の生成を必要とする。あなたは\c
 適切に準備すること。
 \end{quote}
 
-\label{Section 4.2.3}
 \subsection{遅延化リストとしてのストリーム}
+\label{Section 4.2.3}
 
 
 \link{Section 3.5.1}ではどのようにストリームを遅延化されたリストとして実装するかについて示しました。
@@ -23454,8 +23476,8 @@ Ben Bitdiddleは上で与えられた遅延リスト実装を式\code{(car '(a b
 できるようにするためである。
 \end{quote}
 
-\label{Section 4.3}
 \section{Scheme上でのバリエーション --- 非決定性演算}
+\label{Section 4.3}
 
 
 この節では\newterm{nondeterministic computing}(\jnewterm{非決定性演算})と呼ばれる
@@ -23541,8 +23563,8 @@ Ben Bitdiddleは上で与えられた遅延リスト実装を式\code{(car '(a b
 
 
 
-\label{Section 4.3.1}
 \subsection{ambと検索}
+\label{Section 4.3.1}
 
 Schemeに非決定性を対応するよう拡張するために、\code{amb}と呼ばれる新しい特別形式を
 導入します。\footnote{非決定性プログラミングのための\code{amb}の考えは1961年に
@@ -23754,8 +23776,8 @@ Ben Bitdiddleは以下のピタゴラスの3つ組を生成する手法は\link{
 \end{scheme}
 \end{quote}
 
-\label{Section 4.3.2}
 \subsection{非決定性プログラムの例}
+\label{Section 4.3.2}
 \link{Section 4.3.3}は\code{amb}評価機の実装を説明します。しかし最初にそれがどのように使用できるかに
 ついて、いくつかの例を与えます。非決定性プログラミングの利点は探索がどのように実行されるのか
 についての詳細を隠すことができることです。従って抽象の高いレベルにてプログラムを表現できます。
@@ -24192,8 +24214,8 @@ Alyssa P. Hackerはパースするよりも面白い文を生成することに�
 抜け出せなくなります。これに対処する方法は\link{Exercise 4.50}を参照して下さい。}
 \end{quote}
 
-\label{Section 4.3.3}
 \subsection{\code{Amb}評価機の実装}
+\label{Section 4.3.3}
 
 
 通常のScheme式の評価機は値を返すか、永遠に停止しないか、またはエラーを発します。
@@ -24766,9 +24788,8 @@ try-again
 \end{quote}
 
 
-\label{Section 4.4}
 \section{論理プログラミング}
-
+\label{Section 4.4}
 
 \link{Chapter 1}では計算機科学は命令型(どうするか)の知識を扱い、一方、数学は宣言型(何であるか)の
 知識を扱うと強調しました。実際に、プログラミング言語はプログラマが特定の問題を解くために、
@@ -24916,8 +24937,8 @@ LIPS(Logical Inferences Per Second)で計られます。プロジェクトはハ
 
 
 
-\label{Section 4.4.1}
 \subsection{演繹的情報検索}
+\label{Section 4.4.1}
 
 論理プログラミングは情報取得のためのデータベースに対するインターフェイスの提供に
 おいて秀でています。私達がこの章で実装するクエリ言語はこのように使用されるよう
@@ -25671,9 +25692,9 @@ Alyssa P. Hackerは仕事場に相乗りできる、彼女の近所に住む人�
 
 \end{quote}
 
+\subsection{クエリシステムの働き方}
 \label{Sec. 4.4.2}
 \label{Section 4.4.2}
-\subsection{クエリシステムの働き方}
 
 \link{Section 4.4.4}ではクエリインタプリタを手続の集合として紹介します。この節では低レベルの
 実装上の詳細からは独立したシステムの一般的な構造について説明する概観を与えます。
@@ -26154,9 +26175,9 @@ Lispの\code{eval}手続の役割と同様な役割を演じます。\code{qeval
 \end{scheme}
 
 
+\subsection{論理プログラミングは記号論理学なのか?}
 \label{Sec. 4.4.3}
 \label{Section 4.4.3}
-\subsection{論理プログラミングは記号論理学なのか?}
 
 クエリ言語内で使用される組み合わせの手段は最初は記号論理学の\code{and}, \code{or}, \code{not}命令と
 同じに見えるかもしれません。実際にクエリ言語のルールの適用は、推論という、まともな手段を通して
@@ -26444,9 +26465,9 @@ Benは何に気付いたのか? この状況を救い出すため用いられる
 クエリを用いて確認せよ。
 \end{quote}
 
+\subsection{クエリシステムの実装}
 \label{Sec. 4.4.4}
 \label{Section 4.4.4}
-\subsection{クエリシステムの実装}
 
 
 \link{Section 4.4.2}はどのようにクエリシステムが働くかについて説明した。ここでは完全なシステムの実装
@@ -26454,8 +26475,8 @@ Benは何に気付いたのか? この状況を救い出すため用いられる
 
 
 
-\label{Section 4.4.4.1}
 \subsubsection{ドライバループとインスタンス化}
+\label{Section 4.4.4.1}
 
 
 クエリシステムのためのドライバループは繰り返し入力式を読み込みます。もし式が追加されるべき
@@ -26530,8 +26551,8 @@ Benは何に気付いたのか? この状況を救い出すため用いられる
 \noindent
 束縛を操作する手続は\link{Section 4.4.4.8}で定義されます。
 
-\label{Section 4.4.4.2}
 \subsubsection{評価機}
+\label{Section 4.4.4.2}
 
 
 \code{query\-/driver\-/loop}により呼ばれる\code{qeval}手続はクエリシステムの基本的な評価機です。
@@ -26700,9 +26721,9 @@ Benは何に気付いたのか? この状況を救い出すため用いられる
 \noindent
 \code{not}と\code{lisp\-/value}の構文を定義するセレクタは\link{Section 4.4.4.7}で提供されます。
 
+\subsubsection{パターンマッチングによりアサーションを見つける}
 \label{Sec. 4.4.4.3}
 \label{Section 4.4.4.3}
-\subsubsection{パターンマッチングによりアサーションを見つける}
 
 \code{find\-/assertions}は\code{simple\-/query} (\link{Section 4.4.4.2})により呼ばれ、
 入力としてパターンとフレームを取ります。フレームのストリームを返し、各フレームは
@@ -26796,6 +26817,8 @@ Benは何に気付いたのか? この状況を救い出すため用いられる
 定義されます。
 
 \subsubsection*{末尾ドット付きパターン}
+\label{Sec. 4.4.4.4}
+\label{Section 4.4.4.4}
 
 パターンがドットとそれに続くパターン変数を含む場合、そのパターン変数はデータリストの
 (次の要素ではなく)残りに適合します。誰かが予想するように\link{Exercise 2.20}にて
@@ -26817,8 +26840,6 @@ Benは何に気付いたのか? この状況を救い出すため用いられる
 パターン\code{(computer . ?type)}を\code{(programmer trainee)}に適合することは
 \code{?type}をリスト\code{(programmer trainee)}に適合させます。
 
-\label{Sec. 4.4.4.4}
-\label{Section 4.4.4.4}
 \subsubsection{ルールとユニフィケーション}
 
 \code{apply\-/rules}は\code{find\-/assertions}の類似のルールです(\link{Sec. 4.4.4.3})。
@@ -27038,9 +27059,9 @@ Benは何に気付いたのか? この状況を救い出すため用いられる
   (tree-walk exp))
 \end{scheme}
 
+\subsubsection{データベースの保守}
 \label{Sec. 4.4.4.5}
 \label{Section 4.4.4.5}
-\subsubsection{データベースの保守}
 
 論理プログラミング言語の設計における重要な問題の1つは、与えられたパターンの確認に
 おいてできる限り少ないデータベースのエントリが検査されるように物事を準備することです。
@@ -27192,8 +27213,8 @@ Benは何に気付いたのか? この状況を救い出すため用いられる
 \end{scheme}
 \end{quote}
 
-\label{Section 4.4.4.6}
 \subsubsection{ストリーム命令}
+\label{Section 4.4.4.6}
 
 クエリシステムは\link{Chapter 3}には存在しなかったいくつかのストリーム命令を用います。
 
@@ -27248,8 +27269,8 @@ Benは何に気付いたのか? この状況を救い出すため用いられる
   (cons-stream x the-empty-stream))
 \end{scheme}
 
-\label{Section 4.4.4.7}
 \subsubsection{クエリ構文手続}
+\label{Section 4.4.4.7}
 
 
 \code{qeval}(\link{Section 4.4.4.2})により用いられる\code{type}と\code{contents}は、
@@ -27380,8 +27401,8 @@ Lispシステムは通常の\code{read}手続を\newterm{reader macro characters
          (symbol->string (cadr variable))))))
 \end{scheme}
 
-\label{Section 4.4.4.8}
 \subsubsection{フレームと束縛}
+\label{Section 4.4.4.8}
 
 
 フレームは変数と値のペアである束縛のリストとして表現されます。
@@ -27602,8 +27623,8 @@ Benはただ1人のコンピュータウィザードであるためである。
 (この問題には明確な回答やルールは存在しない。良い回答は恐らく博士号の価値があるだろう。)
 \end{quote}
 
-\label{Chapter 5}
 \chapter{レジスタマシンによる演算}
+\label{Chapter 5}
 
 \vspace{0.2em}
 
@@ -27664,8 +27685,8 @@ Lispシステム中の制御の仕組みは明らかにしないためです。�
 
 
 
-\label{Section 5.1}
 \section{レジスタマシンの設計}
+\label{Section 5.1}
 
 レジスタマシンを設計するためには、その\newterm{data paths}(\jnewterm{データパス})(レジスタと命令)と
 これらの命令を順序付ける\newterm{controller}(\jnewterm{コントローラ})を設計する必要があります。
@@ -27820,8 +27841,8 @@ Lispシステム中の制御の仕組みは明らかにしないためです。�
 
 
 
-\label{Section 5.1.1}
 \subsection{レジスタマシンを記述するための言語}
+\label{Section 5.1.1}
 
 
 データパスとコントローラの図は\acronym{GCD}の様な簡単な機械を表現するには適切です。
@@ -28057,8 +28078,8 @@ machine.
 ペアを読み込み、それらの\acronym{GCD}を計算し、結果を表示することを繰り返します。
 この構造は\link{Chapter 4}のインタプリタにて使用したドライバループに似ています。
 
-\label{Section 5.1.2}
 \subsection{機械設計における抽象化}
+\label{Section 5.1.2}
 
 私達はこれから頻繁に、実際には複雑な``プリミティブな''命令を含む機械を定義します。例えば
 \link{Section 5.4}と\link{Section 5.5}ではSchemeの環境の操作をプリミティブとして扱います。
@@ -28191,8 +28212,8 @@ machine.
 データパス図を描き、レジスタマシンのコントローラ定義を記述することで説明せよ。
 \end{quote}
 
-\label{Section 5.1.3}
 \subsection{サブルーチン}
+\label{Section 5.1.3}
 
 演算を実行する機械を設計する時、私達は良くコンポーネントを複製するのではなく、
 演算の異なる部品により共有されるコンポーネントを準備することを好みます。
@@ -28386,8 +28407,8 @@ after-gcd-2
 どこに行けば良いのか知ることができません。次の節で開発される再帰を扱う仕組みは
 この入れ子のサブルーチン呼出の問題にもより良い解法を提供します。
 
-\label{Section 5.1.4}
 \subsection{再帰実装にスタックを使用する}
+\label{Section 5.1.4}
 
 ここまでに説明されたアイデアを用いて、そのプロセスの各状態変数に
 対応するレジスタを持つレジスタマシンを指定することにより、任意の反復プロセスを
@@ -28681,8 +28702,8 @@ Ben Bitdiddleはフィボナッチマシンのコントローラシーケンス�
 より速いマシンを作るために取り除くことができることに気付いた。これらの命令はどこにあるか?
 \end{quote}
 
-\label{Section 5.1.5}
 \subsection{命令の要約}
+\label{Section 5.1.5}
 
 私達のレジスタマシン言語のコントローラ命令は以下の形式の内1つを持ち、各\( \langle \)\( input_i \)\( \rangle \)は
 \code{(reg<\var{register\-/name}>)}か\code{(const <\var{constant\-/value}>)}の何れかです。
@@ -28726,8 +28747,8 @@ Ben Bitdiddleはフィボナッチマシンのコントローラシーケンス�
 (const ()) ~\textrm{は空リスト}~
 \end{scheme}
 
-\label{Section 5.2}
 \section{レジスタマシンシミュレータ}
+\label{Section 5.2}
 
 レジスタマシンの設計を良く理解するために、私達は設計した機械を期待通りに実行されるか
 確認するためにテストをする必要があります。設計のテストを行う1つの方法として
@@ -28822,8 +28843,8 @@ Ben Bitdiddleはフィボナッチマシンのコントローラシーケンス�
 
 
 
-\label{Section 5.2.1}
 \subsection{マシンモデル}
+\label{Section 5.2.1}
 
 \code{make\-/machine}にて生成された機械のモデルは\link{Chapter 3}で開発された
 メッセージパッシングの技術を用いた局所状態を持つ手続として表現されています。
@@ -29031,8 +29052,8 @@ Ben Bitdiddleはフィボナッチマシンのコントローラシーケンス�
   ((machine 'get-register) reg-name))
 \end{scheme}
 
-\label{Section 5.2.2}
 \subsection{アセンブラ}
+\label{Section 5.2.2}
 
 アセンブラはコントローラの機械のための式の列を対応する機械の命令のリストへと変形します。
 各命令はその実行手続を持ちます。概して、アセンブラは\link{Chapter 4}で学習した評価機に
@@ -29213,8 +29234,8 @@ there
 2つの異なる地点を指し示すのに使用された場合にエラーを発するようにせよ。
 \end{quote}
 
-\label{Section 5.2.3}
 \subsection{各命令に対する実行手続の生成}
+\label{Section 5.2.3}
 
 アセンブラは命令の実行手続を生成するために\code{make\-/execution\-/procedure}を呼びます。
 \link{Section 4.1.7}の評価機の\code{analyze}手続と同様に、これは適切な実行手続を生成するために
@@ -29582,8 +29603,8 @@ Scheme手続を適用します。シミュレーション手続は演算命令�
 命令のアセンブリ時の間に初めて現れた時に1つづつレジスタを獲得するようにせよ。
 \end{quote}
 
-\label{Section 5.2.4}
 \subsection{機械のパフォーマンスの監視}
+\label{Section 5.2.4}
 
 シミュレーションは提案された機械設計の正しさを確認するためだけではなく、
 機械のパフォーマンスを計るためにも便利です。例えば、私達のシミュレータに演算中に
@@ -29739,8 +29760,8 @@ Alyssa P. Hackerはシミュレータ内に\newterm{breakpoint}(\jnewterm{ブレ
 \end{scheme}
 \end{quote}
 
-\label{Section 5.3}
 \section{記憶域の割当とガベージコレクション}
+\label{Section 5.3}
 
 \link{Section 5.4}ではレジスタマシンとしてのScheme評価機をどのように実装するかを示します。
 議論を簡易化するために、私達のレジスタマシンは\newterm{list-structured memory}(\jnewterm{リスト構造メモリ})を
@@ -29768,8 +29789,8 @@ Lispのペアによる``箱とポインタ''構造をストレージと典型的
 
 
 
-\label{Section 5.3.1}
 \subsection{ベクタとしてのメモリ}
+\label{Section 5.3.1}
 
 伝統的なコンピュータのメモリは小さな部屋の配列だと考えることができます。
 各部屋は情報の一片を入れることができます。各部屋は\newterm{address}(\jnewterm{アドレス})または
@@ -30073,8 +30094,8 @@ readerは伝統的に\newterm{obarray}(\jnewterm{オブジェクト配列})と�
 マシンを設計せよ。リスト構造のメモリ命令はプリミティブな命令として使用可能と前提せよ。
 \end{quote}
 
-\label{Section 5.3.2}
 \subsection{無限のメモリの幻想を維持する}
+\label{Section 5.3.2}
 
 \link{Section 5.3.1}で概観した表現手法はリスト構造の実装上の問題を解決しましたが、無限の容量の
 メモリを持っている場合という条件付きでした。実際のコンピュータではいつかは新しいペア
@@ -30381,8 +30402,8 @@ gc-flip
   (assign new-cars (reg temp))
 \end{scheme}
 
-\label{Section 5.4}
 \section{明示的制御評価機}
+\label{Section 5.4}
 \link{Section 5.1}では簡単なSchemeプログラムをどのようにレジスタマシンの記述に変形するかについて学びました。
 ここではこの変形をより複雑なプログラム上で実行します。\link{Section 4.1.1}--\link{Section 4.1.4}のメタ循環評価機です。
 メタ循環評価機はSchemeインタプリタの振舞が手続\code{eval}と\code{apply}と用いてどのように説明できるかを示しました。
@@ -30441,8 +30462,8 @@ gc-flip
 
 
 
-\label{Section 5.4.1}
 \subsection{明示制御評価機の核}
+\label{Section 5.4.1}
 
 評価機の中心的な要素は\code{eval\-/dispatch}で始まる命令列です。これは\link{Section 4.1.1}で説明された
 メタ循環評価機の\code{eval}手続に対応します。コントローラが\code{eval\-/dispatch}から開始する時、
@@ -30710,8 +30731,8 @@ compound-apply
 メタ循環評価機と同様に、新しい環境は手続により運ばれた環境から引数リストと対応する束縛される
 変数のリストと共に構築されます。
 
-\label{Section 5.4.2}
 \subsection{列の評価と末尾再帰}
+\label{Section 5.4.2}
 
 明示的制御評価機の\code{ev\-/sequence}の部分はメタ循環評価機の\code{eval\-/sequence}手続と同等です。
 手続のボディ内の式、または明示的な\code{begin}式内の列を取り扱います。
@@ -30853,8 +30874,8 @@ ev-sequence-end
 末尾再帰が無ければ、そのような手続はいつかはスタック領域を使いつくします。
 そして真に反復を表現することは手続呼出以外の何らかの制御の仕組みを必要とします。
 
-\label{Section 5.4.3}
 \subsection{条件文、代入、定義}
+\label{Section 5.4.3}
 
 メタ循環評価機と同様に、特別な形式は選択的に式の部分部分を評価することで取り扱われます。
 \code{if}式に対しては、述語を評価して、その値を元に、結果部(consequent)と代替部(alternative)の
@@ -30963,8 +30984,8 @@ ev-definition-1
 評価機を変更し、\link{Section 4.2}の遅延評価機を基にした正規順評価を使用するようにせよ。
 \end{quote}
 
-\label{Section 5.4.4}
 \subsection{評価機を実行する}
+\label{Section 5.4.4}
 
 明示的制御評価機の実装と共に、私達は\link{Chapter 1}から始まった開発の終わりにやってきました。
 ここまで私達は引き続きより的確な評価過程のモデルを探求してきました。比較的、略式な
@@ -31279,8 +31300,8 @@ Macintosh(tm)は---もしラッキーな場合は---爆発する爆弾の絵を�
 \end{enumerate}
 \end{quote}
 
-\label{Section 5.5}
 \section{コンパイル}
+\label{Section 5.5}
 
 \link{Section 5.4}の明示的制御評価機はコントローラがSchemeプログラムを解釈するレジスタマシンです。
 この節ではSchemeプログラムをコントローラがSchemeインタプリタではないレジスタマシン上にて
@@ -31400,8 +31421,8 @@ Macintosh(tm)は---もしラッキーな場合は---爆発する爆弾の絵を�
 
 
 
-\label{Section 5.5.1}
 \subsection{コンパイラの構造}
+\label{Section 5.5.1}
 
 \link{Section 4.1.7}において、私達は元のメタ循環インタプリタを変更して分析を実行から分離しました。
 各式を分析して環境を引数として取り必要とされる命令を実行する実行手続を生成しました。
@@ -31673,8 +31694,8 @@ Alyssa P. Hackerは評価機を拡張し、組込むことができる全ての�
 \end{enumerate}
 \end{quote}
 
-\label{Section 5.5.2}
 \subsection{式のコンパイル}
+\label{Section 5.5.2}
 
 
 この節と次の節では、\code{compile}手続が割り振るコード生成器を実装します。
@@ -32022,8 +32043,8 @@ after-lambda
      (compile-sequence (lambda-body exp) 'val 'return))))
 \end{scheme}
 
-\label{Section 5.5.3}
 \subsection{組み合わせのコンパイル}
+\label{Section 5.5.3}
 
 コンパイル処理の本質は手続適用のコンパイルです。与えられたターゲットとリンク記述子と
 共にコンパイルされた組み合わせのコードは以下の形式を持ちます。
@@ -32353,9 +32374,9 @@ code{compile\-/proc\-/appl}は上記の手続適用のコードを生成しま�
                 target))))
 \end{scheme}
 
+\subsection{命令列のコンパイル}
 \label{Sec. 5.5.4}
 \label{Section 5.5.4}
-\subsection{命令列のコンパイル}
 
 この節では命令列がどのように表現され、組み合わされるのかについての詳細を説明します。
 \link{Section 5.5.1}から命令列が必要なレジスタのリスト、変更されるレジスタ、実際の命令のリスト
@@ -32509,8 +32530,8 @@ Schemeの標準は任意の数の引数を取る\code{append}手続を提供し�
            (statements seq2))))
 \end{scheme}
 
-\label{Section 5.5.5}
 \subsection{コンパイルされたコードの例}
+\label{Section 5.5.5}
 
 これでコンパイラの全ての要素について学び終えました。
 ここまでのものがどのように御互いに組合せられるのかを見るためにコンパイル済みのコードの例を
@@ -33036,8 +33057,8 @@ open-codeなプリミティブ全ては特別形式とは異なり、オペラ�
 \end{enumerate}
 \end{quote}
 
-\label{Section 5.5.6}
 \subsection{レキシカルアドレッシング}
+\label{Section 5.5.6}
 
 コンパイラにより実行される最も一般的な最適化の1つは変数検索の最適化です。
 ここまで実装した私達のコンパイラは評価機の\code{lookup\-/variable\-/value}命令を用いる
@@ -33217,8 +33238,8 @@ open-codeしてしまうだろう。open-codeなコンパイラを変更し、�
 行わない限り正しく動くようになる。)
 \end{quote}
 
-\label{Section 5.5.7}
 \subsection{コンパイル済みコードと評価機の連結}
+\label{Section 5.5.7}
 
 私達はまだコンパイルされたコードを評価機にどのようにロードするか、またはどのように
 実行するかについて説明していません。ここでは明示的制御評価機が\link{Section 5.4.4}の時点にて定義された
