@@ -6,10 +6,10 @@ SICP
 
 This is a PDF version of "Structure and Interpretation of Computer Programs" by Harold Abelson, Gerald Jay Sussman, and Julie Sussman. It is a further development of the [Unofficial Texinfo Format](http://www.neilvandyke.org/sicp-texi/) (UTF), which was originally derived from the [HTML version](http://mitpress.mit.edu/sicp/) at The MIT Press.
 
-これはPDF版の"Structure and Interpretation of Computer Programs"です。Harold Abelson, Gerald Jay Sussman, そして Julie Sussmanにより開発されました。これは[Unofficial Texinfo Format](http://www.neilvandyke.org/sicp-texi/) (UTF)からのさらなる開発であり、
+これはPDF版の"Structure and Interpretation of Computer Programs"です。Harold Abelson, Gerald Jay Sussman, そして Julie Sussmanによる著書です。PDF版は[Unofficial Texinfo Format](http://www.neilvandyke.org/sicp-texi/) (UTF)からのさらなる開発であり、
 元々はMIT Pressの[HTML version](http://mitpress.mit.edu/sicp/)からの派生です。
 
-(*) これはAndres Raba氏によるPDF版SICP(https://github.com/sarabander/sicp-pdf)の日本語翻訳です。日本語版はminghaiが翻訳を担当しました。
+(*) これはAndres Raba氏によるPDF版SICP(https://github.com/sarabander/sicp-pdf) の日本語翻訳です。日本語版はminghaiが翻訳を担当しました。
 
 Biggest change in this revision (2.andresraba5) is the conversion to LaTeX, which opens the door to design and customization possibilities that the massive CTAN archive enables. Also, the latest typesetting engine XeTeX can be used, along with the Unicode and OpenType goodness it brings.
 
@@ -96,12 +96,12 @@ WARNING: This is not a translation. This is a license only for MY Japanese versi
 
 The files `sicp.texi, sicp.tex, sicp.pdf,` and the diagrams in directory `src/fig` are licensed under Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License ([CC BY-NC-SA](http://creativecommons.org/licenses/by-nc-sa/3.0/)).
 
-I (minghai) added NC constraints to original (PDF's) CC BY-SA license because MIT changed its license of SICP to CC BY-NC (from CC BY-SA), recently.
+I (minghai) added NC constraints to original (PDF's) CC BY-SA license because MIT changed its license of SICP to CC BY-NC (from CC BY-SA), recently. I believe there's no need to do this, but I just want to respect the MIT's decision.
           
 The script files `ex-fig-ref.pl, survey.rb,` and `texi-to-latex.pl` are licensed under GNU General Public License version 3 (for details, see src/LICENSE). (as-is the same with the original PDF version).
 
 日本語版ライセンス：
 
-日本語版のsicp.texi、sicp.texはCreative CommonsのCC BY-NC-SAとさせて頂きます。改変、再配布は同じCC BY-NC-SA 3.0に従う限り自由に行って頂いてかまいません。ただし、NCですので非商業活動に限定します。これは元々のMITサイトのSICP配布ライセンスに従う物です。
+日本語版のsicp.texi、sicp.texはCreative CommonsのCC BY-NC-SAとさせて頂きます。改変、再配布は同じCC BY-NC-SA 3.0にて行う限り自由に行って頂いてかまいません。ただし、NCですので非商業活動に限定します。これは元々のMITサイトのSICP配布ライセンスの変更に従う物です。
 
-また`ex-fig-ref.pl, survey.rb,texi-to-latex.pl`は元の作者であるAndres Raba氏の指定によりGPL v3ですのでご注意願います。
+また`ex-fig-ref.pl, survey.rb,texi-to-latex.pl`は元の作者であるAndres Raba氏の指定によりGPL v3です。
