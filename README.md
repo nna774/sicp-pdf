@@ -9,7 +9,7 @@ This is a PDF version of "Structure and Interpretation of Computer Programs" by 
 これはPDF版の"Structure and Interpretation of Computer Programs"です。Harold Abelson, Gerald Jay Sussman, そして Julie Sussmanによる著書です。PDF版は[Unofficial Texinfo Format](http://www.neilvandyke.org/sicp-texi/) (UTF)からのさらなる開発であり、
 元々はMIT Pressの[HTML version](http://mitpress.mit.edu/sicp/)からの派生です。
 
-* これはAndres Raba氏によるPDF版SICP(https://github.com/sarabander/sicp-pdf) の日本語翻訳です。日本語版はminghaiが翻訳を担当しました。
+* これはAndres Raba氏による[PDF版SICP](https://github.com/sarabander/sicp-pdf) の日本語翻訳です。日本語版はminghaiが翻訳を担当しました。
 
 Biggest change in this revision (2.andresraba5) is the conversion to LaTeX, which opens the door to design and customization possibilities that the massive CTAN archive enables. Also, the latest typesetting engine XeTeX can be used, along with the Unicode and OpenType goodness it brings.
 
