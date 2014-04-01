@@ -9,13 +9,13 @@ This is a PDF version of "Structure and Interpretation of Computer Programs" by 
 これはPDF版の"Structure and Interpretation of Computer Programs"です。Harold Abelson, Gerald Jay Sussman, そして Julie Sussmanによる著書です。PDF版は[Unofficial Texinfo Format](http://www.neilvandyke.org/sicp-texi/) (UTF)からのさらなる開発であり、
 元々はMIT Pressの[HTML version](http://mitpress.mit.edu/sicp/)からの派生です。
 
-(*) これはAndres Raba氏によるPDF版SICP(https://github.com/sarabander/sicp-pdf) の日本語翻訳です。日本語版はminghaiが翻訳を担当しました。
+* これはAndres Raba氏によるPDF版SICP(https://github.com/sarabander/sicp-pdf) の日本語翻訳です。日本語版はminghaiが翻訳を担当しました。
 
 Biggest change in this revision (2.andresraba5) is the conversion to LaTeX, which opens the door to design and customization possibilities that the massive CTAN archive enables. Also, the latest typesetting engine XeTeX can be used, along with the Unicode and OpenType goodness it brings.
 
 このバージョン(2.andresraba5)での大きな変更はLaTeXへの変換です。これにより大規模なCTANアーカイブが可能にするデザインとカスタマイズの可能性への扉を開きました。また、最新の組版エンジンであるXeTeXが、それがもたらすUnicodeとOpenTypeの良さと共に使用可能です。
 
-(*) 日本語版ではIPAフォントを使用しました。
+* 日本語版ではIPAフォントを使用しました。
 
 Source
 ------
@@ -28,19 +28,19 @@ The `src` directory contains both Texinfo and LaTeX sources. To recompile the bo
 $ make
 ```
 
-(*) 日本語版ではTexinfoファイルがLaTeXファイル上の変更を反映しておりません(すみません)。そのため直接、xelatex jsicp.texを実行して下さい。
+* 日本語版ではTexinfoファイルがLaTeXファイル上の変更を反映しておりません(すみません)。そのため直接、xelatex jsicp.texを実行して下さい。
 
 The file `preamble.tex` contains all the configuration and style declarations. Note that the LaTeX file `sicp.tex` will be generated on the fly, overwriting the previous version. To keep `sicp.texi` and `sicp.tex` in sync, I make changes to `sicp.texi,` which is already a hybrid of Texinfo and LaTeX code. This is fine, because all non-Texinfo content remains unchanged by the script.
 
 `preamble.tex`ファイルが全ての設定とスタイル宣言を含みます。LaTeXファイル`sicp.tex`が動的に生成されることに注意して下さい。以前のバージョンを上書きしてしまいます。`sicp.texi`と`sicp.tex`の同期を続けるために、既にTexinfoとLaTeXのコードのハイブリッドである`sicp.texi`に変更を加えることにします。これは問題ありません。全ての非Texinfoコンテンツがスクリプトにより変更されない状態を維持するためです。
 
-(*) 日本語版では既にLaTeXファイルとTexinfoファイルとの間の同期が破綻しています(すみません)。今後Texinfoファイルを直接利用したい方はいないと思いますが(少なくとも私はPDFにしか用が無いのですが)もし必要でしたら頑張って修正を反映して下さい orz。なお、preamble.texはそのままでは日本語が表示できないため、こちらにも変更の反映が必要です。
+* 日本語版では既にLaTeXファイルとTexinfoファイルとの間の同期が破綻しています(すみません)。今後Texinfoファイルを直接利用したい方はいないと思いますが(少なくとも私はPDFにしか用が無いのですが)もし必要でしたら頑張って修正を反映して下さい orz。なお、preamble.texはそのままでは日本語が表示できないため、こちらにも変更の反映が必要です。
 
 Chances for successful compilation are increased if you have almost complete installation of recent TeX Live distribution (the pdf here is compiled with 2012 release). The needed OpenType fonts must be installed in the operating system. You also need Inkscape to recreate image PDFs from SVGs.
 
 成功裏のコンパイルの可能性は最新のTeX Liveのディストリビューションをインストールすることにより増します。(ここのPDFファイルは2012のリリースにてコンパイルされています)。必要なOpenTypeフォントがOSにインストールされなければなりません。またSVGをPDFに変換するためにはInkscapeも必要です。
 
-(*) 日本語を通すには最低でもTeX Live 2013が必要です。日本語対応のminghaiは当初は最新の(RCのUbuntu)ディストリのLinux上で
+* 日本語を通すには最低でもTeX Live 2013が必要です。日本語対応のminghaiは当初は最新の(RCのUbuntu)ディストリのLinux上で
 texi2dviとdvipdfmxを用いてPDF化していました。最終的にはWindowsに最新のW32TeXを入れ、xelatexにてコンパイルしています。
 日本語環境ではIPAフォントをインストールすることが必須です。また実際には足りないスタイルファイルが結構有りますので、
 エラーが出る度にCTANにてスタイルファイルを落としてインストールすることを何度かしなければいけませんでした。
@@ -51,7 +51,7 @@ If compilation stops with "LaTeX Error: Too many unprocessed floats.", you could
 新しいTeX Liveや更新されたフォントの使用は異なる文字メトリックスの結果を引き起し、いくつかの図が合わなくなる恐れがあります。
 問題がissue [#5](https://github.com/sarabander/sicp-pdf/issues/5)にて報告されています。
 
-(*) 日本語版では図では特に問題が出ていませんが、図がそもそも翻訳していません。そもそもそんなに英語のある図がありませんが、図を翻訳して下さる方を募集しています。図を翻訳して下さる方がいらしましたら、図の中の日本語には特に問題が無い限りIPAフォントを使用して下さると表示できないとか、PDFファイルサイズのさらなる増大とかフォントの著作権等の問題が防げますのでよろしくお願いいたします。
+* 日本語版では図では特に問題が出ていませんが、図がそもそも翻訳していません。そもそもそんなに英語のある図がありませんが、図を翻訳して下さる方を募集しています。図を翻訳して下さる方がいらしましたら、図の中の日本語には特に問題が無い限りIPAフォントを使用して下さると表示できないとか、PDFファイルサイズのさらなる増大とかフォントの著作権等の問題が防げますのでよろしくお願いいたします。
 
 To clean up after the build:
 
@@ -61,7 +61,7 @@ To clean up after the build:
 $ make clean
 ```
 
-(*) 日本語版では絶対に行わないで下さい。ファイル名が変更してあるため問題無いと思いますが、何が起こってもしりません。
+* 日本語版では絶対に行わないで下さい。ファイル名が変更してあるため問題無いと思いますが、何が起こってもしりません。
 
 This deletes the temporary files written during sicp.pdf creation, including sicp.pdf itself. Move it up to root directory if you want to keep it.
 
@@ -76,7 +76,7 @@ To remove all the generated PDFs and auxiliary files in the whole `src` tree:
 $ make clean-all
 ```
 
-(*) 日本語版ではやっちゃダメです
+* 日本語版ではやっちゃダメです
 
 謝辞
 ----------------
