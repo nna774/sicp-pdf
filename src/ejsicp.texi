@@ -26610,8 +26610,9 @@ property that we need to guarantee.
 にて導入され、大学のオランダ語でのイニシャルから名付けられました(@ref{Dijkstra 1968a})。
 acquireとreleaseの命令は元々はオランダ語の単語@emph{passeren}(渡す)と@emph{vrijgeven}(解放する)から
 PとVと呼ばれ、鉄道システムにて用いられたsemaphores(信号装置)を参照しています。
-Dijkstra(ダイクストラ)の古典的解説(@ref{1968b})は明確に並行コントロールの問題を表した最も初期の
+Dijkstra(ダイクストラ)の古典的解説(@ref{Dijkstra 1968b})は明確に並行コントロールの問題を表した最も初期の
 1つであり、多様な並行問題をどのようにセマフォを用いて扱うかについて示しました。}
+
 
 @lisp
 (define (make-serializer)
