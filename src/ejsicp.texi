@@ -4780,7 +4780,7 @@ means of a recursive process.
 三角の端の数値は全て1であり、三角内部の各数値はそれの上2つの数値の和である。
 @footnote{パスカルの三角形の各要素は@newterm{binomial coefficients}(二項係数)と
 呼ばれる。@math{n}番目の行が@math{(x + y)^n}の展開式における各項の係数であるため
-である。係数を計算するこのパターンはBlaise Pascalの1653年の確立理論の独創的な成果
+である。係数を計算するこのパターンはBlaise Pascalの1653年の確率理論の独創的な成果
 である @cite{Trait@'e du triangle arithm@'etique}に記載された。@ref{Knuth (1973)}
 によると、1303年に同様のパターンが中国の数学者、朱世傑により出版された@cite{Szu-yuen Y@"u-chien} 
 (``The Precious Mirror of the Four Elements'')(四元玉鑑)の中に記載されている。
