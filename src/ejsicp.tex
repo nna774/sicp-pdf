@@ -8044,7 +8044,7 @@ can readily define the procedure
 
 複合データの使用はプログラミング言語の表現力を実際に増加させます。
 ``一次結合''\( ax + by \)の形式化について考えてみて下さい。
-\( a \), \( b \), \( x \), and \( y \)を引数として取り、\( ax + by \)の
+\( a \), \( b \), \( x \), \( y \)を引数として取り、\( ax + by \)の
 値を返す手続を書こうと思うかもしれません。これは引数が数値であるならば少しも
 難しいとは思えません。私達は既に手続を定義できます。
 
@@ -8171,10 +8171,10 @@ representation of sets, and the encoding of information.
 次に\newterm{symbolic expressions}(記号表現)---その基本的な部分は任意の記号であり
 数字のみではないデータ---を紹介することで言語の具象的な力を増補します。
 オブジェクトの集合を表現するための様々な代替方法について探検します。
-与えられた数値関数が多くの異なる演算処理により計算され得ると同時に、
+与えられた数値関数が多くの異なる演算処理により計算され得るのと同様に、
 与えられたデータ構造が多くの方法にてより単純なオブジェクトを用いて表現され得ること、
-表現の選択はデータを扱う処理が日宇町な時間と記憶域に対し重大な影響を与えることについて発見するでしょう。
-記号上の微分、集合の表現、情報符号化のコンテキストにてこれらの考えについて調査します。
+表現の選択がデータを扱う処理の時間と記憶域の要件に対し重大な影響を与えることについて発見するでしょう。
+記号微分、集合の表現、情報符号化のコンテキストにてこれらの考えについて調査します。
 
 Next we will take up the problem of working with data that may be represented
 differently by different parts of a program.  This leads to the need to
@@ -8190,16 +8190,16 @@ package for performing symbolic arithmetic on polynomials, in which the
 coefficients of the polynomials can be integers, rational numbers, complex
 numbers, and even other polynomials.
 
-次にプログラムの異なる部分において異なって表現され得るデータを用いて処理する問題に問とりかかります。 
+次にプログラムの異なる部分において異なって表現され得るデータを用いて処理する問題にとりかかります。 
 これが\newterm{generic operations}(総称命令)の実装の必要性へと導きます。総称命令は
 多くの異なるデータの型を扱わなければなりません。総称命令の存在時における部品化の保守は
 単純なデータ抽象化のみにより構築可能な場合に比べて、より強力な抽象化バリアを、必要とします。
 具体的には\newterm{data-directed programming}(データ指示プログラミング)を
-個別のデータ表現に対し分離した設計と付加的に\newterm{additively}(つまり変更無しに)
+個別のデータ表現に対し分離した設計と付加的(\newterm{additively})に(つまり変更無しに)
 組み合わせることを可能にする技術として紹介します。
-システム設計に対するこのアプローチを説明するために、この章を
-多項式上の記号演算の実行向けパッケージを実装するために私達が学んだことを適用することで閉めます。
-その実装の中では多項式の係数は整数、分数、複素数、さらには多項式にもなりえます。
+システム設計に対するこのアプローチを説明するために、
+多項式上の記号演算の実行向けパッケージを実装するために私達が学んだことを適用することでこの章を終わります。
+その実装の中では多項式の係数は整数、分数、複素数、さらには多項式にもなり得ます。
 
 
 \label{Section 2.1}
@@ -8418,8 +8418,8 @@ just like a primitive data object.  Moreover, \code{cons} can be used to form
 pairs whose elements are pairs, and so on:
 
 ペアは名前を与えることができ、プリミティブなデータオブジェクトと同様に扱うこと
-ができるデータオブジェクトです。さらに\code{cons}は要素がペアやその以外であるペアを
-作ることも可能です。
+ができるデータオブジェクトです。さらに\code{cons}はその要素がペアであるペアや、
+その繰り返しを作ることも可能です。
 
 \begin{scheme}
 (define x (cons 1 2))
@@ -8439,8 +8439,8 @@ implemented by the procedures \code{cons}, \code{car}, and \code{cdr}, is the
 only glue we need.  Data objects constructed from pairs are called
 \newterm{list-structured} data.
 
-\link{Section 2.2}においてペアを組み立てるこの能力が、
-ペアが全ての種類の複雑なデータ構造を作成するために汎用目的構築ブロックとして利用可能
+\link{Section 2.2}において、ペアを組み立てるこの能力が、
+全ての種類の複雑なデータ構造を作成するために汎用目的構築ブロックとしてペアが利用可能
 であることに対し、どのような意味を持つのかについて学びます。
 \code{cons}, \code{car}, \code{cdr}により実装された単一の複合データプリミティブペアが
 私達が必要とするただ1つの糊です。ペアから構築されたデータオブジェクトは
