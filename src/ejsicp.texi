@@ -837,7 +837,7 @@ Lispプログラムは機能のライブラリを膨らませます。その機能の実用性はそれらを生成し
 反映されています。Pascalでは宣言可能なデータ構造の過剰さがカジュアルな連携を抑止し、ペナルティを科す
 機能の中に特殊化することを促しています。1つのデータ構造の上で操作する100の機能を持つほうが
 10のデータ構造の上で操作する10の機能を持つよりも優れています。結果としてピラミッドは1000年の間
-変わらぬままでいなければなりません。有機体は発展するか滅びます。
+変わらぬままでいるに違いありませんが、有機体は発展できなければ滅んでしまうのです。
 
 To illustrate this difference, compare the treatment of material and exercises
 within this book with that in any first-course text using Pascal.  Do not labor
