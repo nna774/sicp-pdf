@@ -2137,7 +2137,7 @@ important role in our understanding of program execution.
 
 2つ目のルールは
 \code{+}と\code{*}のような記号もまたグローバル(大域)環境に含まれており、それらの``値''として
-一連の機械語命令に関係付けられていると規定すことにより、3番目のルールの特別な場合
+一連の機械語命令に関係付けられていると規定することにより、3番目のルールの特別な場合
 であると見做すことができます。
 注意すべき
 鍵となる点は式の中の記号の意味の決定に環境が果たす役割です。Lispのような
@@ -2304,8 +2304,8 @@ would be in an actual call to the procedure being defined.
 式が利用される時に埋められるべき式中の``枠''を示します。}
 \( \langle\hbox{\sl formal parameters}\kern0.08em\rangle \)は手続の中で
 利用される名前で手続の関連する引数を参照します。
-\( \langle\hbox{\sl body}\kern0.08em\rangle \)は形式上のパラメータが手続が
-適用される実際の引数に置換される時、手続の適用における値を返す式です。
+\( \langle\hbox{\sl body}\kern0.08em\rangle \)は形式上のパラメータが、
+適用される手続の実際の引数に置換される時、手続適用の値を返す式です。
 \footnote{より実際には、手続のボディは連続する式です。この場合インタプリタは
 連続する各式を順に評価し最後の式の値を手続適用全体の値として返します。}
 \( \langle \)\var{name}\( \kern0.08em\rangle \)と
