@@ -1361,9 +1361,9 @@ circumference
 
 値に記号を関連付け、後にそれらを取り出すことがあるのは、インタプリタが名前と
 オブジェクトのペアを追跡するためのある種のメモリを持たなければいけないことを
-意味することは明白でしょう。このメモリは\newterm{environment}(\jnewterm{環境})(より正確
+意味することは明白でしょう。このメモリは\newterm{environment}(\jnewterm{環境})と呼ばれます。(より正確
 には\newterm{global environment}(\jnewterm{グローバル環境}、大域環境)、演算には複数の異なる環境が利用され
-ることを後に学ぶため)と呼ばれます。.\footnote{\link{Chapter 3}にてこの環境という
+ることを後に学ぶため)\footnote{\link{Chapter 3}にてこの環境という
 概念がインタプリタがどのように働くか、またどのようにインタプリタを実装するかに
 おいて重要であることを示します。}
 
@@ -5191,8 +5191,6 @@ Christopher Strachey (1916-1975)によるものです。}
 \begin{itemize}
 
 \item
-They may be named by variables.
-
 変数により名付けることが可能
 
 \item
@@ -10721,11 +10719,6 @@ Benの表現は従って以下のセレクタとコンストラクタにより�
 \end{scheme}
 
 \noindent
-The discipline of data abstraction ensures that the same implementation of
-\code{add\-/complex}, \code{sub\-/complex}, \code{mul\-/complex}, and
-\code{div\-/complex} will work with either Ben's representation or Alyssa's
-representation.
-
 データ抽象化の規律は\code{add\-/complex}, \code{sub\-/complex}, \code{mul\-/complex},
 \code{div\-/complex}の同じ実装がBenの表現とAlyssaの表現のどちらに対してもうまく
 いくことを保証します。
@@ -12403,8 +12396,6 @@ A : x^5 + 2x^4 + 3x^2 - 2x - 5
  A: \quad x^5 + 2x^4 + 3x^2 - 2x - 5 
 \end{displaymath}
 \noindent
-is a dense polynomial, whereas
-
 は密多項式です。
 \begin{comment}
 
