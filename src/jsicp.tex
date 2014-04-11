@@ -4800,11 +4800,11 @@ f(x), f(f(x)), f(f(f(x))), ...
 両者は共に結果がある判定基準を満たすまで推測値を繰り返し改善する考えを基にしています。
 実際に直ぐに平方根の計算を不動点検索として形式化が可能です。
 ある数値\( x \)の平方根を求めるには\( y^2 = x \)を満たす\( y \)を探す必要があります。
-この等式を等価な形式\( y = x \big/\! y \)にするとその関数
+この等式を等価な形の\( y = x \big/\! y \)
 \footnote{\( \mapsto \) (``maps to''(写す)と読みます。)は数学者による\code{lambda}の記述法です。
 \( y \mapsto x \big/\! y \)は\code{(lambda (y) (/ x y))}を意味し、\( y \)における関数の値は
 \( x \big/\! y \)ということです。}
-\( y \mapsto x \big/\! y \)の不動点を探してることに気付きます。従って平方根を以下のように
+にするとその関数\( y \mapsto x \big/\! y \)の不動点を探してることに気付きます。従って平方根を以下のように
 求めることを試すことができます。
 
 \begin{scheme}
@@ -9179,7 +9179,7 @@ d(uv)     / dv \     / du \
 \end{comment}
 \begin{displaymath}
 {{\it dc} \over {\it dx}} 		= 0, 
-	\quad {\rm for\ } c\ {\rm a\ constant\ or\ a\ variable\ different\ from\ } x, 
+	\quad c\ \mbox{は定数か、} x\ \mbox{と異なる変数}, 
 \end{displaymath}
 \begin{displaymath}
 {{\it dx} \over {\it dx}} 		= 1, 

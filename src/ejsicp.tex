@@ -6340,7 +6340,7 @@ seventeenth-century English mathematician John Wallis.}
 しかし、集積やフィルタリングは洗練された考えではありますが、この時点ではそれらを使用するのに我々の両手が縛られて
 いるようなものです。私達はまだこれらの抽象化のための適切な組み合わせの手段を与えるためのデータ構造
 を持っていないためです。私達は\link{Section 2.2.3}にてこれらの考えに立ち戻り、集積とフィルタを
-組み合わせるためのインターフェイスとして\newterm{sequences} (\jnewterm{列})をどのように使うのかを示し
+組み合わせるためのインターフェイスとして\newterm{sequences} (列)をどのように使うのかを示し
 さらに一層強力な抽象化を構築します。そこではこれらの手法が実際にどのようにしてプログラムを設計するのに
 強力で洗練されたアプローチとして役に立つのかを学びます。}
 \code{product}と呼ぶ与えられた範囲の点の関数値の積を返す類似の手続を書け。
@@ -7098,11 +7098,11 @@ and we can therefore try to compute square roots as
 両者は共に結果がある判定基準を満たすまで推測値を繰り返し改善する考えを基にしています。
 実際に直ぐに平方根の計算を不動点検索として形式化が可能です。
 ある数値\( x \)の平方根を求めるには\( y^2 = x \)を満たす\( y \)を探す必要があります。
-この等式を等価な形式\( y = x \big/\! y \)にするとその関数
+この等式を等価な形の\( y = x \big/\! y \)
 \footnote{\( \mapsto \) (``maps to''(写す)と読みます。)は数学者による\code{lambda}の記述法です。
 \( y \mapsto x \big/\! y \)は\code{(lambda (y) (/ x y))}を意味し、\( y \)における関数の値は
 \( x \big/\! y \)ということです。}
-\( y \mapsto x \big/\! y \)の不動点を探してることに気付きます。従って平方根を以下のように
+にするとその関数\( y \mapsto x \big/\! y \)の不動点を探してることに気付きます。従って平方根を以下のように
 求めることを試すことができます。
 
 \begin{scheme}
@@ -13506,7 +13506,7 @@ d(uv)     / dv \     / du \
 \end{comment}
 \begin{displaymath}
 {{\it dc} \over {\it dx}} 		= 0, 
-	\quad {\rm for\ } c\ {\rm a\ constant\ or\ a\ variable\ different\ from\ } x, 
+	\quad c\ \mbox{は定数か、} x\ \mbox{と異なる変数}, 
 \end{displaymath}
 \begin{displaymath}
 {{\it dx} \over {\it dx}} 		= 1, 
