@@ -1188,7 +1188,7 @@ subject on programming linguistics and the @math{\lambda}-calculus taught at
 @acronym{MIT} in the late 1960s by Jack Wozencraft and Arthur Evans, Jr.
 
 私達の教科は明らかに1960年代の終わりに@acronym{MIT}にてJack Wozencraftと
-Arthur Evans, Jr.により教えられたプログラミング言語学と@math{\lambda}演算上の
+Arthur Evans, Jr.により教えられたプログラミング言語学と@math{\lambda}計算上の
 素晴しい科目、``6.231''の知的末裔です。
 
 We owe a great debt to Robert Fano, who reorganized @acronym{MIT}'s
@@ -6682,8 +6682,8 @@ for mathematical investigations of the semantics of programming languages.}
 名前を使用したほうがより判りやすいか、または恐しく思わせたりはしないでしょう。
 しかしこの慣習はしっかりと根付いた物です。この表記は@math{\lambda}-calculus(ラムダ演算)
 という数理論理学者Alonzo @ref{Church (1941)}により発表された数学上の形式主義の
-名から受け入れられています。Churchは@math{\lambda}演算を関数と関数適用の概念を学ぶための
-厳格な基礎として与えるために開発しました。 @math{\lambda}演算はプログラミング言語の
+名から受け入れられています。Churchは@math{\lambda}計算を関数と関数適用の概念を学ぶための
+厳格な基礎として与えるために開発しました。 @math{\lambda}計算はプログラミング言語の
 意味の数学上の研究のための基礎的なツールとなりました。}
 
 @subsubheading Using @t{let} to create local variables
