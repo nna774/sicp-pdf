@@ -4620,8 +4620,8 @@ linearly with the input.  See \link{Exercise 3.27}.}
 多くの場合、指示と理解が簡単であることが人々に対し、ユーザが両者の世界の良い面を
 得られる、木再帰手続をより効率的で等価な手続へと変換を行う``賢いコンパイラ''
 の設計を提案する方向に向かわせています。
-\footnote{冗長な演算に対処する1つの取り組み方法は自動的に値のテーブルを演算結果
-に従い構築することです。手続をある引数に適用するよう要求される度に、最初にその値が
+\footnote{冗長な演算に対処する1つの取り組み方法は演算結果
+に従い、自動的に値のテーブルを構築することです。手続をある引数に適用するよう要求される度に、最初にその値が
 既にテーブルに存在するかを確認します。その場合、冗長な演算を防ぐことが可能です。
 この戦略は\newterm{tabulation}(表形式化)や\newterm{memoization}(メモ化)として知られ
 直感的な方法で実装が可能です。表形式化は時折、(\code{count\-/change}のような)指数関数的な
@@ -4670,13 +4670,13 @@ means of a recursive process.
 
 三角の端の数値は全て1であり、三角内部の各数値はそれの上2つの数値の和である。
 \footnote{パスカルの三角形の各要素は\newterm{binomial coefficients}(二項係数)と
-呼ばれる。\( n \)番目の行が\( (x + y)^n \)の展開式における各項の係数であるため
-である。係数を計算するこのパターンはBlaise Pascalの1653年の確率理論の独創的な成果
-である \textit{Trait\'e du triangle arithm\'etique}に記載された。\link{Knuth (1973)}
+呼ばれます。\( n \)番目の行が\( (x + y)^n \)の展開式における各項の係数であるため
+です。係数を計算するこのパターンはBlaise Pascalの1653年の確率理論の独創的な成果
+である \textit{Trait\'e du triangle arithm\'etique}に現れました。\link{Knuth (1973)}
 によると、1303年に同様のパターンが中国の数学者、朱世傑により出版された\textit{Szu-yuen Y\"u-chien} 
-(``The Precious Mirror of the Four Elements'')(四元玉鑑)の中に記載されている。
+(``The Precious Mirror of the Four Elements'')(四元玉鑑)の中にも記載されています。
 また12世紀のペルシャの詩人であり数学者であったOmar Khayyam、同じく12世紀
-のインド人数学者Bh\'ascara \'Ach\'aryaについても同様である。}パスカルの三角形の要素を
+のインド人数学者Bh\'ascara \'Ach\'aryaについても同様です。}パスカルの三角形の要素を
 再帰プロセスを用いて求める手続を書け。
 \end{quote}
 
