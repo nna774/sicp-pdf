@@ -4089,8 +4089,8 @@ machine that uses an auxiliary data structure known as a \newterm{stack}.}
 プログラムの変数には保存されていません。その情報には遅延命令の連鎖を辿る中での
 ``プロセスの現在地''が示されています。鎖が長い程、より多くの情報が保持される必要が
 あります。\footnote{\link{Chapter 5}にてレジスタマシン上での手続の実装について
-議論する時に、任意の反復プロセスが``ハードウェア内にて''固定数のレジスタ集合と
-補助的なメモリの無い機械であると認識できることを学びます。対照的に、再帰プロセスを
+議論する時に、任意の反復プロセスが``ハードウェア内にて''固定長のレジスタ集合を持ち、
+補助的なメモリは持たない機械であると認識できることを学びます。対照的に、再帰プロセスを
 理解するには\newterm{stack}(スタック)として知られる補助的なデータ構造が必要です。}
 
 In contrasting iteration and recursion, we must be careful not to confuse the
