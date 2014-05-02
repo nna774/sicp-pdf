@@ -1800,7 +1800,6 @@ Lispは適用順序評価を用いています。理由の一部は上の\code{(
 テストの結果により異なる命令を実行する方法が無いためです。例えば数値の絶対値を
 演算する手続を定義できません。数値が正、負、零であるかテストを行いルールに従い
 異なる場合に対し異なる行動をしなければなりません。
-
 \begin{comment}
 
 \begin{example}
@@ -1818,7 +1817,6 @@ Lispは適用順序評価を用いています。理由の一部は上の\code{(
 	0  &  x = 0, \\
   \!\! -x  &  x < 0. \end{array} \right. 
 \end{displaymath}
-
 この考えは\newterm{case analysis}(ケース分析、\jnewterm{事例分析})と呼びLispにはそのようなケース分析の
 ための特殊形式が存在します。\code{cond}(``conditional''(条件文)を表わす)と呼ばれ、
 以下のように利用されます。
@@ -2089,7 +2087,6 @@ Benは正規順評価を用いるインタプリタではどのような挙動�
 
 その一例として、平方根の演算問題について考えましょう。
 square-root関数を以下のように定義できます。
-
 \begin{comment}
 
 \begin{example}
@@ -2101,8 +2098,6 @@ sqrt(x) = the y such that y >= 0 and y^2 = x
 \sqrt{x}\;\; = {\rm\;\; the\;\;} y 
 {\rm\;\; such\;\; that\;\;} y \ge 0 {\rm\;\; and\;\;} y^2 = x.
 \end{displaymath}
-
-
 これは完全に正しい数学の関数です。これを用いてある数値が他の数値の平方根であるか
 分かりますし、平方根の一般的な事実を導出可能です。しかし一方でこの定義は手続の
 記述ではありません。与えられた数値から実際どのようにして平方根を求めるのか、
@@ -2315,7 +2310,6 @@ x/y^2 + 2y
 \begin{displaymath}
 {{x / y^2} + 2y\over 3}.
 \end{displaymath}
-\noindent
 この式を用いてsquare-rootに類似したcube-rootを実装せよ。(\link{Section 1.3.4}にてこれらの
 square-rootとcube-rootの抽象化としての汎用なニュートン法の実装方法を学習します。)
 \end{quote}
@@ -2363,7 +2357,6 @@ square-rootとcube-rootの抽象化としての汎用なニュートン法の実
 \end{quote}
 \end{figure}
 
-\noindent
 この分解戦略の重要性はプログラムを部分---最初の10行、次の10行、その他へと分割
 するような単純なものではありません。そうではなく、各手続が他の手続の定義にて
 モジュールとして利用可能な特定のタスクを担うことが不可欠です。例えば\code{good\-/enough?}
@@ -2618,7 +2611,6 @@ n! = n * [(n - 1) * (n - 2) ... 3 * 2 * 1] = n * (n - 1)!
 \begin{displaymath}
 n! = n \cdot [(n - 1) \dot (n - 2) \dots 3 \cdot 2 \cdot 1] = n \cdot (n - 1)!.
 \end{displaymath}
-
 従って\( (n - 1)! \)を演算し、\( n \)を掛けることで\( n! \)を求めることが可能です。
 もし1!が1に等しいという規約を追加すればこの観察結果は直接手続に翻訳できます。
 
@@ -2867,17 +2859,13 @@ Schemeの実装が末尾再帰であることを必須要件としています�
 もう1つの演算の一般的パターンは\newterm{tree recursion}(\jnewterm{木再帰})と呼ばれます。
 例として、フィボナッチ数の計算について考えてみましょう。各数値は先行する2つの数の
 和となります。
-
 \begin{comment}
 0, 1, 1, 2, 3, 5, 8, 13, 21, \( \dots \)
 \end{comment}
 \begin{displaymath}
  0,\; 1,\; 1,\; 2,\; 3,\; 5,\; 8,\; 13,\; 21,\; \dots. 
 \end{displaymath}
-
-
 一般に、フィボナッチ数は次のルールにて定義可能です。
-
 \begin{comment}
 
 \begin{example}
@@ -2897,8 +2885,6 @@ Fib(n) = <  1                        if n = 1
 	\; {\rm Fib}(n-1) + {\rm Fib}(n-2) \quad & {\rm otherwise}. 
 \end{cases} 
 \end{displaymath}
-
-
 私達は直ぐにこの定義をフィボナッチ数を計算する再帰手続の定義に翻訳が可能です。
 
 \begin{scheme}
@@ -2927,7 +2913,6 @@ Fib(n) = <  1                        if n = 1
 Fib(\( n \))の値が\( n \)に対し指数関数的に増加することを示すことができます。
 より正確にはFib(\( n \))は以下の条件の場合に\( \varphi^n / \sqrt{5} \)に最も近い
 整数になります。(\link{Exercise 1.13}参照)
-
 \begin{comment}
 
 \begin{example}
@@ -2938,9 +2923,7 @@ Fib(\( n \))の値が\( n \)に対し指数関数的に増加することを示�
 \begin{displaymath}
 \varphi = {1 + \sqrt{5}\over2} \approx 1.6180 
 \end{displaymath}
-\noindent
 \( \varphi \)は\newterm{golden ratio}(\jnewterm{黄金比})であり次の等式を満たします。
-
 \begin{comment}
 
 \begin{example}
@@ -2996,8 +2979,6 @@ V     /  . \   . 1  .  . 1  .  . 0  .  . 1  .  . 0  ..
 
 フィボナッチ数の計算を反復プロセスに定式化することも可能です。この考えは\( a \)と\( b \)
 の整数のペアを用い、Fib(1) = 1とFib(0) = 0の初期化を行い、以下の変換を同時に行うというものです。
-
-
 \begin{comment}
 
 \begin{example}
@@ -3014,7 +2995,6 @@ b <- a
   b & a.
 \end{array}
 \end{displaymath}
-\noindent
 この変換を\( n \)回行った後に\( a \)と\( b \)がそれぞれFib(\( n+1 \))と
 Fib(\( n \))に等しいことを示すのは難しくありません。従ってフィボナッチ数を反復的に
 以下の手続を用いて計算可能です。
@@ -3276,7 +3256,6 @@ sin x = 3 sin --- - 4 sin^3 ---
 \begin{displaymath}
 \sin x = 3\sin {x\over3} - 4\sin^3 {x\over3} 
 \end{displaymath}
-\noindent
 を用いてsinの引数の大きさを縮小することができる。(この課題の目的では``十分に小さい''
 とはその大きさが0.1ラジアンよりも大きくないこととする) これらの考えが以下の手続に
 組込まれている。
@@ -3311,7 +3290,6 @@ sin x = 3 sin --- - 4 sin^3 ---
 与えられた数値の指数関数を求める問題について考えましょう。基数\( b \)と正の整数
 である指数\( n \)を引数に取り\( b^n \)を求める手続にします。再帰定義により
 これを行う1つの方法は次の通りです。
-
 \begin{comment}
 
 \begin{example}
@@ -3328,7 +3306,6 @@ b^0 = 1
   b^0 & 1,
 \end{array}
 \end{displaymath}
-
 早速、手続に翻訳します。
 
 \begin{scheme}
@@ -3369,7 +3346,6 @@ b * (b * (b * (b * (b * (b * (b * b))))))
 \begin{displaymath}
  b\cdot (b\cdot (b\cdot (b\cdot (b\cdot (b\cdot (b\cdot b))))))\,, 
 \end{displaymath}
-
 3回の乗算で求めることが可能です。
 \begin{comment}
 
@@ -3390,7 +3366,6 @@ b^8 = b^4 * b^4
   b^8 & b^4\cdot b^4.
 \end{array}
 \end{displaymath}
-
 この方法は2の冪乗である指数関数についてはうまく働きます。また連続する二乗の利点を
 一般的な指数関数の演算に対し以下のルールに従うことで利用可能です。
 \begin{comment}
@@ -3409,7 +3384,6 @@ b^n = b * b^(n - 1)  if n is odd
   b^n & b\cdot b^{n-1} \;\; & \mbox{if\,} & \mbox{\,is\, odd}.
 \end{array}
 \end{displaymath}
-
 この方法を手続として表現します。
 
 \begin{scheme}
@@ -4048,7 +4022,6 @@ Evaが言う。``手続をそのように記述することで、\( \Theta(\log 
 \begin{displaymath}
  {1\over1\cdot 3} +  {1\over5\cdot 7} + {1\over9\cdot 11} + \dots, 
 \end{displaymath}
-\noindent
 これは\( \pi / 8 \)に(とてもゆっくりと)収束します。\footnote{この級数は
 一般に等価である形式\( {\pi\over4} = 1 - {1\over3} + {1\over5} - {1\over7} + \dots \)
 にて記述されるLeibnizによる物です。私達はこれがある高級な数学上のトリックに使われるのを
@@ -4094,7 +4067,6 @@ Evaが言う。``手続をそのように記述することで、\( \Theta(\log 
 \begin{displaymath}
  \sum_{n=a}^b f(n) = f(a) + \ldots + f(b), 
 \end{displaymath}
-\noindent
 このように表現します。シグマ記法の力は数学者に特定の合計のみについてではなく、
 総和のコンセプト自身について取り扱うことを可能にしました。例えば特定の級数の和を求めることから
 独立して一般的な総和についての結果を形式化することを可能としたのです。
@@ -4195,7 +4167,6 @@ termを求めるidentityプロシジャの助けを借りて、\code{sum}を用�
 		+ f\!\left(a + dx + {dx\over 2}\right) 
 		+ f\!\left(a + 2dx + {dx\over 2}\right) + \,\dots \;\right] \! dx} 
 \end{displaymath}
-\noindent
 これを直接、手続として表現します。
 
 \begin{scheme}
@@ -4232,7 +4203,6 @@ h
 \begin{displaymath}
  {h\over 3}(y_0 + 4y_1 + 2y_2 + 4y_3 + 2y_4 + \ldots + 2y_{n-2} + 4y_{n-1} + y_n), 
 \end{displaymath}
-\noindent
 ここで\( h = (b - a) / n \)、\( n \)は偶数、\( y_k = f(a + kh) \)である。
 (\( n \)を増やすことで近似の精度を高めることができる)。
 \( f \), \( a \), \( b \), \( n \)を引数に取りシンプソンの公式を用いて求めた定積分の
@@ -4271,7 +4241,6 @@ h
 どのようにして\code{product}を用いて\code{factorial}を定義するのか示せ。また\code{product}を用いて
 次の式を使用して\( \pi \)の近似値を計算せよ。\footnote{この式は17世紀に英国人数学者John Wallisにより
 発見されました。}
-
 \begin{comment}
 
 \begin{example}
@@ -4456,7 +4425,6 @@ f(x,y) = x(1 + xy)^2 + y(1 - y) + (1 + xy)(1 - y)
 \begin{displaymath}
  f(x,y) = x(1 + xy)^2 + y(1 - y) + (1 + xy)(1 - y), 
 \end{displaymath}
-\noindent
 これは以下のようにも表現できます。
 \begin{comment}
 
@@ -4477,8 +4445,6 @@ f(x,y) = xa^2 + yb + ab
   f(x,y)  &  xa^2 + yb + ab.
 \end{array}
 \end{displaymath}
-
-
 \( f \)を求める手続を書く場合、\( x \)と\( y \)のみでなく中間値の名前として
 \( a \)や\( b \)をローカル変数として含みたくなるでしょう。これを実現する1つの
 方法として補助的な手続をローカル変数を束縛するため使用することがあります。
@@ -4759,7 +4725,6 @@ f(x), f(f(x)), f(f(f(x))), ...
 \begin{displaymath}
  f(x),\quad f(f(x)),\quad f(f(f(x))), \quad\dots, 
 \end{displaymath}
-\noindent
 この考えを用いて関数と初期推定値を入力とし、関数の不動点への近似を生成する手続、
 \code{fixed\-/point}を開発できます。指示した許容範囲未満の差に二点が収まるまで関数を
 繰り返し適用します。
@@ -4881,8 +4846,6 @@ f = ---------------------
 \begin{displaymath}
  {f} = {N_1 \over {D_1 + {N_2 \over {D_2 + {N_3 \over D_3 + \dots}}}}}\,. 
 \end{displaymath}
-
-
 例として、無限連分数の展開として\( N_i \)と\( D_i \)の全てが1の場合、\( 1 / \varphi \)
 を生成し、この時\( \varphi \)は(\link{Section 1.2.2}で説明した)黄金比率である。
 無限連分数の近似を求める1つの方法として与えられた項の数を越えた後、展開を切り捨てる方法がある。
@@ -4904,8 +4867,6 @@ D_1 + -----------
 \begin{displaymath}
  {N_1 \over {D_1 + {N_2 \over {\ddots + {N_k \over D_k}}}}}\,. 
 \end{displaymath}
-
-
 \code{n}と\code{d}は連分数の\( N_i \)\( D_i \)の項を返す1引数(項の索引\( i \))の手続であると考える。
 \code{(cont\-/frac n d k)}を評価すると\( k \)項有限連分数の値を求める手続、\code{cont\-/frac}を定義せよ。
 あなたの手続を以下を用いて\( 1 / \varphi \)の近似を求めることで、一連の\code{k}の値についてチェックせよ。
@@ -4955,7 +4916,6 @@ tan x = ---------------
 \begin{displaymath}
  {\tan x} = {x \over {1 - {x^2 \over {3 - {x^2 \over 5 - \dots}}}}}\,, 
 \end{displaymath}
-\noindent
 ここで\( x \)はラジアンである。ランベルトの式を基にして正接関数の近似値を求める
 手続\code{(tan\-/cf x k)}を定義せよ。\code{k}は\link{Exercise 1.37}と同様に
 求める項の数を指定する。
@@ -5048,7 +5008,6 @@ f(x) = x - -----
 \begin{displaymath}
  {f(x) = x} - {g(x)\over Dg(x)} 
 \end{displaymath}
-\noindent
 そして\( Dg(x) \)は\( x \)により微分した導関数です。ニュートン法は上で学んだ
 不動点を用いる手法で、関数\( f \)の不動点を探すことで方程式の解の近似を求めます。
 \footnote{初歩的な微積分学の教科書は通常ニュートン法を近似の数列\( x_{n+1} = x_n -
@@ -5082,7 +5041,6 @@ Dg(x) = ----------------
 \begin{displaymath}
  {Dg(x)} = {g(x + {\it dx}) - g(x) \over {\it dx}}\,. 
 \end{displaymath}
-\noindent
 従って微分の考えを(\( dx \)を例えば0.00001として)手続として次のように
 表現できます。
 
@@ -5552,7 +5510,6 @@ Lispは他の言語と異なり、手続に完全な第一級の地位を与え�
 どのように実装されるべきであるのかについて語っていません。そうであっても、
 もし私達がこれら3つの手続を持っているのならば、足し算、引き算、かけ算、割り算、等値テスト
 を以下の関係性を用いて行うことができるでしょう。
-
 \begin{comment}
 
 \begin{example}
@@ -5576,8 +5533,8 @@ n_1   n_2
 --- = ---  if and only if n_1 d_2 = n_2 d_1
 d_1   d_2
 \end{example}
-\end{comment}
 
+\end{comment}
 \begin{align*}
   {n_1 \over d_1} + {n_2 \over d_2} 	&= {n_1 d_2 + n_2 d_1 \over d_1 d_2}, \\
   {n_1 \over d_1} - {n_2 \over d_2} 	&= {n_1 d_2 - n_2 d_1 \over d_1 d_2}, \\
@@ -5587,8 +5544,6 @@ d_1   d_2
 						{\rm\ if\ and\ only\ if\quad} 
 						n_1 d_2 = n_2 d_1.
 \end{align*}
-
-\noindent
 これらのルールを手続として表現できます。
 
 \begin{scheme}
@@ -6251,7 +6206,6 @@ R_1 + R_2
 \begin{displaymath}
  {1 \over 1 / R_1 + 1 / R_2}\,. 
 \end{displaymath}
-
 彼は以下の2つのプログラムを書きました。それぞれが並列接続の抵抗値を異なる式で計算します。
 
 \begin{scheme}
@@ -7636,9 +7590,8 @@ a_n x^n + a_(n-1) x^(n-1) + ... + a_1 x + a_0
 \begin{displaymath}
  a_n x^n + a_{n-1} x^{n-1} + \ldots + a_1 x + a_0 
 \end{displaymath}
-\noindent
-ホーナー法は上記の計算を以下のような構造にする。
 
+ホーナー法は上記の計算を以下のような構造にする。
 \begin{comment}
 
 \begin{example}
@@ -7649,7 +7602,6 @@ a_n x^n + a_(n-1) x^(n-1) + ... + a_1 x + a_0
 \begin{displaymath}
  (\ldots (a_n x + a_{n-1}) x + \ldots + a_1) x + a_0. 
 \end{displaymath}
-\noindent
 すなわち\( a_n \)で始め、\( x \)を掛け、\( a_{n-1} \)を足し、\( x \)を掛け、を\( a_0 \)
 に到達するまで繰り返す。\footnote{\link{Knuth 1981}によるとこの方法はW. G. Hornerにより
 19世紀始めに考案された。しかしその手法は実際にはニュートンにより100年を越えた前に使用されていた。
@@ -7865,7 +7817,6 @@ a_n x^n + a_(n-1) x^(n-1) + ... + a_1 x + a_0
 次の問題について考えてみて下さい：正の整数\( n \)を与えられた時、異なる正の整数\( i \)と\( j \)の
 全ての順序付けペアを見つけよ。条件として\( 1 \le j < i \le n \)、かつ\( i + j \)は素数である。
 例として、もし\( n \)が6ならばペアは以下の通りである。
-
 \begin{comment}
 
 \begin{example}
@@ -7895,8 +7846,6 @@ $j$ 	& 1 & 2 & 1 & 3 & 2 & 1 & 5 \cr
 $i + j$	& 3 & 5 & 5 & 7 & 7 & 7 & 11 \cr}
 }
 \end{displaymath}
-
-
 この演算を体系化する自然な方法は全ての順序付けられた\( n \)以下の正の整数のペア
 を生成し、フィルタを通してその合計が素数であるもののみを選択し、フィルタを通った
 各ペア\( (i, j) \)に対し三つ組\( (i, j, i + j) \)を生成することです。
@@ -8548,7 +8497,6 @@ vector    \    __--        edge1
 \newterm{frame coordinate map}(\jnewterm{フレーム座標マップ})に関連付けられます。
 マップは単位正方形をベクトル\( {\bf v} = (x, y) \)を次のベクトルの和にマッピングすることで
 変換します。
-
 \begin{comment}
 
 \begin{example}
@@ -8559,7 +8507,6 @@ Origin(Frame) + x * Edge_1(Frame) + y * Edge_2(Frame)
 \begin{displaymath}
  {\rm Origin(Frame)} + x \cdot {\rm Edge_1(Frame)} + y \cdot {\rm Edge_2(Frame)}. 
 \end{displaymath}
-\noindent
 例えば、(0, 0)はフレームの始点に、(1, 1)は対角線上に始点の反対の頂点へ、そして
 (0.5, 0.5)はフレームの中心点にマッピングされます。フレーム座標マップは以下の手続により
 作成できます。\footnote{\code{frame\-/coord\-/map}はこの先の\link{Exercise 2.46}にて説明される
@@ -8601,7 +8548,6 @@ Origin(Frame) + x * Edge_1(Frame) + y * Edge_2(Frame)
 セレクタ\code{xcor\-/vect}と\code{ycor\-/vect}を与えることにより実装せよ。
 セレクタとコンストラクタを用いてベクトルの足し算、引き算、スカラによる乗算を求める操作を実行する
 手続 \code{add\-/vect}, \code{sub\-/vect}, \code{scale\-/vect}を実装せよ。
-
 \begin{comment}
 
 \begin{example}
@@ -8609,6 +8555,7 @@ Origin(Frame) + x * Edge_1(Frame) + y * Edge_2(Frame)
 (x_1, y_1) - (x_2, y_2) = (x_1 - x_2, y_1 - y_2)
              s * (x, y) = (sx, sy)
 \end{example}
+
 \end{comment}
 \begin{displaymath}
 %  
@@ -8624,7 +8571,6 @@ Origin(Frame) + x * Edge_1(Frame) + y * Edge_2(Frame)
 \end{array}
 \end{displaymath}
 \end{quote}
-
 
 \begin{quote}
 \heading{\phantomsection\label{Exercise 2.47}Exercise 2.47:} 
@@ -9356,7 +9302,6 @@ d(xy)
 \begin{displaymath}
  {{\it d\,(xy)} \over {\it dx}} = x \cdot 0 + 1 \cdot y, 
 \end{displaymath}
-\noindent
 しかし私達はこのプログラムに\( x \cdot 0 = 0 \), \( 1 \cdot y = y \),
 \( 0 + y = y \)を理解して欲しいと望みます。二つ目の例の解答は単純に\code{y}となるべき
 です。三つめの例が示すように、これは式が複雑な場合には深刻な問題となります。
@@ -9433,9 +9378,8 @@ d(u^n)            du
 
 \end{comment}
 \begin{displaymath}
- {{\it d\,(u^n\,)} \over {\it dx}} = nu^{n-1} {{\it du} \over {\it dx}} 
+ {{\it d\,(u^n)} \over {\it dx}} = nu^{n-1} {{\it du} \over {\it dx}} 
 \end{displaymath}
-\noindent
 \code{deriv}プログラムに新しい節を追加し、適切な手続\code{exponentiation?}, \code{base}, \code{exponent},
 \code{make\-/exponentiation}を定義せよ。(シンボル\code{**}を指数演算の表記に用いても良い)。
 任意の数の0乗は1であり、任意の数の1乗はそれ自身であるというルールを構築せよ。
@@ -10597,8 +10541,6 @@ Angle(z_1 * z_2) = Angle(z_1) + Angle(z_2)
 		\hbox{ 角度} (z_1)\; + \hbox{ 角度} (z_2).
 \end{array}
 \end{displaymath}
-
-\noindent
 従って複素数には2つの異なる表現が存在し、それぞれは異なる操作に適しています。
 けれども、複素数を用いるプログラムを書いている誰かさんの視点からは、データ抽象化の
 主義が複素数を操作するための全ての命令はどの表現がコンピュータにより用いられるかに
@@ -10672,7 +10614,6 @@ Benは複素数を直行形式にて表現することを選択しました。�
 複素数を与えられた実数部と虚数部から構築するため、実数部と虚数部を複素数から選択する
 のは直接的です。大きさと角度を求めるためには、または複素数を与えられた大きさと角度から
 構築するために彼は三角法の関係を用いました。
-
 \begin{comment}
 
 \begin{example}
@@ -10693,7 +10634,6 @@ y = r sin A     A = arctan(y,x)
 	y & r \sin A, \qquad 	& A & \arctan(y, x), 
 \end{array}
 \end{displaymath}
-\noindent
 これは実数部と虚数部\( (x, y) \)を大きさと角度\( (r, A) \)へと関係づけます。\footnote{
 ここで参照されたアークタンジェント関数は、Schemeの\code{atan}手続にて計算されますが、2つの
 引数\( y \)と\( x \)を取りタンジェントが\( y / x \)となる角度を返すように定義
@@ -12109,7 +12049,6 @@ x^2 sin (y^2 + 1) + x cos 2y + cos(y^3 - 2y^2)
 \begin{displaymath}
  x^2 \sin (y^2 + 1) + x \cos 2y + \cos(y^3 - 2y^2) 
 \end{displaymath}
-\noindent
 係数を伴なう\( x \)の多項式と係数が整数である\( y \)の三角関数として記述することが
 できます。
 
@@ -12141,7 +12080,6 @@ x^2 sin (y^2 + 1) + x cos 2y + cos(y^3 - 2y^2)
 \begin{displaymath}
  5x^2 + 3x + 7 
 \end{displaymath}
-\noindent
 は簡単な\( x \)の多項式であり、
 \begin{comment}
 
@@ -12153,7 +12091,6 @@ x^2 sin (y^2 + 1) + x cos 2y + cos(y^3 - 2y^2)
 \begin{displaymath}
  (y^2 + 1)x^3 + (2y)x + 1 
 \end{displaymath}
-\noindent
 は係数が\( y \)の多項式である\( x \)の多項式です。
 
 
@@ -12331,9 +12268,8 @@ x^2 sin (y^2 + 1) + x cos 2y + cos(y^3 - 2y^2)
 
 \end{comment}
 \begin{displaymath}
- [3x^2 + (2 + 3i)x + 7] \cdot \! \left[ x^4 + {2\over3} x^2 + (5 + 3i) \right]\!\!. 
+ [3x^2 + (2 + 3i)x + 7] \cdot \! \left[ x^4 + {2\over3} x^2 + (5 + 3i) \right]\!.
 \end{displaymath}
-
 多項式の加算と乗算の手続、\code{add\-/poly}と\code{mul\-/poly} をジェネリックな数値演算システムに
 型\code{polynomial}のための命令\code{add}と\code{mul}としてインストールしたため、私達のシステムは
 また自動的に以下のような多項式操作を取り扱うことが可能です。
@@ -12347,7 +12283,6 @@ x^2 sin (y^2 + 1) + x cos 2y + cos(y^3 - 2y^2)
 \begin{displaymath}
  \Big[(y + 1)x^2 + (y^2 + 1)x + (y - 1)\Big] \cdot \Big[(y - 2)x + (y^3 + 7)\Big]. 
 \end{displaymath}
-
 その理由はシステムが係数を合成しようと試す時、\code{add}と\code{mul}を通して呼出を行うためです。
 係数はそれ自身(\( y \)の)多項式ですから、これらは\code{add\-/poly}と\code{mul\-/poly}を用いて合成され
 ます。結果は``データ適従再帰''のような物で、例えば\code{mul\-/poly}の呼出は係数の乗算のために
@@ -12500,7 +12435,6 @@ x^2 - 1
 \begin{displaymath}
  {x^5 - 1 \over x^2 - 1} = x^3 + x, \hbox{  remainder  } x - 1. 
 \end{displaymath}
-
 除算は長除法を通して行うことができる。これは被除数の最高次の項を除数の最高次の項
 で割る。結果は商の最初の項である。次に結果に除数を掛け、被除数からその結果を引く。
 そして残りの答を再帰的に差を除数で割ることにより求める。除数の次数が被除数の次数を
@@ -12597,7 +12531,6 @@ x^3 - 1
 \begin{displaymath}
  {x + 1 \over x^3 - 1}\,. 
 \end{displaymath}
-
 システムは分数関数の加算、減算、乗算、除算をできなければなりません。そして以下の様な
 計算を行うために、
 \begin{comment}
@@ -12614,7 +12547,6 @@ x^3 - 1   x^2 - 1    x^4 + x^3 - x - 1
 	{x^3 + 2x^2 + 3x + 1 \over x^4 + x^3 - x - 1}\,. 
 \end{displaymath}
 \noindent
-
 (ここでは加算は共通因数を取り除くことで簡約されています。通常の``たすき掛け''なら
 5次多項式分の4次多項式の分数を生成しているでしょう。)
 
@@ -12722,8 +12654,6 @@ P_3 : 13x + 5
 	P_3 	& \quad 13x + 5. 
 \end{array}
 \end{displaymath}
-
-
 次に\( P_1 \)と\( P_2 \)の積\( Q_1 \)、\( P_1 \)と\( P_3 \)の積\( Q_2 \)を定義し、
 \code{greatest\-/common\-/divisor}(\link{Exercise 2.94})を用いて\( Q_1 \)と\( Q_2 \)
 の\acronym{GCD}を求めよ。答が\( P_1 \)と同じにならないことに注意せよ。これが
