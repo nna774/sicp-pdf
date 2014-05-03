@@ -2648,7 +2648,6 @@ actions in the different cases according to the rule
 テストの結果により異なる命令を実行する方法が無いためです。例えば数値の絶対値を
 演算する手続を定義できません。数値が正、負、零であるかテストを行いルールに従い
 異なる場合に対し異なる行動をしなければなりません。
-
 \begin{comment}
 
 \begin{example}
@@ -3051,7 +3050,6 @@ define the square-root function as
 
 その一例として、平方根の演算問題について考えましょう。
 square-root関数を以下のように定義できます。
-
 \begin{comment}
 
 \begin{example}
@@ -4313,7 +4311,6 @@ to \( \varphi^n \big/ \sqrt{5} \), where
 Fib(\( n \))の値が\( n \)に対し指数関数的に増加することを示すことができます。
 より正確にはFib(\( n \))は以下の条件の場合に\( \varphi^n / \sqrt{5} \)に最も近い
 整数になります。(\link{Exercise 1.13}参照)
-
 \begin{comment}
 
 \begin{example}
@@ -4395,8 +4392,6 @@ simultaneous transformations
 
 フィボナッチ数の計算を反復プロセスに定式化することも可能です。この考えは\( a \)と\( b \)
 の整数のペアを用い、Fib(1) = 1とFib(0) = 0の初期化を行い、以下の変換を同時に行うというものです。
-
-
 \begin{comment}
 
 \begin{example}
@@ -4880,7 +4875,6 @@ recursive definition
 与えられた数値の指数関数を求める問題について考えましょう。基数\( b \)と正の整数
 である指数\( n \)を引数に取り\( b^n \)を求める手続にします。再帰定義により
 これを行う1つの方法は次の通りです。
-
 \begin{comment}
 
 \begin{example}
@@ -6346,7 +6340,6 @@ seventeenth-century English mathematician John Wallis.}
 どのようにして\code{product}を用いて\code{factorial}を定義するのか示せ。また\code{product}を用いて
 次の式を使用して\( \pi \)の近似値を計算せよ。\footnote{この式は17世紀に英国人数学者John Wallisにより
 発見されました。}
-
 \begin{comment}
 
 \begin{example}
@@ -8304,7 +8297,6 @@ multiply, divide, and test equality by using the following relations:
 どのように実装されるべきであるのかについて語っていません。そうであっても、
 もし私達がこれら3つの手続を持っているのならば、足し算、引き算、かけ算、割り算、等値テスト
 を以下の関係性を用いて行うことができるでしょう。
-
 \begin{comment}
 
 \begin{example}
@@ -8328,8 +8320,8 @@ n_1   n_2
 --- = ---  if and only if n_1 d_2 = n_2 d_1
 d_1   d_2
 \end{example}
-\end{comment}
 
+\end{comment}
 \begin{align*}
   {n_1 \over d_1} + {n_2 \over d_2} 	&= {n_1 d_2 + n_2 d_1 \over d_1 d_2}, \\
   {n_1 \over d_1} - {n_2 \over d_2} 	&= {n_1 d_2 - n_2 d_1 \over d_1 d_2}, \\
@@ -11551,7 +11543,6 @@ then the pairs are the following:
 次の問題について考えてみて下さい：正の整数\( n \)を与えられた時、異なる正の整数\( i \)と\( j \)の
 全ての順序付けペアを見つけよ。条件として\( 1 \le j < i \le n \)、かつ\( i + j \)は素数である。
 例として、もし\( n \)が6ならばペアは以下の通りである。
-
 \begin{comment}
 
 \begin{example}
@@ -12498,7 +12489,6 @@ the vector sum
 \newterm{frame coordinate map}(フレーム座標マップ)に関連付けられます。
 マップは単位正方形をベクトル\( {\bf v} = (x, y) \)を次のベクトルの和にマッピングすることで
 変換します。
-
 \begin{comment}
 
 \begin{example}
@@ -12574,7 +12564,6 @@ subtraction, and multiplying a vector by a scalar:
 セレクタ\code{xcor\-/vect}と\code{ycor\-/vect}を与えることにより実装せよ。
 セレクタとコンストラクタを用いてベクトルの足し算、引き算、スカラによる乗算を求める操作を実行する
 手続 \code{add\-/vect}, \code{sub\-/vect}, \code{scale\-/vect}を実装せよ。
-
 \begin{comment}
 
 \begin{example}
@@ -12582,6 +12571,7 @@ subtraction, and multiplying a vector by a scalar:
 (x_1, y_1) - (x_2, y_2) = (x_1 - x_2, y_1 - y_2)
              s * (x, y) = (sx, sy)
 \end{example}
+
 \end{comment}
 \begin{displaymath}
 %  
@@ -12597,7 +12587,6 @@ subtraction, and multiplying a vector by a scalar:
 \end{array}
 \end{displaymath}
 \end{quote}
-
 
 \begin{quote}
 \heading{\phantomsection\label{Exercise 2.47}Exercise 2.47:} Here are two possible
@@ -15716,7 +15705,6 @@ Benは複素数を直行形式にて表現することを選択しました。�
 複素数を与えられた実数部と虚数部から構築するため、実数部と虚数部を複素数から選択する
 のは直接的です。大きさと角度を求めるためには、または複素数を与えられた大きさと角度から
 構築するために彼は三角法の関係を用いました。
-
 \begin{comment}
 
 \begin{example}
