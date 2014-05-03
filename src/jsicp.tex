@@ -1453,12 +1453,11 @@ circumference
 \end{example}
 \end{comment}
 \includegraphics[width=31mm]{fig/chap1/Fig1.1g.pdf}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 1.1:} 部分的組合せの値を示す木表現
-\end{quote}
 \end{figure}
 
-\noindent
 次に第一ステップの適用の繰り返しが、組み合わせでなく、プリミティブ
 な式、例えば数値や組込オペレータ、その他の名前を評価することが必要となる点へと
 導くことに注目して下さい。
@@ -2593,12 +2592,16 @@ square-rootとcube-rootの抽象化としての汎用なニュートン法の実
 
 
 階乗を求める関数を考えることから始めましょう。定義を以下に示します。
+\begin{comment}
 
-\[
-n! = n \cdot [(n - 1)  \cdot (n - 2)  \dots 3 \cdot 2 \cdot 1] = n \cdot (n - 1)!
-\]
+\begin{example}
+n! = n * (n - 1) * (n - 2) ... 3 * 2 * 1
+\end{example}
 
-
+\end{comment}
+\begin{displaymath}
+n! = n \cdot (n - 1) \cdot (n - 2) \cdots 3 \cdot 2 \cdot 1.
+\end{displaymath}
 階乗を計算する方法は数多くあります。1つの方法は任意の正の整数 \( n \)において、\( n! \)は
 \( n \)と\( (n - 1)! \)の積に等しいという観察結果を利用します。
 \begin{comment}
@@ -2609,7 +2612,7 @@ n! = n * [(n - 1) * (n - 2) ... 3 * 2 * 1] = n * (n - 1)!
 
 \end{comment}
 \begin{displaymath}
-n! = n \cdot [(n - 1) \dot (n - 2) \dots 3 \cdot 2 \cdot 1] = n \cdot (n - 1)!.
+n! = n \cdot [(n - 1) \cdot (n - 2) \cdots 3 \cdot 2 \cdot 1] = n \cdot (n - 1)!.
 \end{displaymath}
 従って\( (n - 1)! \)を演算し、\( n \)を掛けることで\( n! \)を求めることが可能です。
 もし1!が1に等しいという規約を追加すればこの観察結果は直接手続に翻訳できます。
@@ -2652,7 +2655,6 @@ n! = n \cdot [(n - 1) \dot (n - 2) \dots 3 \cdot 2 \cdot 1] = n \cdot (n - 1)!.
 \heading{Figure 1.3:} 6!を求めるための線形再帰プロセス
 \end{figure}
 
-\noindent
 では階乗の演算について異なる視点を得てみましょう。\( n! \)を計算するルールを最初に
 1を2で掛け、その結果を3に掛け、次に4に掛け\( n \)に辿り着くまで繰り返すと説明する
 ことも可能でした。より形式的には、積の実行と、1から\( n \)までカウントするカウンタ
@@ -2731,7 +2733,6 @@ counter ~\( \dark \gets \)~ counter + 1
 \heading{Figure 1.4:} 6!を求めるための線形反復プロセス
 \end{figure}
 
-\noindent
 最初のプロセスについて考えます。\link{Figure 1.3}の矢印で示されるように、
 置換モデルが展開の後、収縮する状態を明らかにしています。
 展開は\newterm{deferred operations}(遅延演算)の連鎖(このケースでは乗算の連なり)を構築するプロセスとして
@@ -2969,7 +2970,6 @@ V     /  . \   . 1  .  . 1  .  . 0  .  . 1  .  . 0  ..
 \end{quote}
 \end{figure}
 
-\noindent
 従ってプロセスは入力に伴ない指数関数的に増加するステップ数を要します。一方で
 要求される記憶域は入力に対し線形にしか増加しません。なぜなら計算過程の任意のポイントに
 おいて、木の中のどのノードが上にあるのかのみ追跡する必要があるためです。一般的に、
@@ -5789,12 +5789,11 @@ d_1   d_2
 \end{quote}
 \end{comment}
 \includegraphics[width=91mm]{fig/chap2/Fig2.1c.pdf}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 2.1:} 分数パッケージ内の抽象化バリア
-\end{quote}
 \end{figure}
 
-\noindent
 例として、分数を最小の項へと約分する問題の解法の代替法には、分数を組み立てた時でなく、
 分数のパーツにアクセスする度に約分を実行する方法があります。
 これは異なるコンストラクタとセレクタ手続に導きます。
@@ -6296,9 +6295,9 @@ LemはAlyssaのプログラムは2つの方法の演算にて異なる値を返�
 \end{example}
 \end{comment}
 \includegraphics[width=34mm]{fig/chap2/Fig2.2c.pdf}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 2.2:} \code{(cons 1 2)}の箱とポインタ表現
-\end{quote}
 \end{figure}
 
 \begin{figure}[tb]
@@ -6333,7 +6332,6 @@ LemはAlyssaのプログラムは2つの方法の演算にて異なる値を返�
 \end{quote}
 \end{figure}
 
-\noindent
 要素がペアであるペアを作成する能力は表現ツールとしてのリスト構造の重要性の本質です。
 私達はこの能力を\code{cons}の\jnewterm{閉包性}(closure property)と呼びます。
 一般的に、データオブジェクトを組み合わせる操作は
@@ -6408,12 +6406,11 @@ LemはAlyssaのプログラムは2つの方法の演算にて異なる値を返�
 \end{example}
 \end{comment}
 \includegraphics[width=76mm]{fig/chap2/Fig2.4c.pdf}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 2.4:} ペアの鎖として表現された列1, 2, 3, 4
-\end{quote}
 \end{figure}
 
-\noindent
 そのようなペアの列は入れ子の\code{cons}にて形成され、\newterm{list}(\jnewterm{リスト})と呼ばれます。
 そしてSchemeは\code{list}と呼ばれるプリミティブを提供しリストの構築を手助けします。\footnote{
 この本では\newterm{list}をリスト終端マーカーにて終端化されたペアの鎖を意味するように
@@ -6946,7 +6943,6 @@ Louisはそこで彼のバグを\code{cons}への引数を逆順にすること�
 \end{quote}
 \end{figure}
 
-\noindent
 要素それ自身が列である列のもう1つの考え方は木としての考え方である。
 列の要素は木の枝であり、それ自身が列である\mbox{elements}(複数の要素)は部分木である。
 \link{Figure 2.6}は木として見た場合の\link{Figure 2.5}を示している。
@@ -6967,12 +6963,11 @@ Louisはそこで彼のバグを\code{cons}への引数を逆順にすること�
 \end{example}
 \end{comment}
 \includegraphics[width=22mm]{fig/chap2/Fig2.6a.pdf}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 2.6:} 木として見た\link{Figure 2.5}のリスト構造
-\end{quote}
 \end{figure}
 
-\noindent
 再帰は木構造を扱うのに自然なツールです。良く木に対する操作を枝に対する操作へと
 還元でき、それは順に枝の枝への操作へと還元され、木の葉に辿り着くまで繰り返され
 ます。例として、\link{Section 2.2.1}の\code{length}手続を木の葉の総数を求める\code{count\-/leaves}
@@ -7384,10 +7379,10 @@ the commonality between the two programs.
 \end{quote}
 \end{comment}
 \includegraphics[width=111mm]{fig/chap2/Fig2.7d.pdf} 
-\par\bigskip
-\noindent
+\begin{quote}
 \heading{Figure 2.7:} 手続\code{sum\-/odd\-/squares}(上)と\code{even\-/fibs}(下)の信号の流れの計画が
 二つのプログラムの間の共通点を明かす
+\end{quote}
 \end{figure}
 
 \subsubsection*{列命令}
@@ -8122,7 +8117,6 @@ lines, are not part of the images.
 \heading{Figure 2.10:} \code{wave}により生成されたイメージ
 \end{figure}
 
-\noindent
 このピクチャー言語の優雅さの部分は要素の種類が\newterm{painter}(\jnewterm{ペインタ})と呼ばれる
 ものたった1つしかないことです。ペインタは指定された平行四辺形の枠の中にイメージを
 移動し、拡大縮小して描きます。例えば\code{wave}と呼ぶペインタがありそれは\link{Figure 2.10}
@@ -8201,7 +8195,6 @@ permission of the \acronym{MIT} Museum).
 \heading{Figure 2.11:} William Barton Rogersのイメージ
 \end{figure}
 
-\noindent
 イメージを結合するには与えられたペインタから新しいペインタを構築する種々の命令を
 使用します。例えば\code{beside}命令は2つのペインタを取り新しい最初のペインタのイメージを
 フレームの左半分に、2つ目のペインタのイメージをフレームの右半分に描く複合ペインタを
@@ -8234,12 +8227,11 @@ from the \code{wave} painter of \link{Figure 2.10}.
 \end{scheme}
 \end{comment}
 \includegraphics[width=50mm]{fig/chap2/Fig2.12.pdf}
-\par\bigskip
-\noindent
+\begin{quote}
 \heading{Figure 2.12:} \link{Figure 2.10}の\code{wave}ペインタから始めて複雑な図を作成する
+\end{quote}
 \end{figure}
 
-\noindent
 複雑なイメージをこの様式で構築する場合はペインタが言語の接続手段の下で閉じている
 という事実を利用しています。2つのペインタの\code{beside}や\code{below}はそれ自身がペインタです。
 従ってそれをより複雑なペインタを作るための要素として使用できます。
@@ -8294,12 +8286,11 @@ from the \code{wave} painter of \link{Figure 2.10}.
 \end{quote}
 \end{comment}
 \includegraphics[width=111mm]{fig/chap2/Fig2.13a.pdf}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 2.13:} \code{right\-/split}と\code{corner\-/split}の再帰計画
-\end{quote}
 \end{figure}
 
-\noindent
 また再帰命令を定義することも可能です。以下はペインタを分割し、\link{Figure 2.13}に示すように
 右へ向けて枝分かれします。
 
@@ -8491,7 +8482,6 @@ vector    \    __--        edge1
 \end{quote}
 \end{figure}
 
-\noindent
 私達は単位正方形\( (0 \le x, y \le 1) \)内の座標をイメージを指定するのに用いることにします。
 各フレームは、フレームに適合するようにイメージの移動と拡大縮小をするのに使われる
 \newterm{frame coordinate map}(\jnewterm{フレーム座標マップ})に関連付けられます。
@@ -9658,7 +9648,6 @@ d(u^n)            du
 \end{quote}
 \end{figure}
 
-\noindent
 木表現の優位点は次のとおりです。ある数値\( x \)がある集合に含まれているかどうかをチェック
 したいと想定します。\( x \)をトップノードのエントリと比較することから始めます。
 もし\( x \)がこれよりも小さければ、左の部分木のみを探索すれば良いことがわかります。
@@ -10029,7 +10018,6 @@ Bは100で符号化されるので、他のどのシンボルも0、または100
 \heading{Figure 2.18:} ハフマン符号化木
 \end{figure}
 
-\noindent
 ハフマン木を与えられることで、任意のシンボルの符号を木の根から始めてそのシンボル
 を持つ葉に辿り着くまで降りていくことで見つけることができます。
 左の枝に降りる度に符号に0を追加し、右の枝に降りる度に1を追加します。(どの枝を降り
@@ -10419,12 +10407,11 @@ Sha boom
 \end{quote}
 \end{comment}
 \includegraphics[width=108mm]{fig/chap2/Fig2.19a.pdf}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 2.19:} 複素数システムのデータ抽象化バリア
-\end{quote}
 \end{figure}
 
-\noindent
 \link{Section 2.5}にてどのようにタイプタグとデータ適従スタイルを用いてジェネリックな数値演算パッケージを
 開発するかについて示します。これは全ての種類の``数値''を操作するのに用いることができる手続(\code{add},
 \code{mul}, その他)を提供します。\link{Section 2.5.3}ではどのようにして記号代数を実行するジェネリックな
@@ -10506,7 +10493,6 @@ Imaginary-part(z_1 + z_2) = Imaginary-part(z_1) + Imaginary-part(z_2)
 \heading{Figure 2.20:} 平面上の点としての複素数
 \end{figure}
 
-\noindent
 複素数をかけ算する場合、複素数を大きさと角度(\link{Figure 2.20}内の\( r \)と\( A \))
 としての極形式の表現を用いて考える方がより自然です。2つの複素数の積は一方の複素数を
 もう一方の長さで延し次にもう一方の角度の分、回転することで得られるベクトルになります。
@@ -10867,12 +10853,11 @@ Benの表現は従って以下のセレクタとコンストラクタにより�
 \end{quote}
 \end{comment}
 \includegraphics[width=108mm]{fig/chap2/Fig2.21a.pdf}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 2.21:} ジェネリックな複素数演算システムの構造
-\end{quote}
 \end{figure}
 
-\noindent
 各データオブジェクトはその型にてタグ付けられているので、セレクタはデータに対し
 ジェネリックな方法で操作します。これは各セレクタがそれが適用される個々のデータの
 型に従う振舞を持つように定義されているということです。分けられた表現を結び付ける
@@ -10962,12 +10947,11 @@ angle      | angle-polar     | angle-rectangular
 \end{quote}
 \end{comment}
 \includegraphics[width=102mm]{fig/chap2/Fig2.22.pdf}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 2.22:} 複素数システムの命令表
-\end{quote}
 \end{figure}
 
-\noindent
 この計画を実装するために、2つの手続\code{put}と\code{get}を命令と型のテーブルを操作するために
 持っていると仮定します。
 
@@ -11376,7 +11360,6 @@ Schemeのデータ構造として実装されているのにも係らず、使�
 \heading{Figure 2.23:} ジェネリックな数値演算システム
 \end{figure}
 
-\noindent
 \link{Figure 2.23}は私達が構築するシステムの構造を示しています。
 抽象化バリアに注目して下さい。``数値''を扱う第三者の視点からはそこにあるのは
 どの種類の数値が提供されても単一の手続\code{add}です。\code{add}はジェネリックインターフェイスの
@@ -11571,12 +11554,11 @@ scheme-numberパッケージのユーザは(タグ付きの)普通の数値を�
 \end{example}
 \end{comment}
 \includegraphics[width=64mm]{fig/chap2/Fig2.24c.pdf}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 2.24:} 直行形式による\( 3 + 4i \)の表現
-\end{quote}
 \end{figure}
 
-\noindent
 上記のパッケージでは、\code{add\-/rat}, \code{add\-/complex}, それに他の数値演算手続を
 全く元々書かれた状態で利用しました。しかし、これらの定義が異なるインストール手続の内部と
 なれば直ぐに、お互いから識別可能である名前にする必要は無くなります。単純に両者のパッケージにて
@@ -11818,7 +11800,6 @@ integer
 \heading{Figure 2.25:} 型の塔
 \end{figure}
 
-\noindent
 もしタワー構造を持つ場合、階層に新しい型を追加する問題を著しく単純化できます。
 新しい型がどのようにその上のスーパータイプの隣に組込まれるか、そしてどのように
 その型がその下の型に対してスーパータイプであるかを指定するだけです。
@@ -13816,7 +13797,6 @@ Peterが\code{peter\-/acc}から引き出しを行えばPaulは\code{paul\-/acc}
 \heading{Figure 3.1:} 単純な環境構造
 \end{figure}
 
-\noindent
 環境は評価プロセスに対し不可欠な存在です。式が評価されるべきコンテキスト(文脈)を決定するためです。
 実際にプログラミング言語の式、それ自身は意味を持たないと言えるでしょう。
 そうでなく、式はそれが評価されるある環境に対してのみ意味を獲得します。
@@ -13927,7 +13907,6 @@ env        | square: --+          |
 \end{quote}
 \end{figure}
 
-\noindent
 これで手続がどのように作成されるのか学んだので手続がどのように適用されるのかを
 説明することができます。環境モデルは以下のことを指定します。手続を引数に適用するために、
 パラメタを引数の値に束縛するフレームを含む新しい環境を作成します。このフレームの
@@ -13975,7 +13954,6 @@ env       | square: --+                        |
 \end{quote}
 \end{figure}
 
-\noindent
 手続適用の環境モデルは2つのルールでまとめられます。
 
 \begin{itemize}
@@ -14071,7 +14049,6 @@ env       | f: --+                                     |
 \heading{Figure 3.4:} グローバルフレーム内の手続オブジェクト
 \end{figure}
 
-\noindent
 \link{Figure 3.5}は式\code{(f 5)}を評価することで作成された環境構造です。
 \code{f}の呼出により\code{f}の形式パラメタ\code{a}が引数5に束縛されるフレームで始まる新しい環境E1が作成されます。
 E1の中で\code{f}のボディを評価します。
@@ -14126,7 +14103,6 @@ env       +-----------------------------------------------------+
 \end{quote}
 \end{figure}
 
-\noindent
 確認すべき重要な点は\code{square}の各呼出が\code{x}の束縛を持つ新しい環境を構築することです。
 ここで私達は異なるフレームがどのようにして全て\code{x}と名付けられた異なるローカル変数の
 独立を保つのかについて見ることができるます。\code{square}により作られた各フレームがグローバル
@@ -14244,7 +14220,6 @@ env       +------------------|--------+
 \end{quote}
 \end{figure}
 
-\noindent
 演算の面白い部分は手続\code{make\-/withdraw}を引数に適用した時に起こります。
 
 \begin{scheme}
@@ -14302,7 +14277,6 @@ global -->|                                       |       |
 \heading{Figure 3.7:} \code{(define W1 (make\-/withdraw 100))}を評価した結果
 \end{figure}
 
-\noindent
 \code{W1}の形式パラメタ\code{amount}が引数50に束縛されるフレームを構築することから始めます。
 観察すべき重大な点はこのフレームがその外部環境としてグローバル環境ではなく環境E1を持って
 いる点です。これが\code{W1}手続オブジェクトにより指示される環境だからです。
@@ -14351,12 +14325,11 @@ env       | W1: --+                                           |
 \end{example}
 \end{comment}
 \includegraphics[width=99mm]{fig/chap3/Fig3.8c.pdf}
-\par\bigskip
-\noindent
+\begin{quote}
 \heading{Figure 3.8:} 手続オブジェクト\code{W1}を適用したことにより作成された環境
+\end{quote}
 \end{figure}
 
-\noindent
 \code{set!}が実行された時、E1中の\code{balance}の束縛は変更されます。\code{W1}の呼出が終了する時
 \code{balance}は50で、\code{balance}を含むフレームは依然手続オブジェクト\code{W1}から指されています。
 \code{amount}を束縛する(その中で\code{balance}を変更するコードを実行した)フレームは最早関係が存在しません。
@@ -14440,7 +14413,6 @@ env      | W1: --+                        |                |
 \end{quote}
 \end{figure}
 
-\noindent
 これにより\link{Figure 3.10}の環境構造が生成され\code{W2}が手続オブジェクトであり、ある程度のコードと
 環境によるペアであることを示しています。\code{W2}のための環境E2は\code{make\-/withdraw}の呼出により作成されます。
 それ専用の\code{balance}のためのローカルな状態を持つフレームを含みます。一方で\code{W1}と\code{W2}は同じ
@@ -14576,13 +14548,12 @@ body: (define good-enough? ...)      | sqrt-iter: ... |      |
 \end{example}
 \end{comment}
 \includegraphics[width=107mm]{fig/chap3/Fig3.11a.pdf}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 3.11:} 内部定義を持つ\code{sqrt}手続
-\end{quote}
 \end{figure}
 
 
-\noindent
 ローカル手続が定義された後に、式\code{(sqrt\-/iter 1.0)}がまた環境E1の中で評価されます。
 そのためE1の中で\code{sqrt\-/iter}に束縛された手続オブジェクトが引数1にて呼ばれます。
 これが環境E2を作成し\code{sqrt\-/iter}のパラメタである\code{guess}が1に束縛される。
@@ -14752,9 +14723,9 @@ x -->| * | *-+---->| * | *-+---->| * | / |
 \end{example}
 \end{comment}
 \includegraphics[width=72mm]{fig/chap3/Fig3.12b.pdf}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 3.12:} リスト \code{x}: \code{((a b) c d)}と\code{y}: \code{(e f)}
-\end{quote}
 \end{figure}
 
 
@@ -15074,9 +15045,9 @@ z1 -->| * | * |
 \end{example}
 \end{comment}
 \includegraphics[width=46mm]{fig/chap3/Fig3.16b.pdf}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 3.16:} \code{(cons x x)}.で形成されたリスト\code{z1}
-\end{quote}
 \end{figure}
 
 \begin{figure}[tb]
@@ -15108,7 +15079,6 @@ z2 -->| * | *-+---->| * | *-+---->| * | / |
 \end{quote}
 \end{figure}
 
-\noindent
 リストとして考えた時、\code{z1}と\code{z2}の両方が``同じ''リスト\code{((a b) a b)}を表現します。
 一般的に共有はリスト上で用いる命令が\code{cons}, \code{car}, \code{cdr}だけならば完全に検出不可能です。
 しかしリスト構造上で変更を許可するのであれば、共有に気付くことができます。
@@ -15310,7 +15280,6 @@ Operation                Resulting Queue
 \heading{Figure 3.18:} キュー命令
 \end{figure}
 
-\noindent
 データ抽象化の観点ではキューを以下の操作の集合であると見做すことができます。
 
 \begin{itemize}
@@ -15411,7 +15380,6 @@ Operation                Resulting Queue
 \end{figure}
 
 
-\noindent
 キューの命令を定義するために以下の手続を用います。これはキューの先端と終端のポインタの選択、変更を
 可能にします。
 
@@ -15496,7 +15464,6 @@ Operation                Resulting Queue
 \end{quote}
 \end{figure}
 
-\noindent
 キューの頭のアイテムを削除するために、ただ単に先端ポインタを変更しキューの二つ目のアイテムを
 指すようにします。これは最初のアイテムの\code{cdr}ポインタに従うだけで見つけられます。(\link{Figure 3.21}参照)\footnote{
 もし最初のアイテムがキューの最終アイテムでもある場合、先端ポインタは削除後に空リストになるでしょう。
@@ -15651,7 +15618,6 @@ Eva Luが話していることを説明せよ。具体的にはなぜBenの例�
 \heading{Figure 3.22:} 頭出しリストとして表現されたテーブル
 \end{figure}
 
-\noindent
 最初は一次元の表について考えます。各値が単一のキーの下に格納されます。
 テーブルをレコードのリストとして実装し、各レコードははキーと関連する値から成るペアとして実装します。
 レコードは\code{car}が次のレコードを指すペアによりリストを形成する様に連結されます。
@@ -15799,7 +15765,6 @@ table
 \heading{Figure 3.23:} 二次元テーブル
 \end{figure}
 
-\noindent
 キーのペアの下に新しいアイテムを挿入するには\code{assoc}を用いて最初のキーの下に
 部分テーブルが存在するかどうかを確認します。もし無ければ単一のレコード(\code{key\-/2}, \code{value})を含む
 新しい部分テーブルを構築し、それを最初のキーの下にテーブルに挿入します。
@@ -16007,12 +15972,11 @@ Inverter    And-gate     Or-gate
 \end{example}
 \end{comment}
 \includegraphics[width=74mm]{fig/chap3/Fig3.24b.pdf}
-\par\bigskip
-\noindent
+\begin{quote}
 \heading{Figure 3.24:} デジタル論理回路シミュレータにおけるプリミティブな関数
+\end{quote}
 \end{figure}
 
-\noindent
 プリミティブな関数を一緒に接続してより複雑な関数を構築できます。これを達成するために
 ある関数箱の出力から他の関数箱の入力へと回路を引きます。例えば\link{Figure 3.25}に示す
 \newterm{half\-/adder}(\jnewterm{半加算器})はORゲート、2つのANDゲート、逆変換器から成り立ちます。
@@ -16049,7 +16013,6 @@ B -----*------|___/                        |
 \heading{Figure 3.25:} 半加算器回路
 \end{figure}
 
-\noindent
 今から私達が学習を望むデジタル論理回路をモデル化するためのプログラムを構築します。
 プログラムは回路をモデル化する計算モデルを構築します。これは信号を``保持''します。
 関数箱は信号間の正しい関係を強制する手続によりモデル化されます。
@@ -16140,7 +16103,6 @@ C -----+       +---------------/___/   |
 \heading{Figure 3.26:} 全加算器回路
 \end{figure}
 
-\noindent
 手続として定義された\code{full\-/adder}を持つことでさらにより複雑な回路を作成するための
 建築ブロックとして利用することが可能です。(例えば\link{Exercise 3.30}を参照)。
 
@@ -16656,7 +16618,6 @@ C ------+   |     +-----+   |     +-----+   |     :  ------+   |
 一方で私達は時折、量の間の関係を用いてシステムをモデル化します。
 例えば機械構造の数理的モデルは金属棒の偏差\( d \)が棒上の力\( F \)、棒の長さ\( L \)、
 断面積\( A \)、弾性率\( E \)に方程式を通して関連するという情報を含むでしょう。
-
 \begin{comment}
 
 \begin{example}
@@ -16667,8 +16628,6 @@ dAE = FL
 \begin{displaymath}
  dAE = FL. 
 \end{displaymath}
-
-
 そのような方程式は一方向ではありません。任意の4つの量を与えられることで、5つ目を
 計算することができます。けれども方程式を伝統的なコンピュータ言語へと翻訳することは
 1つの量を選択し他の4つを用いて求めることを私達は強制されます。従って断面積\( A \)を
@@ -16704,7 +16663,6 @@ TK!Solver(\link{Konopasek and Jayaraman 1984})は制約をベースにした大�
 \begin{displaymath}
  9C = 5(F - 32). 
 \end{displaymath}
-
 そのような制約はプリミティブな加算器、乗算器、不変制約(\link{Figure 3.28})より成り立つ
 ネットワークとして考えることができます。図の中で左手に\( m \)1, \( m \)2, \( p \)の
 3つの端子を持つ乗算の箱を見ることができます。これらは乗算器を以下のネットワークの残りに
@@ -16740,7 +16698,6 @@ C -----+ m1      |  u  |      m1 +-------+ a1      |
 \end{quote}
 \end{figure}
 
-\noindent
 このようなネットワークによる計算は以下の様に進行されます。コネクタに値が(ユーザ、またはリンクされた制約箱により)
 与えられた時、その関連する制約全てを(それを起こした制約を除いて)起こし、それらに値を得たことを伝えます。
 起きた制約箱は全て次にコネクタに対しコネクタの値を決定するのに十分な情報が存在するかを調査(poll)します。
@@ -17434,7 +17391,6 @@ time
 \end{quote}
 \end{figure}
 
-\noindent
 ここに描かれた一般的な現象は、いくつかのプロセスが共通な状態変数を共有していることです。
 このことを複雑にしているのは複数のプロセスが共有された状態を同時に操作しようと
 試みていることです。銀行口座の例では、各取引の間に、各顧客は他の顧客が存在しないかのように
@@ -17508,7 +17464,6 @@ time
 \end{quote}
 \end{figure}
 
-\noindent
 並行性上の比較的厳しくない制限は並行システムがまるでプロセスが同じ
 順に逐次的に実行されたかのように同じ結果を生成することを保証します。
 2つの重要な側面がこの制限にはあります。第一にプロセスに対し実際に
@@ -18863,9 +18818,9 @@ Lispに導入されました。彼等の実装では\code{cons}は常にその�
 \end{example}
 \end{comment}
 \includegraphics[width=111mm]{fig/chap3/Fig3.31.pdf}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 3.31:} 信号処理システムとして見た素数の篩
-\end{quote}
 \end{figure}
 
 \subsubsection*{暗黙的ストリーム定義}
@@ -19234,8 +19189,6 @@ sinとcosの級数をどのように生成するか示せ。sinの導関数がco
 	            	X 	& 1 - S_R \cdot X. 
 \end{array}
 \end{displaymath}
-
-
 言い換えれば、\( X \)は定数項が1であり高次項が負の\( S_R \)と\( X \)の積により与え
 られる羃級数である。この考えを用いて定数項1を持つ羃級数\( S \)に対する
 \( 1 / S \)を求める手続\code{invert\-/unit\-/series}を書け。\link{Exercise 3.60}の
@@ -19327,7 +19280,6 @@ sinとcosの級数をどのように生成するか示せ。sinの導関数がco
 \begin{displaymath}
  {\pi\over4} = 1 - {1\over3} + {1\over5} - {1\over7} + \dots. 
 \end{displaymath}
-
 最初に級数の加数(符号が交互に代わる奇数の逆数)のストリームを生成します。次に
 (\link{Exercise 3.55}の\code{partial\-/sums}手続を用いてより多くの項の
 和のストリームを取り、結果を4倍します。
@@ -19447,8 +19399,6 @@ $ s_{00} $ 	&  $ s_{01} $ 	&  $ s_{02} $ 	&  $ s_{03} $ 	&  $ s_{04} $ 	&  $ \do
 		& 		& 		&  $ \dots $ 	& 		&  \cr }
 } 
 \end{displaymath}
-
-
 最後にタブローの各行の最初の項を取ることで列を形成します。
 
 \begin{scheme}
@@ -19653,7 +19603,6 @@ $ (S_0, T_0) $ 	& $ (S_0, T_1) $ 	& $ (S_0, T_2) $ 	& $ \dots $ \cr
 		& 			& 			& $ \dots $ \cr }
 } 
 \end{displaymath}
-
 この分解の3つ目の断片(最初の行にないペア)は(再帰的に)\code{(stream\-/cdr S)}と\code{(stream\-/cdr T)}から
 形成されることに注意して下さい。また2番目の断片(最初の行の残り)は以下により求められます。
 
@@ -20097,12 +20046,11 @@ Eva Lu Atorは\link{Exercise 3.75}におけるLouisの取り組み方を批判�
 \end{example}
 \end{comment}
 \includegraphics[width=67mm]{fig/chap3/Fig3.34.pdf}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 3.34:} 方程式\( dy / dt = f(y) \)を解く``アナログ演算回路''
-\end{quote}
 \end{figure}
 
-\noindent
 残念なことに、ループを伴うシステムのストリームモデルは\code{cons\-/stream}により提供される
 ``隠れた''\code{delay}を越えて、\code{delay}の使用を要求します。例えば\link{Figure 3.34}は
 \( f \)が与えられた関数である場合に微分方程式信号\( dy / dt = f(y) \)を
@@ -20218,9 +20166,6 @@ d t^2        d t
 \begin{displaymath}
  {d^2y \over dt^2} - a {dy \over dt} - by = 0. 
 \end{displaymath}
-
-
-
 \( y \)をモデル化する出力ストリームはループを含むネットワークにより生成される。
 これは\( d^2y / dt^2 \)の値が\( y \)と\( dy / dt \)の値に依存し、
 これらの両方が\( d^2y / dt^2 \)を積分することにより決定されるからである。
@@ -20291,7 +20236,6 @@ i_C = C -------
 	v_L 	= 	L {di_L \over dt}\,, \qquad\quad
 	i_C 	= 	C {dv_C \over dt}\,, 
 \end{displaymath}
-
 そして回路の接続が以下の関係を決定する。
 \begin{comment}
 
@@ -20306,8 +20250,6 @@ v_C = v_L + v_R
  	i_R 	= 	i_L = -i_C\,, \qquad\quad
 	v_C 	= 	v_L +  v_R\,.  
 \end{displaymath}
-
-
 これらの方程式の組み合わせは(コンデンサに渡る電圧\( v_C \)とインダクタンスの
 電流\( i_L \)にてまとめれば)回路の状態が以下の微分方程式のペアで説明されることを
 示している。
@@ -20328,7 +20270,6 @@ d i_L      1           R
   {dv_C \over dt}  =  -{i_L \over C}\,, \qquad\quad
     {di_L \over dt}  =   {1   \over L} v_C - {R \over L} i_L\,. 
 \end{displaymath}
-
 この微分方程式のシステムを表す信号フロー図は\link{Figure 3.37}に示される。
 \end{quote}
 
@@ -20401,9 +20342,9 @@ v_C -+- C                     _)  v_L
 \end{example}
 \end{comment}
 \includegraphics[width=68mm]{fig/chap3/Fig3.37a.pdf}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 3.37:} 連続RLC回路の解のための信号フロー図
-\end{quote}
 \end{figure}
 
 \subsubsection*{正規順評価}
@@ -20667,7 +20608,6 @@ Paul's requests    |  merge  |---->| bank    |---->
 \end{quote}
 \end{figure}
 
-\noindent
 この定式化に伴う問題は\newterm{merge}(\jnewterm{マージ})という概念にあります。これは2つの
 ストリームを単純に交互にPeterの要求を1つ、Paulの要求を1つと取りマージすることは
 しません。Paulが口座にとても稀にしかアクセスしないと考えてみましょう。
@@ -22094,12 +22034,11 @@ Lisp式を評価するLispプログラムについて考えることにおいて
 \end{example}
 \end{comment}
 \includegraphics[width=84mm]{fig/chap4/Fig4.2.pdf}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 4.2:} 抽象機械として見た階乗プログラム
-\end{quote}
 \end{figure}
 
-\noindent
 この視点からは、私達の評価機は\newterm{universal machine}(\jnewterm{万能機械})であると見えます。
 他の機械がLispにて説明される時、それを真似します。\footnote{機械がLispで記述されるという
 ことは本質ではありません。もし私達の評価機にC言語の様な他の言語のための評価機として
@@ -22161,7 +22100,6 @@ Douglas Hofstadter(ダグラス ホフスタッター)の美しい本
 \heading{Figure 4.3:} 階乗マシンを真似する評価機
 \end{figure}
 
-\noindent
 もう1つの特筆すべき評価機の側面はそれがプログラミング言語により操作されるデータオブジェクトと
 プログラミング言語それ自身との間のブリッジ(橋)として働くことです。(Lispで実装された)
 評価機プログラムが実行中であり、ユーザが式をその評価機に入力し結果を観察していると
@@ -25821,7 +25759,6 @@ frames     | |    ^          +-------+ |  frames
 \end{quote}
 \end{figure}
 
-\noindent
 \link{Figure 4.6}は2つのクエリの\code{or}を2つのクエリコンポーネント
 の並列な組み合わせとして求めるための類似の手法を示しています。
 フレームの入力ストリームは各クエリにより別々に拡張されます。2つの結果ストリームは
@@ -27671,7 +27608,6 @@ Lispシステム中の制御の仕組みは明らかにしないためです。�
 \heading{Figure 5.1:} \acronym{GCD}マシンのデータパス
 \end{figure}
 
-\noindent
 定数とレジスタの中身から値を求める命令はデータパス図では命令に対する名前を持つ
 台形により表現されます。例えば\link{Figure 5.1}で\code{rem}と印された箱はそれに
 取り付けられたレジスタ\code{a}と\code{b}の中身の剰余を求める命令を表します。
@@ -27965,7 +27901,6 @@ machine.
 \heading{Figure 5.4:} 入力を読み込み結果を表示する\acronym{GCD}マシン
 \end{figure}
 
-\noindent
 \code{read}は私達が使用してきた、その中でレジスタに格納することができる値を生成する
 命令のような物です。しかし\code{read}は入力をどのレジスタからも取得しません。その値は
 私達が設計している機械の外側の部品で起こる何かに依存しています。私達は私達の機械の
@@ -28191,7 +28126,6 @@ after-gcd-2
 \end{quote}
 \end{figure}
 
-\noindent
 この機械は2つの剰余命令の箱と2つの等値テストの箱を持っています。もし複製された
 コンポーネントが剰余の箱のように複雑なら、これは機械を構築するのに経済的な方法では
 ありません。私達はより大きな機械の演算に影響を与えないように与えられた場合に、
@@ -28434,7 +28368,6 @@ after-gcd-2
 \heading{Figure 5.11:} 再帰階乗マシン
 \end{figure}
 
-\noindent
 それにもかかわらず、もし機械の各入れ子のインスタンスが同じコンポーネントを使用するように
 準備ができれば階乗プロセスをレジスタマシンとして実装できます。具体的に言えば、
 \( n! \)を求める機械は\( (n - 1)! \)を求める部分問題、\( (n - 2)! \)の部分問題、以下
@@ -29821,7 +29754,6 @@ the-cdrs |    | p2 | p4 |    | e0 | p7 |    | e0 |    | ...
 \end{quote}
 \end{figure}
 
-\noindent
 シンボルはその表示内容を形成する文字の列を指定する型付きポインタとして表現されることが
 できるでしょう。この列はLispのreaderにより、最初に入力の中の文字列に出くわした時に
 構築されます。2つのシンボルのインスタンスが\code{eq?}により``同じ''シンボルであると
@@ -30015,9 +29947,9 @@ readerは伝統的に\newterm{obarray}(\jnewterm{オブジェクト配列})と�
 を構築するための空き容量を使い切ってしまいます。\footnote{これはいつかは正しくはなく
 なるかもしれません。なぜならメモリが十分に大きくなればコンピュータの生存時間の間には
 空きメモリを使い切ることは不可能になるかもしれないからです。例えば一年は
-\( 3\cdot10^{\hbox{13}} \)マイクロ秒ですから、もし1マイクロ秒に1回\code{cons}を行うので
+\( 3\cdot10^{13} \)マイクロ秒ですから、もし1マイクロ秒に1回\code{cons}を行うので
 あれば、30年間はメモリを使い切ることのないコンピュータを構築するのには
-約\( 10^{\hbox{15}} \)セルのメモリを必要とします。それだけのメモリは今日の標準では話にならない程大きく
+約\( 10^{15} \)セルのメモリを必要とします。それだけのメモリは今日の標準では話にならない程大きく
 見えますが、しかし物理的に不可能ではありません。一方で、プロセッサはより速くなりつつあり
 未来のコンピュータは数多くのプロセッサを並列に単一のメモリ上で作動するかもしれません。
 従って私達の前提よりもよい早くメモリを使い切ることが可能かもしれません。}しかし、
@@ -30158,7 +30090,6 @@ the-cdrs |                  |                 | memory
 \end{quote}
 \end{figure}
 
-\noindent
 ガベージコレクション処理の状態は2つのポインタを管理することによりコントロールされています。
 \code{free}と\code{scan}です。これらは新しいメモリの開始位置を指し示すように初期化されます。
 アルゴリズムは\code{root}により指し示されるペアの新しいメモリの開始位置への再配置から開始されます。
@@ -30342,9 +30273,9 @@ gc-flip
 
 \end{comment}
 \includegraphics[width=91mm]{fig/chap5/chip.jpg}
-\begin{quote}
+\par\bigskip
+\noindent
 \heading{Figure 5.16:} Scheme評価機のシリコンチップ実装
-\end{quote}
 \end{figure}
 
 \subsubsection*{レジスタと命令}
@@ -31101,7 +31032,6 @@ print-result
 評価するために使用される、スタックの最大深度とプッシュの総数を\( n \)の関数として求めよ。
 (再び、これらの関数は線形になる)。あなたの経験を以下の表に適切な\( n \)の式を埋めることで
 まとめよ。
-
 \begin{comment}
 
 \begin{example}
